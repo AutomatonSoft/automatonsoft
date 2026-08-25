@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" fill="none">
+  <defs>
+    <linearGradient id="ns-line" x1="0" y1="0" x2="520" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7fe9e2"/>
+      <stop offset="1" stop-color="#1fb6c4"/>
+    </linearGradient>
+    <linearGradient id="ns-node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#35d0c6"/>
+      <stop offset="1" stop-color="#0c3b56"/>
+    </linearGradient>
+  </defs>
+
+  <!-- connecting lines -->
+  <g stroke="url(#ns-line)" stroke-width="1.6" opacity="0.85">
+    <line x1="260" y1="70"  x2="120" y2="150"/>
+    <line x1="260" y1="70"  x2="400" y2="150"/>
+    <line x1="120" y1="150" x2="90"  y2="270"/>
+    <line x1="120" y1="150" x2="230" y2="220"/>
+    <line x1="400" y1="150" x2="430" y2="270"/>
+    <line x1="400" y1="150" x2="290" y2="220"/>
+    <line x1="230" y1="220" x2="290" y2="220"/>
+    <line x1="230" y1="220" x2="150" y2="330"/>
+    <line x1="290" y1="220" x2="370" y2="330"/>
+    <line x1="90"  y1="270" x2="150" y2="330"/>
+    <line x1="430" y1="270" x2="370" y2="330"/>
+    <line x1="150" y1="330" x2="260" y2="390"/>
+    <line x1="370" y1="330" x2="260" y2="390"/>
+  </g>
+
+  <!-- nodes -->
+  <g>
+    <circle cx="260" cy="70"  r="16" fill="url(#ns-node)"/>
+    <circle cx="120" cy="150" r="11" fill="url(#ns-node)"/>
+    <circle cx="400" cy="150" r="11" fill="url(#ns-node)"/>
+    <circle cx="230" cy="220" r="9"  fill="url(#ns-node)"/>
+    <circle cx="290" cy="220" r="9"  fill="url(#ns-node)"/>
+    <circle cx="90"  cy="270" r="8"  fill="url(#ns-node)"/>
+    <circle cx="430" cy="270" r="8"  fill="url(#ns-node)"/>
+    <circle cx="150" cy="330" r="10" fill="url(#ns-node)"/>
+    <circle cx="370" cy="330" r="10" fill="url(#ns-node)"/>
+    <circle cx="260" cy="390" r="14" fill="url(#ns-node)"/>
+  </g>
+
+  <!-- small accent rings -->
+  <g stroke="#7fe9e2" stroke-width="1.2" opacity="0.5" fill="none">
+    <circle cx="260" cy="70" r="24"/>
+    <circle cx="260" cy="390" r="22"/>
+  </g>
+</svg>

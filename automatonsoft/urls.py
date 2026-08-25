@@ -15,8 +15,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.http import Http404
+from django.shortcuts import render
 from django.urls import path
 
+WEBSITE_PAGES = {
+    'blog.html',
+    'branchen.html',
+    'datenschutz.html',
+    'dienstleistungen.html',
+    'entwickler-engagieren.html',
+    'impressum.html',
+    'index.html',
+    'kontakt.html',
+    'portfolio.html',
+    'unternehmen.html',
+}
+
+
+def website_page(request, page='index.html'):
+    if page not in WEBSITE_PAGES:
+        raise Http404
+    return render(request, page)
+
+
 urlpatterns = [
+    path('', website_page, name='home'),
     path('admin/', admin.site.urls),
+    path('<str:page>', website_page, name='website-page'),
 ]
