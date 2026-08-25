@@ -1,0 +1,9 @@
+services:
+  website:
+    build:
+      context: ./current
+      dockerfile: Dockerfile
+    container_name: automatonsoft-website
+    ports:
+      - "127.0.0.1:18080:80"
+    restart: unless-stopped

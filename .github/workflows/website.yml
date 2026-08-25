@@ -1,0 +1,49 @@
+name: Website CI/CD
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate static website bundle
+        run: |
+          test -f automatonsoft_website/index.html
+          test -f automatonsoft_website/assets/css/style.css
+          test -f automatonsoft_website/assets/js/main.js
+
+  deploy-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure deployment key
+        env:
+          DEPLOY_KEY: ${{ secrets.AUTOMATONSOFT_DEPLOY_KEY }}
+          DEPLOY_HOST: ${{ secrets.AUTOMATONSOFT_HOST }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+      - name: Upload and activate release
+        env:
+          DEPLOY_HOST: ${{ secrets.AUTOMATONSOFT_HOST }}
+          DEPLOY_USER: ${{ secrets.AUTOMATONSOFT_USER }}
+        run: |
+          archive="website-${GITHUB_SHA}.tar.gz"
+          tar -czf "$archive" Dockerfile automatonsoft_website
+          scp "$archive" "$DEPLOY_USER@$DEPLOY_HOST:/home/Automatonsoft/incoming/$archive"
+          ssh "$DEPLOY_USER@$DEPLOY_HOST" "sudo /usr/local/sbin/deploy-automatonsoft /home/Automatonsoft/incoming/$archive"
+      - name: Verify public site
+        run: curl --fail --silent --show-error --max-time 20 https://automatonsoft.com/

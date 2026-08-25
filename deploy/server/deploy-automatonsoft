@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+base_dir=/home/Automatonsoft
+archive=${1:?archive path is required}
+
+case "$archive" in
+    "$base_dir"/incoming/*.tar.gz) ;;
+    *) echo "archive must be inside $base_dir/incoming" >&2; exit 1 ;;
+esac
+
+tar -tzf "$archive" | grep -Eq '(^/|(^|/)\.\.(/|$))' && {
+    echo "unsafe archive path" >&2
+    exit 1
+}
+
+release_dir="$base_dir/releases/$(basename "$archive" .tar.gz)"
+mkdir -p "$release_dir"
+tar -xzf "$archive" -C "$release_dir" --no-same-owner
+
+for required_file in Dockerfile automatonsoft_website/index.html automatonsoft_website/assets/css/style.css automatonsoft_website/assets/js/main.js; do
+    test -f "$release_dir/$required_file"
+done
+
+chown -R root:root "$release_dir"
+chmod -R a=rX,u+w "$release_dir"
+previous_release=$(readlink -f "$base_dir/current" 2>/dev/null || true)
+ln -sTfn "$release_dir" "$base_dir/current.next"
+mv -Tf "$base_dir/current.next" "$base_dir/current"
+restorecon -RF "$base_dir" 2>/dev/null || true
+
+docker compose -f "$base_dir/docker-compose.yml" up -d --build --force-recreate
+
+for _ in $(seq 1 20); do
+    if curl --fail --silent --show-error http://127.0.0.1:18080/ >/dev/null; then
+        exit 0
+    fi
+    sleep 1
+done
+
+if test -n "$previous_release"; then
+    ln -sTfn "$previous_release" "$base_dir/current.next"
+    mv -Tf "$base_dir/current.next" "$base_dir/current"
+    docker compose -f "$base_dir/docker-compose.yml" up -d --build --force-recreate
+fi
+exit 1
