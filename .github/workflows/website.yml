@@ -27,6 +27,14 @@ jobs:
     runs-on: [self-hosted, linux, x64, automatonsoft-production]
     steps:
       - uses: actions/checkout@v4
+      - name: Debug runner permissions
+        run: |
+          echo "USER=$(whoami)"
+          id
+          echo "HOME=$HOME"
+          command -v sudo
+          sudo -n -l || true
+          sudo -n /usr/local/sbin/deploy-automatonsoft || true
       - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
