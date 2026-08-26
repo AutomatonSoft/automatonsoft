@@ -29,12 +29,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Debug runner permissions
         run: |
-          echo "USER=$(whoami)"
+          echo "=== identity ==="
+          whoami
           id
-          echo "HOME=$HOME"
-          command -v sudo
+          id -Z
+          echo "=== sudo permissions ==="
           sudo -n -l || true
-          sudo -n /usr/local/sbin/deploy-automatonsoft || true
+          echo "=== exact deploy test ==="
+          sudo -n /usr/local/sbin/deploy-automatonsoft /tmp/nonexistent-test.tar.gz || true
       - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
