@@ -35,6 +35,8 @@ jobs:
           id -Z
           echo "=== sudo permissions ==="
           sudo -n -l || true
+          echo "=== sudo baseline ==="
+          sudo -n /bin/true || true
           echo "=== exact deploy test ==="
           sudo -n /usr/local/sbin/deploy-automatonsoft /tmp/nonexistent-test.tar.gz || true
       - name: Activate local Docker release
