@@ -55,7 +55,7 @@ jobs:
       - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
-          tar -czf "$archive" Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs jsconfig.json postcss.config.mjs app components lib public nginx automatonsoft backend
+          tar -czf "$archive" Dockerfile Dockerfile.backend requirements.txt manage.py package.json package-lock.json next.config.mjs jsconfig.json postcss.config.mjs app components lib public nginx automatonsoft backend deploy/docker-compose.yml
           install -m 600 "$archive" "/home/Automatonsoft/incoming/$archive"
           sudo -n /usr/local/sbin/deploy-automatonsoft "/home/Automatonsoft/incoming/$archive"
       - name: Verify public site

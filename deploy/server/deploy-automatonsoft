@@ -19,11 +19,11 @@ mkdir -p "$release_dir"
 tar -xzf "$archive" -C "$release_dir" --no-same-owner
 
 for required_path in \
-    Dockerfile Dockerfile.backend requirements.txt \
+    Dockerfile Dockerfile.backend requirements.txt manage.py \
     package.json package-lock.json next.config.mjs \
     app components lib/page-data.js \
     public/assets/css/style.css nginx/default.conf \
-    automatonsoft/settings.py backend/models.py
+    automatonsoft/settings.py backend/models.py deploy/docker-compose.yml
 do
     test -e "$release_dir/$required_path" || {
         echo "missing required release path: $required_path" >&2
@@ -36,6 +36,7 @@ chmod -R a=rX,u+w "$release_dir"
 previous_release=$(readlink -f "$base_dir/current" 2>/dev/null || true)
 ln -sTfn "$release_dir" "$base_dir/current.next"
 mv -Tf "$base_dir/current.next" "$base_dir/current"
+install -m 644 "$release_dir/deploy/docker-compose.yml" "$base_dir/docker-compose.yml"
 restorecon -RF "$base_dir" 2>/dev/null || true
 
 docker compose -f "$base_dir/docker-compose.yml" up -d --build --force-recreate
