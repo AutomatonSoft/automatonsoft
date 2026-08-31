@@ -22,6 +22,28 @@ jobs:
         run: |
           npm ci
           npm run build
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Run Django checks and tests
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python manage.py check
+          python manage.py test
+      - name: Smoke-test Docker site
+        run: |
+          trap 'docker compose -f docker-compose.dev.yml down -v' EXIT
+          docker compose -f docker-compose.dev.yml up -d --build
+          for _ in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:18080/api/session/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:18080/api/session/ >/dev/null
+          curl --fail --silent http://127.0.0.1:18080/ >/dev/null
+          curl --fail --silent http://127.0.0.1:18080/portfolio >/dev/null
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:18080/portfolio.html)" = 404
+          docker compose -f docker-compose.dev.yml exec -T website nginx -t
 
   deploy-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -33,7 +55,7 @@ jobs:
       - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
-          tar -czf "$archive" Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs app lib public nginx automatonsoft backend
+          tar -czf "$archive" Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs app components lib public nginx automatonsoft backend
           install -m 600 "$archive" "/home/Automatonsoft/incoming/$archive"
           sudo -n /usr/local/sbin/deploy-automatonsoft "/home/Automatonsoft/incoming/$archive"
       - name: Verify public site
