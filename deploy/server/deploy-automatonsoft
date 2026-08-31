@@ -18,8 +18,17 @@ release_dir="$base_dir/releases/$(basename "$archive" .tar.gz)"
 mkdir -p "$release_dir"
 tar -xzf "$archive" -C "$release_dir" --no-same-owner
 
-for required_file in Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs app/[[...slug]]/page.jsx lib/site-pages.js public/assets/css/style.css public/assets/js/main.js nginx/default.conf automatonsoft/settings.py backend/models.py; do
-    test -f "$release_dir/$required_file"
+for required_path in \
+    Dockerfile Dockerfile.backend requirements.txt \
+    package.json package-lock.json next.config.mjs \
+    app components lib/page-data.js \
+    public/assets/css/style.css nginx/default.conf \
+    automatonsoft/settings.py backend/models.py
+do
+    test -e "$release_dir/$required_path" || {
+        echo "missing required release path: $required_path" >&2
+        exit 1
+    }
 done
 
 chown -R root:root "$release_dir"
