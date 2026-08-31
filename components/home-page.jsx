@@ -1,0 +1,19 @@
+import { SiteFooter, SiteHeader } from '@/components/site-chrome';
+
+const services = [
+  ['Individuelle Software', 'Digitale Systeme, die exakt zu Ihren Abläufen passen.'],
+  ['Web & Mobile', 'Performante Websites und Anwendungen für Ihre Kunden und Teams.'],
+  ['Automatisierung', 'Workflows, Schnittstellen und Prozesse, die Zeit sparen.'],
+  ['KI-Lösungen', 'Praktische künstliche Intelligenz für dokumentierte Geschäftsprozesse.'],
+  ['UI/UX Design', 'Klare, verständliche Oberflächen mit Fokus auf Ihre Anwender.'],
+  ['Betrieb & Support', 'Zuverlässiger Betrieb und kontinuierliche Weiterentwicklung.'],
+];
+
+export default function HomePage() {
+  return <><SiteHeader /><main>
+    <section className="hero"><div className="hex-pattern" /><div className="container hero-grid"><div><div className="eyebrow">Software · Web · Mobile · Automatisierung</div><h1>Individuelle Software, die Ihr Unternehmen wirklich voranbringt.</h1><p className="lead">AutomatonSoft entwickelt maßgeschneiderte Softwarelösungen, Websites, Apps und Automatisierungen für Unternehmen, die mehr wollen als Standard.</p><div className="hero-actions"><a href="/portfolio" className="btn btn-primary">Portfolio ansehen</a><a href="/kontakt" className="btn btn-outline">Projekt besprechen</a></div><div className="hero-stats"><div className="stat"><b>Individuell</b><span>statt Baukasten-Lösung</span></div><div className="stat"><b>Persönlich</b><span>direkter Draht zum Entwickler-Team</span></div><div className="stat"><b>End-to-End</b><span>von der Idee bis zum Betrieb</span></div></div></div><div className="hero-visual"><img src="/assets/img/logo.png" alt="AutomatonSoft" /></div></div></section>
+    <section className="section-pad"><div className="container"><div className="section-head center"><div className="eyebrow" style={{ justifyContent: 'center' }}>Was wir tun</div><h2>Leistungen, die zusammen funktionieren</h2><p>Von der ersten Idee bis zum laufenden Betrieb entwickeln, gestalten und automatisieren wir digitale Produkte.</p></div><div className="grid grid-3">{services.map(([title, text]) => <article className="card" key={title}><div className="pill">AutomatonSoft</div><h3 style={{ marginTop: 16 }}>{title}</h3><p>{text}</p></article>)}</div><div className="center" style={{ marginTop: 40 }}><a href="/dienstleistungen" className="btn btn-outline-dark">Alle Leistungen ansehen</a></div></div></section>
+    <section className="section-pad bg-pale"><div className="container"><div className="section-head center"><div className="eyebrow" style={{ justifyContent: 'center' }}>Branchen</div><h2>Technologie für echte Geschäftsprozesse</h2><p>Unsere Lösungen unterstützen Teams in Handel, Industrie, Dienstleistung, Hospitality und weiteren Branchen.</p></div><div className="grid grid-3"><article className="card"><h3>E-Commerce & Marketplace</h3><p>Produktdaten, Bestellungen und Marktplatzprozesse aus einer Hand.</p></article><article className="card"><h3>Workforce & HR</h3><p>Planung, Zeit und Mitarbeitende digital organisieren.</p></article><article className="card"><h3>Industrial AI</h3><p>Software und Automatisierung für Fertigung und Industrie.</p></article></div><div className="center" style={{ marginTop: 40 }}><a href="/branchen" className="btn btn-outline-dark">Alle Branchen ansehen</a></div></div></section>
+    <section className="section-pad"><div className="container"><div className="cta-band"><div className="hex-pattern" /><h2>Bereit für Ihr nächstes Software-Projekt?</h2><p>Erzählen Sie uns von Ihrer Idee – wir melden uns mit einer ersten Einschätzung und einem unverbindlichen Gesprächstermin.</p><div className="cta-actions"><a href="/kontakt" className="btn btn-primary">Jetzt Kontakt aufnehmen</a><a href="/dienstleistungen" className="btn btn-outline">Leistungen entdecken</a></div></div></div></section>
+  </main><SiteFooter /></>;
+}

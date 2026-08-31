@@ -1,0 +1,1 @@
+"""AutomatonSoft management command package."""

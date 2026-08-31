@@ -14,36 +14,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate static website bundle
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Build Next.js static export
         run: |
-          test -f automatonsoft_website/index.html
-          test -f automatonsoft_website/assets/css/style.css
-          test -f automatonsoft_website/assets/js/main.js
+          npm ci
+          npm run build
 
   deploy-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate
     environment: production
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, automatonsoft-production]
     steps:
       - uses: actions/checkout@v4
-      - name: Configure deployment key
-        env:
-          DEPLOY_KEY: ${{ secrets.AUTOMATONSOFT_DEPLOY_KEY }}
-          DEPLOY_HOST: ${{ secrets.AUTOMATONSOFT_HOST }}
-        run: |
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
-      - name: Upload and activate release
-        env:
-          DEPLOY_HOST: ${{ secrets.AUTOMATONSOFT_HOST }}
-          DEPLOY_USER: ${{ secrets.AUTOMATONSOFT_USER }}
+      - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
-          tar -czf "$archive" Dockerfile automatonsoft_website
-          scp "$archive" "$DEPLOY_USER@$DEPLOY_HOST:/home/Automatonsoft/incoming/$archive"
-          ssh "$DEPLOY_USER@$DEPLOY_HOST" "sudo /usr/local/sbin/deploy-automatonsoft /home/Automatonsoft/incoming/$archive"
+          tar -czf "$archive" Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs app lib public nginx automatonsoft backend
+          install -m 600 "$archive" "/home/Automatonsoft/incoming/$archive"
+          sudo -n /usr/local/sbin/deploy-automatonsoft "/home/Automatonsoft/incoming/$archive"
       - name: Verify public site
         run: curl --fail --silent --show-error --max-time 20 https://automatonsoft.com/

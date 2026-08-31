@@ -1,12 +1,16 @@
 # AutomatonSoft GmbH – Website
 
-Statische Website (reines HTML/CSS/JavaScript, kein Build-Prozess, kein Framework) für AutomatonSoft GmbH. Kann direkt auf jedem Webspace/Static-Hosting (z. B. Apache, Nginx, Netlify, Vercel, GitHub Pages, IONOS, Strato …) hochgeladen werden.
+Next.js-Website für AutomatonSoft GmbH. Der Build erzeugt einen statischen Export für Nginx; zur Laufzeit ist kein Node.js-Server nötig.
+
+Seiteninhalt und SEO-Daten liegen in `lib/site-pages.js`; CSS, JavaScript, Bilder, `robots.txt` und `sitemap.xml` liegen in `public/`. Next.js erzeugt die ausgelieferten HTML-Dateien in `out/`.
 
 ## Struktur
 
 ```
 /
-├── index.html                  Startseite
+├── app/                        Next.js App Router
+├── lib/site-content.js         Build-time-Migration der bestehenden Seiten
+├── public/                     CSS, JavaScript, Bilder, robots.txt und sitemap.xml
 ├── unternehmen.html            Über uns, Warum AutomatonSoft, Team, Prozess, Karriere, FAQ (Anker-Sektionen)
 ├── dienstleistungen.html       Alle 16 Leistungen (Anker-Sektionen)
 ├── branchen.html               15 Branchen (Anker-Sektionen)
@@ -26,13 +30,14 @@ Statische Website (reines HTML/CSS/JavaScript, kein Build-Prozess, kein Framewor
     └── img/                     Logo, Icon-Crop, generierte SVG-Grafik
 ```
 
-Jede Seite ist eigenständiges HTML mit identischem Header/Footer-Markup (kein Templating/Includes, bewusst einfach gehalten). Wer ein Framework (Next.js, Astro, 11ty …) aufsetzen möchte, kann Header/Footer/Nav 1:1 als Komponente übernehmen.
+Die zehn vorhandenen Seiten werden bei jedem Next.js-Build zu denselben öffentlichen URLs exportiert, beispielsweise `portfolio.html` und `kontakt.html`. Dadurch bleiben bestehende Links und die Sitemap kompatibel.
 
 ## Technik-Stack
 
-- Reines HTML5 / CSS3 (Flexbox, Grid, CSS-Variablen) / Vanilla JavaScript (ES5-kompatibel, keine Abhängigkeiten)
+- Next.js 16 (App Router) mit React 19 und statischem Export
+- HTML5 / CSS3 und bestehendes Vanilla JavaScript für Navigation, Filter, FAQ und Bearbeitungsmodus
 - Schriften: Google Fonts (Poppins, Inter) via `<link>` im `<head>`
-- Keine Build-Tools, kein npm nötig – einfach die Dateien deployen
+- Docker baut den Export und Nginx liefert ausschließlich `out/` aus
 
 ## Bekannte Platzhalter (vor Go-Live ersetzen)
 
@@ -154,9 +159,15 @@ Diese Rubrik wurde – angelehnt an gängige IT-Dienstleister-Strukturen – bew
 
 ## Lokal testen
 
-Kein Server nötig, aber empfohlen wegen relativer Pfade:
+```bash
+npm install
+npm run build
+npx serve out
+# dann im Browser: http://localhost:3000/index.html
+```
+
+Für die Entwicklung mit Hot Reload:
 
 ```bash
-python3 -m http.server 8000
-# dann im Browser: http://localhost:8000/index.html
+npm run dev
 ```
