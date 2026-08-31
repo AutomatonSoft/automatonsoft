@@ -1,0 +1,24 @@
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:18080:80"
+    volumes:
+      - automatonsoft_dev_media:/var/www/media:ro
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      SQLITE_PATH: /data/db.sqlite3
+      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+      DJANGO_CSRF_TRUSTED_ORIGINS: http://localhost:18080,http://127.0.0.1:18080
+    volumes:
+      - automatonsoft_dev_data:/data
+      - automatonsoft_dev_media:/app/media
+
+volumes:
+  automatonsoft_dev_data:
+  automatonsoft_dev_media:

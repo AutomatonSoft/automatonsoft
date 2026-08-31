@@ -6,4 +6,23 @@ services:
     container_name: automatonsoft-website
     ports:
       - "127.0.0.1:18080:80"
+    volumes:
+      - automatonsoft_media:/var/www/media:ro
     restart: unless-stopped
+  backend:
+    build:
+      context: ./current
+      dockerfile: Dockerfile.backend
+    container_name: automatonsoft-backend
+    environment:
+      SQLITE_PATH: /data/db.sqlite3
+      DJANGO_ALLOWED_HOSTS: automatonsoft.com,localhost,127.0.0.1
+      DJANGO_CSRF_TRUSTED_ORIGINS: https://automatonsoft.com
+    volumes:
+      - automatonsoft_data:/data
+      - automatonsoft_media:/app/media
+    restart: unless-stopped
+
+volumes:
+  automatonsoft_data:
+  automatonsoft_media:
