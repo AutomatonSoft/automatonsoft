@@ -1,11 +1,11 @@
 {
     "schema_version": 2,
-    "commit": "bf466d5cfa76e0a266ce52208c9a38e1b9cf455e",
-    "indexed_at": "2026-08-28T11:24:12Z",
+    "commit": "7f6756039914dc3b32548088d1c7d32a014e8a63",
+    "indexed_at": "2026-08-31T03:56:08Z",
     "project": "Users-saidaka-Desktop-DW-WORK-AutomatonSoft-automatonsoft-automatonsoft",
-    "nodes": 132,
-    "edges": 872,
-    "original_size": 1310720,
-    "compressed_size": 46409,
-    "compression_level": 9
+    "nodes": 289,
+    "edges": 635,
+    "original_size": 2031616,
+    "compressed_size": 71610,
+    "compression_level": 3
 }

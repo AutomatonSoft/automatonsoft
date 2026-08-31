@@ -18,7 +18,7 @@ release_dir="$base_dir/releases/$(basename "$archive" .tar.gz)"
 mkdir -p "$release_dir"
 tar -xzf "$archive" -C "$release_dir" --no-same-owner
 
-for required_file in Dockerfile automatonsoft_website/index.html automatonsoft_website/assets/css/style.css automatonsoft_website/assets/js/main.js; do
+for required_file in Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs app/[[...slug]]/page.jsx lib/site-pages.js public/assets/css/style.css public/assets/js/main.js nginx/default.conf automatonsoft/settings.py backend/models.py; do
     test -f "$release_dir/$required_file"
 done
 

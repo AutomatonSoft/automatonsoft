@@ -14,11 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate static website bundle
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Build Next.js static export
         run: |
-          test -f automatonsoft_website/index.html
-          test -f automatonsoft_website/assets/css/style.css
-          test -f automatonsoft_website/assets/js/main.js
+          npm ci
+          npm run build
 
   deploy-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -30,7 +33,7 @@ jobs:
       - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
-          tar -czf "$archive" Dockerfile automatonsoft_website
+          tar -czf "$archive" Dockerfile Dockerfile.backend requirements.txt package.json package-lock.json next.config.mjs app lib public nginx automatonsoft backend
           install -m 600 "$archive" "/home/Automatonsoft/incoming/$archive"
           sudo -n /usr/local/sbin/deploy-automatonsoft "/home/Automatonsoft/incoming/$archive"
       - name: Verify public site
