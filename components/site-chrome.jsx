@@ -11,7 +11,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   return <header className="site-header"><div className="header-inner">
     <a href="/" className="brand"><img src="/assets/img/logo-icon.png" alt="AutomatonSoft Logo" /><span className="brand-name">Automaton<span>Soft</span></span></a>
-    <nav className={`nav ${menuOpen ? 'open' : ''}`} aria-label="Hauptnavigation"><ul>{links.map(([label, href]) => <li key={href}><a href={href} className="nav-link" onClick={() => setMenuOpen(false)}>{label}</a></li>)}<li className="nav-cta-mobile"><a href="/kontakt" className="nav-link" onClick={() => setMenuOpen(false)}>Kontakt aufnehmen</a></li></ul></nav>
+    <nav className={`nav ${menuOpen ? 'open' : ''}`} aria-label="Hauptnavigation"><ul>{links.map(([label, href]) => <li key={href}><a href={href} className="nav-link" onClick={() => setMenuOpen(false)}>{label}</a></li>)}<li><a href="/dashboard" className="btn btn-outline-dark btn-sm" onClick={() => setMenuOpen(false)}>Log in</a></li><li className="nav-cta-mobile"><a href="/kontakt" className="nav-link" onClick={() => setMenuOpen(false)}>Kontakt aufnehmen</a></li></ul></nav>
     <div className="header-cta"><a href="tel:+4973929378410" className="tel"><span className="ic">☎</span><span className="tel-text">+49 7392 9378410</span></a><a href="/kontakt" className="btn btn-primary btn-sm">Kontakt aufnehmen</a><button className={`burger ${menuOpen ? 'open' : ''}`} type="button" aria-label="Menü öffnen" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button></div>
   </div></header>;
 }
