@@ -17,10 +17,10 @@ export default function ContentPage({ locale, page }) {
       <LocalizedPageHero locale={locale} page={page} />
       <Section>
         {content.sections.map((section) => (
-          <section className="section-pad" key={section.title}>
+          <div className="content-block" key={section.title}>
             <SectionHead eyebrow={content.eyebrow} title={section.title} text={section.address ? companyAddress : section.text} preserveLines={section.address} />
             <CardGrid items={section.items} />
-          </section>
+          </div>
         ))}
         <CtaBand title={t.common.helpTitle} text={t.common.helpText} actions={[{ href: href(locale, 'contact'), label: t.common.helpCta }]} />
       </Section>

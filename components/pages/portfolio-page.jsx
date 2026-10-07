@@ -5,9 +5,11 @@ import Section from '@/components/sections/section';
 import SectionHead from '@/components/sections/section-head';
 import CaseStudies from '@/components/portfolio/case-studies';
 import PortfolioGrid from '@/components/portfolio/portfolio-grid';
+import { loadProjectsSnapshot } from '@/lib/portfolio-snapshot';
 
-export default function PortfolioPage({ locale }) {
+export default async function PortfolioPage({ locale }) {
   const { portfolio: t, home } = getDictionary(locale);
+  const snapshot = await loadProjectsSnapshot();
   return (
     <>
       <LocalizedPageHero locale={locale} page="portfolio" title={t.title} intro={t.intro} />
@@ -16,7 +18,7 @@ export default function PortfolioPage({ locale }) {
       </Section>
       <Section tone="pale" id="solutions">
         <SectionHead eyebrow={t.catalogEyebrow} title={t.catalogTitle} text={t.catalogText} />
-        <PortfolioGrid locale={locale} labels={{ all: t.all, loading: t.loading, empty: t.empty, preparing: t.preparing, categories: t.categories }} />
+        <PortfolioGrid locale={locale} snapshot={snapshot} labels={{ all: t.all, loading: t.loading, empty: t.empty, preparing: t.preparing, categories: t.categories }} />
       </Section>
       <Section>
         <CtaBand title={t.ctaTitle} text={t.ctaText} actions={[{ href: href(locale, 'contact'), label: t.ctaButton }]} />

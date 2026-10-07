@@ -8,8 +8,8 @@ import { isPreparing, localizeProject, projectRank } from '@/lib/portfolio';
 const ALL = 'alle';
 const SKELETONS = 6;
 
-export default function PortfolioGrid({ locale, labels }) {
-  const { projects, categories, loading } = useProjects();
+export default function PortfolioGrid({ locale, labels, snapshot }) {
+  const { projects, categories, loading } = useProjects(snapshot);
   const [active, setActive] = useState(ALL);
 
   // Finished work first, then concepts; placeholders "in preparation" are kept but moved to the end.
