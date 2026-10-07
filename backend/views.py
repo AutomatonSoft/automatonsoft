@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
+from .images import InvalidImage, optimize_image
 from .models import PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot
 
 
@@ -76,8 +77,12 @@ def apply_project_form(project, request):
     project.published = request.POST.get('published') == 'true'
     english = {'description': request.POST.get('description_en', '').strip(), 'stack': parse_tags(request.POST.get('stack_en', ''))}
     project.translations = {'en': {key: value for key, value in english.items() if value}} if any(english.values()) else {}
+    try:
+        images = [optimize_image(upload) for upload in request.FILES.getlist('screenshots')]
+    except InvalidImage:
+        return JsonResponse({'detail': 'Screenshots must be valid image files.'}, status=400)
     project.save()
-    ProjectScreenshot.objects.bulk_create([ProjectScreenshot(project=project, image=image) for image in request.FILES.getlist('screenshots')])
+    ProjectScreenshot.objects.bulk_create([ProjectScreenshot(project=project, image=image) for image in images])
     return None
 
 

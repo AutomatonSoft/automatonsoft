@@ -1,9 +1,12 @@
+import importlib
 import shutil
 import tempfile
+from io import BytesIO
 
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
+from PIL import Image
 
 from .models import ContactRequest, Project, ProjectScreenshot
 
@@ -38,8 +41,10 @@ class ProjectApiTests(TestCase):
             'published': 'true', **overrides,
         }
 
-    def image(self, name):
-        return SimpleUploadedFile(name, b'png-content', content_type='image/png')
+    def image(self, name, size=(2400, 1200)):
+        buffer = BytesIO()
+        Image.new('RGB', size, (31, 182, 196)).save(buffer, 'PNG')
+        return SimpleUploadedFile(name, buffer.getvalue(), content_type='image/png')
 
     def test_public_list_hides_drafts(self):
         Project.objects.create(
@@ -67,10 +72,32 @@ class ProjectApiTests(TestCase):
         project = Project.objects.get(title='New project')
         self.assertEqual(project.stack, ['Django', 'Docker'])
         self.assertEqual(project.screenshots.count(), 1)
-        self.assertTrue(response.json()['project']['screenshots'][0].endswith('project.png'))
+        url = response.json()['project']['screenshots'][0]
+        self.assertTrue(url.endswith('project.webp'))
+        with Image.open(project.screenshots.get().image) as stored:
+            self.assertEqual((stored.format, stored.size), ('WEBP', (1600, 800)))
+
+    def test_invalid_image_is_rejected_without_saving(self):
+        self.client.force_login(self.staff)
+        broken = SimpleUploadedFile('broken.png', b'not an image', content_type='image/png')
+
+        response = self.client.post('/api/projects/create/', self.project_data(screenshots=[broken]))
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Project.objects.filter(title='New project').exists())
+
+    def test_migration_converts_existing_png_screenshots(self):
+        legacy = ProjectScreenshot.objects.create(project=self.project, image=self.image('legacy.png'))
+        migration = importlib.import_module('backend.migrations.0006_optimize_screenshots')
+
+        from django.apps import apps
+        migration.forwards(apps, None)
+
+        legacy.refresh_from_db()
+        self.assertTrue(legacy.image.name.endswith('.webp'))
 
     def test_latest_uploaded_image_is_primary(self):
-        ProjectScreenshot.objects.create(project=self.project, image=self.image('old.png'))
+        ProjectScreenshot.objects.create(project=self.project, image=self.image('old.png', (10, 10)))
         self.client.force_login(self.staff)
 
         response = self.client.post(
@@ -80,7 +107,7 @@ class ProjectApiTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.project.screenshots.count(), 2)
-        self.assertTrue(response.json()['project']['screenshots'][0].endswith('new.png'))
+        self.assertTrue(response.json()['project']['screenshots'][0].endswith('new.webp'))
 
     def test_english_translation_is_saved_and_cleared(self):
         self.client.force_login(self.staff)
