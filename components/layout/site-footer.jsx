@@ -15,7 +15,7 @@ function ContactItem({ icon: Icon, children }) {
 
 // Service and industry names come from the homepage dictionary, so the footer never drifts from the content.
 export default function SiteFooter({ locale, page }) {
-  const { footer: t, home, nav } = getDictionary(locale);
+  const { footer: t, nav, services, industries } = getDictionary(locale);
   const portfolio = href(locale, 'portfolio');
   return (
     <footer className="site-footer">
@@ -27,10 +27,10 @@ export default function SiteFooter({ locale, page }) {
             <ButtonLink href={href(locale, 'contact')} arrow>{t.cta}</ButtonLink>
           </div>
           <FooterColumn title={t.services}>
-            {home.services.items.map((item) => <li key={item.title}><a href={href(locale, 'services')}>{item.title}</a></li>)}
+            {services.items.map((item) => <li key={item.id}><a href={href(locale, 'services', item.id)}>{item.title}</a></li>)}
           </FooterColumn>
           <FooterColumn title={t.industries}>
-            {home.industries.items.map((item) => <li key={item.id}><a href={`${portfolio}#${item.category}`}>{item.title}</a></li>)}
+            {industries.items.map((item) => <li key={item.id}><a href={href(locale, 'industries', item.id)}>{item.title}</a></li>)}
           </FooterColumn>
           <FooterColumn title={t.company}>
             <li><a href={href(locale, 'company')}>{t.aboutUs}</a></li>

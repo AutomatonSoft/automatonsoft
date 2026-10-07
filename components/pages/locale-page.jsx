@@ -1,13 +1,18 @@
 import { notFound } from 'next/navigation';
 import { pageFromSlug, staticParams } from '@/lib/i18n';
-import { buildMetadata } from '@/lib/seo';
+import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
+import JsonLd from '@/components/layout/json-ld';
 import SiteShell from '@/components/layout/site-shell';
 import HomePage from '@/components/pages/home-page';
 import PortfolioPage from '@/components/pages/portfolio-page';
 import ContactPage from '@/components/pages/contact-page';
 import ContentPage from '@/components/pages/content-page';
+import ServicesPage from '@/components/pages/services-page';
+import CompanyPage from '@/components/pages/company-page';
+import IndustriesPage from '@/components/pages/industries-page';
+import HirePage from '@/components/pages/hire-page';
 
-const pageComponents = { home: HomePage, portfolio: PortfolioPage, contact: ContactPage };
+const pageComponents = { home: HomePage, company: CompanyPage, services: ServicesPage, industries: IndustriesPage, hire: HirePage, portfolio: PortfolioPage, contact: ContactPage };
 
 // Factory for the per-locale catch-all route: every locale shares the same page tree.
 export function createLocaleRoute(locale) {
@@ -18,7 +23,12 @@ export function createLocaleRoute(locale) {
     Page: async function LocalePage({ params }) {
       const page = await resolve(params);
       const Component = pageComponents[page] || ContentPage;
-      return <SiteShell locale={locale} page={page}><Component locale={locale} page={page} /></SiteShell>;
+      return (
+        <SiteShell locale={locale} page={page}>
+          {page !== 'home' && <JsonLd data={breadcrumbJsonLd(locale, page)} />}
+          <Component locale={locale} page={page} />
+        </SiteShell>
+      );
     },
   };
 }

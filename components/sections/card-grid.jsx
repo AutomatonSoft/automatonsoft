@@ -20,7 +20,9 @@ function MoreLink({ label, as: Tag = 'span', href }) {
   return <Tag className="card-more" href={href}>{label}<ArrowRight aria-hidden="true" /></Tag>;
 }
 
-function renderCard(card, { href, linkLabel, flipHint }) {
+function renderCard(card, options) {
+  const { linkLabel, flipHint } = options;
+  const href = card.href || options.href;
   if (card.details) {
     return (
       <FlipCard key={card.title} hintLabel={flipHint} front={<><CardHeader {...card} />{card.icon && <Icon name={card.icon} className="card-watermark" />}</>} back={(
@@ -39,7 +41,7 @@ function renderCard(card, { href, linkLabel, flipHint }) {
     : <article className="card" key={card.title}>{content}</article>;
 }
 
-// items: strings or { icon?, title, text?, points?, details? }. `details` turns a card into a flip card,
+// items: strings or { icon?, title, text?, points?, details?, href? }; an item href overrides the grid href. `details` turns a card into a flip card,
 // otherwise `href` makes the whole card a link.
 export default function CardGrid({ items, href, linkLabel, flipHint }) {
   return (

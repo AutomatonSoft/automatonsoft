@@ -13,14 +13,16 @@ import EngagementModels from '@/components/home/engagement-models';
 import CaseStudies from '@/components/portfolio/case-studies';
 
 export default function HomePage({ locale }) {
-  const t = getDictionary(locale).home;
+  const dictionary = getDictionary(locale);
+  const t = dictionary.home;
+  const serviceItems = dictionary.services.items.map((item) => ({ ...item, href: href(locale, 'services', item.id) }));
   const { services, industries, process, engagement, faq } = t;
   return (
     <>
       <Hero t={t} locale={locale} />
       <Section>
         <SectionHead eyebrow={services.eyebrow} title={services.title} text={services.text} center />
-        <CardGrid items={services.items} href={href(locale, 'services')} linkLabel={services.more} flipHint={services.flipHint} />
+        <CardGrid items={serviceItems} linkLabel={services.more} flipHint={services.flipHint} />
         <TrustBar label={t.trust.label} items={t.trust.items} />
         <div className="text-center" style={{ marginTop: 40 }}><ButtonLink href={href(locale, 'services')} variant="outline-dark">{services.cta}</ButtonLink></div>
       </Section>
@@ -29,7 +31,7 @@ export default function HomePage({ locale }) {
           <SectionHead eyebrow={industries.eyebrow} title={industries.title} text={industries.text} />
           <ButtonLink href={href(locale, 'industries')} variant="outline-dark" arrow>{industries.cta}</ButtonLink>
         </div>
-        <IndustryExplorer items={industries.items} labels={industries.labels} portfolioHref={href(locale, 'portfolio')} />
+        <IndustryExplorer items={dictionary.industries.items} labels={industries.labels} portfolioHref={href(locale, 'portfolio')} />
       </Section>
       <Section>
         <CaseStudies locale={locale} content={t.caseStudies} />

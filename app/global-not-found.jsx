@@ -1,11 +1,12 @@
 import RootDocument from '@/components/layout/root-document';
+import { siteFontVariables } from '@/components/layout/fonts';
 import ButtonLink from '@/components/sections/button-link';
 
 export const metadata = { title: '404 | AutomatonSoft GmbH', robots: { index: false } };
 
 export default function GlobalNotFound() {
   return (
-    <RootDocument lang="en">
+    <RootDocument lang="en" className={siteFontVariables}>
       <main className="page-hero" style={{ minHeight: '100vh' }}>
         <div className="hex-pattern" />
         <div className="container">
