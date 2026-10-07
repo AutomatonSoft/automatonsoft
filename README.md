@@ -2,35 +2,31 @@
 
 Next.js-Website für AutomatonSoft GmbH. Der Build erzeugt einen statischen Export für Nginx; zur Laufzeit ist kein Node.js-Server nötig.
 
-Seiteninhalt und SEO-Daten liegen in `lib/site-pages.js`; CSS, JavaScript, Bilder, `robots.txt` und `sitemap.xml` liegen in `public/`. Next.js erzeugt die ausgelieferten HTML-Dateien in `out/`.
+Inhalte liegen zweisprachig in `lib/i18n/dictionaries/{de,en}/` (`index.js` = Navigation/Footer/Kontakt, `home.js` = Startseite, `pages.js` = Unterseiten), Firmendaten (Telefon, E-Mail, Adresse, Domain) zentral in `lib/site-config.js`. Deutsche URLs bleiben unverändert (`/kontakt`), die englische Version liegt unter `/en/...` (`/en/contact`) – inkl. `hreflang`, Canonical, Open Graph, JSON-LD und mehrsprachiger `sitemap.xml`.
 
 ## Struktur
 
 ```
-/
-├── app/                        Next.js App Router
-├── lib/site-content.js         Build-time-Migration der bestehenden Seiten
-├── public/                     CSS, JavaScript, Bilder, robots.txt und sitemap.xml
-├── unternehmen.html            Über uns, Warum AutomatonSoft, Team, Prozess, Karriere, FAQ (Anker-Sektionen)
-├── dienstleistungen.html       Alle 16 Leistungen (Anker-Sektionen)
-├── branchen.html               15 Branchen (Anker-Sektionen)
-├── entwickler-engagieren.html  Team-Verstärkung / Staff Augmentation (Anker-Sektionen)
-├── portfolio.html              Portfolio, gegliedert nach 9 Kategorien (E-Commerce, Workforce & HR, AI Business Solutions, Supply Chain, Industrial AI, Hospitality, Automotive, Finance, Custom Software)
-├── blog.html                   Blog-Übersicht (Platzhalter-Beiträge)
-├── kontakt.html                Kontaktformular, Kontaktdaten, Karte (Click-to-load)
-├── impressum.html              Impressum (§5 TMG) – Platzhalter, siehe unten
-├── datenschutz.html            Datenschutzerklärung (DSGVO) – Platzhalter, siehe unten
-├── robots.txt                  Crawler-Steuerung
-├── sitemap.xml                 XML-Sitemap für Suchmaschinen
-├── README.md                   Diese Datei
-└── assets/
-    ├── css/style.css           Gesamtes Styling (CSS-Variablen am Dateianfang)
-    ├── js/main.js               Navigation, Dropdowns, FAQ-Akkordeon, Portfolio-Filter, Formular-Stub, Scroll-Reveal
-    ├── js/editor.js             Passwortgeschützter Frontend-Bearbeitungsmodus (Texte/Bilder/Portfolio, lokal gespeichert)
-    └── img/                     Logo, Icon-Crop, generierte SVG-Grafik
+app/(de)/[[...slug]]      Deutsche Seiten (Root-Layout lang="de")
+app/(en)/en/[[...slug]]   Englische Seiten (Root-Layout lang="en")
+app/(admin)/dashboard     Admin: Portfolio + Kontaktanfragen
+app/sitemap.js, robots.js Generierte SEO-Dateien
+components/layout         Header, Footer, Sprachumschalter, Schnellkontakt, Attribution
+components/home           Startseiten-Sektionen (Hero, Branchen-Explorer, Fallstudien, Vorgehen, Zusammenarbeit)
+components/sections       Wiederverwendbare Bausteine (PageHero, Section, CardGrid/FlipCard, CtaBand, FaqList, Switcher …)
+components/pages          Seitentypen (Home, Content, Portfolio, Kontakt) + Route-Factory
+components/contact        Kontaktformular (POST /api/contact/, UTM/gclid-Attribution)
+components/portfolio      Portfolio-Grid, Karte, Daten-Hook
+components/dashboard      Admin-Komponenten und useDashboard-Hook
+lib/i18n, lib/seo.js, lib/api.js, lib/site-config.js
+backend/                  Django: Projekte, Screenshots, Kontaktanfragen
 ```
 
-Die zehn vorhandenen Seiten werden bei jedem Next.js-Build zu denselben öffentlichen URLs exportiert, beispielsweise `portfolio.html` und `kontakt.html`. Dadurch bleiben bestehende Links und die Sitemap kompatibel.
+Neue Seite: Eintrag in `routes` (`lib/i18n/index.js`) und `pages.<id>` in beiden Wörterbüchern – `ContentPage` rendert sie automatisch.
+
+Seiten ohne echten Inhalt (aktuell `blog`) stehen in `draftPages` (`lib/seo.js`): erreichbar, aber `noindex`, nicht im Menü und nicht in der Sitemap.
+
+Neue Fallstudie: Eintrag in `home.caseStudies.items` (beide Sprachen). Portfolio-Daten werden per `seed_portfolio` angelegt (nur fehlende Titel). Änderungen an Seed-Einträgen zusätzlich als Datenmigration ausliefern (Beispiel: `backend/migrations/0004_update_hubnity_and_lisa.py`), sonst legt der Seed beim nächsten Deploy den alten Titel neu an.
 
 ## Technik-Stack
 
@@ -157,17 +153,15 @@ Aus Stabilitätsgründen ist die Fußzeile bewusst von der automatischen Text-Be
 
 Diese Rubrik wurde – angelehnt an gängige IT-Dienstleister-Strukturen – bewusst kompakter gehalten (10 Rollen statt z. B. 20+), um realistisch zur Teamgröße von AutomatonSoft zu passen. Bei Bedarf lässt sich die Liste in `entwickler-engagieren.html` (Karten-Grid) sowie im Nav-Dropdown aller Seiten beliebig erweitern – gleiches Markup-Muster wie bei den bestehenden Karten kopieren.
 
-## Lokal testen
+## Lokal entwickeln
 
 ```bash
 npm install
-npm run build
-npx serve out
-# dann im Browser: http://localhost:3000/index.html
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python manage.py migrate && .venv/bin/python manage.py seed_portfolio
+.venv/bin/python manage.py createsuperuser        # Login für /dashboard
+.venv/bin/python manage.py runserver 127.0.0.1:8000
+npm run dev                                       # http://localhost:3000, /api und /media werden an Django weitergeleitet
 ```
 
-Für die Entwicklung mit Hot Reload:
-
-```bash
-npm run dev
-```
+Tests: `.venv/bin/python manage.py test backend` · Produktions-Build: `npm run build` (statischer Export nach `out/`).

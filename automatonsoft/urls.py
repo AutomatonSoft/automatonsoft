@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from backend import views
@@ -24,4 +26,8 @@ urlpatterns = [
     path('api/projects/', views.projects), path('api/projects/create/', views.create_project),
     path('api/projects/<int:project_id>/update/', views.update_project),
     path('api/projects/<int:project_id>/delete/', views.delete_project),
+    path('api/contact/', views.contact), path('api/contact-requests/', views.contact_requests),
 ]
+
+# Uploaded media is served by Nginx in production; the dev server needs this to show dashboard uploads locally.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

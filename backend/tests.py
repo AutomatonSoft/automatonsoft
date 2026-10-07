@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 
-from .models import Project, ProjectScreenshot
+from .models import ContactRequest, Project, ProjectScreenshot
 
 
 class ProjectApiTests(TestCase):
@@ -82,6 +82,26 @@ class ProjectApiTests(TestCase):
         self.assertEqual(self.project.screenshots.count(), 2)
         self.assertTrue(response.json()['project']['screenshots'][0].endswith('new.png'))
 
+    def test_english_translation_is_saved_and_cleared(self):
+        self.client.force_login(self.staff)
+        url = f'/api/projects/{self.project.id}/update/'
+
+        response = self.client.post(url, self.project_data(description_en='English text', stack_en='Django, Docker'))
+        self.assertEqual(response.json()['project']['translations'], {'en': {'description': 'English text', 'stack': ['Django', 'Docker']}})
+
+        self.client.post(url, self.project_data())
+        self.project.refresh_from_db()
+        self.assertEqual(self.project.translations, {})
+
+    def test_seed_backfills_missing_translations_only(self):
+        from django.core.management import call_command
+        Project.objects.create(title='Cashbook', description='Edited', category='finance-accounting-automation', stack=[], development_time='—', translations={'en': {'description': 'Kept'}})
+
+        call_command('seed_portfolio', stdout=open('/dev/null', 'w'))
+
+        self.assertEqual(Project.objects.get(title='Cashbook').translations, {'en': {'description': 'Kept'}})
+        self.assertIn('en', Project.objects.get(title='Hubnity').translations)
+
     def test_staff_can_delete_project(self):
         self.client.force_login(self.staff)
 
@@ -89,3 +109,33 @@ class ProjectApiTests(TestCase):
 
         self.assertEqual(response.status_code, 204)
         self.assertFalse(Project.objects.filter(pk=self.project.id).exists())
+
+
+class ContactApiTests(TestCase):
+    def payload(self, **overrides):
+        return {'name': 'Ada', 'email': 'ada@example.com', 'message': 'We need an ERP.', 'locale': 'en', 'consent': True,
+                'attribution': {'utm_source': 'google', 'gclid': 'abc', 'unknown': 'dropped'}, **overrides}
+
+    def post(self, payload):
+        return self.client.post('/api/contact/', payload, content_type='application/json')
+
+    def test_valid_request_is_stored_with_known_attribution_only(self):
+        self.assertEqual(self.post(self.payload()).status_code, 201)
+        lead = ContactRequest.objects.get()
+        self.assertEqual((lead.email, lead.locale), ('ada@example.com', 'en'))
+        self.assertEqual(lead.attribution, {'utm_source': 'google', 'gclid': 'abc'})
+
+    def test_invalid_email_and_missing_consent_are_rejected(self):
+        self.assertEqual(self.post(self.payload(email='nope')).json()['fields'], ['email'])
+        self.assertEqual(self.post(self.payload(consent=False)).status_code, 400)
+        self.assertFalse(ContactRequest.objects.exists())
+
+    def test_honeypot_is_silently_ignored(self):
+        self.assertEqual(self.post(self.payload(website='spam')).status_code, 201)
+        self.assertFalse(ContactRequest.objects.exists())
+
+    def test_leads_are_staff_only(self):
+        self.post(self.payload())
+        self.assertEqual(self.client.get('/api/contact-requests/').status_code, 401)
+        self.client.force_login(get_user_model().objects.create_user('staff', password='pw', is_staff=True))
+        self.assertEqual(self.client.get('/api/contact-requests/').json()['requests'][0]['name'], 'Ada')

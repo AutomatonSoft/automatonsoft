@@ -21,7 +21,7 @@ tar -xzf "$archive" -C "$release_dir" --no-same-owner
 for required_path in \
     Dockerfile Dockerfile.backend requirements.txt manage.py \
     package.json package-lock.json next.config.mjs \
-    app components lib/page-data.js \
+    app components lib/i18n/index.js \
     public/assets/css/style.css nginx/default.conf \
     automatonsoft/settings.py backend/models.py deploy/docker-compose.yml
 do
