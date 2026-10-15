@@ -11,6 +11,7 @@ import IndustryExplorer from '@/components/home/industry-explorer';
 import ProcessSteps from '@/components/home/process-steps';
 import EngagementModels from '@/components/home/engagement-models';
 import CaseStudies from '@/components/portfolio/case-studies';
+import AutomationBento from '@/components/home/automation-bento';
 
 export default function HomePage({ locale }) {
   const dictionary = getDictionary(locale);
@@ -20,21 +21,15 @@ export default function HomePage({ locale }) {
   return (
     <>
       <Hero t={t} locale={locale} />
+      <AutomationBento t={t.automate} locale={locale} ctaHref={href(locale, 'contact')} />
       <Section>
+        <CaseStudies locale={locale} content={t.caseStudies} />
+      </Section>
+      <Section tone="pale">
         <SectionHead eyebrow={services.eyebrow} title={services.title} text={services.text} center />
         <CardGrid items={serviceItems} linkLabel={services.more} flipHint={services.flipHint} />
         <TrustBar label={t.trust.label} items={t.trust.items} />
         <div className="text-center" style={{ marginTop: 40 }}><ButtonLink href={href(locale, 'services')} variant="outline-dark">{services.cta}</ButtonLink></div>
-      </Section>
-      <Section tone="pale">
-        <div className="section-head-split">
-          <SectionHead eyebrow={industries.eyebrow} title={industries.title} text={industries.text} />
-          <ButtonLink href={href(locale, 'industries')} variant="outline-dark" arrow>{industries.cta}</ButtonLink>
-        </div>
-        <IndustryExplorer items={dictionary.industries.items} labels={industries.labels} portfolioHref={href(locale, 'portfolio')} />
-      </Section>
-      <Section>
-        <CaseStudies locale={locale} content={t.caseStudies} />
       </Section>
       <Section tone="navy">
         <SectionHead eyebrow={process.eyebrow} title={process.title} text={process.text} center />
@@ -45,6 +40,13 @@ export default function HomePage({ locale }) {
         <EngagementModels locale={locale} models={engagement.models} bestForLabel={engagement.bestFor} />
       </Section>
       <Section tone="pale">
+        <div className="section-head-split">
+          <SectionHead eyebrow={industries.eyebrow} title={industries.title} text={industries.text} />
+          <ButtonLink href={href(locale, 'industries')} variant="outline-dark" arrow>{industries.cta}</ButtonLink>
+        </div>
+        <IndustryExplorer items={dictionary.industries.items} labels={industries.labels} portfolioHref={href(locale, 'portfolio')} />
+      </Section>
+      <Section>
         <div className="faq-layout">
           <div>
             <SectionHead eyebrow={faq.eyebrow} title={faq.title} text={faq.text} />
