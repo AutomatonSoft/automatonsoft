@@ -1,4 +1,4 @@
-import { ImagePlus, Pencil, Trash2 } from 'lucide-react';
+import { ExternalLink, ImagePlus, Pencil, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { categoryName } from '@/components/dashboard/copy';
@@ -19,6 +19,7 @@ export default function ProjectListItem({ project, t, lang, onEdit, onDelete }) 
           <div className="mt-3 flex flex-wrap gap-1.5"><Badge>{project.development_time}</Badge>{project.stack.map((item) => <Badge key={item}>{item}</Badge>)}</div>
           <div className="mt-4 flex gap-2">
             <button type="button" onClick={() => onEdit(project)} className={`${buttonVariants({ variant: 'outline' })} !border-slate-600 !bg-slate-700 !text-white hover:!bg-slate-600`}><Pencil className="size-3.5" /> {t.editButton}</button>
+            {project.slug && <a href={`/portfolio/${project.slug}`} target="_blank" rel="noopener" className={buttonVariants({ variant: 'outline' })}><ExternalLink className="size-3.5" /> {t.viewPage}</a>}
             <button type="button" onClick={() => onDelete(project)} className={`${buttonVariants({ variant: 'destructive' })} !bg-red-500 !text-white hover:!bg-red-400`}><Trash2 className="size-3.5" /> {t.deleteButton}</button>
           </div>
         </div>

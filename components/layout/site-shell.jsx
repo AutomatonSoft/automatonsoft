@@ -9,13 +9,13 @@ import AttributionTracker from '@/components/layout/attribution-tracker';
 
 const navPages = ['company', 'services', 'industries', 'portfolio', 'hire'];
 
-export default function SiteShell({ locale, page, children }) {
+export default function SiteShell({ locale, page, alternates, children }) {
   const { nav } = getDictionary(locale);
   const links = navPages.map((item) => ({ label: nav[item], href: href(locale, item), current: item === page }));
   return (
     <>
       <a className="skip-link" href="#main">{nav.skip}</a>
-      <TopBar tagline={nav.tagline} languageSwitcher={<LanguageSwitcher locale={locale} page={page} label={nav.language} />} />
+      <TopBar tagline={nav.tagline} languageSwitcher={<LanguageSwitcher locale={locale} page={page} alternates={alternates} label={nav.language} />} />
       <SiteHeader
         brand={<Brand homeHref={href(locale, 'home')} />}
         links={links}

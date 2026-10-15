@@ -14,6 +14,10 @@ export default function ProjectForm({ project, categories, t, lang, onSave, onCa
     title: project.title, description: project.description, category: project.category || categories[0]?.value || '',
     development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published,
     description_en: project.translations?.en?.description || '', stack_en: project.translations?.en?.stack?.join(', ') || '',
+    slug: project.slug || '', website: project.website || '', challenge: project.challenge || '',
+    features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
+    challenge_en: project.translations?.en?.challenge || '',
+    features_en: project.translations?.en?.features?.join('\n') || '', results_en: project.translations?.en?.results?.join('\n') || '',
   });
   const [preview, setPreview] = useState(project.screenshots?.[0] || '');
   const bind = (name) => ({ name, value: values[name], onChange: (event) => setValues({ ...values, [name]: event.target.value }) });
@@ -39,6 +43,15 @@ export default function ProjectForm({ project, categories, t, lang, onSave, onCa
           <div className="md:col-span-2"><Label>{t.description}</Label><Textarea {...bind('description')} required /></div>
           <div className="md:col-span-2"><Label>{t.descriptionEn}</Label><Textarea {...bind('description_en')} /></div>
           <div className="md:col-span-2"><Label>{t.stackEn}</Label><Input {...bind('stack_en')} placeholder="Workflow automation, API integration" /></div>
+          <div className="md:col-span-2 border-t border-white/10 pt-4"><p className={eyebrow}>{t.landing}</p><p className="mt-1 text-xs text-slate-400">{t.landingHint}</p></div>
+          <div><Label>{t.slug}</Label><Input {...bind('slug')} placeholder={t.slugHint} pattern="[a-z0-9-]*" /></div>
+          <div><Label>{t.website}</Label><Input {...bind('website')} type="url" placeholder="https://" /></div>
+          <div className="md:col-span-2"><Label>{t.challenge}</Label><Textarea {...bind('challenge')} /></div>
+          <div><Label>{t.features}</Label><Textarea {...bind('features')} rows={5} /></div>
+          <div><Label>{t.results}</Label><Textarea {...bind('results')} rows={5} /></div>
+          <div className="md:col-span-2"><Label>{t.challengeEn}</Label><Textarea {...bind('challenge_en')} /></div>
+          <div><Label>{t.featuresEn}</Label><Textarea {...bind('features_en')} rows={5} /></div>
+          <div><Label>{t.resultsEn}</Label><Textarea {...bind('results_en')} rows={5} /></div>
           <div className="md:col-span-2">
             <Label>{t.screenshot} {project.id ? t.addImages : ''}</Label>
             <Input name="screenshots" type="file" accept="image/*" multiple onChange={(event) => { const file = event.target.files?.[0]; if (file) setPreview(URL.createObjectURL(file)); }} />

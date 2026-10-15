@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import ProjectCard from '@/components/portfolio/project-card';
 import { useProjects } from '@/components/portfolio/use-projects';
+import { projectHref } from '@/lib/i18n';
 import { isPreparing, localizeProject, projectRank } from '@/lib/portfolio';
 
 const ALL = 'alle';
@@ -48,7 +49,7 @@ export default function PortfolioGrid({ locale, labels, snapshot }) {
       {visible.length === 0 ? <p>{labels.empty}</p> : (
         <div className="grid grid-3" id="portfolio-grid">
           {visible.map(({ project, preparing }) => (
-            <ProjectCard key={project.id} project={project} preparing={preparing} categoryLabel={labels.categories[project.category]} preparingLabel={labels.preparing} />
+            <ProjectCard key={project.id} project={project} preparing={preparing} href={!preparing && project.slug ? projectHref(locale, project.slug) : null} categoryLabel={labels.categories[project.category]} preparingLabel={labels.preparing} />
           ))}
         </div>
       )}

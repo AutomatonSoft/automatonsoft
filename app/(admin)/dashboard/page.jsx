@@ -12,7 +12,7 @@ import StatCards from '@/components/dashboard/stat-cards';
 import { eyebrow, primaryButton } from '@/components/dashboard/styles';
 import { useDashboard } from '@/components/dashboard/use-dashboard';
 
-const emptyProject = { title: '', description: '', category: '', development_time: '', stack: [], published: true, screenshots: [] };
+const emptyProject = { title: '', description: '', category: '', development_time: '', stack: [], published: true, screenshots: [], features: [], results: [] };
 
 function Tabs({ tabs, active, onChange }) {
   return (

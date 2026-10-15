@@ -1,7 +1,7 @@
 import { Icon } from '@/components/sections/icons';
 import { categoryIcons } from '@/lib/portfolio';
 
-export default function ProjectCard({ project, categoryLabel, preparingLabel, preparing }) {
+export default function ProjectCard({ project, href, categoryLabel, preparingLabel, preparing }) {
   return (
     <article className={`project-card ${preparing ? 'is-preparing' : ''}`} data-category={project.category}>
       <div className="project-thumb">
@@ -12,7 +12,7 @@ export default function ProjectCard({ project, categoryLabel, preparingLabel, pr
       </div>
       <div className="project-body">
         <div className="project-tag">{categoryLabel}</div>
-        <h3>{project.title}</h3>
+        <h3>{href ? <a href={href}>{project.title}</a> : project.title}</h3>
         <p>{project.description}</p>
         {!preparing && (
           <div className="project-meta">

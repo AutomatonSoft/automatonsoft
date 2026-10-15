@@ -2,19 +2,20 @@ import json
 
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
+from django.core.validators import URLValidator, validate_email
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
 from .images import InvalidImage, optimize_image
-from .models import PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot
+from .models import PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot, unique_slug
 
 
 def serialize(project, request):
     return {
-        'id': project.id, 'title': project.title, 'description': project.description,
+        'id': project.id, 'slug': project.slug, 'title': project.title, 'description': project.description,
+        'challenge': project.challenge, 'features': project.features, 'results': project.results, 'website': project.website,
         'stack': project.stack, 'category': project.category, 'category_label': project.get_category_display(),
         'development_time': project.development_time,
         'published': project.published, 'translations': project.translations,
@@ -64,18 +65,37 @@ def parse_tags(value):
     return [item.strip() for item in value.split(',') if item.strip()]
 
 
+def parse_lines(value):
+    return [item.strip() for item in value.splitlines() if item.strip()]
+
+
 def apply_project_form(project, request):
     """Copy the dashboard form onto `project`; returns an error response or None."""
     category = request.POST.get('category', '')
     if category not in dict(PORTFOLIO_CATEGORIES):
         return JsonResponse({'detail': 'Invalid portfolio category.'}, status=400)
+    website = request.POST.get('website', '').strip()
+    try:
+        if website:
+            URLValidator(schemes=['http', 'https'])(website)
+    except ValidationError:
+        return JsonResponse({'detail': 'Invalid website URL.'}, status=400)
     project.title = request.POST['title']
+    project.slug = unique_slug(request.POST.get('slug', '').strip() or project.title, exclude=project.pk)
     project.description = request.POST['description']
+    project.challenge = request.POST.get('challenge', '').strip()
+    project.features = parse_lines(request.POST.get('features', ''))
+    project.results = parse_lines(request.POST.get('results', ''))
+    project.website = website
     project.category = category
     project.stack = parse_tags(request.POST.get('stack', ''))
     project.development_time = request.POST['development_time']
     project.published = request.POST.get('published') == 'true'
-    english = {'description': request.POST.get('description_en', '').strip(), 'stack': parse_tags(request.POST.get('stack_en', ''))}
+    english = {
+        'description': request.POST.get('description_en', '').strip(), 'stack': parse_tags(request.POST.get('stack_en', '')),
+        'challenge': request.POST.get('challenge_en', '').strip(),
+        'features': parse_lines(request.POST.get('features_en', '')), 'results': parse_lines(request.POST.get('results_en', '')),
+    }
     project.translations = {'en': {key: value for key, value in english.items() if value}} if any(english.values()) else {}
     try:
         images = [optimize_image(upload) for upload in request.FILES.getlist('screenshots')]
