@@ -6,6 +6,7 @@ import SiteFooter from '@/components/layout/site-footer';
 import QuickContact from '@/components/layout/quick-contact';
 import LanguageSwitcher from '@/components/layout/language-switcher';
 import AttributionTracker from '@/components/layout/attribution-tracker';
+import CursorFollower from '@/components/layout/cursor-follower';
 
 const navPages = ['company', 'services', 'industries', 'portfolio', 'hire'];
 
@@ -26,6 +27,7 @@ export default function SiteShell({ locale, page, alternates, children }) {
       <SiteFooter locale={locale} page={page} />
       <QuickContact locale={locale} />
       <AttributionTracker />
+      <CursorFollower />
     </>
   );
 }

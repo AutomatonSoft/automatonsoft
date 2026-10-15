@@ -737,3 +737,6 @@ section{ position:relative; }
 .role-card .tech-chips li{ font-size:.76rem; padding:5px 11px; }
 @media(max-width:1100px){ .role-grid{ grid-template-columns:repeat(2,1fr); } }
 @media(max-width:560px){ .role-grid{ grid-template-columns:1fr; } }
+
+/* Cursor sparks canvas (drawn by components/layout/cursor-follower.jsx) */
+.cursor-sparks{ position:fixed; inset:0; width:100vw; height:100vh; z-index:9999; pointer-events:none; }
