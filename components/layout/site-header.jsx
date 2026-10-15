@@ -20,8 +20,8 @@ export default function SiteHeader({ brand, links, labels, contactHref }) {
     if (!menuOpen) return undefined;
     const onKey = (event) => event.key === 'Escape' && close();
     document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+    document.documentElement.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', onKey); document.documentElement.style.overflow = ''; };
   }, [menuOpen]);
 
   return (

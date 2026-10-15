@@ -7,6 +7,7 @@ import QuickContact from '@/components/layout/quick-contact';
 import LanguageSwitcher from '@/components/layout/language-switcher';
 import AttributionTracker from '@/components/layout/attribution-tracker';
 import CursorFollower from '@/components/layout/cursor-follower';
+import SmoothScroll from '@/components/layout/smooth-scroll';
 
 const navPages = ['company', 'services', 'industries', 'portfolio', 'hire'];
 
@@ -28,6 +29,7 @@ export default function SiteShell({ locale, page, alternates, children }) {
       <QuickContact locale={locale} />
       <AttributionTracker />
       <CursorFollower />
+      <SmoothScroll />
     </>
   );
 }

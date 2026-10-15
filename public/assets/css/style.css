@@ -28,6 +28,7 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+html.lenis{ scroll-behavior:auto; } /* Lenis animates scrolling itself */
 /* clip (not hidden) keeps the viewport as scroll container, otherwise position:sticky breaks */
 html, body{ max-width:100%; overflow-x:clip; }
 [id]{ scroll-margin-top:96px; }
