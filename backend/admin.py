@@ -12,6 +12,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'development_time', 'published', 'updated_at')
     list_filter = ('category', 'published')
     search_fields = ('title', 'description')
+    prepopulated_fields = {'slug': ('title',)}
     inlines = [ProjectScreenshotInline]
 
 

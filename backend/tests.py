@@ -129,6 +129,28 @@ class ProjectApiTests(TestCase):
         self.assertEqual(Project.objects.get(title='Cashbook').translations, {'en': {'description': 'Kept'}})
         self.assertIn('en', Project.objects.get(title='Hubnity').translations)
 
+    def test_landing_page_fields_and_unique_slug(self):
+        self.client.force_login(self.staff)
+
+        response = self.client.post('/api/projects/create/', self.project_data(
+            title='Existing project', challenge='Manual work', features='Sync orders\n\n Reports ',
+            results='-50 % effort', website='https://example.com', features_en='Order sync',
+        ))
+
+        project = response.json()['project']
+        self.assertEqual(self.project.slug, 'existing-project')
+        self.assertEqual(project['slug'], 'existing-project-2')
+        self.assertEqual((project['challenge'], project['features'], project['results']), ('Manual work', ['Sync orders', 'Reports'], ['-50 % effort']))
+        self.assertEqual(project['translations'], {'en': {'features': ['Order sync']}})
+
+    def test_slug_is_kept_on_update_and_invalid_website_rejected(self):
+        self.client.force_login(self.staff)
+        url = f'/api/projects/{self.project.id}/update/'
+
+        self.client.post(url, self.project_data(title='Renamed', slug=self.project.slug))
+        self.assertEqual(Project.objects.get(pk=self.project.id).slug, 'existing-project')
+        self.assertEqual(self.client.post(url, self.project_data(website='javascript:alert(1)')).status_code, 400)
+
     def test_staff_can_delete_project(self):
         self.client.force_login(self.staff)
 

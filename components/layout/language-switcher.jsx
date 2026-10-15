@@ -1,8 +1,7 @@
 import { getDictionary, locales } from '@/lib/i18n';
 import { pageAlternates } from '@/lib/seo';
 
-export default function LanguageSwitcher({ locale, page, label }) {
-  const alternates = pageAlternates(page);
+export default function LanguageSwitcher({ locale, page, label, alternates = pageAlternates(page) }) {
   return (
     <div className="lang-switch" role="group" aria-label={label}>
       {locales.map((item) => (

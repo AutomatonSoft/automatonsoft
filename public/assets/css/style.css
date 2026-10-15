@@ -653,7 +653,12 @@ section{ position:relative; }
 .filter-btn{ display:inline-flex; align-items:center; gap:8px; }
 .filter-count{ min-width:22px; padding:1px 7px; border-radius:100px; font-size:.72rem; font-weight:700; text-align:center; background:var(--turquoise-pale); color:var(--turquoise); }
 .filter-btn.active .filter-count{ background:rgba(8,42,61,.15); color:var(--navy-deep); }
-.project-card{ display:flex; flex-direction:column; }
+.project-card{ display:flex; flex-direction:column; position:relative; }
+/* The title link covers the whole card. */
+.project-body h3 a{ color:inherit; text-decoration:none; }
+.project-body h3 a::after{ content:''; position:absolute; inset:0; z-index:4; }
+.project-body h3 a:focus-visible{ outline:none; }
+.project-card:has(h3 a:focus-visible){ outline:2px solid var(--turquoise); outline-offset:3px; }
 .project-thumb-icon{ position:relative; z-index:2; width:52px; height:52px; color:var(--turquoise-light); opacity:.9; }
 .project-thumb .project-status{ position:absolute; top:14px; right:14px; z-index:3; padding:5px 12px; border-radius:100px; font-size:.72rem; font-weight:700; letter-spacing:.04em;
   background:rgba(255,255,255,.92); color:var(--navy); }
@@ -732,3 +737,6 @@ section{ position:relative; }
 .role-card .tech-chips li{ font-size:.76rem; padding:5px 11px; }
 @media(max-width:1100px){ .role-grid{ grid-template-columns:repeat(2,1fr); } }
 @media(max-width:560px){ .role-grid{ grid-template-columns:1fr; } }
+
+/* Cursor sparks canvas (drawn by components/layout/cursor-follower.jsx) */
+.cursor-sparks{ position:fixed; inset:0; width:100vw; height:100vh; z-index:9999; pointer-events:none; }
