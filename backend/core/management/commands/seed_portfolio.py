@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from backend.models import Project
+from core.models import Project
 
 
 PROJECTS = (

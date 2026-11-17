@@ -88,7 +88,7 @@ class ProjectApiTests(TestCase):
 
     def test_migration_converts_existing_png_screenshots(self):
         legacy = ProjectScreenshot.objects.create(project=self.project, image=self.image('legacy.png'))
-        migration = importlib.import_module('backend.migrations.0006_optimize_screenshots')
+        migration = importlib.import_module('core.migrations.0006_optimize_screenshots')
 
         from django.apps import apps
         migration.forwards(apps, None)

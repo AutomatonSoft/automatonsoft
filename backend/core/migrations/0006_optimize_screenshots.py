@@ -1,6 +1,6 @@
 from django.db import migrations
 
-from backend.images import InvalidImage, optimize_image
+from core.images import InvalidImage, optimize_image
 
 
 def forwards(apps, schema_editor):

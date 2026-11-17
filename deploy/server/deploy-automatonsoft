@@ -18,12 +18,11 @@ release_dir="$base_dir/releases/$(basename "$archive" .tar.gz)"
 mkdir -p "$release_dir"
 tar -xzf "$archive" -C "$release_dir" --no-same-owner
 
+# Only the entry points: the builds themselves fail loudly if anything else is missing.
 for required_path in \
-    Dockerfile Dockerfile.backend requirements.txt manage.py \
-    package.json package-lock.json next.config.mjs \
-    app components lib/i18n/index.js \
-    public/assets/css/style.css nginx/default.conf \
-    automatonsoft/settings.py backend/models.py deploy/docker-compose.yml
+    frontend/Dockerfile frontend/package-lock.json \
+    backend/Dockerfile backend/manage.py \
+    deploy/docker-compose.yml
 do
     test -e "$release_dir/$required_path" || {
         echo "missing required release path: $required_path" >&2
