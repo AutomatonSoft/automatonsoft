@@ -3,7 +3,5 @@ FROM python:3.14-slim
 WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-COPY manage.py ./
-COPY automatonsoft ./automatonsoft
-COPY backend ./backend
+COPY . .
 CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py seed_portfolio && exec gunicorn automatonsoft.wsgi:application --bind 0.0.0.0:8000 --workers 2"]

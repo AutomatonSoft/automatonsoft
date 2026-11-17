@@ -1,16 +1,13 @@
+# Local stack, same containers as production: http://127.0.0.1:18080/
 services:
   website:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: ./frontend
     ports:
       - "127.0.0.1:18080:80"
     volumes:
       - automatonsoft_dev_media:/var/www/media:ro
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    build: ./backend
     environment:
       SQLITE_PATH: /data/db.sqlite3
       DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
