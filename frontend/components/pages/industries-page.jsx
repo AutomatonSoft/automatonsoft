@@ -1,4 +1,5 @@
 import { getDictionary, href } from '@/lib/i18n';
+import { landingHrefFor } from '@/lib/landings';
 import ButtonLink from '@/components/sections/button-link';
 import CardGrid from '@/components/sections/card-grid';
 import CtaBand from '@/components/sections/cta-band';
@@ -13,7 +14,7 @@ export default function IndustriesPage({ locale }) {
   const t = pages.industries;
   const portfolioHref = href(locale, 'portfolio');
   const serviceTitles = Object.fromEntries(services.items.map((service) => [service.id, service.title]));
-  const overview = industries.items.map(({ id, icon, title, summary }) => ({ icon, title, text: summary, href: `#${id}` }));
+  const overview = industries.items.map(({ id, icon, title, summary }) => ({ icon, title, text: summary, href: landingHrefFor(locale, id) || `#${id}` }));
   return (
     <>
       <LocalizedPageHero locale={locale} page="industries" actions={(

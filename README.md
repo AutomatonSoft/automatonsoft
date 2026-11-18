@@ -72,6 +72,7 @@ Push в `main` после зелёного CI: GitHub Actions на self-hosted �
 
 ## Контент
 
+- **Отраслевой лендинг** (`/branchen/<slug>`, `/en/industries/<slug>`): файл данных в `lib/landings/` по образцу `ecommerce.js` и запись в `landings` (`lib/landings/index.js`). Шаблон, маршруты, hreflang, FAQPage, картинка для соцсетей (opengraph-image), sitemap и ссылки со страниц «Branchen» и главной подхватят его сами. Лендинги живут в отдельных root-layout `(landing-de)`/`(landing-en)`: только Tailwind и тёмные токены дизайна B (`.dark` в `app/globals.css`), без старого `style.css`.
 - **Новая страница:** id и slug в `routes` (`lib/i18n/index.js`) и `pages.<id>` в обоих словарях. `ContentPage` отрисует её сама.
 - **Страница без готового контента:** добавить в `draftPages` (`lib/seo.js`). Она доступна, но `noindex`, без меню и sitemap.
 - **Портфолио:** хранится в Django и редактируется в `/dashboard`. Для статических страниц проектов данные берутся с API во время сборки. `seed_portfolio` при каждом старте backend создаёт недостающие проекты по заголовку. Если меняется заголовок seed-проекта, нужна ещё и data-миграция (пример: `core/migrations/0004_update_hubnity_and_lisa.py`), иначе seed создаст старый проект заново.

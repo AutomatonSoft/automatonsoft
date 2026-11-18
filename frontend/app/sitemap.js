@@ -1,4 +1,5 @@
 import { href, locales, pageIds, projectHref } from '@/lib/i18n';
+import { landingAlternates, landingHref, landings } from '@/lib/landings';
 import { isPreparing } from '@/lib/portfolio';
 import { loadProjectsSnapshot } from '@/lib/portfolio-snapshot';
 import { draftPages, pageAlternates, projectAlternates } from '@/lib/seo';
@@ -22,6 +23,9 @@ export default async function sitemap() {
       changeFrequency: page === 'home' ? 'weekly' : 'monthly',
       priority: page === 'home' ? 1 : 0.7,
       alternates: absoluteAlternates(pageAlternates(page)),
+    })),
+    ...Object.keys(landings).map((id) => ({
+      url: absolute(landingHref(locale, id)), lastModified, changeFrequency: 'monthly', priority: 0.8, alternates: absoluteAlternates(landingAlternates(id)),
     })),
     ...projects.map(({ slug }) => ({
       url: absolute(projectHref(locale, slug)), lastModified, changeFrequency: 'monthly', priority: 0.6, alternates: absoluteAlternates(projectAlternates(slug)),

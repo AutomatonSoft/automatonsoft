@@ -22,6 +22,7 @@ function IndustryPanel({ item, labels, portfolioHref, active }) {
           <p className="industry-label">{labels.reference}</p>
           <b>{item.reference.name}</b>
           <p>{item.reference.text}</p>
+          {item.landing && <a href={item.landing}>{labels.viewSolution}<ArrowRight aria-hidden="true" /></a>}
           <a href={`${portfolioHref}#${item.category}`}>{labels.viewInPortfolio}<ArrowRight aria-hidden="true" /></a>
         </div>
       )}

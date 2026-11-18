@@ -8,6 +8,7 @@ import SectionHead from '@/components/sections/section-head';
 import TrustBar from '@/components/sections/trust-bar';
 import Hero from '@/components/home/hero';
 import IndustryExplorer from '@/components/home/industry-explorer';
+import { landingHrefFor } from '@/lib/landings';
 import ProcessSteps from '@/components/home/process-steps';
 import EngagementModels from '@/components/home/engagement-models';
 import CaseStudies from '@/components/portfolio/case-studies';
@@ -44,7 +45,7 @@ export default function HomePage({ locale }) {
           <SectionHead eyebrow={industries.eyebrow} title={industries.title} text={industries.text} />
           <ButtonLink href={href(locale, 'industries')} variant="outline-dark" arrow>{industries.cta}</ButtonLink>
         </div>
-        <IndustryExplorer items={dictionary.industries.items} labels={industries.labels} portfolioHref={href(locale, 'portfolio')} />
+        <IndustryExplorer items={dictionary.industries.items.map((item) => ({ ...item, landing: landingHrefFor(locale, item.id) }))} labels={industries.labels} portfolioHref={href(locale, 'portfolio')} />
       </Section>
       <Section>
         <div className="faq-layout">
