@@ -45,7 +45,7 @@ export default function HomeLanding({ locale }) {
               </li>
             ))}
           </ul>
-          <h1 className="mt-7 text-[clamp(2.5rem,min(6.2vw,11vh),5.5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
+          <h1 className="mt-7 text-[clamp(2.5rem,min(6vw,11vh),5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
             {t.titleStart} <span className="block text-lilac">{t.titleHighlight}</span>
           </h1>
         </section>

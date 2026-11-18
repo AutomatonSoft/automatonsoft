@@ -4,9 +4,9 @@ import LandingContactForm from '@/components/landing/landing-contact-form';
 
 // Building blocks of design E (docs/TZ.md §6), shared by the home page and the industry landings:
 // huge black headings, rounded blocks, three tones (wave = loud blue, foam = loud light, deep = calm white card).
-export const wrap = 'mx-auto w-full max-w-[1360px] px-4 sm:px-6';
+export const wrap = 'mx-auto w-full max-w-[1200px] px-4 sm:px-6';
 export const gap = 'pt-28 sm:pt-36';
-export const bigTitle = 'font-black text-[clamp(2.75rem,6vw,6rem)] leading-[0.95] tracking-[-0.05em] text-balance';
+export const bigTitle = 'font-black text-[clamp(2.5rem,5.2vw,5.25rem)] leading-[0.95] tracking-[-0.05em] text-balance';
 export const pill = 'rounded-full px-3 py-1.5 text-[13px] font-bold';
 export const button = 'inline-flex min-h-14 items-center justify-center rounded-full px-7 py-4 text-center text-[17px] font-extrabold transition hover:brightness-110';
 export const block = 'rounded-[2.25rem] shadow-[0_1px_2px_rgba(10,15,36,0.05),0_14px_36px_rgba(6,37,135,0.06)]';
