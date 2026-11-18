@@ -29,7 +29,7 @@ export default function LandingPage({ locale, id }) {
       <main id="inhalt">
         <section className={`${wrap} pt-10`}>
           <ul className="flex flex-wrap gap-2">
-            <li className="rounded-full border-[1.5px] border-lilac px-3.5 py-1.5 text-sm font-bold text-lilac">{t.hero.eyebrow}</li>
+            <li className="rounded-[1.1rem] border-[1.5px] border-lilac px-3.5 py-1.5 text-sm leading-snug font-bold text-lilac">{t.hero.eyebrow}</li>
           </ul>
           <h1 className="mt-7 text-[clamp(2.5rem,min(6vw,11vh),5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
             {t.hero.titleStart} <span className="block text-lilac">{t.hero.titleHighlight}</span> {t.hero.titleEnd}
@@ -38,7 +38,7 @@ export default function LandingPage({ locale, id }) {
 
         <section className={`${wrap} mt-12 flex flex-wrap gap-4`}>
           <div className={`${block} @container order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
-            <p className="text-[clamp(1.25rem,6cqw,1.875rem)] leading-tight font-semibold tracking-[-0.02em]">{t.hero.lead}</p>
+            <p className="text-[clamp(1.0625rem,6cqw,1.875rem)] leading-snug font-semibold tracking-[-0.02em]">{t.hero.lead}</p>
             <div className="grid gap-2.5">
               <a href="#anfrage" className={`${button} bg-primary text-primary-foreground`}>{t.hero.primary}</a>
               <a href="#referenzen" className={`${button} bg-foam text-ink`}>{t.hero.secondary}</a>
@@ -57,7 +57,7 @@ export default function LandingPage({ locale, id }) {
               <div aria-hidden="true" className="absolute -top-24 -right-24 size-75 rounded-full border-[50px] border-white/22" />
               <p className="relative text-lg font-extrabold">{t.hero.panelLabel}</p>
               <p className="relative mt-3 max-w-[520px] text-[clamp(1.5rem,2.6vw,2.25rem)] leading-tight font-black tracking-[-0.03em]">{t.hero.panelTitle}</p>
-              <ul className="relative mt-8 grid gap-2.5">
+              <ul className="relative mt-8 grid grid-cols-1 gap-2.5">
                 {t.hero.panel.map((item) => (
                   <li key={item.name} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 rounded-[1.25rem] bg-ink/25 px-5 py-4">
                     <span className="text-lg font-extrabold">{item.name}</span>
@@ -116,11 +116,11 @@ export default function LandingPage({ locale, id }) {
             </thead>
             <tbody className="max-md:block">
               {t.compare.rows.map(([criteria, standard, custom]) => (
-                <tr key={criteria} className="max-md:mb-3 max-md:block max-md:rounded-[1.75rem] max-md:bg-card max-md:p-6">
+                <tr key={criteria} className="max-md:mb-3 max-md:block max-md:rounded-[1.75rem] max-md:bg-card max-md:p-5">
                   <th scope="row" className="rounded-l-[1.75rem] bg-card px-6 py-6 align-top text-lg font-extrabold max-md:block max-md:bg-transparent max-md:p-0">{criteria}</th>
-                  <td data-label={t.compare.columns[1]} className="bg-card px-6 py-6 align-top text-muted-foreground max-md:block max-md:bg-transparent max-md:p-0 max-md:pt-3 max-md:before:block max-md:before:text-xs max-md:before:font-bold max-md:before:tracking-[0.12em] max-md:before:uppercase max-md:before:content-[attr(data-label)]">{standard}</td>
-                  <td data-label={t.compare.columns[2]} className="rounded-r-[1.75rem] bg-foam px-6 py-6 align-top font-semibold text-ink max-md:block max-md:rounded-none max-md:bg-transparent max-md:p-0 max-md:pt-3 max-md:before:block max-md:before:text-xs max-md:before:font-bold max-md:before:tracking-[0.12em] max-md:before:text-lilac max-md:before:uppercase max-md:before:content-[attr(data-label)]">
-                    <span className="inline-flex gap-2.5"><Check aria-hidden="true" className="mt-1 size-4 shrink-0 max-md:hidden" strokeWidth={2.6} />{custom}</span>
+                  <td data-label={t.compare.columns[1]} className="bg-card px-6 py-6 align-top text-muted-foreground max-md:mt-3 max-md:block max-md:bg-transparent max-md:p-0 max-md:text-sm max-md:before:mb-0.5 max-md:before:block max-md:before:text-[11px] max-md:before:font-bold max-md:before:tracking-[0.1em] max-md:before:uppercase max-md:before:content-[attr(data-label)]">{standard}</td>
+                  <td data-label={t.compare.columns[2]} className="rounded-r-[1.75rem] bg-foam px-6 py-6 align-top font-semibold text-ink max-md:mt-3 max-md:block max-md:rounded-[1.25rem] max-md:p-4 max-md:before:mb-1 max-md:before:block max-md:before:text-[11px] max-md:before:font-bold max-md:before:tracking-[0.1em] max-md:before:text-lilac max-md:before:uppercase max-md:before:content-[attr(data-label)]">
+                    <span className="inline-flex gap-2.5"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{custom}</span></span>
                   </td>
                 </tr>
               ))}
@@ -142,13 +142,13 @@ export default function LandingPage({ locale, id }) {
                   </div>
                   <div>
                     {item.listLabel && <p className={cn('mb-4 text-xs font-bold tracking-[0.14em] uppercase', scheme.muted)}>{item.listLabel}</p>}
-                    <ul className="grid content-start gap-3">
+                    <ul className="grid grid-cols-1 content-start gap-3">
                       {item.list.map((entry) => item.status ? (
-                        <li key={entry} className="flex items-center justify-between gap-4 text-lg font-extrabold">
-                          {entry}<span className={cn('flex items-center gap-2 text-sm font-medium', scheme.muted)}><span aria-hidden="true" className="size-2 rounded-full bg-hot" />{item.status}</span>
+                        <li key={entry} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-lg font-extrabold">
+                          <span className="min-w-0 break-words">{entry}</span><span className={cn('flex shrink-0 items-center gap-2 text-sm font-medium whitespace-nowrap', scheme.muted)}><span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-hot" />{item.status}</span>
                         </li>
                       ) : (
-                        <li key={entry} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} />{entry}</li>
+                        <li key={entry} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{entry}</span></li>
                       ))}
                     </ul>
                   </div>
@@ -170,8 +170,8 @@ export default function LandingPage({ locale, id }) {
                 <div key={model.title} className={cn(block, 'p-8', scheme.card, hover)}>
                   <h3 className="text-2xl font-black tracking-[-0.03em]">{model.title}</h3>
                   <p className={cn('mt-2 text-sm', scheme.muted)}>{t.models.bestFor} {model.bestFor}</p>
-                  <ul className="mt-6 grid gap-3 text-[15px]">
-                    {model.points.map((point) => <li key={point} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} />{point}</li>)}
+                  <ul className="mt-6 grid grid-cols-1 gap-3 text-[15px]">
+                    {model.points.map((point) => <li key={point} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{point}</span></li>)}
                   </ul>
                 </div>
               );

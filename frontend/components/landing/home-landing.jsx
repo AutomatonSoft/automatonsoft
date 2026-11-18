@@ -40,7 +40,7 @@ export default function HomeLanding({ locale }) {
         <section className={`${wrap} pt-10`}>
           <ul className="flex flex-wrap gap-2">
             {x.tags.map((tag, index) => (
-              <li key={tag} className={cn('flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-bold', index ? 'bg-card' : 'border-[1.5px] border-lilac text-lilac')}>
+              <li key={tag} className={cn('flex items-center gap-2 rounded-[1.1rem] px-3.5 py-1.5 text-sm leading-snug font-bold', index ? 'bg-card' : 'border-[1.5px] border-lilac text-lilac')}>
                 {!index && <span aria-hidden="true" className="size-2 animate-pulse rounded-full bg-hot motion-reduce:animate-none" />}{tag}
               </li>
             ))}
@@ -52,7 +52,7 @@ export default function HomeLanding({ locale }) {
 
         <section className={`${wrap} mt-12 flex flex-wrap gap-4`}>
           <div className={`${block} @container order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
-            <p className="text-[clamp(1.25rem,6cqw,1.875rem)] leading-tight font-semibold tracking-[-0.02em]">{t.lead}</p>
+            <p className="text-[clamp(1.0625rem,6cqw,1.875rem)] leading-snug font-semibold tracking-[-0.02em]">{t.lead}</p>
             <div className="grid gap-2.5">
               <a href="#kontakt" className={`${button} bg-primary text-primary-foreground`}>{t.primaryCta}</a>
               <a href="#projekte" className={`${button} bg-foam text-ink`}>{t.secondaryCta}</a>

@@ -8,7 +8,7 @@ export const wrap = 'mx-auto w-full max-w-[1200px] px-4 sm:px-6';
 export const gap = 'pt-28 sm:pt-36';
 export const bigTitle = 'font-black text-[clamp(2.5rem,5.2vw,5.25rem)] leading-[0.95] tracking-[-0.05em] text-balance';
 export const pill = 'rounded-full px-3 py-1.5 text-[13px] font-bold';
-export const button = 'inline-flex min-h-14 items-center justify-center rounded-full px-7 py-4 text-center text-[17px] font-extrabold transition hover:brightness-110';
+export const button = 'inline-flex min-h-14 items-center justify-center rounded-full px-7 py-4 text-center text-[17px] font-extrabold text-balance transition hover:brightness-110 max-sm:min-h-12 max-sm:px-5 max-sm:py-3 max-sm:text-[15px]';
 export const block = 'rounded-[2.25rem] shadow-[0_1px_2px_rgba(10,15,36,0.05),0_14px_36px_rgba(6,37,135,0.06)]';
 export const hover = 'transition hover:-translate-y-1.5';
 export const num = (index) => String(index + 1).padStart(2, '0');
@@ -19,9 +19,16 @@ export const tone = {
   deep: { card: 'bg-card text-foreground', tag: 'bg-secondary', button: 'bg-secondary text-foreground', muted: 'text-muted-foreground', accent: 'text-lilac' },
 };
 
-// parts: [plain, accent] or one string whose last word becomes the accent.
+// parts: [plain, accent], or one string: its last sentence (or last word) becomes the accent.
+export function splitTitle(text) {
+  const sentences = text.split(/(?<=\.) /);
+  if (sentences.length > 1) return [sentences.slice(0, -1).join(' '), sentences.at(-1)];
+  const words = text.split(' ');
+  return [words.slice(0, -1).join(' '), words.at(-1)];
+}
+
 export function Title({ parts, as: Tag = 'h2', className = '' }) {
-  const [head, accent] = Array.isArray(parts) ? parts : [parts.split(' ').slice(0, -1).join(' '), parts.split(' ').slice(-1)[0]];
+  const [head, accent] = Array.isArray(parts) ? parts : splitTitle(parts);
   return <Tag className={cn(bigTitle, className)}>{head} <span className="text-lilac">{accent}</span></Tag>;
 }
 
@@ -85,15 +92,16 @@ export function ContactSection({ id, locale, contact, formT, privacyHref }) {
   return (
     <Section id={id} className="pb-24">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-        <div className={cn(block, 'bg-card p-8 sm:p-10')}>
+        <div className={cn(block, 'bg-card p-6 sm:p-10')}>
           <h2 className="text-[clamp(2.25rem,4vw,3.5rem)] leading-[0.95] font-black tracking-[-0.045em]">{contact.title}</h2>
           <p className="mt-5 text-muted-foreground">{contact.text}</p>
-          {contact.nextTitle && <p className="mt-8 text-xs font-bold tracking-[0.14em] text-muted-foreground uppercase">{contact.nextTitle}</p>}
+          {contact.nextTitle && <p className="mt-8 text-xs font-bold tracking-[0.1em] text-muted-foreground uppercase sm:tracking-[0.14em]">{contact.nextTitle}</p>}
           <ol className={cn('grid gap-3', contact.nextTitle ? 'mt-4' : 'mt-8')}>
             {contact.next.map((step, index) => (
-              <li key={step.title} className="flex gap-4 rounded-[1.25rem] bg-secondary p-4">
-                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-black text-primary-foreground">{index + 1}</span>
-                <span><span className="block font-extrabold">{step.title}</span><span className="mt-0.5 block text-sm text-muted-foreground">{step.text}</span></span>
+              <li key={step.title} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-1.5 rounded-[1.25rem] bg-secondary p-3.5 sm:gap-x-4 sm:p-4">
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-black text-primary-foreground sm:row-span-2 sm:self-start">{index + 1}</span>
+                <span className="block font-extrabold">{step.title}</span>
+                <span className="col-span-2 block text-sm text-muted-foreground sm:col-span-1 sm:col-start-2">{step.text}</span>
               </li>
             ))}
           </ol>
