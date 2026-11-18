@@ -88,6 +88,7 @@ const de = {
     ],
   },
   compare: {
+    eyebrow: 'Vergleich',
     title: 'Standardsoftware oder individuelle Lösung?',
     text: 'Standardsoftware ist oft die richtige Wahl. Wir sagen Ihnen ehrlich, wann sich eine eigene Lösung lohnt.',
     columns: ['', 'Standardsoftware', 'Individuelle Lösung'],
@@ -180,6 +181,7 @@ const en = {
     ],
   },
   compare: {
+    eyebrow: 'Comparison',
     title: 'Off-the-shelf software or a custom solution?',
     text: 'Off-the-shelf software is often the right choice. We tell you honestly when a custom solution pays off.',
     columns: ['', 'Off-the-shelf software', 'Custom solution'],

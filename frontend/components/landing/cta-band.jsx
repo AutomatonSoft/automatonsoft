@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 
-// The signature turquoise call to action. Rule (docs/TZ.md §6): one per page; besides it only the hero stage may be a large turquoise surface.
+// The signature turquoise call to action. Rule (docs/TZ.md §6): one per page – the only large turquoise surface.
 export default function CtaBand({ title, text, cta, href }) {
   return (
     <div className="relative flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-[1.75rem] bg-[linear-gradient(120deg,#35d0c6_0%,#7fe9e2_55%,#35d0c6_100%)] px-7 py-12 text-primary-foreground sm:px-14 sm:py-16">
