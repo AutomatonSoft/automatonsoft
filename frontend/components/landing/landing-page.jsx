@@ -31,14 +31,14 @@ export default function LandingPage({ locale, id }) {
           <ul className="flex flex-wrap gap-2">
             <li className="rounded-full border-[1.5px] border-lilac px-3.5 py-1.5 text-sm font-bold text-lilac">{t.hero.eyebrow}</li>
           </ul>
-          <h1 className="mt-7 text-[clamp(2.75rem,6.2vw,5.5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
+          <h1 className="mt-7 text-[clamp(2.5rem,min(6.2vw,11vh),5.5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
             {t.hero.titleStart} <span className="block text-lilac">{t.hero.titleHighlight}</span> {t.hero.titleEnd}
           </h1>
         </section>
 
         <section className={`${wrap} mt-12 flex flex-wrap gap-4`}>
-          <div className={`${block} order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
-            <p className="text-[clamp(1.375rem,2.2vw,1.875rem)] leading-tight font-semibold tracking-[-0.02em]">{t.hero.lead}</p>
+          <div className={`${block} @container order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
+            <p className="text-[clamp(1.25rem,6cqw,1.875rem)] leading-tight font-semibold tracking-[-0.02em]">{t.hero.lead}</p>
             <div className="grid gap-2.5">
               <a href="#anfrage" className={`${button} bg-primary text-primary-foreground`}>{t.hero.primary}</a>
               <a href="#referenzen" className={`${button} bg-foam text-ink`}>{t.hero.secondary}</a>

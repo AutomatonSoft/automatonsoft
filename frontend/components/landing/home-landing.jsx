@@ -45,14 +45,14 @@ export default function HomeLanding({ locale }) {
               </li>
             ))}
           </ul>
-          <h1 className="mt-7 text-[clamp(2.75rem,6.2vw,5.5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
+          <h1 className="mt-7 text-[clamp(2.5rem,min(6.2vw,11vh),5.5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
             {t.titleStart} <span className="block text-lilac">{t.titleHighlight}</span>
           </h1>
         </section>
 
         <section className={`${wrap} mt-12 flex flex-wrap gap-4`}>
-          <div className={`${block} order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
-            <p className="text-[clamp(1.375rem,2.2vw,1.875rem)] leading-tight font-semibold tracking-[-0.02em]">{t.lead}</p>
+          <div className={`${block} @container order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
+            <p className="text-[clamp(1.25rem,6cqw,1.875rem)] leading-tight font-semibold tracking-[-0.02em]">{t.lead}</p>
             <div className="grid gap-2.5">
               <a href="#kontakt" className={`${button} bg-primary text-primary-foreground`}>{t.primaryCta}</a>
               <a href="#projekte" className={`${button} bg-foam text-ink`}>{t.secondaryCta}</a>
