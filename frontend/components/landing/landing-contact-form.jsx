@@ -42,7 +42,7 @@ export default function LandingContactForm({ locale, t, messageLabel, privacyHre
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px]" />
       <label className="flex items-start gap-2.5 text-[13px] leading-relaxed text-muted-foreground">
         <input type="checkbox" name="consent" required className="mt-1 size-4 shrink-0 accent-primary" />
-        <span>{t.consent} <a href={privacyHref} className="text-primary underline underline-offset-2">{t.privacyLink}</a>.</span>
+        <span>{t.consent} <a href={privacyHref} className="text-lilac underline underline-offset-2">{t.privacyLink}</a>.</span>
       </label>
       <div className="flex flex-wrap items-center gap-4">
         <button type="submit" disabled={status === 'sending'} className={cn(buttonVariants({ size: 'xl', className: 'h-auto min-h-12 shrink py-3 whitespace-normal hover:bg-primary hover:brightness-110' }))}>

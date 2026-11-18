@@ -1,15 +1,18 @@
-import { ArrowRight } from 'lucide-react';
+import { block, button, gap, wrap } from '@/components/landing/blocks';
 
-// The signature turquoise call to action. Rule (docs/TZ.md §6): one per page – the only large turquoise surface.
-export default function CtaBand({ title, text, cta, href }) {
+// The big blue call to action. Rule (docs/TZ.md §6): one per page. secondary: optional { href, label } (phone).
+export default function CtaBand({ title, text, cta, href, secondary }) {
   return (
-    <div className="relative flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-[1.75rem] bg-[linear-gradient(120deg,#35d0c6_0%,#7fe9e2_55%,#35d0c6_100%)] px-7 py-12 text-primary-foreground sm:px-14 sm:py-16">
-      <div aria-hidden="true" className="absolute -top-24 -right-16 size-72 rounded-full border-[40px] border-white/20" />
-      <div className="relative max-w-[620px]">
-        <h2 className="font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-[-0.035em]">{title}</h2>
-        {text && <p className="mt-3 text-[17px] text-primary-foreground/80">{text}</p>}
+    <section className={`${wrap} ${gap}`}>
+      <div className={`${block} relative overflow-hidden bg-primary p-[clamp(1.5rem,6vw,6rem)] text-primary-foreground`}>
+        <div aria-hidden="true" className="absolute -right-30 -bottom-45 size-130 rounded-full border-[90px] border-white/22" />
+        <h2 className="relative max-w-[1000px] text-[clamp(3.25rem,8vw,8rem)] leading-[0.9] font-black tracking-[-0.055em]">{title}</h2>
+        {text && <p className="relative mt-6 max-w-[560px] text-lg">{text}</p>}
+        <div className="relative mt-10 flex flex-wrap gap-3">
+          <a href={href} className={`${button} w-full bg-ink text-white max-sm:px-4 max-sm:text-base sm:w-auto`}><span>{cta}&nbsp;→</span></a>
+          {secondary && <a href={secondary.href} className={`${button} w-full bg-ink/25 max-sm:text-base sm:w-auto`}>{secondary.label}</a>}
+        </div>
       </div>
-      <a href={href} className="relative inline-flex min-h-12 items-center gap-2 rounded-xl bg-[#04222b] px-6 py-3 font-semibold text-white shadow-[0_12px_32px_rgba(4,34,43,0.35)] hover:bg-[#073342]">{cta}<ArrowRight aria-hidden="true" className="size-[18px]" /></a>
-    </div>
+    </section>
   );
 }

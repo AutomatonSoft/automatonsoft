@@ -12,7 +12,7 @@ import LandingPage from '@/components/landing/landing-page';
 // Industry landings have their own root layout: Tailwind and design system C only, without the legacy style.css.
 export function LandingLayout({ locale, children }) {
   return (
-    <RootDocument lang={locale} className={`dark ${landingFontVariables}`} siteStyles={false}>
+    <RootDocument lang={locale} className={`theme-hub ${landingFontVariables}`} siteStyles={false}>
       <AttributionTracker />
       <JsonLd data={siteJsonLd(locale)} />
       {children}
