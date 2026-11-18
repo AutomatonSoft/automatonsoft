@@ -1,6 +1,7 @@
 import { ArrowRight, Check, MessageCircle, Phone, Plus } from 'lucide-react';
 import { getDictionary, href } from '@/lib/i18n';
 import { landingHref, landings } from '@/lib/landings';
+import caseStudies from '@/lib/landings/cases';
 import { addressLines, siteConfig } from '@/lib/site-config';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -35,8 +36,8 @@ export default function LandingPage({ locale, id }) {
   const t = landing.content[locale];
   const dictionary = getDictionary(locale);
   const otherLocale = locale === 'de' ? 'en' : 'de';
-  const { deliveredLabel, items: cases } = dictionary.home.caseStudies;
-  const lisaDelivered = cases.find((item) => item.id === 'lisa').delivered.slice(0, 4);
+  const image = landing.heroImage;
+  const references = landing.cases.map((key) => ({ key, ...caseStudies[key][locale] }));
 
   return (
     <div className="overflow-x-clip bg-background pb-20 font-sans text-[16px] leading-relaxed text-foreground antialiased md:pb-0">
@@ -73,21 +74,37 @@ export default function LandingPage({ locale, id }) {
                 <TextLink href="#referenzen">{t.hero.secondary}</TextLink>
               </div>
             </div>
-            <figure>
-              <img src={landing.lisaImage.src} width={landing.lisaImage.width} height={landing.lisaImage.height} alt={t.references.lisa.alt} srcSet={`${landing.lisaImage.small} 960w, ${landing.lisaImage.src} 2000w`} sizes="(min-width: 1024px) 1050px, 180vw" className="aspect-[10/11] w-full rounded-2xl border border-white/10 object-cover object-right shadow-[0_40px_100px_rgba(0,0,0,0.45)]" />
-              <figcaption className="mt-4 text-sm text-muted-foreground">Lisa · {t.references.lisa.tags[1]}</figcaption>
-            </figure>
+            {image ? (
+              <figure>
+                <img src={image.src} width={image.width} height={image.height} alt={t.hero.imageAlt} srcSet={`${image.small} 960w, ${image.src} 2000w`} sizes="(min-width: 1024px) 1050px, 180vw" className="aspect-[10/11] w-full rounded-2xl border border-white/10 object-cover object-right shadow-[0_40px_100px_rgba(0,0,0,0.45)]" />
+                <figcaption className="mt-4 text-sm text-muted-foreground">{t.hero.imageCaption}</figcaption>
+              </figure>
+            ) : (
+              // No product screenshot yet: the shipped modules carry the hero instead of a stock image.
+              <aside className="rounded-2xl border border-white/10 bg-card p-8 sm:p-10">
+                <Kicker>{t.hero.panelLabel}</Kicker>
+                <p className="mt-4 font-heading text-2xl font-semibold tracking-[-0.02em]">{t.hero.panelTitle}</p>
+                <ul className={`mt-8 border-b ${hairline}`}>
+                  {t.hero.panel.map((item) => (
+                    <li key={item.name} className={`flex items-baseline justify-between gap-6 border-t ${hairline} py-5`}>
+                      <span className="font-heading text-lg font-medium">{item.name}</span>
+                      <span className="text-right text-sm text-muted-foreground">{item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )}
           </div>
         </section>
 
-        <section aria-labelledby="integrationen" className={`${shell} mt-24 sm:mt-32`}>
+        {landing.integrations && <section aria-labelledby="integrationen" className={`${shell} mt-24 sm:mt-32`}>
           <div className={`flex flex-wrap items-baseline gap-x-12 gap-y-4 border-t ${hairline} pt-8`}>
             <h2 id="integrationen" className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">{t.integrations.title}</h2>
             <ul className="flex flex-wrap gap-x-9 gap-y-2 font-heading text-lg font-medium text-foreground/70">
               {landing.integrations.map((name) => <li key={name}>{name}</li>)}
             </ul>
           </div>
-        </section>
+        </section>}
 
         <section className={sectionSpace}>
           <Kicker>{t.problem.eyebrow}</Kicker>
@@ -156,33 +173,27 @@ export default function LandingPage({ locale, id }) {
           <Kicker>{t.references.eyebrow}</Kicker>
           <h2 className={h2}>{t.references.title}</h2>
           <div className={`mt-16 border-b ${hairline}`}>
-            <article className={`grid gap-10 border-t ${hairline} py-12 lg:grid-cols-2 lg:gap-20`}>
-              <div>
-                <p className="text-sm text-primary">{t.references.lisa.tags[0]} · {t.references.lisa.tags[1]}</p>
-                <h3 className="mt-4 font-heading text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-semibold tracking-[-0.02em]">{t.references.lisa.title}</h3>
-                <p className="mt-4 max-w-[480px] text-muted-foreground">{t.references.lisa.text}</p>
-              </div>
-              <div>
-                <p className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">{deliveredLabel}</p>
-                <ul className="mt-5 grid gap-3.5">
-                  {lisaDelivered.map((item) => <li key={item} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0 text-primary" strokeWidth={2.2} />{item}</li>)}
-                </ul>
-              </div>
-            </article>
-            <article className={`grid gap-10 border-t ${hairline} py-12 lg:grid-cols-2 lg:gap-20`}>
-              <div>
-                <p className="text-sm text-primary">{t.references.suite.tags.join(' · ')}</p>
-                <h3 className="mt-4 font-heading text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-semibold tracking-[-0.02em]">{t.references.suite.title}</h3>
-                <p className="mt-4 max-w-[480px] text-muted-foreground">{t.references.suite.text}</p>
-              </div>
-              <ul className="grid content-start gap-3.5">
-                {landing.suiteChannels.map((name) => (
-                  <li key={name} className="flex items-center justify-between gap-4 font-heading text-lg font-medium">
-                    {name}<span className="flex items-center gap-2 font-sans text-sm text-muted-foreground"><span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />{t.references.suite.status}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+            {references.map((item) => (
+              <article key={item.key} className={`grid gap-10 border-t ${hairline} py-12 lg:grid-cols-2 lg:gap-20`}>
+                <div>
+                  <p className="text-sm text-primary">{item.meta}</p>
+                  <h3 className="mt-4 font-heading text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-semibold tracking-[-0.02em]">{item.title}</h3>
+                  <p className="mt-4 max-w-[480px] text-muted-foreground">{item.text}</p>
+                </div>
+                <div>
+                  {item.listLabel && <p className="mb-5 text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">{item.listLabel}</p>}
+                  <ul className="grid content-start gap-3.5">
+                    {item.list.map((entry) => item.status ? (
+                      <li key={entry} className="flex items-center justify-between gap-4 font-heading text-lg font-medium">
+                        {entry}<span className="flex items-center gap-2 font-sans text-sm text-muted-foreground"><span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />{item.status}</span>
+                      </li>
+                    ) : (
+                      <li key={entry} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0 text-primary" strokeWidth={2.2} />{entry}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
           </div>
           <p className="mt-10"><TextLink href={href(locale, 'portfolio')}>{t.allProjects}</TextLink></p>
         </section>
