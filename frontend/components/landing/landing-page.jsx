@@ -31,7 +31,7 @@ export default function LandingPage({ locale, id }) {
           <ul className="flex flex-wrap gap-2">
             <li className="rounded-full border-[1.5px] border-lilac px-3.5 py-1.5 text-sm font-bold text-lilac">{t.hero.eyebrow}</li>
           </ul>
-          <h1 className="mt-7 text-[clamp(2.5rem,min(6.2vw,11vh),5.5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
+          <h1 className="mt-7 text-[clamp(2.5rem,min(6vw,11vh),5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
             {t.hero.titleStart} <span className="block text-lilac">{t.hero.titleHighlight}</span> {t.hero.titleEnd}
           </h1>
         </section>
