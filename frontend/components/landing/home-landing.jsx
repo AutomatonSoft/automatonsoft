@@ -160,10 +160,10 @@ export default function HomeLanding({ locale }) {
             {t.process.steps.map((step, index) => {
               const scheme = tone[index === 0 ? 'wave' : index === t.process.steps.length - 1 ? 'foam' : 'deep'];
               return (
-                <li key={step.title} className={cn(block, 'flex min-h-60 flex-col justify-between gap-8 p-7', scheme.card)}>
+                <li key={step.title} className={cn(block, 'flex min-h-60 min-w-0 flex-col gap-10 p-6', scheme.card)}>
                   <span className={cn('text-7xl leading-[0.85] font-black tracking-[-0.05em]', index && index < t.process.steps.length - 1 && 'text-lilac')}>{num(index)}</span>
                   <span>
-                    <span className="block text-[1.375rem] font-extrabold tracking-[-0.02em]">{step.title}</span>
+                    <span className="block min-h-[2.5em] text-[1.125rem] leading-tight font-extrabold tracking-[-0.02em] break-words">{step.title}</span>
                     <span className={cn('mt-1.5 block text-[15px]', scheme.muted)}>{step.text}</span>
                   </span>
                 </li>
