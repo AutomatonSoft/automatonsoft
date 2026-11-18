@@ -1,12 +1,12 @@
 import RootDocument from '@/components/layout/root-document';
-import { siteFontVariables } from '@/components/layout/fonts';
 import ButtonLink from '@/components/sections/button-link';
 
 export const metadata = { title: '404 | AutomatonSoft GmbH', robots: { index: false } };
 
 export default function GlobalNotFound() {
   return (
-    <RootDocument lang="en" className={siteFontVariables}>
+    // No next/font here: global-not-found is bundled into every route, so its fonts would be preloaded on every page.
+    <RootDocument lang="en">
       <main className="page-hero" style={{ minHeight: '100vh' }}>
         <div className="hex-pattern" />
         <div className="container">

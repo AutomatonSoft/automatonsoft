@@ -5,7 +5,6 @@ import { loadProject, projectSlugs } from '@/lib/portfolio-snapshot';
 import { breadcrumbJsonLd, buildMetadata, projectAlternates, projectMetadata } from '@/lib/seo';
 import JsonLd from '@/components/layout/json-ld';
 import SiteShell from '@/components/layout/site-shell';
-import HomePage from '@/components/pages/home-page';
 import PortfolioPage from '@/components/pages/portfolio-page';
 import ContactPage from '@/components/pages/contact-page';
 import ContentPage from '@/components/pages/content-page';
@@ -15,7 +14,7 @@ import IndustriesPage from '@/components/pages/industries-page';
 import HirePage from '@/components/pages/hire-page';
 import ProjectPage from '@/components/pages/project-page';
 
-const pageComponents = { home: HomePage, company: CompanyPage, services: ServicesPage, industries: IndustriesPage, hire: HirePage, portfolio: PortfolioPage, contact: ContactPage };
+const pageComponents = { company: CompanyPage, services: ServicesPage, industries: IndustriesPage, hire: HirePage, portfolio: PortfolioPage, contact: ContactPage };
 
 // Factory for the per-locale catch-all route: every locale shares the same page tree,
 // plus one landing page per portfolio project (/portfolio/<slug>) generated from the build-time snapshot.
@@ -27,7 +26,7 @@ export function createLocaleRoute(locale) {
   };
   return {
     generateStaticParams: async () => [
-      ...staticParams(locale),
+      ...staticParams(locale).filter(({ slug }) => slug.length), // the home page lives in (landing-*)/page.jsx
       ...[FALLBACK_SLUG, ...(await projectSlugs())].map((slug) => projectParams(locale, slug)),
     ],
     generateMetadata: async ({ params }) => {

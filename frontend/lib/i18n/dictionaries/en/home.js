@@ -40,7 +40,7 @@ const home = {
   industries: {
     eyebrow: 'Industries', title: 'Proven in the industries we serve', cta: 'See all industries',
     text: 'Every industry has its own processes, systems and regulations. We build on solutions already running in our portfolio.',
-    labels: { list: 'Industries', challenge: 'The challenge', solutions: 'What we build', reference: 'Reference solution', viewInPortfolio: 'View in portfolio' },
+    labels: { list: 'Industries', challenge: 'The challenge', solutions: 'What we build', reference: 'Reference solution', viewInPortfolio: 'View in portfolio', viewSolution: 'See the solution' },
   },
   caseStudies: {
     eyebrow: 'Selected work', title: 'Products we have engineered',

@@ -40,7 +40,7 @@ const home = {
   industries: {
     eyebrow: 'Branchen', title: 'Bewährt in den Branchen, die wir betreuen', cta: 'Alle Branchen ansehen',
     text: 'Jede Branche hat eigene Prozesse, Systeme und Vorgaben. Wir bauen auf Lösungen auf, die in unserem Portfolio bereits im Einsatz sind.',
-    labels: { list: 'Branchen', challenge: 'Die Herausforderung', solutions: 'Was wir entwickeln', reference: 'Referenzlösung', viewInPortfolio: 'Im Portfolio ansehen' },
+    labels: { list: 'Branchen', challenge: 'Die Herausforderung', solutions: 'Was wir entwickeln', reference: 'Referenzlösung', viewInPortfolio: 'Im Portfolio ansehen', viewSolution: 'Lösung im Detail' },
   },
   caseStudies: {
     eyebrow: 'Ausgewählte Projekte', title: 'Produkte, die wir entwickelt haben',
