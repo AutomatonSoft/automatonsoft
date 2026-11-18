@@ -7,6 +7,7 @@ import { landingFontVariables } from '@/components/landing/fonts';
 import AttributionTracker from '@/components/layout/attribution-tracker';
 import JsonLd from '@/components/layout/json-ld';
 import RootDocument from '@/components/layout/root-document';
+import IndustriesView from '@/components/landing/industries-view';
 import LandingPage from '@/components/landing/landing-page';
 
 // Industry landings have their own root layout: Tailwind and design system C only, without the legacy style.css.
@@ -49,6 +50,21 @@ export function createLandingRoute(locale) {
           <JsonLd data={breadcrumbJsonLd(locale, 'industries', { name: t.name, path: new URL(path, siteConfig.url).href })} />
           <JsonLd data={faqJsonLd(t.faq.items)} />
           <LandingPage locale={locale} id={id} />
+        </>
+      );
+    },
+  };
+}
+
+// /branchen (the list of industries) lives next to its landing pages.
+export function createIndustriesRoute(locale) {
+  return {
+    generateMetadata: () => buildMetadata(locale, 'industries'),
+    Page: function Industries() {
+      return (
+        <>
+          <JsonLd data={breadcrumbJsonLd(locale, 'industries')} />
+          <IndustriesView locale={locale} />
         </>
       );
     },

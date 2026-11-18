@@ -46,7 +46,7 @@ export function SiteFooter({ locale }) {
   const pages = ['services', 'industries', 'portfolio', 'company', 'contact'];
   const industryTitles = Object.fromEntries(t.industries.items.map((item) => [item.id, item.title]));
   return (
-    <footer className={`border-t ${hairline}`}>
+    <footer>
       <div className={`${shell} grid gap-10 py-14 text-sm text-muted-foreground sm:grid-cols-[1.4fr_1fr_1fr]`}>
         <div>
           <div className="font-heading text-base font-semibold text-foreground">{siteConfig.shortName}</div>

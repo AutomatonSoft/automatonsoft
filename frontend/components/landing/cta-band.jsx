@@ -9,8 +9,8 @@ export default function CtaBand({ title, text, cta, href, secondary }) {
         <h2 className="relative max-w-[1000px] text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] font-black tracking-[-0.055em]">{title}</h2>
         {text && <p className="relative mt-6 max-w-[560px] text-lg">{text}</p>}
         <div className="relative mt-10 flex flex-wrap gap-3">
-          <a href={href} className={`${button} w-full bg-ink text-white max-sm:px-4 max-sm:text-base sm:w-auto`}><span>{cta}&nbsp;→</span></a>
-          {secondary && <a href={secondary.href} className={`${button} w-full bg-ink/25 max-sm:text-base sm:w-auto`}>{secondary.label}</a>}
+          <a href={href} className={`${button} w-full bg-ink text-white sm:w-auto`}><span>{cta}&nbsp;→</span></a>
+          {secondary && <a href={secondary.href} className={`${button} w-full bg-ink/25 sm:w-auto`}>{secondary.label}</a>}
         </div>
       </div>
     </section>
