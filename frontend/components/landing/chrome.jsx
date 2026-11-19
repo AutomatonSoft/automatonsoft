@@ -52,6 +52,10 @@ export function SiteFooter({ locale }) {
           <div className="font-heading text-base font-semibold text-foreground">{siteConfig.shortName}</div>
           <p className="mt-3 max-w-[340px]">{t.footer.tagline}</p>
           <p className="mt-5">{[siteConfig.name, ...addressLines].join(' · ')}</p>
+          <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-semibold text-foreground">
+            <a href={siteConfig.phone.href} className="hover:text-lilac">{siteConfig.phone.display}</a>
+            <a href={`mailto:${siteConfig.email}`} className="hover:text-lilac">{siteConfig.email}</a>
+          </p>
         </div>
         <nav aria-label={t.footer.industries}>
           <p className="text-xs font-medium tracking-[0.16em] uppercase">{t.footer.industries}</p>

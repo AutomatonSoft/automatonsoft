@@ -9,7 +9,7 @@ export const siteConfig = {
   appleIcon: '/assets/img/apple-touch-icon.png',
   ogImage: (locale) => `/assets/img/og/og-${locale}.jpg`,
   email: 'info@automatonsoft.de',
-  phone: { display: '+49 7392 9378410', href: 'tel:+4973929378410' },
+  phone: { display: '+49 7392 9378440', href: 'tel:+4973929378440' },
   whatsapp: { display: '+49 176 43450100', href: 'https://wa.me/4917643450100' },
   address: { street: 'Am Flugplatz 28', postalCode: '88483', city: 'Burgrieden', country: 'DE' },
 };

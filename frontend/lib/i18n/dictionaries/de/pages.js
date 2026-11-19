@@ -2,19 +2,19 @@ const pages = {
   home: { meta: {} },
   portfolio: { eyebrow: 'Portfolio', meta: { title: 'Portfolio: Software- & KI-Projekte', description: 'Software, Automation und Artificial Intelligence – Projekte von AutomatonSoft.' } },
   company: {
-    meta: { title: 'Über uns – Software aus Deutschland', description: 'AutomatonSoft GmbH aus Burgrieden entwickelt individuelle Software, Web- und Mobile-Apps, Automatisierung und KI – vom Konzept bis zum Betrieb.' },
+    meta: { title: 'Über uns – Software aus Deutschland', description: 'AutomatonSoft aus Burgrieden entwickelt individuelle Software, Web- und Mobile-Apps, Automatisierung und KI – vom Konzept bis zum Betrieb.' },
     eyebrow: 'Über uns', title: 'Software entsteht im Dialog.',
     intro: 'AutomatonSoft entwickelt digitale Lösungen für Unternehmen, die ihre Prozesse wirksam verbessern wollen.',
     primaryCta: 'Lernen Sie uns kennen', secondaryCta: 'Unsere Projekte',
     story: {
       eyebrow: 'Wer wir sind', title: 'Ein Softwareunternehmen, entwickelt in Deutschland',
       paragraphs: [
-        'Die AutomatonSoft GmbH ist ein Softwareunternehmen mit Sitz in Burgrieden, Baden-Württemberg. Wir konzipieren, entwickeln und betreiben individuelle Software, Web- und Mobile-Anwendungen, Prozessautomatisierung und KI-Lösungen für Unternehmen, die mehr wollen als Standard.',
+        'Die AEA GmbH & Co. KG (Marke AutomatonSoft) ist ein Softwareunternehmen mit Sitz in Burgrieden, Baden-Württemberg. Wir konzipieren, entwickeln und betreiben individuelle Software, Web- und Mobile-Anwendungen, Prozessautomatisierung und KI-Lösungen für Unternehmen, die mehr wollen als Standard.',
         'Unsere Produkte laufen in ganz unterschiedlichen Branchen – von der Zeiterfassung für verteilte Teams über KI-Sprachassistenten bis zu E-Commerce, Hospitality und Automotive. Was sie verbindet, ist unsere Arbeitsweise: nah an Ihren Prozessen, transparent in jeder Etappe und verantwortlich vom ersten Konzept bis zum laufenden Betrieb.',
       ],
       factsTitle: 'Auf einen Blick',
       facts: [
-        { label: 'Unternehmen', value: 'AutomatonSoft GmbH' },
+        { label: 'Unternehmen', value: 'AEA GmbH & Co. KG' },
         { label: 'Hauptsitz', value: 'Burgrieden, Deutschland' },
         { label: 'Schwerpunkt', value: 'Individualsoftware, Automatisierung & KI' },
         { label: 'Portfolio', value: '9 Lösungskategorien' },
@@ -125,14 +125,16 @@ const pages = {
     ],
   },
   contact: {
-    meta: { title: 'Kontakt – kostenloses Erstgespräch', description: 'Kontaktieren Sie AutomatonSoft GmbH – unverbindliches Erstgespräch zu Ihrem Software-Projekt.' },
+    meta: { title: 'Kontakt – kostenloses Erstgespräch', description: 'Kontaktieren Sie AutomatonSoft – unverbindliches Erstgespräch zu Ihrem Software-Projekt.' },
     eyebrow: 'Kontakt', title: 'Lassen Sie uns über Ihr Projekt sprechen.', intro: 'Beschreiben Sie uns kurz Ihre Idee oder Herausforderung. Wir melden uns mit einer ersten Einschätzung.',
   },
   imprint: {
-    meta: { title: 'Impressum', description: 'Impressum: Anbieterkennzeichnung, Kontaktdaten und rechtliche Hinweise gemäß § 5 TMG.' },
-    eyebrow: 'Rechtliches', title: 'Impressum', intro: 'Angaben gemäß § 5 TMG.',
+    meta: { title: 'Impressum', description: 'Impressum: Anbieterkennzeichnung, Kontaktdaten und rechtliche Hinweise gemäß § 5 DDG.' },
+    eyebrow: 'Rechtliches', title: 'Impressum', intro: 'Angaben gemäß § 5 DDG.',
     sections: [
-      { title: 'Anbieter', address: true, items: ['Telefon: +49 7392 9378410', 'E-Mail: info@automatonsoft.de'] },
+      { title: 'Anbieter', address: true, items: ['Rechtsform: Kommanditgesellschaft (GmbH & Co. KG)', 'Persönlich haftende Gesellschafterin: JV Möbel GmbH, Am Flugplatz 28, 88483 Burgrieden', 'Vertreten durch die Geschäftsführung der JV Möbel GmbH: Eugen Krisling', 'Telefon: +49 7392 9378440', 'E-Mail: info@automatonsoft.de'] },
+      { title: 'Registereintrag', items: ['Registergericht: Amtsgericht Ulm', 'Registernummer: HRA 726335', 'Komplementärin: Amtsgericht Ulm, HRB 728795', 'Umsatzsteuer-ID gemäß § 27a UStG: DE327113973'] },
+      { title: 'Inhaltlich verantwortlich', items: ['Eugen Krisling, Anschrift wie oben (§ 18 Abs. 2 MStV)'] },
       { title: 'Hinweise', text: 'Inhalte dieser Website werden mit Sorgfalt erstellt. Für externe Inhalte, auf die wir verlinken, übernehmen wir keine Haftung.', items: ['Urheberrecht', 'Haftung für Links'] },
     ],
   },
@@ -140,7 +142,10 @@ const pages = {
     meta: { title: 'Datenschutzerklärung', description: 'Datenschutzerklärung: Wie wir Ihre personenbezogenen Daten verarbeiten, Ihre Rechte nach der DSGVO und Kontakt.' },
     eyebrow: 'Rechtliches', title: 'Datenschutzerklärung', intro: 'Der Schutz Ihrer persönlichen Daten ist uns wichtig.',
     sections: [
-      { title: 'Verantwortliche Stelle', address: true, items: ['Kontaktaufnahme', 'Server-Logdaten'] },
+      { title: 'Verantwortliche Stelle', address: true, items: ['Verantwortlich im Sinne der DSGVO: AEA GmbH & Co. KG, vertreten durch die JV Möbel GmbH (Geschäftsführer: Eugen Krisling)', 'E-Mail: info@automatonsoft.de', 'Telefon: +49 7392 9378440'] },
+      { title: 'Hosting und Server-Logdaten', text: 'Diese Website wird auf einem Server der IONOS SE betrieben. Beim Aufruf verarbeitet der Webserver technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browser-Angaben, um die Seite auszuliefern und sicher zu betreiben.', items: ['Server-Logdaten', 'Keine Cookies, kein Tracking, keine Webanalyse'] },
+      { title: 'Kontaktaufnahme', text: 'Wenn Sie das Formular nutzen, speichern wir Name, E-Mail, Nachricht sowie freiwillig Unternehmen und Telefonnummer, die Sprache der Seite und, falls vorhanden, die Herkunft des Besuchs (Kampagnenparameter, Referrer, Einstiegsseite). Die Anfragen liegen in unserer Datenbank und werden von berechtigten Mitarbeitenden der AEA GmbH & Co. KG gelesen und beantwortet. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) bzw. die Anbahnung eines Vertrags (lit. b).', items: ['Kontaktformular', 'Herkunft des Besuchs'] },
+      { title: 'Speicherdauer', text: 'Server-Logdaten werden spätestens nach 14 Tagen gelöscht. Kontaktanfragen löschen wir spätestens 12 Monate nach dem letzten Kontakt, sofern keine Geschäftsbeziehung zustande kommt. Kommt es zu einem Vertrag, bewahren wir die zugehörige Korrespondenz nach den gesetzlichen Aufbewahrungsfristen auf (derzeit bis zu sechs Jahre, § 257 HGB).', items: ['Logdaten: 14 Tage', 'Anfragen: 12 Monate'] },
       { title: 'Ihre Rechte', text: 'Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch.', items: ['Auskunft', 'Berichtigung', 'Löschung'] },
     ],
   },

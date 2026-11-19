@@ -2,19 +2,19 @@ const pages = {
   home: { meta: {} },
   portfolio: { eyebrow: 'Portfolio', meta: { title: 'Portfolio: Software & AI Projects', description: 'Software, automation and artificial intelligence – projects by AutomatonSoft.' } },
   company: {
-    meta: { title: 'About Us – Software Company from Germany', description: 'AutomatonSoft GmbH from Burgrieden, Germany builds custom software, web and mobile apps, automation and AI – from concept to operations.' },
+    meta: { title: 'About Us – Software Company from Germany', description: 'AutomatonSoft from Burgrieden, Germany builds custom software, web and mobile apps, automation and AI – from concept to operations.' },
     eyebrow: 'About us', title: 'Great software is built in dialogue.',
     intro: 'AutomatonSoft builds digital solutions for companies that want to measurably improve their processes.',
     primaryCta: 'Get to know us', secondaryCta: 'View our work',
     story: {
       eyebrow: 'Who we are', title: 'A software company engineered in Germany',
       paragraphs: [
-        'AutomatonSoft GmbH is a software company based in Burgrieden, Baden-Württemberg. We design, build and operate custom software, web and mobile applications, process automation and AI solutions for companies that want more than off-the-shelf.',
+        'AEA GmbH & Co. KG (brand: AutomatonSoft) is a software company based in Burgrieden, Baden-Württemberg. We design, build and operate custom software, web and mobile applications, process automation and AI solutions for companies that want more than off-the-shelf.',
         'Our products run in very different industries – from time tracking for distributed teams and AI voice assistants to e-commerce, hospitality and automotive. What connects them is the way we work: close to your processes, transparent in every milestone and responsible from the first concept to daily operations.',
       ],
       factsTitle: 'At a glance',
       facts: [
-        { label: 'Company', value: 'AutomatonSoft GmbH' },
+        { label: 'Company', value: 'AEA GmbH & Co. KG' },
         { label: 'Headquarters', value: 'Burgrieden, Germany' },
         { label: 'Focus', value: 'Custom software, automation & AI' },
         { label: 'Portfolio', value: '9 solution categories' },
@@ -125,14 +125,16 @@ const pages = {
     ],
   },
   contact: {
-    meta: { title: 'Contact – Free Initial Consultation', description: 'Contact AutomatonSoft GmbH – free initial consultation for your software project.' },
+    meta: { title: 'Contact – Free Initial Consultation', description: 'Contact AutomatonSoft – free initial consultation for your software project.' },
     eyebrow: 'Contact', title: 'Let’s talk about your project.', intro: 'Briefly describe your idea or challenge. We will get back to you with an initial assessment.',
   },
   imprint: {
-    meta: { title: 'Legal Notice', description: 'Legal notice: provider identification, contact details and legal information pursuant to § 5 TMG.' },
-    eyebrow: 'Legal', title: 'Legal notice', intro: 'Information pursuant to § 5 TMG (German Telemedia Act).',
+    meta: { title: 'Legal Notice', description: 'Legal notice: provider identification, contact details and legal information pursuant to § 5 DDG.' },
+    eyebrow: 'Legal', title: 'Legal notice', intro: 'Information pursuant to § 5 DDG (German Digital Services Act).',
     sections: [
-      { title: 'Provider', address: true, items: ['Phone: +49 7392 9378410', 'Email: info@automatonsoft.de'] },
+      { title: 'Provider', address: true, items: ['Legal form: limited partnership (GmbH & Co. KG)', 'General partner: JV Möbel GmbH, Am Flugplatz 28, 88483 Burgrieden, Germany', 'Represented by the managing director of JV Möbel GmbH: Eugen Krisling', 'Phone: +49 7392 9378440', 'Email: info@automatonsoft.de'] },
+      { title: 'Register entry', items: ['Register court: Amtsgericht Ulm', 'Register number: HRA 726335', 'General partner: Amtsgericht Ulm, HRB 728795', 'VAT ID pursuant to § 27a UStG: DE327113973'] },
+      { title: 'Responsible for content', items: ['Eugen Krisling, address as above (§ 18 (2) MStV)'] },
       { title: 'Disclaimer', text: 'The content of this website is created with care. We accept no liability for external content we link to.', items: ['Copyright', 'Liability for links'] },
     ],
   },
@@ -140,7 +142,10 @@ const pages = {
     meta: { title: 'Privacy Policy', description: 'Privacy policy: how we process your personal data, your rights under the GDPR and how to contact us.' },
     eyebrow: 'Legal', title: 'Privacy policy', intro: 'Protecting your personal data is important to us.',
     sections: [
-      { title: 'Data controller', address: true, items: ['Contact requests', 'Server log data'] },
+      { title: 'Data controller', address: true, items: ['Controller within the meaning of the GDPR: AEA GmbH & Co. KG, represented by JV Möbel GmbH (managing director: Eugen Krisling)', 'Email: info@automatonsoft.de', 'Phone: +49 7392 9378440'] },
+      { title: 'Hosting and server logs', text: 'This website runs on a server operated by IONOS SE. When you visit it, the web server processes technically necessary data such as IP address, date and time, requested page and browser details in order to deliver the page and operate it securely.', items: ['Server log data', 'No cookies, no tracking, no web analytics'] },
+      { title: 'Contact requests', text: 'If you use the form, we store your name, email and message, and optionally company and phone number, the language of the page and, where available, where the visit came from (campaign parameters, referrer, landing page). Requests are kept in our database and read and answered by authorised staff of AEA GmbH & Co. KG. The legal basis is your consent (Art. 6(1)(a) GDPR) or the preparation of a contract (point (b)).', items: ['Contact form', 'Origin of the visit'] },
+      { title: 'Retention', text: 'Server log data is deleted after 14 days at the latest. We delete contact requests no later than 12 months after the last contact, unless a business relationship is established. If a contract is concluded, we keep the related correspondence for the statutory retention periods (currently up to six years, § 257 HGB).', items: ['Log data: 14 days', 'Requests: 12 months'] },
       { title: 'Your rights', text: 'You have the right to access, rectification, erasure, restriction of processing, data portability and objection.', items: ['Access', 'Rectification', 'Erasure'] },
     ],
   },

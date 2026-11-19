@@ -1,6 +1,6 @@
 # AutomatonSoft — сайт
 
-Сайт AutomatonSoft GmbH: портфолио, отраслевые лендинги, форма заявки. Немецкий язык без префикса (`/kontakt`), английский под `/en/...` (`/en/contact`).
+Сайт AutomatonSoft (юрлицо AEA GmbH & Co. KG): портфолио, отраслевые лендинги, форма заявки. Немецкий язык без префикса (`/kontakt`), английский под `/en/...` (`/en/contact`).
 
 План развития и ТЗ: [docs/TZ.md](docs/TZ.md).
 
@@ -67,6 +67,8 @@ CI (`.github/workflows/website.yml`) запускает обе проверки 
 ## Деплой
 
 Push в `main` после зелёного CI: GitHub Actions на self-hosted раннере собирает архив из `frontend/`, `backend/` и `deploy/docker-compose.yml` и запускает `/usr/local/sbin/deploy-automatonsoft` (копия в `deploy/server/`). Скрипт распаковывает релиз, пересобирает контейнеры и откатывается, если сайт не ответил.
+
+**Сроки хранения данных** (текст в Datenschutz): логи контейнеров ограничены в `deploy/docker-compose.yml`; на сервере один раз нужно поставить `deploy/server/automatonsoft-purge.cron` (в `/etc/cron.d/`, удаляет заявки старше 12 месяцев командой `purge_requests`). Логи nginx на сервере общие для всех проектов: ротация в `/etc/logrotate.d/nginx` (`daily`, `rotate 10`) уже укладывается в 14 дней, её не менять; журнал запросов в контейнере выключен (`access_log off`).
 
 Если меняется `deploy/server/deploy-automatonsoft`, его нужно вручную установить на сервер: в `/usr/local/sbin/` он лежит под root.
 
