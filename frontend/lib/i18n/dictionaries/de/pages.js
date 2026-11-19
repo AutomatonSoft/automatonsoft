@@ -142,7 +142,9 @@ const pages = {
     meta: { title: 'Datenschutzerklärung', description: 'Datenschutzerklärung: Wie wir Ihre personenbezogenen Daten verarbeiten, Ihre Rechte nach der DSGVO und Kontakt.' },
     eyebrow: 'Rechtliches', title: 'Datenschutzerklärung', intro: 'Der Schutz Ihrer persönlichen Daten ist uns wichtig.',
     sections: [
-      { title: 'Verantwortliche Stelle', address: true, items: ['Kontaktaufnahme', 'Server-Logdaten'] },
+      { title: 'Verantwortliche Stelle', address: true, items: ['Verantwortlich im Sinne der DSGVO: AEA GmbH & Co. KG, vertreten durch die JV Möbel GmbH (Geschäftsführer: Eugen Krisling)', 'E-Mail: info@automatonsoft.de', 'Telefon: +49 7392 9378440'] },
+      { title: 'Hosting und Server-Logdaten', text: 'Diese Website wird auf einem Server der IONOS SE betrieben. Beim Aufruf verarbeitet der Webserver technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browser-Angaben, um die Seite auszuliefern und sicher zu betreiben.', items: ['Server-Logdaten', 'Keine Cookies, kein Tracking, keine Webanalyse'] },
+      { title: 'Kontaktaufnahme', text: 'Wenn Sie das Formular nutzen, speichern wir Name, E-Mail, Nachricht sowie freiwillig Unternehmen und Telefonnummer, die Sprache der Seite und, falls vorhanden, die Herkunft des Besuchs (Kampagnenparameter, Referrer, Einstiegsseite). Die Anfragen liegen in unserer Datenbank und werden von berechtigten Mitarbeitenden der AEA GmbH & Co. KG gelesen und beantwortet. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) bzw. die Anbahnung eines Vertrags (lit. b).', items: ['Kontaktformular', 'Herkunft des Besuchs'] },
       { title: 'Ihre Rechte', text: 'Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch.', items: ['Auskunft', 'Berichtigung', 'Löschung'] },
     ],
   },

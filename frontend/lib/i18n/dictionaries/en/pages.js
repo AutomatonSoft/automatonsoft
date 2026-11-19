@@ -142,7 +142,9 @@ const pages = {
     meta: { title: 'Privacy Policy', description: 'Privacy policy: how we process your personal data, your rights under the GDPR and how to contact us.' },
     eyebrow: 'Legal', title: 'Privacy policy', intro: 'Protecting your personal data is important to us.',
     sections: [
-      { title: 'Data controller', address: true, items: ['Contact requests', 'Server log data'] },
+      { title: 'Data controller', address: true, items: ['Controller within the meaning of the GDPR: AEA GmbH & Co. KG, represented by JV Möbel GmbH (managing director: Eugen Krisling)', 'Email: info@automatonsoft.de', 'Phone: +49 7392 9378440'] },
+      { title: 'Hosting and server logs', text: 'This website runs on a server operated by IONOS SE. When you visit it, the web server processes technically necessary data such as IP address, date and time, requested page and browser details in order to deliver the page and operate it securely.', items: ['Server log data', 'No cookies, no tracking, no web analytics'] },
+      { title: 'Contact requests', text: 'If you use the form, we store your name, email and message, and optionally company and phone number, the language of the page and, where available, where the visit came from (campaign parameters, referrer, landing page). Requests are kept in our database and read and answered by authorised staff of AEA GmbH & Co. KG. The legal basis is your consent (Art. 6(1)(a) GDPR) or the preparation of a contract (point (b)).', items: ['Contact form', 'Origin of the visit'] },
       { title: 'Your rights', text: 'You have the right to access, rectification, erasure, restriction of processing, data portability and objection.', items: ['Access', 'Rectification', 'Erasure'] },
     ],
   },
