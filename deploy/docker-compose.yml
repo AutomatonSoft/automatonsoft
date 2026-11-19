@@ -9,6 +9,9 @@ services:
     volumes:
       - automatonsoft_media:/var/www/media:ro
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: 10m, max-file: '3' }
   backend:
     build: ./current/backend
     container_name: automatonsoft-backend
@@ -20,6 +23,9 @@ services:
       - automatonsoft_data:/data
       - automatonsoft_media:/app/media
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: 10m, max-file: '3' }
 
 volumes:
   automatonsoft_data:

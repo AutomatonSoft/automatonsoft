@@ -1,11 +1,15 @@
 import importlib
+from datetime import timedelta
+from io import StringIO
 import shutil
 import tempfile
 from io import BytesIO
 
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
+from django.utils import timezone
 from PIL import Image
 
 from .models import ContactRequest, Project, ProjectScreenshot
@@ -188,3 +192,12 @@ class ContactApiTests(TestCase):
         self.assertEqual(self.client.get('/api/contact-requests/').status_code, 401)
         self.client.force_login(get_user_model().objects.create_user('staff', password='pw', is_staff=True))
         self.assertEqual(self.client.get('/api/contact-requests/').json()['requests'][0]['name'], 'Ada')
+
+
+class PurgeRequestsTests(TestCase):
+    def test_only_requests_older_than_the_retention_period_are_deleted(self):
+        for name, days in (('old', 400), ('recent', 30)):
+            lead = ContactRequest.objects.create(name=name, email='a@example.com', message='x')
+            ContactRequest.objects.filter(pk=lead.pk).update(created_at=timezone.now() - timedelta(days=days))
+        call_command('purge_requests', stdout=StringIO())
+        self.assertEqual(list(ContactRequest.objects.values_list('name', flat=True)), ['recent'])
