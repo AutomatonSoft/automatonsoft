@@ -1,6 +1,9 @@
+from pathlib import Path
+
 from django.core.management.base import BaseCommand
 
 from core.models import Project
+from core.portfolio_import import load_file
 
 
 PROJECTS = (
@@ -59,4 +62,7 @@ class Command(BaseCommand):
                 project.translations = {'en': {'description': description_en, 'stack': stack_en}}
                 project.save(update_fields=['translations'])
                 translated += 1
+        # Projects kept as JSON in core/portfolio_data: added when missing, never overwritten (dashboard edits win).
+        for path in sorted((Path(__file__).resolve().parents[2] / 'portfolio_data').glob('*.json')):
+            load_file(path)
         self.stdout.write(self.style.SUCCESS(f'Portfolio seed complete: {created} created, {len(PROJECTS) - created} already present, {translated} translated.'))

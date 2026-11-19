@@ -201,3 +201,35 @@ class PurgeRequestsTests(TestCase):
             ContactRequest.objects.filter(pk=lead.pk).update(created_at=timezone.now() - timedelta(days=days))
         call_command('purge_requests', stdout=StringIO())
         self.assertEqual(list(ContactRequest.objects.values_list('name', flat=True)), ['recent'])
+
+
+class ImportProjectTests(TestCase):
+    card = {'title': 'Demo', 'category_guess': 'ecommerce', 'published': True, 'development_time': 'seit 07/2026',
+            'description': {'de': 'Beschreibung', 'en': 'Description'}, 'features': {'de': ['A'], 'en': ['B']}, 'stack': ['Next.js']}
+
+    def test_creates_with_english_translation_and_keeps_existing_unless_update(self):
+        from .portfolio_import import import_project
+        self.assertEqual(import_project(self.card), 'created')
+        project = Project.objects.get(title='Demo')
+        self.assertEqual((project.category, project.features, project.translations['en']['features']), ('ecommerce-marketplace-automation', ['A'], ['B']))
+        project.description = 'edited in dashboard'
+        project.save()
+        self.assertEqual(import_project(self.card), 'kept')
+        self.assertEqual(Project.objects.get(title='Demo').description, 'edited in dashboard')
+        self.assertEqual(import_project(self.card, update=True), 'updated')
+        self.assertEqual(Project.objects.get(title='Demo').description, 'Beschreibung')
+
+    def test_unknown_category_is_rejected(self):
+        from .portfolio_import import import_project
+        with self.assertRaises(ValueError):
+            import_project({**self.card, 'category_guess': 'nope'})
+
+    def test_screenshots_are_attached_once_from_files_next_to_the_card(self):
+        from .portfolio_import import import_project
+        with tempfile.TemporaryDirectory() as folder, override_settings(MEDIA_ROOT=folder):
+            Image.new('RGB', (40, 20), 'blue').save(f'{folder}/shot.png')
+            card = {**self.card, 'integrations': ['Afterbuy'], 'screenshots': [{'file': 'shot.png', 'alt': {'de': 'Bild', 'en': 'Image'}}]}
+            import_project(card, base_dir=folder)
+            import_project(card, base_dir=folder)
+            project = Project.objects.get(title='Demo')
+            self.assertEqual((project.screenshots.count(), project.integrations, project.screenshots.get().alt['en']), (1, ['Afterbuy'], 'Image'))

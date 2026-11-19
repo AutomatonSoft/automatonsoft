@@ -38,6 +38,7 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
 
   const p = localizeProject(project, locale);
   const [cover, ...gallery] = p.screenshots;
+  const alts = (p.screenshot_alts || []).map((alt) => alt?.[locale] || alt?.de || p.title);
   const category = labels.categories[p.category] || p.category_label;
   const time = p.development_time && p.development_time !== '—' ? p.development_time : null;
   const facts = [[labels.category, category], ...(time ? [[labels.time, time]] : [])];
@@ -56,14 +57,14 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
         <section className="mx-auto mt-12 w-full max-w-[1200px] px-4 sm:px-6">
           <figure className={cn(block, 'relative overflow-hidden bg-primary px-5 pt-6 sm:px-9 sm:pt-9')}>
             <div aria-hidden="true" className="absolute -top-24 -right-24 size-75 rounded-full border-[50px] border-white/22" />
-            <img src={cover} alt={p.title} className="relative aspect-video w-full rounded-t-[22px] object-cover object-top" />
+            <img src={cover} alt={alts[0] || p.title} className="relative aspect-video w-full rounded-t-[22px] object-cover object-top" />
           </figure>
         </section>
       )}
 
       <Section>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
-          <div className={cn(block, 'bg-card p-8 sm:p-10')}>
+        <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+          <div className={cn(block, 'bg-card p-5 sm:p-10 lg:sticky lg:top-24')}>
             <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] leading-none font-black tracking-[-0.04em]">{p.challenge ? labels.challenge : labels.overview}</h2>
             {p.challenge && <p className="mt-5 text-muted-foreground">{p.challenge}</p>}
             <dl className="mt-8 grid gap-4">
@@ -74,13 +75,17 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
                 <div><dt className="text-xs font-bold tracking-[0.14em] text-muted-foreground uppercase">{labels.stack}</dt>
                   <dd className="mt-2 flex flex-wrap gap-1.5">{p.stack.map((item) => <span key={item} className={cn(pill, 'bg-secondary')}>{item}</span>)}</dd></div>
               )}
+              {p.integrations?.length > 0 && (
+                <div><dt className="text-xs font-bold tracking-[0.14em] text-muted-foreground uppercase">{labels.integrations}</dt>
+                  <dd className="mt-2 flex flex-wrap gap-1.5">{p.integrations.map((item) => <span key={item} className={cn(pill, 'bg-secondary')}>{item}</span>)}</dd></div>
+              )}
             </dl>
           </div>
           {p.features.length > 0 && (
-            <div className={cn(block, tone.foam.card, 'p-8 sm:p-10')}>
+            <div className={cn(block, tone.foam.card, 'p-5 sm:p-10')}>
               <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] leading-none font-black tracking-[-0.04em]">{labels.features}</h2>
               <ul className="mt-6 grid grid-cols-1 gap-3">
-                {p.features.map((item) => <li key={item} className="flex gap-3 rounded-[1.25rem] bg-white/60 p-4"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{item}</span></li>)}
+                {p.features.map((item) => <li key={item} className="flex gap-2.5 rounded-[1.25rem] bg-white/60 p-3.5 sm:gap-3 sm:p-4"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{item}</span></li>)}
               </ul>
             </div>
           )}
@@ -90,10 +95,10 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
       {p.results.length > 0 && (
         <Section>
           <Title parts={labels.results} />
-          <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <ul className={cn('mt-12 grid grid-cols-1 gap-4', p.results.length > 2 ? 'md:grid-cols-3' : p.results.length === 2 && 'md:grid-cols-2')}>
             {p.results.map((item, index) => {
               const scheme = tone[['wave', 'deep', 'deep'][index % 3]];
-              return <li key={item} className={cn(block, 'p-8 text-lg font-extrabold', scheme.card)}>{item}</li>;
+              return <li key={item} className={cn(block, 'p-6 text-lg font-extrabold sm:p-8', p.results.length === 1 && 'sm:p-10 sm:text-3xl sm:leading-tight', scheme.card)}>{item}</li>;
             })}
           </ul>
         </Section>
@@ -103,7 +108,7 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
         <Section>
           <Title parts={labels.gallery} />
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
-            {gallery.map((src) => <figure key={src} className={cn(block, 'overflow-hidden bg-card')}><img src={src} alt={p.title} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover object-top" /></figure>)}
+            {gallery.map((src, index) => <figure key={src} className={cn(block, 'overflow-hidden bg-card md:[&:last-child:nth-child(odd)]:col-span-2 md:[&:last-child:nth-child(odd)_img]:aspect-[16/7]')}><img src={src} alt={alts[index + 1] || p.title} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover object-top" /></figure>)}
           </div>
         </Section>
       )}

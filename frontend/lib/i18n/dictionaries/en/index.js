@@ -40,7 +40,7 @@ const en = {
     ctaText: 'We build custom software for business processes that go beyond our existing portfolio.',
     project: {
       overview: 'The solution at a glance', challenge: 'The challenge', features: 'Features', results: 'Results', gallery: 'Screenshots',
-      time: 'Development time', category: 'Category', stack: 'Technologies', visit: 'Visit website', similar: 'Request a similar project',
+      time: 'Development time', category: 'Category', stack: 'Technologies', integrations: 'Integrations', visit: 'Visit website', similar: 'Request a similar project',
       loading: 'Loading project …', notFound: 'This project is not available.', back: 'Back to portfolio',
       ctaTitle: 'Need a similar solution?', ctaText: 'We adapt existing solutions to your processes or build them specifically for you.',
     },
