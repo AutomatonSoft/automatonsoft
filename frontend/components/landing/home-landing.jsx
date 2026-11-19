@@ -4,7 +4,7 @@ import { caseImages, homeExtras } from '@/lib/landings/home';
 import { landingHrefFor, landings } from '@/lib/landings';
 import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
-import { block, button, ContactSection, FaqSection, hover, num, pill, Section, Title, tone, wrap } from '@/components/landing/blocks';
+import { block, button, ContactSection, FaqSection, hover, num, pill, Section, StepCards, Title, tone, wrap } from '@/components/landing/blocks';
 import CtaBand from '@/components/landing/cta-band';
 import { FloatingCta, MobileContactBar, SiteFooter, SiteHeader } from '@/components/landing/chrome';
 
@@ -60,7 +60,7 @@ export default function HomeLanding({ locale }) {
           </div>
           <figure className={`${block} order-1 relative flex flex-[1.6_1_520px] min-[960px]:order-2 flex-col overflow-hidden bg-primary px-5 pt-6 text-primary-foreground sm:px-9 sm:pt-9`}>
             <div aria-hidden="true" className="absolute -top-24 -right-24 size-75 rounded-full border-[50px] border-white/22" />
-            <figcaption className="relative flex items-center pb-6 justify-between gap-3 text-lg font-extrabold">
+            <figcaption className="relative flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pb-6 text-lg font-extrabold">
               {x.stageLabel}<span className="flex items-center gap-2 rounded-full bg-ink px-3.5 py-1.5 text-sm whitespace-nowrap text-white"><span aria-hidden="true" className="size-2 animate-pulse rounded-full bg-hot motion-reduce:animate-none" />{x.stageBadge}</span>
             </figcaption>
             <img src={caseImages.lisa.src} width={caseImages.lisa.width} height={caseImages.lisa.height} alt={cases.lisa?.image?.alt || x.stageLabel}
@@ -98,7 +98,7 @@ export default function HomeLanding({ locale }) {
               <li key={service.id}>
                 <a href={href(locale, 'services', service.id)} className={`${block} group flex h-full flex-col gap-6 bg-card p-8 ${hover}`}>
                   <span className="text-5xl leading-none font-black tracking-[-0.05em] text-lilac">{num(index)}</span>
-                  <span className="text-2xl font-black tracking-[-0.03em]">{service.title}</span>
+                  <span className="text-2xl font-black tracking-[-0.03em] break-words hyphens-auto">{service.title}</span>
                   <span className="text-muted-foreground">{service.text}</span>
                   <span className="mt-auto text-[15px] font-extrabold group-hover:text-lilac">{x.more} →</span>
                 </a>
@@ -156,20 +156,7 @@ export default function HomeLanding({ locale }) {
 
         <Section>
           <Title parts={x.titles.steps} />
-          <ol className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {t.process.steps.map((step, index) => {
-              const scheme = tone[index === 0 ? 'wave' : index === t.process.steps.length - 1 ? 'foam' : 'deep'];
-              return (
-                <li key={step.title} className={cn(block, 'flex min-h-60 min-w-0 flex-col gap-10 p-6', scheme.card)}>
-                  <span className={cn('text-7xl leading-[0.85] font-black tracking-[-0.05em]', index && index < t.process.steps.length - 1 && 'text-lilac')}>{num(index)}</span>
-                  <span>
-                    <span className="block min-h-[2.5em] text-[1.125rem] leading-tight font-extrabold tracking-[-0.02em] break-words">{step.title}</span>
-                    <span className={cn('mt-1.5 block text-[15px]', scheme.muted)}>{step.text}</span>
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
+          <StepCards steps={t.process.steps} />
         </Section>
 
         <FaqSection title={x.titles.faq} text={t.faq.text} items={t.faq.items} />

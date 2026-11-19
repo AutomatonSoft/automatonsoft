@@ -8,5 +8,5 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 export const metadata = { title: 'Admin | AutomatonSoft', robots: { index: false, follow: false } };
 
 export default function AdminLayout({ children }) {
-  return <RootDocument lang="de" className={`font-sans ${geist.variable}`} siteStyles={false}>{children}</RootDocument>;
+  return <RootDocument lang="de" className={`font-sans ${geist.variable}`}>{children}</RootDocument>;
 }
