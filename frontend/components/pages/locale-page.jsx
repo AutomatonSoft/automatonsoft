@@ -3,15 +3,13 @@ import { pageFromSlug, staticParams } from '@/lib/i18n';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import JsonLd from '@/components/layout/json-ld';
 import SiteShell from '@/components/layout/site-shell';
-import ContactPage from '@/components/pages/contact-page';
 import ContentPage from '@/components/pages/content-page';
-import ServicesPage from '@/components/pages/services-page';
 import CompanyPage from '@/components/pages/company-page';
 import HirePage from '@/components/pages/hire-page';
 
-const pageComponents = { company: CompanyPage, services: ServicesPage, hire: HirePage, contact: ContactPage };
-// Pages already in design E live in the (landing-*) root layouts: the home page, the portfolio (with its project pages) and the industries.
-const redesigned = ['home', 'portfolio', 'industries'];
+const pageComponents = { company: CompanyPage, hire: HirePage };
+// Pages already in design E live in the (landing-*) root layouts: the home page, the portfolio (with its project pages), the industries, the services and the contact page.
+const redesigned = ['home', 'portfolio', 'industries', 'services', 'contact'];
 
 // Factory for the per-locale catch-all route: every locale shares the same page tree.
 export function createLocaleRoute(locale) {

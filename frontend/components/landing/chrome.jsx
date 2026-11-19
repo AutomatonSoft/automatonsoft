@@ -11,7 +11,7 @@ const logo = '/assets/img/logo-icon-96.webp';
 // links: [{ href, label }]; language: { href, label, locale } of the same page in the other language.
 export function SiteHeader({ locale, links, language, cta, label }) {
   return (
-    <header className="sticky top-0 z-30 bg-background/85 backdrop-blur-md">
+    <header className="sticky top-0 z-30 transform-gpu bg-background/95">
       <div className={`${shell} flex h-18 items-center justify-between gap-6`}>
         <a href={href(locale, 'home')} className="flex shrink-0 items-center gap-2.5 text-lg font-extrabold tracking-[-0.02em] whitespace-nowrap">
           <img src={logo} alt="" width="34" height="34" className="size-8.5 rounded-[10px]" />
@@ -81,7 +81,7 @@ export function SiteFooter({ locale }) {
 // Phones: the three ways to reach us stay one tap away. Pure CSS, no script.
 export function MobileContactBar({ labels, requestHref }) {
   return (
-    <nav aria-label={labels.request} className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-3 gap-2 rounded-2xl border border-border bg-card/95 p-2 shadow-[0_12px_40px_rgba(6,37,135,0.22)] backdrop-blur-md md:hidden">
+    <nav aria-label={labels.request} className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-3 gap-2 rounded-2xl border border-border bg-card p-2 shadow-[0_12px_40px_rgba(6,37,135,0.22)] md:hidden">
       <a href={siteConfig.phone.href} className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl text-sm font-semibold hover:bg-primary/10"><Phone aria-hidden="true" className="size-4 text-lilac" />{labels.call}</a>
       <a href={siteConfig.whatsapp.href} target="_blank" rel="noopener" className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl text-sm font-semibold hover:bg-primary/10"><MessageCircle aria-hidden="true" className="size-4 text-lilac" />{labels.whatsapp}</a>
       <a href={requestHref} className="flex min-h-11 items-center justify-center rounded-xl bg-primary text-sm font-semibold text-primary-foreground">{labels.request}</a>

@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
-const control = 'h-12 rounded-xl bg-background/70 px-3.5 text-[15px] md:text-[15px] dark:bg-background/70';
+const control = 'h-12 rounded-xl border-muted-foreground/40 bg-background/70 px-3.5 text-[15px] md:text-[15px] dark:bg-background/70';
 
 // Same endpoint and attribution as the main contact form; t = dictionary.contact, messageLabel from the landing.
 export default function LandingContactForm({ locale, t, messageLabel, privacyHref }) {
@@ -38,7 +38,7 @@ export default function LandingContactForm({ locale, t, messageLabel, privacyHre
         <div className="grid gap-1.5"><Label className="text-secondary-foreground" htmlFor="lead-email">{t.emailField}</Label><Input id="lead-email" name="email" type="email" autoComplete="email" maxLength={254} required className={control} /></div>
       </div>
       <div className="grid gap-1.5"><Label className="text-secondary-foreground" htmlFor="lead-company">{t.company}</Label><Input id="lead-company" name="company" autoComplete="organization" maxLength={160} className={control} /></div>
-      <div className="grid gap-1.5"><Label className="text-secondary-foreground" htmlFor="lead-message">{messageLabel}</Label><Textarea id="lead-message" name="message" rows={4} maxLength={5000} required className="min-h-28 rounded-xl bg-background/70 px-3.5 py-3 text-[15px] md:text-[15px] dark:bg-background/70" /></div>
+      <div className="grid gap-1.5"><Label className="text-secondary-foreground" htmlFor="lead-message">{messageLabel}</Label><Textarea id="lead-message" name="message" rows={4} maxLength={5000} required className="min-h-28 rounded-xl border-muted-foreground/40 bg-background/70 px-3.5 py-3 text-[15px] md:text-[15px] dark:bg-background/70" /></div>
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px]" />
       <label className="flex items-start gap-2.5 text-[13px] leading-relaxed text-muted-foreground">
         <input type="checkbox" name="consent" required className="mt-1 size-4 shrink-0 accent-primary" />

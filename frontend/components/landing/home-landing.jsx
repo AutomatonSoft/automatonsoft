@@ -4,7 +4,7 @@ import { caseImages, homeExtras } from '@/lib/landings/home';
 import { landingHrefFor, landings } from '@/lib/landings';
 import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
-import { block, button, ContactSection, FaqSection, hover, num, pill, Section, Title, tone, wrap } from '@/components/landing/blocks';
+import { block, button, ContactSection, FaqSection, hover, num, pill, Section, StepCards, Title, tone, wrap } from '@/components/landing/blocks';
 import CtaBand from '@/components/landing/cta-band';
 import { FloatingCta, MobileContactBar, SiteFooter, SiteHeader } from '@/components/landing/chrome';
 
@@ -156,20 +156,7 @@ export default function HomeLanding({ locale }) {
 
         <Section>
           <Title parts={x.titles.steps} />
-          <ol className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {t.process.steps.map((step, index) => {
-              const scheme = tone[index === 0 ? 'wave' : index === t.process.steps.length - 1 ? 'foam' : 'deep'];
-              return (
-                <li key={step.title} className={cn(block, 'flex min-h-60 min-w-0 flex-col gap-10 p-6', scheme.card)}>
-                  <span className={cn('text-7xl leading-[0.85] font-black tracking-[-0.05em]', index && index < t.process.steps.length - 1 && 'text-lilac')}>{num(index)}</span>
-                  <span>
-                    <span className="block min-h-[2.5em] text-[1.125rem] leading-tight font-extrabold tracking-[-0.02em] break-words">{step.title}</span>
-                    <span className={cn('mt-1.5 block text-[15px]', scheme.muted)}>{step.text}</span>
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
+          <StepCards steps={t.process.steps} />
         </Section>
 
         <FaqSection title={x.titles.faq} text={t.faq.text} items={t.faq.items} />

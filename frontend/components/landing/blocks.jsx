@@ -88,29 +88,58 @@ export function FaqSection({ title, text, items, extra }) {
 }
 
 // contact: { title, text, points, nextTitle?, next, message }; formT: dictionary.contact (field labels).
+// Desktop: one card with the text and the steps next to the form. Phone: the card dissolves (display: contents) into two cards,
+// so the order is heading, form, steps.
+const phoneCard = 'max-lg:rounded-[2.25rem] max-lg:bg-card max-lg:p-6 max-lg:shadow-[0_1px_2px_rgba(10,15,36,0.05),0_14px_36px_rgba(6,37,135,0.06)] sm:max-lg:p-10';
+
 export function ContactSection({ id, locale, contact, formT, privacyHref }) {
   return (
     <Section id={id} className="pb-24">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-        <div className={cn(block, 'bg-card p-6 sm:p-10')}>
-          <h2 className="text-[clamp(2.25rem,4vw,3.5rem)] leading-[0.95] font-black tracking-[-0.045em]">{contact.title}</h2>
-          <p className="mt-5 text-muted-foreground">{contact.text}</p>
-          {contact.nextTitle && <p className="mt-8 text-xs font-bold tracking-[0.1em] text-muted-foreground uppercase sm:tracking-[0.14em]">{contact.nextTitle}</p>}
-          <ol className={cn('grid gap-3', contact.nextTitle ? 'mt-4' : 'mt-8')}>
-            {contact.next.map((step, index) => (
-              <li key={step.title} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-1.5 rounded-[1.25rem] bg-secondary p-3.5 sm:gap-x-4 sm:p-4">
-                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-black text-primary-foreground sm:row-span-2 sm:self-start">{index + 1}</span>
-                <span className="block font-extrabold">{step.title}</span>
-                <span className="col-span-2 block text-sm text-muted-foreground sm:col-span-1 sm:col-start-2">{step.text}</span>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-6 text-sm text-muted-foreground">{contact.points.join(' · ')}</p>
+      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+        <div className={cn(block, 'bg-card p-6 sm:p-10 max-lg:contents lg:col-start-1 lg:row-start-1')}>
+          <div className={cn('max-lg:order-1', phoneCard)}>
+            <h2 className="text-[clamp(2.25rem,4vw,3.5rem)] leading-[0.95] font-black tracking-[-0.045em]">{contact.title}</h2>
+            <p className="mt-5 text-muted-foreground">{contact.text}</p>
+          </div>
+          <div className={cn('max-lg:order-3', phoneCard)}>
+            {contact.nextTitle && <p className="text-xs font-bold tracking-[0.1em] text-muted-foreground uppercase sm:tracking-[0.14em] lg:mt-8">{contact.nextTitle}</p>}
+            <ol className={cn('grid grid-cols-1 gap-3', contact.nextTitle ? 'mt-4' : 'lg:mt-8')}>
+              {contact.next.map((step, index) => (
+                <li key={step.title} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-1.5 rounded-[1.25rem] bg-secondary p-3.5 sm:gap-x-4 sm:p-4">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-black text-primary-foreground sm:row-span-2 sm:self-start">{index + 1}</span>
+                  <span className="block font-extrabold">{step.title}</span>
+                  <span className="col-span-2 block text-sm text-muted-foreground sm:col-span-1 sm:col-start-2">{step.text}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-6 text-sm text-muted-foreground">{contact.points.join(' · ')}</p>
+          </div>
         </div>
-        <div className={cn(block, 'bg-secondary p-6 sm:p-10')}>
+        <div className={cn(block, 'order-2 bg-secondary p-6 sm:p-10 lg:sticky lg:top-24 lg:order-none lg:col-start-2 lg:row-start-1')}>
           <LandingContactForm locale={locale} t={formT} messageLabel={contact.message} privacyHref={privacyHref} />
         </div>
       </div>
     </Section>
+  );
+}
+
+// Numbered process steps: first card loud blue, last loud ice, the rest calm white.
+export function StepCards({ steps }) {
+  return (
+    <ol className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {steps.map((step, index) => {
+        const middle = index > 0 && index < steps.length - 1;
+        const scheme = tone[index === 0 ? 'wave' : middle ? 'deep' : 'foam'];
+        return (
+          <li key={step.title} className={cn(block, 'flex min-h-60 min-w-0 flex-col gap-10 p-6', scheme.card)}>
+            <span className={cn('text-7xl leading-[0.85] font-black tracking-[-0.05em]', middle && 'text-lilac')}>{num(index)}</span>
+            <span>
+              <span className="block min-h-[2.5em] text-[1.125rem] leading-tight font-extrabold tracking-[-0.02em] break-words">{step.title}</span>
+              <span className={cn('mt-1.5 block text-[15px]', scheme.muted)}>{step.text}</span>
+            </span>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
