@@ -60,7 +60,7 @@ export default function HomeLanding({ locale }) {
           </div>
           <figure className={`${block} order-1 relative flex flex-[1.6_1_520px] min-[960px]:order-2 flex-col overflow-hidden bg-primary px-5 pt-6 text-primary-foreground sm:px-9 sm:pt-9`}>
             <div aria-hidden="true" className="absolute -top-24 -right-24 size-75 rounded-full border-[50px] border-white/22" />
-            <figcaption className="relative flex items-center pb-6 justify-between gap-3 text-lg font-extrabold">
+            <figcaption className="relative flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pb-6 text-lg font-extrabold">
               {x.stageLabel}<span className="flex items-center gap-2 rounded-full bg-ink px-3.5 py-1.5 text-sm whitespace-nowrap text-white"><span aria-hidden="true" className="size-2 animate-pulse rounded-full bg-hot motion-reduce:animate-none" />{x.stageBadge}</span>
             </figcaption>
             <img src={caseImages.lisa.src} width={caseImages.lisa.width} height={caseImages.lisa.height} alt={cases.lisa?.image?.alt || x.stageLabel}
@@ -98,7 +98,7 @@ export default function HomeLanding({ locale }) {
               <li key={service.id}>
                 <a href={href(locale, 'services', service.id)} className={`${block} group flex h-full flex-col gap-6 bg-card p-8 ${hover}`}>
                   <span className="text-5xl leading-none font-black tracking-[-0.05em] text-lilac">{num(index)}</span>
-                  <span className="text-2xl font-black tracking-[-0.03em]">{service.title}</span>
+                  <span className="text-2xl font-black tracking-[-0.03em] break-words hyphens-auto">{service.title}</span>
                   <span className="text-muted-foreground">{service.text}</span>
                   <span className="mt-auto text-[15px] font-extrabold group-hover:text-lilac">{x.more} →</span>
                 </a>

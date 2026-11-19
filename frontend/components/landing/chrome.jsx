@@ -23,7 +23,7 @@ export function SiteHeader({ locale, links, language, cta, label }) {
         </nav>
         <span className="flex items-center gap-3">
           <a href={language.href} hrefLang={language.locale} lang={language.locale} aria-label={`${language.locale.toUpperCase()} – ${language.label}`} className="rounded-full px-2 py-2 text-sm font-extrabold text-muted-foreground uppercase hover:text-lilac lg:hidden">{language.locale}</a>
-          <a href={cta.href} className="hidden rounded-full bg-primary px-4 py-2.5 text-sm font-extrabold whitespace-nowrap text-primary-foreground transition hover:brightness-110 sm:inline-block sm:px-5 sm:text-[15px]">{cta.label}</a>
+          <a href={cta.href} className="hidden rounded-full bg-primary px-4 py-2.5 text-sm font-extrabold whitespace-nowrap text-primary-foreground transition-opacity hover:opacity-85 sm:inline-block sm:px-5 sm:text-[15px]">{cta.label}</a>
         </span>
       </div>
     </header>

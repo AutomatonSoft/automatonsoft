@@ -78,7 +78,7 @@ const home = {
     text: 'Ob klar abgegrenztes Projekt oder langfristige Kapazität – wählen Sie das Modell, das zu Ihrer Organisation passt.',
     bestFor: 'Ideal für',
     models: [
-      { id: 'project', icon: 'Target', title: 'Projektumsetzung', bestFor: 'Klar abgegrenzte Vorhaben mit definiertem Ziel',
+      { id: 'project', icon: 'Target', title: 'Projektumsetzung', bestFor: 'klar abgegrenzte Vorhaben mit definiertem Ziel',
         points: ['Verantwortung von A bis Z', 'Vereinbarter Umfang und Meilensteine', 'Vom Konzept bis zum Go-live'], cta: 'Projekt anfragen', target: 'contact' },
       { id: 'team', icon: 'UsersRound', title: 'Dediziertes Team', bestFor: 'Produktentwicklung über Monate oder Jahre',
         points: ['Ein Team exklusiv für Ihr Produkt', 'Fester technischer Ansprechpartner', 'Wächst mit Ihrer Roadmap'], cta: 'Team aufbauen', target: 'hire' },

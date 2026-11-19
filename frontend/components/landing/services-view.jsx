@@ -3,7 +3,7 @@ import { getDictionary, href } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import CtaBand from '@/components/landing/cta-band';
 import { PageHead, SitePage } from '@/components/landing/shell';
-import { block, button, hover, num, pill, Section, StepCards, Title, tone } from '@/components/landing/blocks';
+import { block, button, hover, ModelCards, num, pill, Section, StepCards, Title, tone } from '@/components/landing/blocks';
 
 const serviceTones = ['wave', 'deep', 'deep', 'foam', 'deep', 'deep'];
 
@@ -79,21 +79,7 @@ export default function ServicesView({ locale }) {
       <Section>
         <Title parts={home.engagement.title} />
         <p className="mt-6 max-w-[560px] text-muted-foreground">{home.engagement.text}</p>
-        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {home.engagement.models.map((model, index) => {
-            const scheme = tone[index === 1 ? 'wave' : 'deep'];
-            return (
-              <div key={model.id} className={cn(block, 'flex flex-col p-6 sm:p-8', scheme.card)}>
-                <h3 className="text-2xl font-black tracking-[-0.03em]">{model.title}</h3>
-                <p className={cn('mt-2 text-sm', scheme.muted)}>{home.engagement.bestFor} {model.bestFor}</p>
-                <ul className="mt-6 grid grid-cols-1 gap-3 text-[15px]">
-                  {model.points.map((point) => <li key={point} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{point}</span></li>)}
-                </ul>
-                <a href={href(locale, model.target)} className={cn(button, 'mt-8 self-start', scheme.button)}>{model.cta} →</a>
-              </div>
-            );
-          })}
-        </div>
+        <ModelCards locale={locale} models={home.engagement.models} bestFor={home.engagement.bestFor} />
       </Section>
 
       <CtaBand title={t.ctaTitle} text={t.ctaText} cta={t.primaryCta} href={href(locale, 'contact')} />

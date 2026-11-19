@@ -138,6 +138,11 @@
   html {
     @apply font-sans;
     }
+  /* Long German compounds must wrap instead of running out of their card. */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+    }
 }
 /* Scroll reveal without JavaScript: only where the browser supports scroll-driven animations and motion is welcome.
    Elsewhere the content is simply visible. */

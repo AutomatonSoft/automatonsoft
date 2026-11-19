@@ -45,7 +45,7 @@ export default function LandingContactForm({ locale, t, messageLabel, privacyHre
         <span>{t.consent} <a href={privacyHref} className="text-lilac underline underline-offset-2">{t.privacyLink}</a>.</span>
       </label>
       <div className="flex flex-wrap items-center gap-4">
-        <button type="submit" disabled={status === 'sending'} className={cn(buttonVariants({ size: 'xl', className: 'h-auto min-h-12 shrink py-3 whitespace-normal hover:bg-primary hover:brightness-110' }))}>
+        <button type="submit" disabled={status === 'sending'} className={cn(buttonVariants({ size: 'xl', className: 'h-auto min-h-12 shrink py-3 whitespace-normal hover:bg-primary hover:opacity-85' }))}>
           {status === 'sending' ? t.sending : t.submit}<ArrowRight aria-hidden="true" />
         </button>
         {status === 'error' && <p role="alert" className="text-sm font-medium text-destructive">{t.error}</p>}

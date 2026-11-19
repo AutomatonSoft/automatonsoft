@@ -4,12 +4,9 @@ import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import JsonLd from '@/components/layout/json-ld';
 import SiteShell from '@/components/layout/site-shell';
 import ContentPage from '@/components/pages/content-page';
-import CompanyPage from '@/components/pages/company-page';
-import HirePage from '@/components/pages/hire-page';
 
-const pageComponents = { company: CompanyPage, hire: HirePage };
-// Pages already in design E live in the (landing-*) root layouts: the home page, the portfolio (with its project pages), the industries, the services and the contact page.
-const redesigned = ['home', 'portfolio', 'industries', 'services', 'contact'];
+// Pages already in design E live in the (landing-*) root layouts: the home page, the portfolio (with its project pages), the industries, the services, the contact, company and hire pages. Only the legal and blog pages stay here.
+const redesigned = ['home', 'portfolio', 'industries', 'services', 'contact', 'company', 'hire'];
 
 // Factory for the per-locale catch-all route: every locale shares the same page tree.
 export function createLocaleRoute(locale) {
@@ -22,11 +19,10 @@ export function createLocaleRoute(locale) {
     generateMetadata: async ({ params }) => buildMetadata(locale, await resolve(params)),
     Page: async function LocalePage({ params }) {
       const page = await resolve(params);
-      const Component = pageComponents[page] || ContentPage;
       return (
         <SiteShell locale={locale} page={page}>
           <JsonLd data={breadcrumbJsonLd(locale, page)} />
-          <Component locale={locale} page={page} />
+          <ContentPage locale={locale} page={page} />
         </SiteShell>
       );
     },
