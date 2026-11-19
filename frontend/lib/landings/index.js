@@ -1,11 +1,13 @@
 import { defaultLocale, href, locales } from '@/lib/i18n';
 import common from './common';
 import ecommerce from './ecommerce';
+import finance from './finance';
+import hospitality from './hospitality';
 import supplyChain from './supply-chain';
 
 // Industry landing pages (docs/TZ.md §4): one template, one data file per industry.
 // Keys are the industry ids from dictionaries/industries.js, so the home and industries pages can link to them.
-const sources = { ecommerce, 'supply-chain': supplyChain };
+const sources = { ecommerce, 'supply-chain': supplyChain, finance, hospitality };
 
 // A landing's own copy overrides the shared copy, one level deep (e.g. contact.text replaces only that field).
 const withCommon = (shared, own) => Object.fromEntries(

@@ -60,7 +60,7 @@ export default function LandingPage({ locale, id }) {
               <ul className="relative mt-8 grid grid-cols-1 gap-2.5">
                 {t.hero.panel.map((item) => (
                   <li key={item.name} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 rounded-[1.25rem] bg-ink/25 px-5 py-4">
-                    <span className="text-lg font-extrabold">{item.name}</span>
+                    <span className="min-w-0 text-lg font-extrabold break-words hyphens-auto">{item.name}</span>
                     <span className="text-sm">{item.text}</span>
                   </li>
                 ))}
@@ -91,11 +91,11 @@ export default function LandingPage({ locale, id }) {
               <Title parts={t.solution.title} />
               <Lead className="max-w-[440px]">{t.solution.text}</Lead>
             </div>
-            <ol className="grid gap-3">
+            <ol className="grid grid-cols-1 gap-3">
               {t.solution.steps.map((step, index) => (
                 <li key={step.title} className={cn(block, 'flex gap-5 bg-card p-6 sm:p-7')}>
                   <span className="grid size-11 shrink-0 place-items-center rounded-full bg-primary text-lg font-black text-primary-foreground">{index + 1}</span>
-                  <span><span className="block text-xl font-extrabold tracking-[-0.02em]">{step.title}</span><span className="mt-1 block text-muted-foreground">{step.text}</span></span>
+                  <span className="min-w-0"><span className="block text-xl font-extrabold tracking-[-0.02em] break-words hyphens-auto">{step.title}</span><span className="mt-1 block break-words text-muted-foreground">{step.text}</span></span>
                 </li>
               ))}
             </ol>
@@ -130,11 +130,11 @@ export default function LandingPage({ locale, id }) {
 
         <Section id="referenzen">
           <Title parts={t.references.title} />
-          <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className={cn('mt-12 grid grid-cols-1 gap-4', references.length > 1 && 'lg:grid-cols-2')}>
             {references.map((item, index) => {
               const scheme = tone[index ? 'deep' : 'foam'];
               return (
-                <article key={item.key} className={cn(block, 'flex flex-col gap-8 p-8 sm:p-10', scheme.card)}>
+                <article key={item.key} className={cn(block, 'flex flex-col gap-8 p-8 sm:p-10', references.length === 1 && 'lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]', scheme.card)}>
                   <div>
                     <span className={cn(pill, 'inline-block', index ? 'bg-primary text-primary-foreground' : scheme.tag)}>{item.meta}</span>
                     <h3 className="mt-5 text-[clamp(1.75rem,2.6vw,2.5rem)] leading-none font-black tracking-[-0.04em]">{item.title}</h3>

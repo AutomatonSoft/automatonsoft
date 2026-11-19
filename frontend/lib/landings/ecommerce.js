@@ -4,8 +4,8 @@ import { images } from './cases';
 // Industry landing: E-commerce & marketplaces. Only facts from shipped projects – no invented numbers (docs/TZ.md §8).
 const de = {
   meta: {
-    title: 'E-Commerce-Automatisierung für Marktplätze & Shops',
-    description: 'Produktdaten, Preise und Bestellungen für otto.de, Kaufland, Google Merchant Center und Shopware aus einer zentralen Quelle. Individuelle Software aus Deutschland – DSGVO-konform.',
+    title: 'E-Commerce-Automatisierung für Marktplätze',
+    description: 'Produktdaten, Preise und Bestellungen für otto.de, Kaufland, Google Merchant Center und Shopware aus einer Quelle. Individuelle Software, DSGVO-konform.',
   },
   name: 'E-Commerce & Marktplätze',
   hero: {
@@ -64,8 +64,8 @@ const de = {
 
 const en = {
   meta: {
-    title: 'E-commerce automation for marketplaces & shops',
-    description: 'Product data, prices and orders for otto.de, Kaufland, Google Merchant Center and Shopware from one central source. Custom software from Germany – GDPR-compliant.',
+    title: 'E-commerce automation for marketplaces',
+    description: 'Product data, prices and orders for otto.de, Kaufland, Google Merchant Center and Shopware from one source. Custom software, GDPR-compliant.',
   },
   name: 'E-commerce & marketplaces',
   hero: {

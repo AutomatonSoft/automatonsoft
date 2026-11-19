@@ -75,7 +75,7 @@ const pages = {
     ctaTitle: 'Not sure which service you need?', ctaText: 'Describe your challenge – we will recommend the right approach in a free, no-obligation consultation.',
   },
   industries: {
-    meta: { title: 'Software for E-commerce, HR, Logistics & More', description: 'Software and automation for e-commerce, workforce management, supply chain, hospitality, automotive, finance and manufacturing – with products running in production.' },
+    meta: { title: 'Software for E-commerce, HR & Logistics', description: 'Software and automation for e-commerce, workforce, supply chain, hospitality, automotive, finance and manufacturing – with products in daily use.' },
     eyebrow: 'Industries', title: 'Solutions for real workflows.',
     intro: 'Our experience ranges from e-commerce and logistics to manufacturing, hospitality and automotive – backed by products our team has built.',
     primaryCta: 'Discuss your project', secondaryCta: 'View portfolio',
@@ -84,7 +84,7 @@ const pages = {
     ctaTitle: 'Your industry is not listed?', ctaText: 'Our custom software and automation work beyond these industries. Tell us about your processes – the first consultation is free and without obligation.',
   },
   hire: {
-    meta: { title: 'Hire Developers: Dedicated Teams & Specialists', description: 'Dedicated developers and teams from Germany: full-stack, frontend, backend, mobile, AI, DevOps, QA and UI/UX – as a dedicated team or team extension.' },
+    meta: { title: 'Hire Developers: Dedicated Teams', description: 'Dedicated developers and teams from Germany: full-stack, frontend, backend, mobile, AI, DevOps, QA and UI/UX – as a dedicated team or team extension.' },
     eyebrow: 'Teams & specialists', title: 'Engineering expertise whenever you need it.',
     intro: 'Extend your team with experienced specialists for specific projects or long-term initiatives.',
     primaryCta: 'Request specialists', secondaryCta: 'Compare models',
@@ -129,7 +129,7 @@ const pages = {
     eyebrow: 'Contact', title: 'Let’s talk about your project.', intro: 'Briefly describe your idea or challenge. We will get back to you with an initial assessment.',
   },
   imprint: {
-    meta: { title: 'Legal Notice', description: 'Legal notice of AutomatonSoft GmbH.' },
+    meta: { title: 'Legal Notice', description: 'Legal notice: provider identification, contact details and legal information pursuant to § 5 TMG.' },
     eyebrow: 'Legal', title: 'Legal notice', intro: 'Information pursuant to § 5 TMG (German Telemedia Act).',
     sections: [
       { title: 'Provider', address: true, items: ['Phone: +49 7392 9378410', 'Email: info@automatonsoft.de'] },
@@ -137,7 +137,7 @@ const pages = {
     ],
   },
   privacy: {
-    meta: { title: 'Privacy Policy', description: 'Privacy policy of AutomatonSoft GmbH.' },
+    meta: { title: 'Privacy Policy', description: 'Privacy policy: how we process your personal data, your rights under the GDPR and how to contact us.' },
     eyebrow: 'Legal', title: 'Privacy policy', intro: 'Protecting your personal data is important to us.',
     sections: [
       { title: 'Data controller', address: true, items: ['Contact requests', 'Server log data'] },
