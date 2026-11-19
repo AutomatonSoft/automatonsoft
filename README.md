@@ -17,12 +17,12 @@ compose.yaml  локальный запуск всего стека в Docker
 Внутри `frontend/`:
 
 ```
-app/              маршруты: (de) и (en) — сайт, (admin)/dashboard — админка
-components/       секции и страницы; ui/ — shadcn, только для админки
+app/              маршруты: (landing-de) и (landing-en) — сайт, (admin)/dashboard — админка; globals.css — Tailwind и палитра
+components/       landing/ — блоки и страницы сайта, portfolio/ — данные портфолио, ui/ — shadcn, dashboard/ — админка
 lib/i18n/         тексты на двух языках и таблица URL (routes)
 lib/site-config.js  телефон, e-mail, адрес, домен
 lib/seo.js        metadata, JSON-LD, черновые страницы (draftPages)
-public/assets/    картинки и основной CSS сайта
+public/assets/    картинки
 nginx.conf        Nginx внутри контейнера: статика, /api/ → Django, редиректы
 ```
 
