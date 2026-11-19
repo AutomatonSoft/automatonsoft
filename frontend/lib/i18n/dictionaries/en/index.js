@@ -23,6 +23,7 @@ const en = {
     rights: 'All rights reserved.', imprint: 'Legal notice', privacy: 'Privacy', backToTop: 'Back to top',
   },
   common: { home: 'Home', helpTitle: 'How can we help?', helpText: 'We look forward to hearing from you.', helpCta: 'Get in touch' },
+  notFound: { eyebrow: 'Error 404', text: 'This page does not exist or has been moved.', home: 'Go to homepage', contact: 'Get in touch' },
   quickContact: { whatsapp: 'Chat on WhatsApp', whatsappText: 'Hello AutomatonSoft, I am interested in a software project.' },
   home,
   services,

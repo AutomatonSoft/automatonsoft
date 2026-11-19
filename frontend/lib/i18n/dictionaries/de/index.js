@@ -23,6 +23,7 @@ const de = {
     rights: 'Alle Rechte vorbehalten.', imprint: 'Impressum', privacy: 'Datenschutz', backToTop: 'Nach oben',
   },
   common: { home: 'Start', helpTitle: 'Wie können wir helfen?', helpText: 'Wir freuen uns auf Ihre Anfrage.', helpCta: 'Kontakt aufnehmen' },
+  notFound: { eyebrow: 'Fehler 404', text: 'Diese Seite existiert nicht oder wurde verschoben.', home: 'Zur Startseite', contact: 'Kontakt aufnehmen' },
   quickContact: { whatsapp: 'Per WhatsApp schreiben', whatsappText: 'Hallo AutomatonSoft, ich interessiere mich für ein Software-Projekt.' },
   home,
   services,
