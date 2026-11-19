@@ -4,8 +4,8 @@ import { commonFaq } from './common';
 // No product screenshot yet, so the hero shows the suite's modules instead of an image.
 const de = {
   meta: {
-    title: 'Software für Lager & Logistik: Bestellungen und Lager zentral steuern',
-    description: 'Bestellungen aus allen Kanälen an einem Ort und eine strukturierte Lagerorganisation statt Papier. Individuelle Software für Lager und Logistik aus Deutschland – DSGVO-konform.',
+    title: 'Lager- und Logistiksoftware nach Maß',
+    description: 'Bestellungen aus allen Kanälen an einem Ort und strukturierte Lagerorganisation statt Papier. Individuelle Software aus Deutschland, DSGVO-konform.',
   },
   name: 'Lager & Logistik',
   hero: {
@@ -68,8 +68,8 @@ const de = {
 
 const en = {
   meta: {
-    title: 'Warehouse & logistics software: manage orders and stock centrally',
-    description: 'Orders from every channel in one place and structured warehouse organisation instead of paper. Custom software for warehouses and logistics from Germany – GDPR-compliant.',
+    title: 'Warehouse & logistics software',
+    description: 'Orders from every channel in one place and structured warehouse organisation instead of paper. Custom software from Germany, GDPR-compliant.',
   },
   name: 'Warehouse & logistics',
   hero: {

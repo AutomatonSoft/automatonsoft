@@ -2,7 +2,7 @@ const pages = {
   home: { meta: {} },
   portfolio: { eyebrow: 'Portfolio', meta: { title: 'Portfolio: Software- & KI-Projekte', description: 'Software, Automation und Artificial Intelligence – Projekte von AutomatonSoft.' } },
   company: {
-    meta: { title: 'Über uns – Softwareentwicklung aus Deutschland', description: 'AutomatonSoft GmbH aus Burgrieden entwickelt individuelle Software, Web- und Mobile-Apps, Automatisierung und KI – vom Konzept bis zum Betrieb.' },
+    meta: { title: 'Über uns – Software aus Deutschland', description: 'AutomatonSoft GmbH aus Burgrieden entwickelt individuelle Software, Web- und Mobile-Apps, Automatisierung und KI – vom Konzept bis zum Betrieb.' },
     eyebrow: 'Über uns', title: 'Software entsteht im Dialog.',
     intro: 'AutomatonSoft entwickelt digitale Lösungen für Unternehmen, die ihre Prozesse wirksam verbessern wollen.',
     primaryCta: 'Lernen Sie uns kennen', secondaryCta: 'Unsere Projekte',
@@ -75,7 +75,7 @@ const pages = {
     ctaTitle: 'Unsicher, welche Leistung Sie brauchen?', ctaText: 'Beschreiben Sie Ihre Herausforderung – wir empfehlen im kostenlosen, unverbindlichen Erstgespräch den passenden Weg.',
   },
   industries: {
-    meta: { title: 'Software für E-Commerce, HR, Logistik & mehr', description: 'Software und Automatisierung für E-Commerce, Workforce-Management, Supply Chain, Hospitality, Automotive, Finance und Fertigung – mit Produkten im produktiven Einsatz.' },
+    meta: { title: 'Software für E-Commerce, HR, Logistik & mehr', description: 'Software und Automatisierung für E-Commerce, Workforce, Supply Chain, Hospitality, Automotive, Finance und Fertigung – mit Produkten im Einsatz.' },
     eyebrow: 'Branchen', title: 'Lösungen für echte Arbeitsabläufe.',
     intro: 'Unsere Erfahrung reicht von E-Commerce und Logistik bis zu Industrie, Hospitality und Automotive – belegt durch Produkte, die unser Team entwickelt hat.',
     primaryCta: 'Projekt besprechen', secondaryCta: 'Portfolio ansehen',
@@ -129,7 +129,7 @@ const pages = {
     eyebrow: 'Kontakt', title: 'Lassen Sie uns über Ihr Projekt sprechen.', intro: 'Beschreiben Sie uns kurz Ihre Idee oder Herausforderung. Wir melden uns mit einer ersten Einschätzung.',
   },
   imprint: {
-    meta: { title: 'Impressum', description: 'Impressum der AutomatonSoft GmbH.' },
+    meta: { title: 'Impressum', description: 'Impressum: Anbieterkennzeichnung, Kontaktdaten und rechtliche Hinweise gemäß § 5 TMG.' },
     eyebrow: 'Rechtliches', title: 'Impressum', intro: 'Angaben gemäß § 5 TMG.',
     sections: [
       { title: 'Anbieter', address: true, items: ['Telefon: +49 7392 9378410', 'E-Mail: info@automatonsoft.de'] },
@@ -137,7 +137,7 @@ const pages = {
     ],
   },
   privacy: {
-    meta: { title: 'Datenschutzerklärung', description: 'Datenschutzerklärung der AutomatonSoft GmbH.' },
+    meta: { title: 'Datenschutzerklärung', description: 'Datenschutzerklärung: Wie wir Ihre personenbezogenen Daten verarbeiten, Ihre Rechte nach der DSGVO und Kontakt.' },
     eyebrow: 'Rechtliches', title: 'Datenschutzerklärung', intro: 'Der Schutz Ihrer persönlichen Daten ist uns wichtig.',
     sections: [
       { title: 'Verantwortliche Stelle', address: true, items: ['Kontaktaufnahme', 'Server-Logdaten'] },

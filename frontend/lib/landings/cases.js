@@ -45,6 +45,34 @@ const cases = {
       list: ['OrderHub – central order management', 'Warehouse Organizer – warehouse organisation', 'BerimDepom – warehouse organisation'],
     },
   },
+  cashbook: {
+    de: {
+      meta: 'Digitales Kassenbuch', title: 'Cashbook',
+      text: 'Digitale Kassenbuchführung für kleine und mittlere Unternehmen mit Bargeldverkehr.',
+      listLabel: 'Was wir umgesetzt haben',
+      list: ['Digitales Kassenbuch statt Papier', 'Für kleine und mittlere Unternehmen mit Bargeldverkehr', 'Teil unserer Finance-Automation'],
+    },
+    en: {
+      meta: 'Digital cash book', title: 'Cashbook',
+      text: 'Digital cash book management for small and medium-sized businesses that handle cash.',
+      listLabel: 'What we delivered',
+      list: ['A digital cash book instead of paper', 'For small and medium-sized businesses that handle cash', 'Part of our finance automation'],
+    },
+  },
+  lunanitiz: {
+    de: {
+      meta: 'Hotel Software · Airbnb', title: 'Lunanitiz Hotel Software',
+      text: 'Zentrale Verwaltung von Buchungen und Verfügbarkeiten für Hotellerie und Kurzzeitvermietung, mit Anbindung an Airbnb.',
+      listLabel: 'Was wir umgesetzt haben',
+      list: ['Zentrale Verwaltung von Buchungen', 'Verfügbarkeiten für Hotellerie und Kurzzeitvermietung', 'Anbindung an Airbnb'],
+    },
+    en: {
+      meta: 'Hotel software · Airbnb', title: 'Lunanitiz Hotel Software',
+      text: 'Central management of bookings and availability for hotels and short-term rentals, connected to Airbnb.',
+      listLabel: 'What we delivered',
+      list: ['Central management of bookings', 'Availability for hotels and short-term rentals', 'Connection to Airbnb'],
+    },
+  },
 };
 
 export default cases;

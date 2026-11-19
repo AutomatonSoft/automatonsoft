@@ -40,12 +40,18 @@ export function buildMetadata(locale, page, overrides = {}) {
   };
 }
 
+// Meta description: the project text can be long, search results cut it at about 160 characters.
+const shorten = (text, max = 155) => (text.length <= max ? text : `${text.slice(0, max - 1).replace(/\s+\S*$/, '')}…`);
+
 // Without a project (the client-rendered fallback page) the portfolio metadata is used, kept out of the index.
+// The title adds the category when it still fits a search result (about 60 characters with the brand).
 export function projectMetadata(locale, project) {
   if (!project) return buildMetadata(locale, 'portfolio', { noindex: true });
   const { title, description, slug, screenshots } = localizeProject(project, locale);
+  const category = getDictionary(locale).portfolio.categories[project.category];
+  const fullTitle = category && `${title} – ${category}`.length + siteConfig.shortName.length + 3 <= 60 ? `${title} – ${category}` : title;
   return buildMetadata(locale, 'portfolio', {
-    meta: { title, description }, path: projectHref(locale, slug), languages: projectAlternates(slug),
+    meta: { title: fullTitle, description: shorten(description) }, path: projectHref(locale, slug), languages: projectAlternates(slug),
     image: screenshots[0] && { url: screenshots[0], alt: title }, noindex: isPreparing(project),
   });
 }
