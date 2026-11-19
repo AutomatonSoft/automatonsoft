@@ -74,6 +74,8 @@ export function siteJsonLd(locale) {
         image: absolute(siteConfig.ogImage(locale)),
         email: siteConfig.email,
         telephone: siteConfig.phone.display,
+        vatID: siteConfig.vatId,
+        contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: siteConfig.email, telephone: siteConfig.phone.display, availableLanguage: ['German', 'English'] },
         address: { '@type': 'PostalAddress', streetAddress: address.street, postalCode: address.postalCode, addressLocality: address.city, addressCountry: address.country },
         areaServed: 'Worldwide',
         knowsLanguage: ['de', 'en'],
