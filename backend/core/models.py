@@ -27,6 +27,8 @@ class Project(models.Model):
     website = models.URLField(blank=True)
     category = models.CharField(max_length=64, choices=PORTFOLIO_CATEGORIES, default='custom-software-business-automation')
     stack = models.JSONField(default=list)
+    # Services the product connects to (Afterbuy, Klarna …); proper names, so one list for every language.
+    integrations = models.JSONField(default=list, blank=True)
     development_time = models.CharField(max_length=120)
     published = models.BooleanField(default=True)
     # Per-locale overrides of the German base content, e.g. {'en': {'description': ..., 'stack': [...]}}
@@ -57,6 +59,8 @@ def unique_slug(text, exclude=None):
 class ProjectScreenshot(models.Model):
     project = models.ForeignKey(Project, related_name='screenshots', on_delete=models.CASCADE)
     image = models.FileField(upload_to='projects/%Y/%m/')
+    # Description per language, e.g. {'de': '…', 'en': '…'}; the page falls back to the project title.
+    alt = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

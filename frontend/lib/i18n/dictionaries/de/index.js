@@ -40,7 +40,7 @@ const de = {
     ctaText: 'Wir entwickeln individuelle Software für Geschäftsprozesse, die über unser bestehendes Portfolio hinausgehen.',
     project: {
       overview: 'Die Lösung im Überblick', challenge: 'Ausgangslage', features: 'Funktionen', results: 'Ergebnisse', gallery: 'Einblicke',
-      time: 'Entwicklungszeit', category: 'Kategorie', stack: 'Technologien', visit: 'Website besuchen', similar: 'Ähnliches Projekt anfragen',
+      time: 'Entwicklungszeit', category: 'Kategorie', stack: 'Technologien', integrations: 'Anbindungen', visit: 'Website besuchen', similar: 'Ähnliches Projekt anfragen',
       loading: 'Projekt wird geladen …', notFound: 'Dieses Projekt ist nicht verfügbar.', back: 'Zum Portfolio',
       ctaTitle: 'Sie brauchen eine ähnliche Lösung?', ctaText: 'Wir passen bestehende Lösungen an Ihre Prozesse an oder entwickeln sie individuell für Sie.',
     },

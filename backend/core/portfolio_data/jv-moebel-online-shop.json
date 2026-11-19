@@ -1,0 +1,92 @@
+{
+  "title": "JV Möbel Online-Shop",
+  "category_guess": "ecommerce",
+  "published": true,
+  "development_time": "seit 07/2026",
+  "description": {
+    "de": "Eigenes Projekt der AEA GmbH & Co. KG: ein Möbel-Onlineshop in Entwicklung, in dem Redakteure Katalog, Preise, Aktionen und Inhalte ohne Programmierer pflegen. Ausgelegt für bis zu 30 Märkte.",
+    "en": "An in-house project of AEA GmbH & Co. KG: a furniture online shop in development where editors maintain catalog, prices, promotions and content without developers. Built for up to 30 markets."
+  },
+  "challenge": {
+    "de": "Ein Möbelhändler muss Katalog, Preise, Aktionen und Inhalte für viele Länder aus einem System pflegen und die Daten aus dem alten Shopsystem übernehmen.",
+    "en": "A furniture retailer has to manage catalog, prices, promotions and content for many countries in one system and carry over data from the old shop system."
+  },
+  "features": {
+    "de": [
+      "Katalog mit Suche, Filtern und Sortierung; Produktkonfiguration mit Aufpreis",
+      "Mehrere Länder-Shops in einer Installation (Sprache, Währung, Domain)",
+      "Übernahme von Produkten, Kunden, Bestellungen und Wunschlisten aus dem Altsystem",
+      "Katalog automatisch übersetzen, Entwürfe prüfen, dann veröffentlichen",
+      "Aktionen je Fabrik und Kollektion; Rabatt für Warenkorb-Abbrecher",
+      "Sofort-Ware und B-Ware mit Mängelhinweis und eigenem Versandpreis",
+      "Bestellung als Gast oder mit Konto, Kartenzahlung, Klarna, Google-Login",
+      "Neue Bestellungen automatisch an Afterbuy; Kundenanfragen verwalten",
+      "Mobile App für Google Play und den App Store (in Entwicklung)"
+    ],
+    "en": [
+      "Catalog with search, filters and sorting; product configuration with surcharge",
+      "Several country shops in one installation (language, currency, domain)",
+      "Import of products, customers, orders and wishlists from the old system",
+      "Translate the catalog automatically, review drafts, then publish",
+      "Promotions per factory and collection; discount for abandoned carts",
+      "Ready-to-ship and B-grade stock with defect notes and own shipping price",
+      "Checkout as guest or with an account, card payment, Klarna, Google login",
+      "New orders sent to Afterbuy automatically; manage customer inquiries",
+      "Mobile app for Google Play and the App Store (in development)"
+    ]
+  },
+  "results": {
+    "de": [
+      "Katalog mit über 70.000 Produkten (Stand 11/2026)"
+    ],
+    "en": [
+      "Catalog with over 70,000 products (as of 11/2026)"
+    ]
+  },
+  "stack": [
+    "Shopware 6.7",
+    "PHP",
+    "Symfony",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "MySQL",
+    "OpenSearch"
+  ],
+  "screenshots": [
+    {
+      "file": "jv-moebel-online-shop/jv-home.webp",
+      "alt": {
+        "de": "Startseite des Möbel-Onlineshops mit Kollektionsbanner und Aktionen",
+        "en": "Home page of the furniture online shop with collection banner and promotions"
+      }
+    },
+    {
+      "file": "jv-moebel-online-shop/jv-catalog.webp",
+      "alt": {
+        "de": "Katalog mit Filtern, Sortierung und Rabattplaketten",
+        "en": "Catalog with filters, sorting and discount badges"
+      }
+    },
+    {
+      "file": "jv-moebel-online-shop/jv-product.webp",
+      "alt": {
+        "de": "Produktseite mit Galerie, Preis und Zahlungsart",
+        "en": "Product page with gallery, price and payment method"
+      }
+    },
+    {
+      "file": "jv-moebel-online-shop/jv-responsive.webp",
+      "alt": {
+        "de": "Onlineshop am Computer und auf dem Smartphone",
+        "en": "The online shop on desktop and on a smartphone"
+      }
+    }
+  ],
+  "integrations": [
+    "Afterbuy",
+    "Klarna",
+    "Google Login",
+    "CosmoShop (Import)"
+  ]
+}

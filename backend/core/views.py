@@ -16,10 +16,11 @@ def serialize(project, request):
     return {
         'id': project.id, 'slug': project.slug, 'title': project.title, 'description': project.description,
         'challenge': project.challenge, 'features': project.features, 'results': project.results, 'website': project.website,
-        'stack': project.stack, 'category': project.category, 'category_label': project.get_category_display(),
+        'stack': project.stack, 'integrations': project.integrations, 'category': project.category, 'category_label': project.get_category_display(),
         'development_time': project.development_time,
         'published': project.published, 'translations': project.translations,
         'screenshots': [item.image.url for item in project.screenshots.order_by('-id')],
+        'screenshot_alts': [item.alt for item in project.screenshots.order_by('-id')],
     }
 
 
