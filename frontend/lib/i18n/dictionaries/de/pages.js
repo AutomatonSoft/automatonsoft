@@ -2,19 +2,19 @@ const pages = {
   home: { meta: {} },
   portfolio: { eyebrow: 'Portfolio', meta: { title: 'Portfolio: Software- & KI-Projekte', description: 'Software, Automation und Artificial Intelligence – Projekte von AutomatonSoft.' } },
   company: {
-    meta: { title: 'Über uns – Software aus Deutschland', description: 'AutomatonSoft GmbH aus Burgrieden entwickelt individuelle Software, Web- und Mobile-Apps, Automatisierung und KI – vom Konzept bis zum Betrieb.' },
+    meta: { title: 'Über uns – Software aus Deutschland', description: 'AutomatonSoft aus Burgrieden entwickelt individuelle Software, Web- und Mobile-Apps, Automatisierung und KI – vom Konzept bis zum Betrieb.' },
     eyebrow: 'Über uns', title: 'Software entsteht im Dialog.',
     intro: 'AutomatonSoft entwickelt digitale Lösungen für Unternehmen, die ihre Prozesse wirksam verbessern wollen.',
     primaryCta: 'Lernen Sie uns kennen', secondaryCta: 'Unsere Projekte',
     story: {
       eyebrow: 'Wer wir sind', title: 'Ein Softwareunternehmen, entwickelt in Deutschland',
       paragraphs: [
-        'Die AutomatonSoft GmbH ist ein Softwareunternehmen mit Sitz in Burgrieden, Baden-Württemberg. Wir konzipieren, entwickeln und betreiben individuelle Software, Web- und Mobile-Anwendungen, Prozessautomatisierung und KI-Lösungen für Unternehmen, die mehr wollen als Standard.',
+        'Die AEA GmbH & Co. KG (Marke AutomatonSoft) ist ein Softwareunternehmen mit Sitz in Burgrieden, Baden-Württemberg. Wir konzipieren, entwickeln und betreiben individuelle Software, Web- und Mobile-Anwendungen, Prozessautomatisierung und KI-Lösungen für Unternehmen, die mehr wollen als Standard.',
         'Unsere Produkte laufen in ganz unterschiedlichen Branchen – von der Zeiterfassung für verteilte Teams über KI-Sprachassistenten bis zu E-Commerce, Hospitality und Automotive. Was sie verbindet, ist unsere Arbeitsweise: nah an Ihren Prozessen, transparent in jeder Etappe und verantwortlich vom ersten Konzept bis zum laufenden Betrieb.',
       ],
       factsTitle: 'Auf einen Blick',
       facts: [
-        { label: 'Unternehmen', value: 'AutomatonSoft GmbH' },
+        { label: 'Unternehmen', value: 'AEA GmbH & Co. KG' },
         { label: 'Hauptsitz', value: 'Burgrieden, Deutschland' },
         { label: 'Schwerpunkt', value: 'Individualsoftware, Automatisierung & KI' },
         { label: 'Portfolio', value: '9 Lösungskategorien' },
@@ -125,14 +125,16 @@ const pages = {
     ],
   },
   contact: {
-    meta: { title: 'Kontakt – kostenloses Erstgespräch', description: 'Kontaktieren Sie AutomatonSoft GmbH – unverbindliches Erstgespräch zu Ihrem Software-Projekt.' },
+    meta: { title: 'Kontakt – kostenloses Erstgespräch', description: 'Kontaktieren Sie AutomatonSoft – unverbindliches Erstgespräch zu Ihrem Software-Projekt.' },
     eyebrow: 'Kontakt', title: 'Lassen Sie uns über Ihr Projekt sprechen.', intro: 'Beschreiben Sie uns kurz Ihre Idee oder Herausforderung. Wir melden uns mit einer ersten Einschätzung.',
   },
   imprint: {
-    meta: { title: 'Impressum', description: 'Impressum: Anbieterkennzeichnung, Kontaktdaten und rechtliche Hinweise gemäß § 5 TMG.' },
-    eyebrow: 'Rechtliches', title: 'Impressum', intro: 'Angaben gemäß § 5 TMG.',
+    meta: { title: 'Impressum', description: 'Impressum: Anbieterkennzeichnung, Kontaktdaten und rechtliche Hinweise gemäß § 5 DDG.' },
+    eyebrow: 'Rechtliches', title: 'Impressum', intro: 'Angaben gemäß § 5 DDG.',
     sections: [
-      { title: 'Anbieter', address: true, items: ['Telefon: +49 7392 9378410', 'E-Mail: info@automatonsoft.de'] },
+      { title: 'Anbieter', address: true, items: ['Rechtsform: Kommanditgesellschaft (GmbH & Co. KG)', 'Persönlich haftende Gesellschafterin: JV Möbel GmbH, Am Flugplatz 28, 88483 Burgrieden', 'Vertreten durch die Geschäftsführung der JV Möbel GmbH: Eugen Krisling', 'Telefon: +49 7392 9378440', 'E-Mail: info@automatonsoft.de'] },
+      { title: 'Registereintrag', items: ['Registergericht: Amtsgericht Ulm', 'Registernummer: HRA 726335', 'Komplementärin: Amtsgericht Ulm, HRB 728795', 'Umsatzsteuer-ID gemäß § 27a UStG: DE327113973'] },
+      { title: 'Inhaltlich verantwortlich', items: ['Eugen Krisling, Anschrift wie oben (§ 18 Abs. 2 MStV)'] },
       { title: 'Hinweise', text: 'Inhalte dieser Website werden mit Sorgfalt erstellt. Für externe Inhalte, auf die wir verlinken, übernehmen wir keine Haftung.', items: ['Urheberrecht', 'Haftung für Links'] },
     ],
   },
