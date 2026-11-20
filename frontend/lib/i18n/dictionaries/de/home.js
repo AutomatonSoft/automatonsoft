@@ -44,7 +44,7 @@ const home = {
   },
   caseStudies: {
     eyebrow: 'Ausgewählte Projekte', title: 'Produkte, die wir entwickelt haben',
-    text: 'Echte Plattformen im täglichen Einsatz – von SaaS für verteilte Teams bis zu KI, die Kundenanrufe beantwortet.',
+    text: 'Plattformen, die wir entwickelt haben: von SaaS für verteilte Teams bis zu unserem eigenen Onlineshop.',
     switchLabel: 'Fallstudien', deliveredLabel: 'Was wir umgesetzt haben', similar: 'Ähnliches Projekt besprechen',
     items: [
       { id: 'hubnity', brand: 'Hubnity', tag: 'hubnity.com', title: 'Hubnity: Zeiterfassungs-SaaS für verteilte Teams',
@@ -53,13 +53,16 @@ const home = {
         facts: [{ label: 'Produkt', value: 'B2B-SaaS-Plattform' }, { label: 'Plattformen', value: 'Web · Windows · macOS · Linux · Android' }, { label: 'Zielgruppe', value: 'Agenturen, Remote- und Außendienst-Teams' }],
         stackLabel: 'Technologie-Stack', stack: ['TypeScript', 'NestJS', 'Next.js', 'React', 'PostgreSQL', 'Redis', 'BullMQ', 'Stripe'],
         url: 'https://hubnity.com', visit: 'hubnity.com besuchen',
-        image: { src: '/assets/img/cases/hubnity-site.webp', width: 2000, height: 905, alt: 'Hubnity-Website: „Time Tracking Software for Teams & Businesses“ mit Team-Dashboard, Projektfortschritt, mobiler GPS-Karte und Umsatz-Widgets' } },
+        image: { src: '/assets/img/cases/hubnity-site.webp', width: 1600, height: 900, alt: 'Hubnity Dashboard im Browser und die Mobile-App mit laufendem Timer' } },
       { id: 'lisa', brand: 'Lisa', tag: 'Voice AI · JV Möbel', title: 'Lisa: KI-Sprachassistentin für Kundenanrufe',
         text: 'Für das Möbelunternehmen JV Möbel haben wir Lisa entwickelt – eine KI-Sprachassistentin, die Kundenanrufe rund um die Uhr annimmt, Anrufer verifiziert und den Bestellstatus mitteilt, während das Team Anrufe, Bestellungen und Sprachnachrichten in einer Konsole verwaltet.',
         delivered: ['KI-Sprachassistentin, die Anrufe rund um die Uhr annimmt', 'Anruferverifizierung, bevor Daten geteilt werden', 'Live-Bestellstatus aus Afterbuy', 'Sprachnachrichten mit Transkript per E-Mail', 'Mitarbeiterkonsole für Anrufe, Bestellungen und Nachrichten', 'Rollenbasierter Zugriff und Brute-Force-Schutz'],
         facts: [{ label: 'Produkt', value: 'KI-Sprachassistentin und Mitarbeiterkonsole' }, { label: 'Kanäle', value: 'Telefonanrufe · Sprachnachrichten' }, { label: 'Branche', value: 'Möbel-E-Commerce' }],
         stackLabel: 'Integrationen', stack: ['Twilio', 'Afterbuy'],
         image: { src: '/assets/img/cases/lisa-console.webp', width: 2000, height: 1135, alt: 'Anmeldeseite der Lisa Console: „Every call answered, even at night.“ mit einem verifizierten, ohne Mitarbeiter gelösten Anruf' } },
+      { id: 'jv-mobel-online-shop', brand: 'JV Möbel Online-Shop', tag: 'Eigenes Projekt · E-Commerce', title: 'JV Möbel Online-Shop: eigener Möbel-Onlineshop auf Shopware',
+        text: 'Unser eigener Möbel-Onlineshop auf Shopware: Redakteure pflegen Katalog, Preise, Aktionen und Inhalte ohne Programmierer, ausgelegt für bis zu 30 Märkte. Eine mobile App für Google Play und den App Store ist in Entwicklung.',
+        image: { src: '/assets/img/cases/jv-shop.webp', width: 1600, height: 900, alt: 'Der JV-Möbel-Onlineshop am Computer und auf dem Smartphone' } },
     ],
   },
   process: {

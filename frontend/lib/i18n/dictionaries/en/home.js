@@ -44,7 +44,7 @@ const home = {
   },
   caseStudies: {
     eyebrow: 'Selected work', title: 'Products we have engineered',
-    text: 'Real platforms in daily use – from SaaS for distributed teams to AI that answers customer calls.',
+    text: 'Platforms we engineered, from SaaS for distributed teams to our own online shop.',
     switchLabel: 'Case studies', deliveredLabel: 'What we delivered', similar: 'Discuss a similar project',
     items: [
       { id: 'hubnity', brand: 'Hubnity', tag: 'hubnity.com', title: 'Hubnity: time tracking SaaS for distributed teams',
@@ -53,13 +53,16 @@ const home = {
         facts: [{ label: 'Product', value: 'B2B SaaS platform' }, { label: 'Platforms', value: 'Web · Windows · macOS · Linux · Android' }, { label: 'Audience', value: 'Agencies, remote and field teams' }],
         stackLabel: 'Technology stack', stack: ['TypeScript', 'NestJS', 'Next.js', 'React', 'PostgreSQL', 'Redis', 'BullMQ', 'Stripe'],
         url: 'https://hubnity.com', visit: 'Visit hubnity.com',
-        image: { src: '/assets/img/cases/hubnity-site.webp', width: 2000, height: 905, alt: 'Hubnity website: “Time Tracking Software for Teams & Businesses” with the team dashboard, project completion, mobile GPS map and revenue widgets' } },
+        image: { src: '/assets/img/cases/hubnity-site.webp', width: 1600, height: 900, alt: 'Hubnity dashboard in the browser and the mobile app with a running timer' } },
       { id: 'lisa', brand: 'Lisa', tag: 'Voice AI · JV Möbel', title: 'Lisa: AI voice assistant for customer calls',
         text: 'For the furniture company JV Möbel we built Lisa – an AI voice assistant that answers customer calls around the clock, verifies callers and shares order status, while the team manages calls, orders and voice messages in one console.',
         delivered: ['AI voice assistant answering calls 24/7', 'Caller verification before any data is shared', 'Live order status from Afterbuy', 'Voice messages with transcripts by email', 'Staff console for calls, orders and messages', 'Role-based access and brute-force protection'],
         facts: [{ label: 'Product', value: 'AI voice assistant and staff console' }, { label: 'Channels', value: 'Phone calls · Voice messages' }, { label: 'Industry', value: 'Furniture e-commerce' }],
         stackLabel: 'Integrations', stack: ['Twilio', 'Afterbuy'],
         image: { src: '/assets/img/cases/lisa-console.webp', width: 2000, height: 1135, alt: 'Lisa Console sign-in screen: “Every call answered, even at night.” with an incoming call verified and resolved without an agent' } },
+      { id: 'jv-mobel-online-shop', brand: 'JV Möbel Online-Shop', tag: 'In-house project · E-commerce', title: 'JV Möbel Online-Shop: our own furniture online shop on Shopware',
+        text: 'Our own furniture online shop on Shopware: editors maintain catalog, prices, promotions and content without developers, built for up to 30 markets. A mobile app for Google Play and the App Store is in development.',
+        image: { src: '/assets/img/cases/jv-shop.webp', width: 1600, height: 900, alt: 'The JV Möbel online shop on desktop and on a smartphone' } },
     ],
   },
   process: {
