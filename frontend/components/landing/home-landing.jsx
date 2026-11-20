@@ -23,6 +23,7 @@ export default function HomeLanding({ locale }) {
     return { ...item, tags, href: landingHrefFor(locale, item.id) || href(locale, 'industries', item.id), hasLanding: Boolean(landing) };
   }).sort((a, b) => Number(b.hasLanding) - Number(a.hasLanding));
   const loud = ['wave', 'foam'];
+  const featured = ['hubnity', 'jv-mobel-online-shop']; // the two finished products shown as cards; the rest are quick links
 
   return (
     <div className="overflow-x-clip bg-background pb-24 font-sans text-[17px] leading-normal text-foreground antialiased">
@@ -118,7 +119,7 @@ export default function HomeLanding({ locale }) {
                   <a href={item.href} className={cn(block, 'flex h-full min-h-75 flex-col justify-between gap-10 p-8', hover, scheme.card)}>
                     <span>
                       <span className="flex flex-wrap gap-1.5">{item.tags.map((tag) => <span key={tag} className={cn(pill, scheme.tag)}>{tag}</span>)}</span>
-                      <span className="mt-6 block text-[2rem] leading-none font-black tracking-[-0.035em]">{item.title}</span>
+                      <span className="mt-6 block text-[2rem] leading-none font-black tracking-[-0.035em] break-words hyphens-auto">{item.title}</span>
                       <span className={cn('mt-3 block', scheme.muted)}>{item.summary}</span>
                     </span>
                     <span className={cn('self-start rounded-full px-5 py-3 text-[15px] font-extrabold', scheme.button)}>{item.hasLanding ? x.viewSolution : x.more} →</span>
@@ -130,28 +131,38 @@ export default function HomeLanding({ locale }) {
         </Section>
 
         <Section id="projekte">
-          <Title parts={x.titles.products} />
+          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+            <Title parts={x.titles.products} />
+            <a href={href(locale, 'portfolio')} className="text-[17px] font-extrabold text-lilac hover:underline max-sm:hidden">{shared.allProjects} →</a>
+          </div>
           <p className="mt-6 max-w-[560px] text-muted-foreground">{t.caseStudies.text}</p>
+          <a href={href(locale, 'portfolio')} className="mt-4 inline-block text-[17px] font-extrabold text-lilac hover:underline sm:hidden">{shared.allProjects} →</a>
           <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {['hubnity', 'lisa'].map((id, index) => {
+            {featured.map((id) => {
               const item = cases[id];
               const image = caseImages[id];
-              const scheme = tone[index ? 'deep' : 'foam'];
+              const scheme = tone.deep;
               return (
                 <a key={id} href={projectHref(locale, id)} className={cn(block, 'flex flex-col overflow-hidden px-8 pt-8', hover, scheme.card)}>
                   <span className="flex flex-wrap gap-1.5">
-                    <span className={cn(pill, index ? 'bg-primary text-primary-foreground' : scheme.tag)}>{item.tag}</span>
+                    <span className={cn(pill, 'bg-primary text-primary-foreground')}>{item.tag}</span>
                   </span>
                   <span className="mt-5 block text-[2.5rem] leading-none font-black tracking-[-0.04em]">{item.brand}</span>
                   <span className={cn('mt-3 mb-7 block max-w-[520px]', scheme.muted)}>{item.text}</span>
                   <img src={image.src} width={image.width} height={image.height} alt={item.image?.alt || item.brand} loading="lazy" decoding="async"
-                    srcSet={`${image.small} 960w, ${image.src} 2000w`} sizes="(min-width: 1024px) 620px, 100vw"
-                    className="mt-auto aspect-video w-full rounded-t-[18px] object-cover object-top-left" />
+                    srcSet={`${image.small} 960w, ${image.src} ${image.width}w`} sizes="(min-width: 1024px) 620px, 100vw"
+                    className="-mx-8 mt-auto aspect-video w-[calc(100%+4rem)] max-w-none object-cover object-top" />
                 </a>
               );
             })}
           </div>
-          <p className="mt-8"><a href={href(locale, 'portfolio')} className={`${button} bg-card text-foreground`}>{shared.allProjects} →</a></p>
+          <p className="mt-10 text-sm font-bold text-muted-foreground">{x.moreProjects}</p>
+          <ul className="mt-3 flex flex-wrap gap-2 sm:gap-2.5">
+            {x.products.filter((product) => !featured.includes(product.slug)).map((product) => (
+              <li key={product.slug}><a href={projectHref(locale, product.slug)} className="block rounded-full bg-card px-3.5 py-2 text-sm font-bold shadow-[0_1px_2px_rgba(10,15,36,0.05)] transition-colors hover:bg-secondary sm:px-4 sm:py-2.5 sm:text-[15px]">{product.name}</a></li>
+            ))}
+            <li><a href={href(locale, 'portfolio')} className="block rounded-full bg-primary px-3.5 py-2 text-sm font-extrabold text-primary-foreground transition-opacity hover:opacity-85 sm:px-4 sm:py-2.5 sm:text-[15px]">{shared.allProjects} →</a></li>
+          </ul>
         </Section>
 
         <Section>
