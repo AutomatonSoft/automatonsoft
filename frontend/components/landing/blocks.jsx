@@ -11,6 +11,8 @@ export const wrap = 'mx-auto w-full max-w-[1200px] px-4 sm:px-6';
 export const gap = 'pt-28 sm:pt-36';
 export const bigTitle = 'font-black text-[clamp(2.5rem,5.2vw,5.25rem)] leading-[0.95] tracking-[-0.05em] text-balance';
 export const pill = 'rounded-full px-3 py-1.5 text-[13px] font-bold';
+// A row of choices (filters, related links): one swipeable line on phones, wrapping from sm up. Not for tags that must stay readable.
+export const chipRow = 'flex gap-2 overflow-x-auto max-sm:-mx-4 max-sm:px-4 max-sm:pb-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden sm:flex-wrap sm:gap-2.5 [&>*]:shrink-0 [&>*]:whitespace-nowrap';
 export const button = 'inline-flex min-h-14 items-center justify-center rounded-full px-7 py-4 text-center text-[17px] font-extrabold text-balance transition-opacity hover:opacity-85 max-sm:min-h-12 max-sm:px-5 max-sm:py-3 max-sm:text-[15px]';
 export const block = 'rounded-[2.25rem] shadow-[0_1px_2px_rgba(10,15,36,0.05),0_14px_36px_rgba(6,37,135,0.06)]';
 export const hover = 'transition hover:-translate-y-1.5';

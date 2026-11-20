@@ -4,7 +4,7 @@ import { caseImages, homeExtras } from '@/lib/landings/home';
 import { landingHrefFor, landings } from '@/lib/landings';
 import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
-import { block, button, ContactSection, FaqSection, hover, num, pill, Section, StepCards, Title, tone, wrap } from '@/components/landing/blocks';
+import { block, button, chipRow, ContactSection, FaqSection, hover, num, pill, Section, StepCards, Title, tone, wrap } from '@/components/landing/blocks';
 import CtaBand from '@/components/landing/cta-band';
 import { FloatingCta, MobileContactBar, SiteFooter, SiteHeader } from '@/components/landing/chrome';
 
@@ -136,7 +136,6 @@ export default function HomeLanding({ locale }) {
             <a href={href(locale, 'portfolio')} className="text-[17px] font-extrabold text-lilac hover:underline max-sm:hidden">{shared.allProjects} →</a>
           </div>
           <p className="mt-6 max-w-[560px] text-muted-foreground">{t.caseStudies.text}</p>
-          <a href={href(locale, 'portfolio')} className="mt-4 inline-block text-[17px] font-extrabold text-lilac hover:underline sm:hidden">{shared.allProjects} →</a>
           <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-2">
             {featured.map((id) => {
               const item = cases[id];
@@ -157,12 +156,12 @@ export default function HomeLanding({ locale }) {
             })}
           </div>
           <p className="mt-10 text-sm font-bold text-muted-foreground">{x.moreProjects}</p>
-          <ul className="mt-3 flex flex-wrap gap-2 sm:gap-2.5">
+          <ul className={cn(chipRow, 'mt-3')}>
             {x.products.filter((product) => !featured.includes(product.slug)).map((product) => (
               <li key={product.slug}><a href={projectHref(locale, product.slug)} className="block rounded-full bg-card px-3.5 py-2 text-sm font-bold shadow-[0_1px_2px_rgba(10,15,36,0.05)] transition-colors hover:bg-secondary sm:px-4 sm:py-2.5 sm:text-[15px]">{product.name}</a></li>
             ))}
-            <li><a href={href(locale, 'portfolio')} className="block rounded-full bg-primary px-3.5 py-2 text-sm font-extrabold text-primary-foreground transition-opacity hover:opacity-85 sm:px-4 sm:py-2.5 sm:text-[15px]">{shared.allProjects} →</a></li>
           </ul>
+          <a href={href(locale, 'portfolio')} className="mt-4 inline-block rounded-full bg-primary px-4 py-2.5 text-[15px] font-extrabold text-primary-foreground transition-opacity hover:opacity-85">{shared.allProjects} →</a>
         </Section>
 
         <Section>
