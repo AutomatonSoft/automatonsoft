@@ -61,10 +61,10 @@
   "website": "https://benimdepom.info",
   "screenshots": [
     {
-      "file": "benim-depom/benim-stats.webp",
+      "file": "benim-depom/benim-landing.webp",
       "alt": {
-        "de": "Mobile App: Preisverhandlungen eines Produkts und Verkaufsstatistik mit Zeitraum",
-        "en": "Mobile app: price negotiations for a product and sales statistics with a date range"
+        "de": "Öffentliche Website von Benim Depom für Hersteller mit Hero-Bereich und Zugang zur App",
+        "en": "Public Benim Depom website for manufacturers with the hero section and access to the app"
       }
     },
     {
@@ -75,10 +75,24 @@
       }
     },
     {
+      "file": "benim-depom/benim-statistics.webp",
+      "alt": {
+        "de": "Web-Portal: Verkaufsstatistik mit Zeitraum, verkauften Stück, Bestellungen und Umsatz",
+        "en": "Web portal: sales statistics with a date range, units sold, orders and revenue"
+      }
+    },
+    {
+      "file": "benim-depom/benim-edit.webp",
+      "alt": {
+        "de": "Web-Portal: Produkt bearbeiten mit Fotos und Produktangaben",
+        "en": "Web portal: editing a product with photos and product details"
+      }
+    },
+    {
       "file": "benim-depom/benim-cover.webp",
       "alt": {
-        "de": "Mobile App: Produktliste, Postfach mit Preisangebot und Preisverhandlungen",
-        "en": "Mobile app: product list, inbox with a price offer and price negotiations"
+        "de": "Benim Depom Web-Portal mit Produktliste und zwei Mobile-Ansichten: Postfach mit Preisangebot und Preisverhandlungen",
+        "en": "Benim Depom web portal with the product list and two mobile screens: inbox with a price offer and price negotiations"
       }
     }
   ]
