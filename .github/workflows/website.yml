@@ -66,6 +66,9 @@ jobs:
       - name: Activate local Docker release
         run: |
           archive="website-${GITHUB_SHA}.tar.gz"
+          # The site is rendered with the portfolio fetched from the API at build time. Without a changing file Docker
+          # reuses the cached frontend build and the HTML keeps stale project data (e.g. old screenshots).
+          echo "$GITHUB_SHA" > frontend/.deploy-stamp
           tar -czf "$archive" frontend backend deploy/docker-compose.yml
           install -m 600 "$archive" "/home/Automatonsoft/incoming/$archive"
           sudo -n /usr/local/sbin/deploy-automatonsoft "/home/Automatonsoft/incoming/$archive"
