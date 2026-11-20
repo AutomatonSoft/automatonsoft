@@ -6,7 +6,7 @@ import { projectHref } from '@/lib/i18n';
 import { categoryIcons, isPreparing, localizeProject, projectRank } from '@/lib/portfolio';
 import { Icon } from '@/components/sections/icons';
 import { cn } from '@/lib/utils';
-import { block, hover, pill } from '@/components/landing/blocks';
+import { block, chipRow, hover, pill } from '@/components/landing/blocks';
 
 const ALL = 'alle';
 
@@ -71,7 +71,7 @@ export default function PortfolioList({ locale, labels, snapshot }) {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2" role="toolbar">
+      <div className={chipRow} role="toolbar">
         {filters.map(({ value, count }) => (
           <button type="button" key={value} aria-pressed={active === value} onClick={() => choose(value)}
             className={cn('rounded-full px-4 py-2 text-[15px] font-bold transition', active === value ? 'bg-primary text-primary-foreground' : 'bg-card hover:bg-secondary')}>
