@@ -2,6 +2,7 @@
   "title": "Hubnity",
   "category_guess": "workforce",
   "published": true,
+  "own": true,
   "development_time": "ca. 12 Monate",
   "description": {
     "de": "Zeiterfassung für Teams: Desktop-App, Web-Dashboard und zwei Mobile-Apps erfassen Arbeitszeit, Aktivität und Abwesenheiten und berechnen die Auszahlung aus freigegebenen Stunden.",

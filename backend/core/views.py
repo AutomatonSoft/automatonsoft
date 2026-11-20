@@ -17,7 +17,7 @@ def serialize(project, request):
         'id': project.id, 'slug': project.slug, 'title': project.title, 'description': project.description,
         'challenge': project.challenge, 'features': project.features, 'results': project.results, 'website': project.website,
         'stack': project.stack, 'integrations': project.integrations, 'category': project.category, 'category_label': project.get_category_display(),
-        'development_time': project.development_time,
+        'development_time': project.development_time, 'own': project.own,
         'published': project.published, 'translations': project.translations,
         'screenshots': [item.image.url for item in project.screenshots.order_by('-id')],
         'screenshot_alts': [item.alt for item in project.screenshots.order_by('-id')],

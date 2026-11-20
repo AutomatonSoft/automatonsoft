@@ -47,7 +47,7 @@ const home = {
     text: 'Platforms we engineered, from SaaS for distributed teams to our own online shop.',
     switchLabel: 'Case studies', deliveredLabel: 'What we delivered', similar: 'Discuss a similar project',
     items: [
-      { id: 'hubnity', brand: 'Hubnity', tag: 'hubnity.com', title: 'Hubnity: time tracking SaaS for distributed teams',
+      { id: 'hubnity', brand: 'Hubnity', tag: 'In-house project · hubnity.com', title: 'Hubnity: time tracking SaaS for distributed teams',
         text: 'We engineered Hubnity – a cloud platform that gives teams reliable hours, project context, attendance and reports in one workspace, across web, desktop and mobile.',
         delivered: ['Automatic time and activity tracking', 'Timesheets, billable hours and invoicing', 'Desktop apps for Windows, macOS and Linux', 'Android app with GPS tracking for field teams', 'Subscription billing with Stripe', 'Reports and exports as PDF and CSV'],
         facts: [{ label: 'Product', value: 'B2B SaaS platform' }, { label: 'Platforms', value: 'Web · Windows · macOS · Linux · Android' }, { label: 'Audience', value: 'Agencies, remote and field teams' }],

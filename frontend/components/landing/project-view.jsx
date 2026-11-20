@@ -45,7 +45,7 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
 
   return (
     <>
-      <PageHead tags={[{ label: `← ${labels.portfolio}`, href: links.portfolio }, { label: category }]} title={p.title} lead={p.description}
+      <PageHead tags={[{ label: `← ${labels.portfolio}`, href: links.portfolio }, { label: category }, ...(p.own ? [{ label: labels.own }] : [])]} title={p.title} lead={p.description}
         actions={(
           <>
             {p.website && <a href={p.website} target="_blank" rel="noopener" className={cn(button, 'gap-2 bg-primary text-primary-foreground')}>{labels.visit}<ArrowUpRight aria-hidden="true" className="size-5" /></a>}
