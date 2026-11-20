@@ -1,0 +1,116 @@
+{
+  "title": "Hubnity",
+  "category_guess": "workforce",
+  "published": true,
+  "development_time": "ca. 12 Monate",
+  "description": {
+    "de": "Zeiterfassung für Teams: Desktop-App, Web-Dashboard und zwei Mobile-Apps erfassen Arbeitszeit, Aktivität und Abwesenheiten und berechnen die Auszahlung aus freigegebenen Stunden.",
+    "en": "Time tracking for teams: a desktop app, web dashboard and two mobile apps record working time, activity and absences and calculate pay from approved hours."
+  },
+  "challenge": {
+    "de": "Inhaber und Personalverantwortliche von verteilten Teams oder Außendienst-Teams wissen oft nicht genau, wann, wo und woran gearbeitet wurde und wofür sie zahlen. Stunden, Urlaub, Anwesenheit und Lohn liegen in getrennten Tabellen.",
+    "en": "Owners and HR managers of remote and field teams often don't know exactly when, where and on what people worked, or what they are paying for. Hours, leave, attendance and pay sit in separate spreadsheets."
+  },
+  "features": {
+    "de": [
+      "Zeiterfassung am Desktop und mit zwei Mobile-Apps (App Store und Google Play); eine davon als persönliche App mit PDF- oder CSV-Bericht an den Arbeitgeber",
+      "Screenshots, genutzte Apps und Websites, Leerlauf und Aktivitätsanteil",
+      "Projekte, Aufgaben, Kunden und Teams mit Rollen (Inhaber, Manager, Mitarbeiter)",
+      "Tageslisten und Zeitnachweise mit Freigabe; abgeschlossene Zeiträume werden gesperrt",
+      "Schichtpläne, Anwesenheit (zu spät, gefehlt, früher gegangen), Urlaubsregeln und Urlaubsanträge",
+      "Lohnläufe mit Stundensätzen, Boni, Abzügen und offenen Beträgen, Prüfung vor der Auszahlung, Auszahlung per PayPal",
+      "Standort und Route nur während der laufenden Schicht, Karte mit Arbeitsorten",
+      "Berichte mit CSV- und PDF-Export, KI-Berichte mit Hinweisen auf auffällige Aktivität, Kundenrechnungen aus erfassten Stunden",
+      "Benutzeroberfläche in 91 Sprachen"
+    ],
+    "en": [
+      "Time tracking on the desktop and with two mobile apps (App Store and Google Play); one of them is a personal app that sends a PDF or CSV report to the employer",
+      "Screenshots, apps and websites used, idle time and activity percentage",
+      "Projects, tasks, clients and teams with roles (owner, manager, employee)",
+      "Daily timesheets with approval; closed periods are locked",
+      "Shift schedules, attendance (late, absent, left early), leave policies and time-off requests",
+      "Payroll runs with pay rates, bonuses, deductions and amounts owed, with a check before payment, payouts via PayPal",
+      "Location and route recorded only during a running shift, map of work sites",
+      "Reports with CSV and PDF export, AI reports with alerts on unusual activity, client invoices from tracked hours",
+      "User interface in 91 languages"
+    ]
+  },
+  "results": {
+    "de": ["Mehr als 150 Nutzer (Stand 11/2026)"],
+    "en": ["More than 150 users (as of 11/2026)"]
+  },
+  "stack": [
+    "TypeScript",
+    "NestJS",
+    "Next.js",
+    "React",
+    "Flutter",
+    "PostgreSQL",
+    "Prisma",
+    "Redis"
+  ],
+  "integrations": [
+    "Stripe",
+    "PayPal",
+    "Jira",
+    "GitHub",
+    "Trello",
+    "OpenAI",
+    "Firebase",
+    "Google Maps",
+    "Apple In-App Purchase",
+    "Google Play Billing"
+  ],
+  "website": "https://hubnity.com",
+  "screenshots": [
+    {
+      "file": "hubnity/hubnity-mobile.webp",
+      "alt": {
+        "de": "Mobile App des Teams mit Timer, Karte der Arbeitsorte und Anwesenheit in einer Zone",
+        "en": "Team mobile app with timer, map of work sites and people present in a zone"
+      }
+    },
+    {
+      "file": "hubnity/hubnity-readiness.webp",
+      "alt": {
+        "de": "Prüfung vor der Lohnabrechnung: fehlende Sätze, fehlende Auszahlungsdaten und nicht freigegebene Stunden",
+        "en": "Payroll readiness check: missing rates, missing payout details and unapproved hours"
+      }
+    },
+    {
+      "file": "hubnity/hubnity-payroll.webp",
+      "alt": {
+        "de": "Offene Beträge: Summe, Verlauf pro Tag und Liste der Mitarbeitenden mit Stundensatz",
+        "en": "Amounts owed: total, trend per day and a list of members with their pay rate"
+      }
+    },
+    {
+      "file": "hubnity/hubnity-activity.webp",
+      "alt": {
+        "de": "Screenshots einer Arbeitsstunde mit Aktivitätsanteil pro Aufnahme",
+        "en": "Screenshots from a working hour with the activity percentage for each capture"
+      }
+    },
+    {
+      "file": "hubnity/hubnity-timesheets.webp",
+      "alt": {
+        "de": "Tagesliste der Arbeitszeiten mit Projekten und Freigabe durch die Führungskraft",
+        "en": "Daily time log with projects and approval by the manager"
+      }
+    },
+    {
+      "file": "hubnity/hubnity-desktop.webp",
+      "alt": {
+        "de": "Desktop-App mit laufendem Timer und Projektauswahl",
+        "en": "Desktop app with a running timer and project selection"
+      }
+    },
+    {
+      "file": "hubnity/hubnity-cover.webp",
+      "alt": {
+        "de": "Hubnity Dashboard im Browser und zwei Mobile-Apps mit laufendem Timer",
+        "en": "Hubnity dashboard in the browser and two mobile apps with a running timer"
+      }
+    }
+  ]
+}
