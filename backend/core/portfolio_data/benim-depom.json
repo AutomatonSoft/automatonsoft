@@ -1,0 +1,85 @@
+{
+  "title": "Benim Depom",
+  "category_guess": "ecommerce",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 3,5 Monate",
+  "description": {
+    "de": "Plattform für Möbelhersteller: Produkte werden per Smartphone-App im Lager erfasst, KI erstellt Bilder und Texte, Manager prüfen die Angebote und veröffentlichen sie auf Online-Marktplätzen.",
+    "en": "Platform for furniture manufacturers: products are captured with a smartphone app in the warehouse, AI creates images and texts, and managers review the listings and publish them to online marketplaces."
+  },
+  "challenge": {
+    "de": "Hersteller mit vollen Lagern haben oft nur wenige Verkaufskanäle. Der Weg auf den europäischen Markt mit Fotos, Texten, Prüfung und Veröffentlichung auf mehreren Marktplätzen ist aufwendig.",
+    "en": "Manufacturers with full warehouses often have only a few sales channels. Reaching the European market with photos, texts, review and publishing on several marketplaces is time-consuming."
+  },
+  "features": {
+    "de": [
+      "Produkte mit dem Smartphone erfassen: bis zu 20 Fotos, mehrere Größen, Farbe, Material und Bestand",
+      "Weißer Hintergrund und Interieurbilder per KI erstellen",
+      "Deutsche Titel, Beschreibungen und Stichpunkte per KI",
+      "Prüfung durch Manager mit Entscheidungsverlauf und Begründung; EAN-Codes werden erst bei Freigabe vergeben",
+      "Veröffentlichen, Aktualisieren und Deaktivieren auf den Marktplätzen OTTO, Kaufland und Hood.de, Übersicht des Veröffentlichungsstatus im Web-Portal",
+      "Preisangebote von Käufern annehmen oder ablehnen, mit Verlauf",
+      "Statusmeldungen per Push-Nachricht und im Postfach der App, zum Beispiel zur Bestätigung der Verfügbarkeit",
+      "Verkaufsstatistik: Bestellungen, verkaufte Stück und Umsatz je Zeitraum und Produkt",
+      "App in vier Sprachen (Deutsch, Englisch, Türkisch, Russisch) mit WhatsApp-Support"
+    ],
+    "en": [
+      "Capture products with a smartphone: up to 20 photos, several sizes, color, material and stock",
+      "White-background and interior images created with AI",
+      "German titles, descriptions and bullet points drafted by AI",
+      "Manager review with a history of decisions and reasons; EAN codes are assigned only on approval",
+      "Publish, update and deactivate on the OTTO, Kaufland and Hood.de marketplaces, with an overview of publishing status in the web portal",
+      "Accept or decline buyer price offers, with history",
+      "Status updates by push notification and in the app inbox, for example to confirm availability",
+      "Sales statistics: orders, units sold and revenue per period and product",
+      "App in four languages (German, English, Turkish, Russian) with WhatsApp support"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Next.js",
+    "React",
+    "Flutter",
+    "Django",
+    "Django REST Framework",
+    "PostgreSQL",
+    "Redis",
+    "Celery"
+  ],
+  "integrations": [
+    "OTTO",
+    "Kaufland",
+    "Hood.de",
+    "OpenAI",
+    "Google Gemini",
+    "Firebase Cloud Messaging"
+  ],
+  "website": "https://benimdepom.info",
+  "screenshots": [
+    {
+      "file": "benim-depom/benim-stats.webp",
+      "alt": {
+        "de": "Mobile App: Preisverhandlungen eines Produkts und Verkaufsstatistik mit Zeitraum",
+        "en": "Mobile app: price negotiations for a product and sales statistics with a date range"
+      }
+    },
+    {
+      "file": "benim-depom/benim-create.webp",
+      "alt": {
+        "de": "Mobile App: Produkt bearbeiten mit Fotos und Preis, daneben der Moderationsverlauf mit Entscheidungen",
+        "en": "Mobile app: editing a product with photos and price, next to the moderation history with decisions"
+      }
+    },
+    {
+      "file": "benim-depom/benim-cover.webp",
+      "alt": {
+        "de": "Mobile App: Produktliste, Postfach mit Preisangebot und Preisverhandlungen",
+        "en": "Mobile app: product list, inbox with a price offer and price negotiations"
+      }
+    }
+  ]
+}
