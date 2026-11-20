@@ -233,3 +233,5 @@ class ImportProjectTests(TestCase):
             import_project(card, base_dir=folder)
             project = Project.objects.get(title='Demo')
             self.assertEqual((project.screenshots.count(), project.integrations, project.screenshots.get().alt['en']), (1, ['Afterbuy'], 'Image'))
+            import_project({**card, 'screenshots': [{'file': 'shot.png', 'alt': {'en': 'New'}}]}, update=True, base_dir=folder)
+            self.assertEqual((project.screenshots.count(), project.screenshots.get().alt['en']), (1, 'New'))
