@@ -10,7 +10,7 @@ import { block, hover, pill } from '@/components/landing/blocks';
 
 const ALL = 'alle';
 
-function ProjectCard({ project, preparing, href, category, preparingLabel }) {
+function ProjectCard({ project, preparing, href, category, preparingLabel, ownLabel }) {
   const body = (
     <>
       <span className="relative block aspect-[16/10] overflow-hidden bg-secondary">
@@ -20,7 +20,10 @@ function ProjectCard({ project, preparing, href, category, preparingLabel }) {
         {preparing && <span className={cn(pill, 'absolute top-4 left-4 bg-ink text-white')}>{preparingLabel}</span>}
       </span>
       <span className="flex flex-1 flex-col gap-3 p-7">
-        <span className={cn(pill, 'self-start bg-secondary')}>{category}</span>
+        <span className="flex flex-wrap gap-1.5 self-start">
+          <span className={cn(pill, 'bg-secondary')}>{category}</span>
+          {project.own && <span className={cn(pill, 'bg-foam text-ink')}>{ownLabel}</span>}
+        </span>
         <span className="text-[1.625rem] leading-tight font-black tracking-[-0.03em]">{project.title}</span>
         <span className="line-clamp-3 text-muted-foreground">{project.description}</span>
         {!preparing && project.stack.length > 0 && (
@@ -79,7 +82,7 @@ export default function PortfolioList({ locale, labels, snapshot }) {
       {visible.length === 0 ? <p className="mt-8 text-muted-foreground">{labels.empty}</p> : (
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {visible.map(({ project, preparing }) => (
-            <ProjectCard key={project.id} project={project} preparing={preparing} category={labels.categories[project.category]} preparingLabel={labels.preparing}
+            <ProjectCard key={project.id} project={project} preparing={preparing} category={labels.categories[project.category]} preparingLabel={labels.preparing} ownLabel={labels.own}
               href={!preparing && project.slug ? projectHref(locale, project.slug) : null} />
           ))}
         </div>

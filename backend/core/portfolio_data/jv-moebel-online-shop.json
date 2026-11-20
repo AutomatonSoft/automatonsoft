@@ -2,6 +2,7 @@
   "title": "JV Möbel Online-Shop",
   "category_guess": "ecommerce",
   "published": true,
+  "own": true,
   "development_time": "seit 07/2026",
   "description": {
     "de": "Eigenes Projekt der AEA GmbH & Co. KG: ein Möbel-Onlineshop in Entwicklung, in dem Redakteure Katalog, Preise, Aktionen und Inhalte ohne Programmierer pflegen. Ausgelegt für bis zu 30 Märkte.",

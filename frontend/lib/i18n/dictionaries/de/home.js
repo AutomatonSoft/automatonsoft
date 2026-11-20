@@ -47,7 +47,7 @@ const home = {
     text: 'Plattformen, die wir entwickelt haben: von SaaS für verteilte Teams bis zu unserem eigenen Onlineshop.',
     switchLabel: 'Fallstudien', deliveredLabel: 'Was wir umgesetzt haben', similar: 'Ähnliches Projekt besprechen',
     items: [
-      { id: 'hubnity', brand: 'Hubnity', tag: 'hubnity.com', title: 'Hubnity: Zeiterfassungs-SaaS für verteilte Teams',
+      { id: 'hubnity', brand: 'Hubnity', tag: 'Eigenes Projekt · hubnity.com', title: 'Hubnity: Zeiterfassungs-SaaS für verteilte Teams',
         text: 'Wir haben Hubnity entwickelt – eine Cloud-Plattform, die Teams verlässliche Arbeitszeiten, Projektkontext, Anwesenheit und Reports in einem Workspace bietet, im Web, auf dem Desktop und mobil.',
         delivered: ['Automatische Zeit- und Aktivitätserfassung', 'Stundenzettel, abrechenbare Zeiten und Rechnungen', 'Desktop-Apps für Windows, macOS und Linux', 'Android-App mit GPS-Erfassung für Außendienst-Teams', 'Abo-Abrechnung mit Stripe', 'Reports und Exporte als PDF und CSV'],
         facts: [{ label: 'Produkt', value: 'B2B-SaaS-Plattform' }, { label: 'Plattformen', value: 'Web · Windows · macOS · Linux · Android' }, { label: 'Zielgruppe', value: 'Agenturen, Remote- und Außendienst-Teams' }],

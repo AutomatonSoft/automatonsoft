@@ -30,6 +30,8 @@ class Project(models.Model):
     # Services the product connects to (Afterbuy, Klarna …); proper names, so one list for every language.
     integrations = models.JSONField(default=list, blank=True)
     development_time = models.CharField(max_length=120)
+    # Our own product or in-house project, not client work; shown as a label on the card and the project page.
+    own = models.BooleanField(default=False)
     published = models.BooleanField(default=True)
     # Per-locale overrides of the German base content, e.g. {'en': {'description': ..., 'stack': [...]}}
     translations = models.JSONField(default=dict, blank=True)

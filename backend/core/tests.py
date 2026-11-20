@@ -219,6 +219,13 @@ class ImportProjectTests(TestCase):
         self.assertEqual(import_project(self.card, update=True), 'updated')
         self.assertEqual(Project.objects.get(title='Demo').description, 'Beschreibung')
 
+    def test_own_flag_is_imported_and_served(self):
+        from .portfolio_import import import_project
+        import_project({**self.card, 'own': True})
+        project = Project.objects.get(title='Demo')
+        self.assertTrue(project.own)
+        self.assertTrue(self.client.get('/api/projects/').json()['projects'][0]['own'])
+
     def test_unknown_category_is_rejected(self):
         from .portfolio_import import import_project
         with self.assertRaises(ValueError):
