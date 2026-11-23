@@ -44,6 +44,8 @@ const pages = {
         { name: 'Lunanitiz Hotel Software', category: 'hospitality-hotel-software', tag: 'Hospitality' },
         { name: 'AutoCar Software Suite', category: 'automotive-software', tag: 'Automotive' },
         { name: 'Cashbook', category: 'finance-accounting-automation', tag: 'Finance' },
+        { name: 'Roader', category: 'supply-chain-warehouse', tag: 'Deliveries' },
+        { name: 'Benim Depom', category: 'ecommerce-marketplace-automation', tag: 'Marketplace platform' },
         { name: 'KIDOC_Office', category: 'ai-business-solutions', tag: 'AI document processing' },
       ],
     },
@@ -64,10 +66,10 @@ const pages = {
     tech: {
       eyebrow: 'Technology', title: 'A proven technology stack', text: 'The technologies behind the platforms we have built and run in production.',
       groups: [
-        { label: 'Frontend', items: ['TypeScript', 'React', 'Next.js'] },
-        { label: 'Backend', items: ['Node.js', 'NestJS', 'Python', 'Django'] },
-        { label: 'Data & queues', items: ['PostgreSQL', 'Redis', 'BullMQ'] },
-        { label: 'Integrations', items: ['Stripe', 'Twilio', 'Afterbuy', 'Shopware', 'Google Merchant Center', 'Airbnb'] },
+        { label: 'Frontend', items: ['TypeScript', 'React', 'Next.js', 'Flutter'] },
+        { label: 'Backend', items: ['Node.js', 'NestJS', 'Python', 'Django', 'FastAPI', 'PHP', 'Symfony'] },
+        { label: 'Data & queues', items: ['PostgreSQL', 'Redis', 'BullMQ', 'Celery'] },
+        { label: 'Integrations', items: ['Stripe', 'PayPal', 'Twilio', 'Afterbuy', 'OTTO', 'Kaufland', 'Shopware', 'Klarna', 'TomTom', 'OpenAI', 'Firebase'] },
         { label: 'Infrastructure', items: ['Docker', 'Nginx', 'GitHub Actions'] },
       ],
     },

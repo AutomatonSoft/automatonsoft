@@ -11,6 +11,8 @@ const products = [
   { slug: 'lisa', name: 'Lisa', de: 'KI-Sprachassistentin im Kundenservice', en: 'AI voice assistant for customer calls' },
   { slug: 'e-commerce-automation-suite', name: 'E-Commerce Automation Suite', short: 'E-Commerce Suite', de: 'Produktdaten für Marktplätze', en: 'Product data for marketplaces' },
   { slug: 'cashbook', name: 'Cashbook', de: 'Digitale Kassenbücher', en: 'Digital cash books' },
+  { slug: 'roader', name: 'Roader', de: 'Auslieferungen für Fahrer', en: 'Deliveries for drivers' },
+  { slug: 'benim-depom', name: 'Benim Depom', de: 'Produkte erfassen und auf Marktplätzen anbieten', en: 'Capture products and list them on marketplaces' },
 ];
 
 const labels = {
@@ -19,7 +21,7 @@ const labels = {
     tags: ['KI im Live-Betrieb', 'Entwickelt in Deutschland', 'DSGVO by Design'],
     stageLabel: 'Lisa · KI-Sprachassistentin', stageBadge: '24/7 live',
     stats: [
-      { value: '5', label: 'Produkte im täglichen Einsatz' },
+      { value: '6', label: 'Produkte im täglichen Einsatz' },
       { value: '24/7', label: 'Lisa beantwortet Kundenanrufe' },
       { value: '7', label: 'Branchen, die wir betreuen' },
       { value: 'DE/EN', label: 'Projekte auf Deutsch und Englisch' },
@@ -31,7 +33,7 @@ const labels = {
     tags: ['AI in live operation', 'Engineered in Germany', 'GDPR by design'],
     stageLabel: 'Lisa · AI voice assistant', stageBadge: '24/7 live',
     stats: [
-      { value: '5', label: 'Products in daily use' },
+      { value: '6', label: 'Products in daily use' },
       { value: '24/7', label: 'Lisa answers customer calls' },
       { value: '7', label: 'Industries we serve' },
       { value: 'DE/EN', label: 'Projects in German and English' },
