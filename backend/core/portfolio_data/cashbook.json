@@ -1,0 +1,91 @@
+{
+  "title": "Cashbook",
+  "category_guess": "finance",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 6 Monate",
+  "description": {
+    "de": "Belege hochladen, ordnen und per E-Mail weiterleiten, Kassenbuch führen und Steuer- sowie Belegberichte als PDF erstellen – im Web und per App.",
+    "en": "Upload, sort and forward receipts by email, keep a cash book, and create tax and document reports as PDF – on the web and in a mobile app."
+  },
+  "challenge": {
+    "de": "Rechnungen, Zoll- und Kassenbelege liegen verstreut in E-Mails und auf Papier. Das Team verliert den Überblick über Beträge, Steuern und Kassenstände.",
+    "en": "Invoices, customs papers and cash receipts are scattered across emails and paper. The team loses track of amounts, taxes and cash balances."
+  },
+  "features": {
+    "de": [
+      "Belege als PDF oder Foto hochladen, mehrere Dateien pro Beleg",
+      "Beträge und Texte werden per Texterkennung aus dem Beleg vorgeschlagen",
+      "Kategorien: Eingangs-/Ausgangsrechnungen, Kassenbuch, Zoll, Sonstiges",
+      "Belege per E-Mail an die Buchhaltung senden, Versand wird protokolliert",
+      "Kassenbuch mit Einzahlungen, Ausgaben und Kontostand je Nutzer",
+      "Steuersatz und Steuerbetrag je Beleg, Steuerbericht nach Zeitraum",
+      "Berichte und Kassenbuch als PDF herunterladen",
+      "Mehrere Firmen und Länder, Rollen für Nutzer und Admins, Änderungsprotokoll"
+    ],
+    "en": [
+      "Upload receipts as PDF or photo, several files per receipt",
+      "Text recognition suggests amounts and descriptions from the receipt",
+      "Categories: incoming/outgoing invoices, cash book, customs, other",
+      "Send receipts by email to accounting; every send is logged",
+      "Cash book with top-ups, expenses and balance per user",
+      "Tax rate and tax amount per receipt, tax report by period",
+      "Download reports and the cash book as PDF",
+      "Multiple companies and countries, user/admin roles, change log"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Flutter",
+    "Tesseract",
+    "ReportLab"
+  ],
+  "integrations": [],
+  "website": null,
+  "screenshots": [
+    {
+      "file": "cashbook/cashbook-documents.webp",
+      "alt": {
+        "de": "Web-App: Belegliste mit Kategorien, Status, Firma und Beschreibung",
+        "en": "Web app: document list with categories, status, company and description"
+      }
+    },
+    {
+      "file": "cashbook/cashbook-cashbook.webp",
+      "alt": {
+        "de": "Web-App: Kassenbuch mit Nutzern, Firmen, Kontostand und Aktionen für Einzahlung, Kassenbuch und PDF",
+        "en": "Web app: cash book with users, companies, balances and actions for top-up, ledger and PDF"
+      }
+    },
+    {
+      "file": "cashbook/cashbook-new-document.webp",
+      "alt": {
+        "de": "Web-App: neuen Beleg anlegen mit Kategorie, Firma, Betrag, Steuersatz und Dateiupload",
+        "en": "Web app: creating a new document with category, company, amount, tax rate and file upload"
+      }
+    },
+    {
+      "file": "cashbook/cashbook-reports.webp",
+      "alt": {
+        "de": "Web-App: Berichte mit Einnahmen, Ausgaben und Saldo, Diagramm, Zeitverlauf und Belegstatus",
+        "en": "Web app: reports with income, expenses and balance, a chart, period trend and document status"
+      }
+    },
+    {
+      "file": "cashbook/cashbook-dashboard.webp",
+      "alt": {
+        "de": "Web-App: Dashboard mit Einnahmen, Ausgaben, Saldo und Übersicht nach Belegkategorien",
+        "en": "Web app: dashboard with income, expenses, balance and an overview by document category"
+      }
+    }
+  ]
+}
