@@ -60,9 +60,9 @@ export default function ServicesView({ locale }) {
       <Section>
         <Title parts={t.tech.title} />
         <p className="mt-6 max-w-[560px] text-muted-foreground">{t.tech.text}</p>
-        <dl className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <dl className="mt-12 flex flex-wrap gap-4">
           {t.tech.groups.map(({ label, items }) => (
-            <div key={label} className={cn(block, 'bg-card p-6 sm:p-8')}>
+            <div key={label} className={cn(block, 'grow basis-full bg-card p-6 sm:p-8 md:basis-[calc(50%-1rem)] lg:basis-[calc(33.333%-1rem)]')}>
               <dt className="text-xs font-bold tracking-[0.1em] text-muted-foreground uppercase sm:tracking-[0.14em]">{label}</dt>
               <dd className="mt-4"><ul className="flex flex-wrap gap-1.5">{items.map((item) => <li key={item} className={cn(pill, 'bg-secondary')}>{item}</li>)}</ul></dd>
             </div>
