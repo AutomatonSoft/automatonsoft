@@ -5,7 +5,7 @@ import { images } from './cases';
 const de = {
   meta: {
     title: 'E-Commerce-Automatisierung für Marktplätze',
-    description: 'Produktdaten, Preise und Bestellungen für otto.de, Kaufland, Google Merchant Center und Shopware aus einer Quelle. Individuelle Software, DSGVO-konform.',
+    description: 'Produktdaten, Preise und Bestellungen für otto.de, Kaufland und Shopware aus einer Quelle. Individuelle Software, DSGVO-konform.',
   },
   name: 'E-Commerce & Marktplätze',
   hero: {
@@ -48,7 +48,7 @@ const de = {
   band: { text: 'Erzählen Sie uns, welche Kanäle Ihr Team am meisten Zeit kosten – wir zeigen, was von selbst laufen kann.' },
   faq: {
     items: [
-      { q: 'Welche Marktplätze und Shops können Sie anbinden?', a: 'Im Einsatz sind bereits Anbindungen an otto.de, kaufland.de, Google Merchant Center, Shopware und Afterbuy. Weitere Marktplätze und Shopsysteme binden wir über deren Schnittstellen an – welche für Sie sinnvoll sind, klären wir im Erstgespräch.' },
+      { q: 'Welche Marktplätze und Shops können Sie anbinden?', a: 'Im Einsatz sind bereits Anbindungen an otto.de, kaufland.de, Shopware und Afterbuy. Weitere Marktplätze und Shopsysteme binden wir über deren Schnittstellen an – welche für Sie sinnvoll sind, klären wir im Erstgespräch.' },
       commonFaq.de.erp,
       { q: 'Wie viel Zeit und Kosten spart die Automatisierung?', a: 'Weniger manuelle Pflege pro Kanal, weniger Bestandsfehler und schnellere Bearbeitung von Bestellungen. Die tatsächliche Ersparnis hängt von Ihren Prozessen, Kanälen und dem Automatisierungsgrad ab – im Erstgespräch schätzen wir sie mit Ihren Zahlen ab.' },
       { q: 'Was kostet ein Projekt?', a: 'Das hängt vom Umfang ab: Anzahl der Kanäle, Datenqualität und vorhandene Systeme. Nach der Analyse erhalten Sie ein Angebot mit klaren Etappen. Das Erstgespräch ist kostenlos.' },
@@ -65,7 +65,7 @@ const de = {
 const en = {
   meta: {
     title: 'E-commerce automation for marketplaces',
-    description: 'Product data, prices and orders for otto.de, Kaufland, Google Merchant Center and Shopware from one source. Custom software, GDPR-compliant.',
+    description: 'Product data, prices and orders for otto.de, Kaufland and Shopware from one source. Custom software, GDPR-compliant.',
   },
   name: 'E-commerce & marketplaces',
   hero: {
@@ -108,7 +108,7 @@ const en = {
   band: { text: 'Tell us which channels cost your team the most time – we will show you what can run on its own.' },
   faq: {
     items: [
-      { q: 'Which marketplaces and shops can you connect?', a: 'Connections to otto.de, kaufland.de, Google Merchant Center, Shopware and Afterbuy are already in use. We connect further marketplaces and shop systems via their APIs – which ones make sense for you, we clarify in the first call.' },
+      { q: 'Which marketplaces and shops can you connect?', a: 'Connections to otto.de, kaufland.de, Shopware and Afterbuy are already in use. We connect further marketplaces and shop systems via their APIs – which ones make sense for you, we clarify in the first call.' },
       commonFaq.en.erp,
       { q: 'How much time and money does automation save?', a: 'Less manual maintenance per channel, fewer stock errors and faster order processing. The actual savings depend on your processes, channels and degree of automation – in the first call we estimate them with your numbers.' },
       { q: 'What does a project cost?', a: 'That depends on the scope: number of channels, data quality and existing systems. After the analysis you receive a quote with clear milestones. The first call is free.' },
@@ -126,7 +126,7 @@ const ecommerce = {
   slug: { de: 'e-commerce', en: 'e-commerce' },
   heroImage: images.lisa,
   cases: ['lisa', 'ecommerceSuite'],
-  integrations: ['otto.de', 'kaufland.de', 'Google Merchant Center', 'Shopware', 'Afterbuy', 'Twilio', 'Stripe'],
+  integrations: ['otto.de', 'kaufland.de', 'Shopware', 'Afterbuy', 'Twilio', 'Stripe'],
   content: { de, en },
 };
 

@@ -22,13 +22,13 @@ const cases = {
   ecommerceSuite: {
     de: {
       meta: 'Produktdaten · Marktplätze', title: 'E-Commerce Automation Suite',
-      text: 'Automatisiertes Produktdatenmanagement für otto.de, kaufland.de, Google Merchant Center und Shopware – aus einer zentralen Produktdatenbank heraus.',
-      list: ['otto.de', 'kaufland.de', 'Google Merchant Center', 'Shopware'], status: 'synchron',
+      text: 'Automatisiertes Produktdatenmanagement für otto.de, kaufland.de und Shopware – aus einer zentralen Produktdatenbank heraus.',
+      list: ['otto.de', 'kaufland.de', 'Shopware'], status: 'synchron',
     },
     en: {
       meta: 'Product data · Marketplaces', title: 'E-Commerce Automation Suite',
-      text: 'Automated product data management for otto.de, kaufland.de, Google Merchant Center and Shopware – from one central product database.',
-      list: ['otto.de', 'kaufland.de', 'Google Merchant Center', 'Shopware'], status: 'in sync',
+      text: 'Automated product data management for otto.de, kaufland.de and Shopware – from one central product database.',
+      list: ['otto.de', 'kaufland.de', 'Shopware'], status: 'in sync',
     },
   },
   cashbook: {
