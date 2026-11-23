@@ -68,7 +68,8 @@ jobs:
           archive="website-${GITHUB_SHA}.tar.gz"
           # The site is rendered with the portfolio fetched from the API at build time. Without a changing file Docker
           # reuses the cached frontend build and the HTML keeps stale project data (e.g. old screenshots).
-          echo "$GITHUB_SHA" > frontend/.deploy-stamp
+          # SHA alone repeats on a re-run of the same commit, so the run id and attempt are part of the stamp.
+          echo "${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" > frontend/.deploy-stamp
           tar -czf "$archive" frontend backend deploy/docker-compose.yml
           install -m 600 "$archive" "/home/Automatonsoft/incoming/$archive"
           sudo -n /usr/local/sbin/deploy-automatonsoft "/home/Automatonsoft/incoming/$archive"
