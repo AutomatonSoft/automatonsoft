@@ -1,0 +1,82 @@
+{
+  "title": "Roader",
+  "category_guess": "supply-chain",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 4,5 Monate",
+  "description": {
+    "de": "Roader organisiert Auslieferungen für Fahrer: Routen und Stopps auf dem Smartphone, digitale Empfangsbestätigung mit Unterschrift und Benachrichtigungen an Kunden.",
+    "en": "Roader organizes deliveries for drivers: routes and stops on the phone, digital proof of receipt with a signature, and notifications to customers."
+  },
+  "challenge": {
+    "de": "Auslieferungen mit Fahrern, Kundenterminen und Empfangsnachweisen sollen digital und nachvollziehbar sein, statt über verstreute Nachrichten und Papier zu laufen.",
+    "en": "Deliveries involve drivers, customer appointments and proof of receipt; these should be digital and traceable instead of running on paper and scattered messages."
+  },
+  "features": {
+    "de": [
+      "Routen mit Stopps als Liste und Karte in der Fahrer-App",
+      "Digitale Unterschrift des Empfängers mit Datenschutzhinweis",
+      "Signierter Lieferschein als PDF mit eingebetteter Unterschrift",
+      "Arbeiten ohne Internet; Daten werden später automatisch übertragen",
+      "Terminbestätigung für Kunden über einen persönlichen Link",
+      "Benachrichtigungen per SMS, WhatsApp oder E-Mail",
+      "Streckenberechnung und Kraftstoffkosten je Route",
+      "Abgleich mit Bestellungen aus Afterbuy und OTTO Market",
+      "Routenplanung durch Disponenten im Web-Portal"
+    ],
+    "en": [
+      "Routes with stops as a list and map in the driver app",
+      "Digital recipient signature with a privacy notice",
+      "Signed delivery note as a PDF with the embedded signature",
+      "Works without internet; data syncs automatically later",
+      "Appointment confirmation for customers via a personal link",
+      "Notifications by SMS, WhatsApp or email",
+      "Route distance calculation and fuel cost per route",
+      "Matching with orders from Afterbuy and OTTO Market",
+      "Route planning by dispatchers in the web portal"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Django",
+    "Django REST Framework",
+    "PostgreSQL",
+    "Celery",
+    "Redis",
+    "Flutter"
+  ],
+  "integrations": [
+    "TomTom",
+    "Tankerkönig",
+    "Afterbuy",
+    "OTTO Market",
+    "Twilio"
+  ],
+  "website": "https://roader.automatonsoft.de",
+  "screenshots": [
+    {
+      "file": "roader/roader-points.webp",
+      "alt": {
+        "de": "Web-Portal: Routenpunkte mit Adressen, Ankunfts- und Abfahrtszeiten und Terminstatus",
+        "en": "Web portal: route points with addresses, arrival and departure times and appointment status"
+      }
+    },
+    {
+      "file": "roader/roader-statistics.webp",
+      "alt": {
+        "de": "Web-Portal: Lieferstatistik mit Zeitraum, Summen und Aufschlüsselung nach Routen",
+        "en": "Web portal: delivery statistics with a date range, totals and a breakdown by route"
+      }
+    },
+    {
+      "file": "roader/roader-routes.webp",
+      "alt": {
+        "de": "Web-Portal: neue Route anlegen und Liste der Routen mit Status, Abfahrtszeit, Fahrzeug und Entfernung",
+        "en": "Web portal: creating a new route and the route list with status, departure time, vehicle and distance"
+      }
+    }
+  ]
+}
