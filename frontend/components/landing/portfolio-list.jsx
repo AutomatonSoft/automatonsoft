@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useProjects } from '@/components/portfolio/use-projects';
 import { projectHref } from '@/lib/i18n';
-import { categoryIcons, isPreparing, localizeProject, projectRank } from '@/lib/portfolio';
+import { categoryIcons, compareProjects, isPreparing, localizeProject } from '@/lib/portfolio';
 import { Icon } from '@/components/sections/icons';
 import { cn } from '@/lib/utils';
 import { block, chipRow, hover, pill } from '@/components/landing/blocks';
@@ -44,7 +44,7 @@ export default function PortfolioList({ locale, labels, snapshot }) {
 
   // Finished work first, then concepts; placeholders "in preparation" stay but move to the end.
   const items = useMemo(() => [...projects]
-    .sort((a, b) => projectRank(a) - projectRank(b))
+    .sort(compareProjects)
     .map((project) => ({ project: localizeProject(project, locale), preparing: isPreparing(project) })), [projects, locale]);
   const counts = useMemo(() => items.reduce((map, { project }) => ({ ...map, [project.category]: (map[project.category] || 0) + 1 }), {}), [items]);
   const filters = [{ value: ALL, count: items.length }, ...categories.filter((category) => counts[category.value]).map((category) => ({ value: category.value, count: counts[category.value] }))];

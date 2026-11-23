@@ -18,6 +18,15 @@ const CONCEPT_TAG = 'Konzept';
 export const isPreparing = (project) => project.stack.includes(PREPARING_TAG);
 export const projectRank = (project) => (isPreparing(project) ? 2 : project.stack.includes(CONCEPT_TAG) ? 1 : 0);
 
+// Within a rank the big finished projects come first, in this order; the generic category card goes last, the rest keeps the API order.
+const FIRST = ['hubnity', 'jv-mobel-online-shop', 'benim-depom', 'cashbook', 'roader', 'lisa'];
+const LAST = ['custom-software-business-automation'];
+export const projectOrder = (project) => {
+  const index = FIRST.indexOf(project.slug);
+  return index >= 0 ? index - FIRST.length : LAST.includes(project.slug) ? 1 : 0;
+};
+export const compareProjects = (a, b) => projectRank(a) - projectRank(b) || projectOrder(a) - projectOrder(b);
+
 export const categoryIcons = {
   'ecommerce-marketplace-automation': 'ShoppingCart', 'workforce-hr-automation': 'Users', 'ai-business-solutions': 'Sparkles',
   'supply-chain-warehouse': 'Package', 'industrial-ai-manufacturing': 'Factory', 'hospitality-hotel-software': 'Hotel',
