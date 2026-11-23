@@ -10,7 +10,6 @@ PROJECTS = (
     ('ecommerce-marketplace-automation', 'E-Commerce Automation Suite', 'Automatisiertes Produktdatenmanagement für otto.de, kaufland.de, Google Merchant Center und Shopware – aus einer zentralen Produktdatenbank heraus.', ['Marketplace Automation', 'Produktdatenmanagement']),
     ('ecommerce-marketplace-automation', 'Aftercool', 'Teil unseres E-Commerce-Portfolios. Eine ausführliche Beschreibung dieser Lösung ergänzen wir in Kürze.', ['In Vorbereitung']),
     ('ai-business-solutions', 'Lisa', 'KI-Sprachassistentin für JV Möbel: nimmt Kundenanrufe rund um die Uhr an, verifiziert Anrufer, teilt den Bestellstatus aus Afterbuy mit und übermittelt Sprachnachrichten als Transkript per E-Mail – verwaltet in einer Mitarbeiterkonsole.', ['Voice AI', 'Twilio', 'Afterbuy']),
-    ('workforce-hr-automation', 'Hubnity', 'Zeiterfassungs-SaaS für Agenturen, Remote- und Außendienst-Teams: automatische Zeit- und Aktivitätserfassung, Stundenzettel, abrechenbare Zeiten und Reports – im Web, als Desktop-App für Windows, macOS und Linux sowie unter Android.', ['TypeScript', 'NestJS', 'Next.js', 'React', 'PostgreSQL', 'Redis', 'BullMQ', 'Stripe']),
     ('workforce-hr-automation', 'Industry Human Organization', 'Organisatorische Ergänzung für Industriebetriebe im Umfeld der Hubnity Workforce Platform. Nähere Details folgen in Kürze.', ['In Vorbereitung']),
     ('ai-business-solutions', 'ProVocat', 'Bestehende KI-Lösung von Automatonsoft. Eine ausführliche Beschreibung ergänzen wir in Kürze.', ['In Vorbereitung']),
     ('ai-business-solutions', 'KIDOC_Office', 'KI-gestützte Verarbeitung von Bürodokumenten – von der Erkennung über die Datenextraktion bis zur strukturierten Ablage.', ['KI-Dokumentenverarbeitung']),
@@ -18,7 +17,6 @@ PROJECTS = (
     ('industrial-ai-manufacturing', 'Woodguard', 'Teil unseres Portfolios für Industrie und Fertigung. Eine ausführliche Beschreibung dieser Lösung ergänzen wir in Kürze.', ['In Vorbereitung']),
     ('hospitality-hotel-software', 'Lunanitiz Hotel Software', 'Zentrale Verwaltung von Buchungen und Verfügbarkeiten für Hotellerie und Kurzzeitvermietung, mit Anbindung an Airbnb.', ['Hotel Software', 'Airbnb Integration']),
     ('automotive-software', 'AutoCar Software Suite', 'Verwaltung von Fahrzeug-, Kunden- und Auftragsdaten für Autohäuser und Werkstätten – im Backoffice und mobil.', ['Autohaus Software', 'Werkstattverwaltung']),
-    ('finance-accounting-automation', 'Cashbook', 'Digitale Kassenbuchführung für kleine und mittlere Unternehmen mit Bargeldverkehr.', ['Digitales Kassenbuch', 'Finance Automation']),
     ('custom-software-business-automation', 'Custom Software & Business Automation', 'Individuelle Softwareentwicklung und Automatisierung für Geschäftsprozesse, die über Standardlösungen hinausgehen – aufbauend auf unserer Erfahrung aus allen Portfolio-Kategorien.', ['Individuelle Softwareentwicklung', 'Business Automation']),
 )
 
@@ -29,7 +27,6 @@ TRANSLATIONS_EN = {
     'E-Commerce Automation Suite': ('Automated product data management for otto.de, kaufland.de, Google Merchant Center and Shopware – from one central product database.', ['Marketplace automation', 'Product data management']),
     'Aftercool': ('Part of our e-commerce portfolio. A detailed description of this solution will follow shortly.', ['In preparation']),
     'Lisa': ('AI voice assistant for JV Möbel: answers customer calls around the clock, verifies callers, shares order status from Afterbuy and forwards voice messages as transcripts by email – managed in a staff console.', ['Voice AI', 'Twilio', 'Afterbuy']),
-    'Hubnity': ('Time tracking SaaS for agencies, remote and field teams: automatic time and activity tracking, timesheets, billable hours and reports – on the web, as a desktop app for Windows, macOS and Linux and on Android.', ['TypeScript', 'NestJS', 'Next.js', 'React', 'PostgreSQL', 'Redis', 'BullMQ', 'Stripe']),
     'Industry Human Organization': ('Organisational extension for industrial companies around our workforce solutions. Details will follow shortly.', ['In preparation']),
     'ProVocat': ('An existing AI solution by AutomatonSoft. A detailed description will follow shortly.', ['In preparation']),
     'KIDOC_Office': ('AI-powered processing of office documents – from recognition and data extraction to structured filing.', ['AI document processing']),
@@ -37,7 +34,6 @@ TRANSLATIONS_EN = {
     'Woodguard': ('Part of our industry and manufacturing portfolio. A detailed description of this solution will follow shortly.', ['In preparation']),
     'Lunanitiz Hotel Software': ('Central management of bookings and availability for hotels and short-term rentals, connected to Airbnb.', ['Hotel software', 'Airbnb integration']),
     'AutoCar Software Suite': ('Management of vehicle, customer and order data for dealerships and workshops – in the back office and on mobile.', ['Dealership software', 'Workshop management']),
-    'Cashbook': ('Digital cash book management for small and medium-sized businesses that handle cash.', ['Digital cash book', 'Finance automation']),
     'Custom Software & Business Automation': ('Custom software development and automation for business processes that go beyond standard solutions – building on our experience across all portfolio categories.', ['Custom software development', 'Business automation']),
 }
 

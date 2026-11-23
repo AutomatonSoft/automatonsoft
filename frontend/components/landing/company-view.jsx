@@ -70,15 +70,15 @@ export default function CompanyView({ locale }) {
       <Section>
         <Title parts={t.products.title} />
         <p className="mt-6 max-w-[560px] text-muted-foreground">{t.products.text}</p>
-        <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-12 flex flex-wrap gap-4">
           {t.products.items.map((product) => (
-            <li key={product.name}>
-              <a href={`${portfolioHref}#${product.category}`} className={cn(block, 'flex h-full flex-col gap-5 bg-card p-6', hover)}>
-                <span className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-full bg-secondary text-lilac"><Icon name={categoryIcons[product.category]} className="size-5" /></span>
-                  <ArrowUpRight aria-hidden="true" className="size-5 text-muted-foreground" />
+            <li key={product.name} className="@container grow basis-full sm:basis-[calc(50%-1rem)] lg:basis-[calc(25%-1rem)]">
+              <a href={`${portfolioHref}#${product.category}`} className={cn(block, 'flex h-full flex-col gap-5 bg-card p-6 @xl:flex-row @xl:items-center', hover)}>
+                <span className="flex items-center justify-between @xl:contents">
+                  <span className="grid size-11 place-items-center rounded-full bg-secondary text-lilac @xl:order-1"><Icon name={categoryIcons[product.category]} className="size-5" /></span>
+                  <ArrowUpRight aria-hidden="true" className="size-5 text-muted-foreground @xl:order-3 @xl:ml-auto" />
                 </span>
-                <span>
+                <span className="@xl:order-2">
                   <span className="block text-lg leading-snug font-extrabold">{product.name}</span>
                   <span className="mt-1 block text-sm text-muted-foreground">{product.tag}</span>
                 </span>

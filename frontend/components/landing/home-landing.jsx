@@ -23,7 +23,7 @@ export default function HomeLanding({ locale }) {
     return { ...item, tags, href: landingHrefFor(locale, item.id) || href(locale, 'industries', item.id), hasLanding: Boolean(landing) };
   }).sort((a, b) => Number(b.hasLanding) - Number(a.hasLanding));
   const loud = ['wave', 'foam'];
-  const featured = ['hubnity', 'jv-mobel-online-shop']; // the two finished products shown as cards; the rest are quick links
+  const featured = ['hubnity', 'jv-mobel-online-shop']; // the two products shown as cards; the rest are quick links
 
   return (
     <div className="overflow-x-clip bg-background pb-24 font-sans text-[17px] leading-normal text-foreground antialiased">
@@ -111,18 +111,18 @@ export default function HomeLanding({ locale }) {
         <Section id="branchen">
           <Title parts={x.titles.industries} />
           <p className="mt-6 max-w-[560px] text-muted-foreground">{t.industries.text}</p>
-          <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 flex flex-wrap gap-4">
             {industries.map((item, index) => {
               const scheme = tone[item.hasLanding ? loud[index % 2] : 'deep'];
               return (
-                <li key={item.id}>
-                  <a href={item.href} className={cn(block, 'flex h-full min-h-75 flex-col justify-between gap-10 p-8', hover, scheme.card)}>
+                <li key={item.id} className="@container grow basis-full md:basis-[calc(50%-1rem)] lg:basis-[calc(33.333%-1rem)]">
+                  <a href={item.href} className={cn(block, 'flex h-full min-h-75 flex-col justify-between gap-10 p-8 @2xl:min-h-0 @2xl:flex-row @2xl:items-end', hover, scheme.card)}>
                     <span>
                       <span className="flex flex-wrap gap-1.5">{item.tags.map((tag) => <span key={tag} className={cn(pill, scheme.tag)}>{tag}</span>)}</span>
-                      <span className="mt-6 block text-[2rem] leading-none font-black tracking-[-0.035em] break-words hyphens-auto">{item.title}</span>
+                      <span className="mt-6 block text-[2rem] leading-none font-black tracking-[-0.035em] break-words">{item.title}</span>
                       <span className={cn('mt-3 block', scheme.muted)}>{item.summary}</span>
                     </span>
-                    <span className={cn('self-start rounded-full px-5 py-3 text-[15px] font-extrabold', scheme.button)}>{item.hasLanding ? x.viewSolution : x.more} →</span>
+                    <span className={cn('self-start rounded-full px-5 py-3 text-[15px] font-extrabold @2xl:self-end', scheme.button)}>{item.hasLanding ? x.viewSolution : x.more} →</span>
                   </a>
                 </li>
               );

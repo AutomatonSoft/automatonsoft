@@ -33,16 +33,16 @@ const cases = {
   },
   cashbook: {
     de: {
-      meta: 'Digitales Kassenbuch', title: 'Cashbook',
-      text: 'Digitale Kassenbuchführung für kleine und mittlere Unternehmen mit Bargeldverkehr.',
+      meta: 'Belege & Kassenbuch', title: 'Cashbook',
+      text: 'Belege hochladen, ordnen und per E-Mail weiterleiten, Kassenbuch führen und Steuer- sowie Belegberichte als PDF erstellen – im Web und per App.',
       listLabel: 'Was wir umgesetzt haben',
-      list: ['Digitales Kassenbuch statt Papier', 'Für kleine und mittlere Unternehmen mit Bargeldverkehr', 'Teil unserer Finance-Automation'],
+      list: ['Belege hochladen, ordnen und per E-Mail weiterleiten', 'Kassenbuch mit Kontostand je Nutzer', 'Steuer- und Belegberichte als PDF'],
     },
     en: {
-      meta: 'Digital cash book', title: 'Cashbook',
-      text: 'Digital cash book management for small and medium-sized businesses that handle cash.',
+      meta: 'Receipts & cash book', title: 'Cashbook',
+      text: 'Upload, sort and forward receipts by email, keep a cash book, and create tax and document reports as PDF – on the web and in a mobile app.',
       listLabel: 'What we delivered',
-      list: ['A digital cash book instead of paper', 'For small and medium-sized businesses that handle cash', 'Part of our finance automation'],
+      list: ['Upload, sort and forward receipts by email', 'Cash book with a balance per user', 'Tax and document reports as PDF'],
     },
   },
   lunanitiz: {

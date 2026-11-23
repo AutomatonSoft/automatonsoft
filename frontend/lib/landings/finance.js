@@ -47,7 +47,7 @@ const de = {
       ['Weiterentwicklung', 'Nach der Roadmap des Anbieters', 'Nach Ihren Prioritäten'],
     ],
   },
-  references: { eyebrow: 'Referenzen', title: 'Bereits im Einsatz bei der Kassenführung' },
+  references: { eyebrow: 'Referenzen', title: 'Bereits im Einsatz bei Belegen und Kassenführung' },
   band: { text: 'Erzählen Sie uns, wo Kasse oder Belege Ihr Team die meiste Zeit kosten – wir zeigen, was von selbst laufen kann.' },
   faq: {
     items: [
@@ -111,7 +111,7 @@ const en = {
       ['Further development', 'Follows the vendor’s roadmap', 'Follows your priorities'],
     ],
   },
-  references: { eyebrow: 'References', title: 'Already in use for cash handling' },
+  references: { eyebrow: 'References', title: 'Already in use for receipts and cash handling' },
   band: { text: 'Tell us where cash or receipts cost your team the most time – we will show you what can run on its own.' },
   faq: {
     items: [
