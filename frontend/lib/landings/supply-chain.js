@@ -1,7 +1,7 @@
 import { commonFaq } from './common';
 
-// Industry landing: warehouse & logistics. Facts from the Supply Chain Automation Suite only (docs/TZ.md §8).
-// No product screenshot yet, so the hero shows the suite's modules instead of an image.
+// Industry landing: warehouse & logistics.
+// No product screenshot yet, so the hero lists our own portfolio projects (Roader, Benim Depom) instead of an image.
 const de = {
   meta: {
     title: 'Lager- und Logistiksoftware nach Maß',
@@ -13,11 +13,10 @@ const de = {
     titleStart: 'Alle Bestellungen.', titleHighlight: 'Ein Ort.', titleEnd: 'Ein Lager ohne Zettel.',
     lead: 'Bestellungen kommen über viele Kanäle, während Lagerprozesse auf Papier und manuellen Übergaben beruhen. Wir bringen Bestellungen und Lager in ein System, mit dem Ihr Team gern arbeitet.',
     primary: 'Kostenlosen Prozess-Check anfragen', secondary: 'Referenzen',
-    panelLabel: 'Bereits im Einsatz', panelTitle: 'Supply Chain Automation Suite',
+    panelLabel: 'Bereits im Einsatz', panelTitle: 'Unsere eigenen Lösungen',
     panel: [
-      { name: 'OrderHub', text: 'Bestellungen aus allen Kanälen an einem Ort' },
-      { name: 'Warehouse Organizer', text: 'Strukturierte Lagerorganisation' },
-      { name: 'BerimDepom', text: 'Lagerorganisation' },
+      { name: 'Roader', text: 'Routen, Stopps, digitale Unterschrift', href: '/portfolio/roader' },
+      { name: 'Benim Depom', text: 'Produkte erfassen, KI-Texte, Marktplätze', href: '/portfolio/benim-depom' },
     ],
   },
   problem: {
@@ -77,11 +76,10 @@ const en = {
     titleStart: 'Every order.', titleHighlight: 'One place.', titleEnd: 'A warehouse without paper.',
     lead: 'Orders arrive through many channels while warehouse processes rely on paper and manual hand-offs. We bring orders and stock into one system your team actually likes to use.',
     primary: 'Request a free process check', secondary: 'References',
-    panelLabel: 'Already in use', panelTitle: 'Supply Chain Automation Suite',
+    panelLabel: 'Already in use', panelTitle: 'Our own solutions',
     panel: [
-      { name: 'OrderHub', text: 'Orders from every channel in one place' },
-      { name: 'Warehouse Organizer', text: 'Structured warehouse organisation' },
-      { name: 'BerimDepom', text: 'Warehouse organisation' },
+      { name: 'Roader', text: 'Routes, stops, digital signature', href: '/en/portfolio/roader' },
+      { name: 'Benim Depom', text: 'Capture products, AI texts, marketplaces', href: '/en/portfolio/benim-depom' },
     ],
   },
   problem: {

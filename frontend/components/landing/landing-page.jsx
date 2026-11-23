@@ -59,8 +59,10 @@ export default function LandingPage({ locale, id }) {
               <p className="relative mt-3 max-w-[520px] text-[clamp(1.5rem,2.6vw,2.25rem)] leading-tight font-black tracking-[-0.03em]">{t.hero.panelTitle}</p>
               <ul className="relative mt-8 grid grid-cols-1 gap-2.5">
                 {t.hero.panel.map((item) => (
-                  <li key={item.name} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 rounded-[1.25rem] bg-ink/25 px-5 py-4">
-                    <span className="min-w-0 text-lg font-extrabold break-words hyphens-auto">{item.name}</span>
+                  <li key={item.name} className="relative flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 rounded-[1.25rem] bg-ink/25 px-5 py-4">
+                    <span className="min-w-0 text-lg font-extrabold break-words hyphens-auto">
+                      {item.href ? <a href={item.href} className="underline-offset-4 after:absolute after:inset-0 after:rounded-[1.25rem] hover:underline focus-visible:underline">{item.name}</a> : item.name}
+                    </span>
                     <span className="text-sm">{item.text}</span>
                   </li>
                 ))}
