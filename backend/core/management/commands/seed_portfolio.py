@@ -19,7 +19,6 @@ PROJECTS = (
     ('hospitality-hotel-software', 'Lunanitiz Hotel Software', 'Zentrale Verwaltung von Buchungen und Verfügbarkeiten für Hotellerie und Kurzzeitvermietung, mit Anbindung an Airbnb.', ['Hotel Software', 'Airbnb Integration']),
     ('automotive-software', 'AutoCar Software Suite', 'Verwaltung von Fahrzeug-, Kunden- und Auftragsdaten für Autohäuser und Werkstätten – im Backoffice und mobil.', ['Autohaus Software', 'Werkstattverwaltung']),
     ('finance-accounting-automation', 'Cashbook', 'Digitale Kassenbuchführung für kleine und mittlere Unternehmen mit Bargeldverkehr.', ['Digitales Kassenbuch', 'Finance Automation']),
-    ('custom-software-business-automation', 'Router', 'Individuelle Lösung im Bereich Custom Software & Business Automation. Nähere Details folgen in Kürze.', ['In Vorbereitung']),
     ('custom-software-business-automation', 'Custom Software & Business Automation', 'Individuelle Softwareentwicklung und Automatisierung für Geschäftsprozesse, die über Standardlösungen hinausgehen – aufbauend auf unserer Erfahrung aus allen Portfolio-Kategorien.', ['Individuelle Softwareentwicklung', 'Business Automation']),
 )
 
@@ -39,7 +38,6 @@ TRANSLATIONS_EN = {
     'Lunanitiz Hotel Software': ('Central management of bookings and availability for hotels and short-term rentals, connected to Airbnb.', ['Hotel software', 'Airbnb integration']),
     'AutoCar Software Suite': ('Management of vehicle, customer and order data for dealerships and workshops – in the back office and on mobile.', ['Dealership software', 'Workshop management']),
     'Cashbook': ('Digital cash book management for small and medium-sized businesses that handle cash.', ['Digital cash book', 'Finance automation']),
-    'Router': ('Custom solution in the area of custom software and business automation. Details will follow shortly.', ['In preparation']),
     'Custom Software & Business Automation': ('Custom software development and automation for business processes that go beyond standard solutions – building on our experience across all portfolio categories.', ['Custom software development', 'Business automation']),
 }
 
