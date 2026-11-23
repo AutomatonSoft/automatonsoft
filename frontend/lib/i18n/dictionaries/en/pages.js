@@ -41,7 +41,6 @@ const pages = {
         { name: 'Hubnity', category: 'workforce-hr-automation', tag: 'Time tracking SaaS' },
         { name: 'Lisa', category: 'ai-business-solutions', tag: 'AI voice assistant' },
         { name: 'E-Commerce Automation Suite', category: 'ecommerce-marketplace-automation', tag: 'Marketplace automation' },
-        { name: 'Supply Chain Automation Suite', category: 'supply-chain-warehouse', tag: 'Orders & warehouse' },
         { name: 'Lunanitiz Hotel Software', category: 'hospitality-hotel-software', tag: 'Hospitality' },
         { name: 'AutoCar Software Suite', category: 'automotive-software', tag: 'Automotive' },
         { name: 'Cashbook', category: 'finance-accounting-automation', tag: 'Finance' },
