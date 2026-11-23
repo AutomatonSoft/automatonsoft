@@ -10,7 +10,6 @@ const products = [
   { slug: 'hubnity', name: 'Hubnity', de: 'Zeiterfassung für verteilte Teams', en: 'Time tracking for distributed teams' },
   { slug: 'lisa', name: 'Lisa', de: 'KI-Sprachassistentin im Kundenservice', en: 'AI voice assistant for customer calls' },
   { slug: 'e-commerce-automation-suite', name: 'E-Commerce Automation Suite', short: 'E-Commerce Suite', de: 'Produktdaten für Marktplätze', en: 'Product data for marketplaces' },
-  { slug: 'supply-chain-automation-suite', name: 'Supply Chain Automation Suite', short: 'Supply Chain Suite', de: 'Bestellungen und Lager', en: 'Orders and warehouse' },
   { slug: 'cashbook', name: 'Cashbook', de: 'Digitale Kassenbücher', en: 'Digital cash books' },
 ];
 

@@ -31,20 +31,6 @@ const cases = {
       list: ['otto.de', 'kaufland.de', 'Google Merchant Center', 'Shopware'], status: 'in sync',
     },
   },
-  supplyChainSuite: {
-    de: {
-      meta: 'Bestellungen · Lager', title: 'Supply Chain Automation Suite',
-      text: 'Zentrale Bestellverwaltung (OrderHub) und strukturierte Lagerorganisation (Warehouse Organizer, BerimDepom) aus einer Suite.',
-      listLabel: 'Module',
-      list: ['OrderHub – zentrale Bestellverwaltung', 'Warehouse Organizer – Lagerorganisation', 'BerimDepom – Lagerorganisation'],
-    },
-    en: {
-      meta: 'Orders · Warehouse', title: 'Supply Chain Automation Suite',
-      text: 'Central order management (OrderHub) and structured warehouse organisation (Warehouse Organizer, BerimDepom) in one suite.',
-      listLabel: 'Modules',
-      list: ['OrderHub – central order management', 'Warehouse Organizer – warehouse organisation', 'BerimDepom – warehouse organisation'],
-    },
-  },
   cashbook: {
     de: {
       meta: 'Digitales Kassenbuch', title: 'Cashbook',

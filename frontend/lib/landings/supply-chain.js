@@ -132,7 +132,7 @@ const en = {
 
 const supplyChain = {
   slug: { de: 'lager-logistik', en: 'warehouse-logistics' },
-  cases: ['supplyChainSuite', 'lisa'],
+  cases: ['lisa'],
   content: { de, en },
 };
 
