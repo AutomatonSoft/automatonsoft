@@ -8,11 +8,11 @@ export const caseImages = {
 
 const products = [
   { slug: 'hubnity', name: 'Hubnity', de: 'Zeiterfassung für verteilte Teams', en: 'Time tracking for distributed teams' },
-  { slug: 'lisa', name: 'Lisa', de: 'KI-Sprachassistentin im Kundenservice', en: 'AI voice assistant for customer calls' },
-  { slug: 'e-commerce-automation-suite', name: 'E-Commerce Automation Suite', short: 'E-Commerce Suite', de: 'Produktdaten für Marktplätze', en: 'Product data for marketplaces' },
+  { slug: 'benim-depom', name: 'Benim Depom', de: 'Produkte erfassen und auf Marktplätzen anbieten', en: 'Capture products and list them on marketplaces' },
   { slug: 'cashbook', name: 'Cashbook', de: 'Digitale Kassenbücher', en: 'Digital cash books' },
   { slug: 'roader', name: 'Roader', de: 'Auslieferungen für Fahrer', en: 'Deliveries for drivers' },
-  { slug: 'benim-depom', name: 'Benim Depom', de: 'Produkte erfassen und auf Marktplätzen anbieten', en: 'Capture products and list them on marketplaces' },
+  { slug: 'lisa', name: 'Lisa', de: 'KI-Sprachassistentin im Kundenservice', en: 'AI voice assistant for customer calls' },
+  { slug: 'e-commerce-automation-suite', name: 'E-Commerce Automation Suite', short: 'E-Commerce Suite', de: 'Produktdaten für Marktplätze', en: 'Product data for marketplaces' },
 ];
 
 const labels = {
