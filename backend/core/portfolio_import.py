@@ -40,6 +40,8 @@ def import_project(data, update=False, base_dir=None):
     project.development_time = data.get('development_time') or '—'
     project.own = bool(data.get('own', False))
     project.published = bool(data.get('published', False))
+    if 'position' in data:  # absent = keep what was set in the dashboard
+        project.position = int(data['position'])
     project.translations = {'en': {key: value for key, value in english.items() if value}}
     created = project.pk is None
     project.save()

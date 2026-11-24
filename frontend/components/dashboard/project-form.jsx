@@ -12,7 +12,7 @@ const splitStack = (value) => value.split(',').map((item) => item.trim()).filter
 export default function ProjectForm({ project, categories, t, lang, onSave, onCancel }) {
   const [values, setValues] = useState({
     title: project.title, description: project.description, category: project.category || categories[0]?.value || '',
-    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published,
+    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, position: project.position ?? 100,
     description_en: project.translations?.en?.description || '', stack_en: project.translations?.en?.stack?.join(', ') || '',
     slug: project.slug || '', website: project.website || '', challenge: project.challenge || '',
     features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
@@ -40,6 +40,7 @@ export default function ProjectForm({ project, categories, t, lang, onSave, onCa
           </div>
           <div><Label>{t.time}</Label><Input {...bind('development_time')} placeholder="z. B. 12 Wochen" required /></div>
           <div><Label>{t.stack}</Label><Input {...bind('stack')} placeholder="Next.js, Django, Docker" /></div>
+          <div><Label>{t.position}</Label><Input {...bind('position')} type="number" min="0" max="32767" step="1" /></div>
           <div className="md:col-span-2"><Label>{t.description}</Label><Textarea {...bind('description')} required /></div>
           <div className="md:col-span-2"><Label>{t.descriptionEn}</Label><Textarea {...bind('description_en')} /></div>
           <div className="md:col-span-2"><Label>{t.stackEn}</Label><Input {...bind('stack_en')} placeholder="Workflow automation, API integration" /></div>

@@ -17,7 +17,7 @@ def serialize(project, request):
         'id': project.id, 'slug': project.slug, 'title': project.title, 'description': project.description,
         'challenge': project.challenge, 'features': project.features, 'results': project.results, 'website': project.website,
         'stack': project.stack, 'integrations': project.integrations, 'category': project.category, 'category_label': project.get_category_display(),
-        'development_time': project.development_time, 'own': project.own,
+        'development_time': project.development_time, 'own': project.own, 'position': project.position,
         'published': project.published, 'translations': project.translations,
         'screenshots': [item.image.url for item in project.screenshots.order_by('-id')],
         'screenshot_alts': [item.alt for item in project.screenshots.order_by('-id')],
@@ -92,6 +92,12 @@ def apply_project_form(project, request):
     project.stack = parse_tags(request.POST.get('stack', ''))
     project.development_time = request.POST['development_time']
     project.published = request.POST.get('published') == 'true'
+    try:
+        project.position = int(request.POST.get('position') or 100)
+        if not 0 <= project.position <= 32767:
+            raise ValueError
+    except ValueError:
+        return JsonResponse({'detail': 'Invalid order number.'}, status=400)
     english = {
         'description': request.POST.get('description_en', '').strip(), 'stack': parse_tags(request.POST.get('stack_en', '')),
         'challenge': request.POST.get('challenge_en', '').strip(),
