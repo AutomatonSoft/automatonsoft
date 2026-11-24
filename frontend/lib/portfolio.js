@@ -20,8 +20,9 @@ export const isPreparing = (project) => project.stack.includes(PREPARING_TAG);
 export const isConcept = (project) => project.stack.includes(CONCEPT_TAG) || project.stack.includes('Concept');
 export const projectRank = (project) => (isPreparing(project) ? 2 : isConcept(project) ? 1 : 0);
 
-// Within a rank the order number from the dashboard decides (smaller first); equal numbers keep the API order, newest first.
-export const compareProjects = (a, b) => projectRank(a) - projectRank(b) || (a.position ?? 100) - (b.position ?? 100);
+// The order number from the dashboard decides (smaller first). Among equal numbers finished work comes before concepts and
+// concepts before placeholders "in preparation"; after that the API order stays, newest first.
+export const compareProjects = (a, b) => (a.position ?? 100) - (b.position ?? 100) || projectRank(a) - projectRank(b);
 
 export const categoryIcons = {
   'ecommerce-marketplace-automation': 'ShoppingCart', 'workforce-hr-automation': 'Users', 'ai-business-solutions': 'Sparkles',
