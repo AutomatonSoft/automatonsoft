@@ -8,7 +8,6 @@ from core.portfolio_import import load_file
 
 PROJECTS = (
     ('ecommerce-marketplace-automation', 'E-Commerce Automation Suite', 'Automatisiertes Produktdatenmanagement für otto.de, kaufland.de und Shopware – aus einer zentralen Produktdatenbank heraus.', ['Marketplace Automation', 'Produktdatenmanagement']),
-    ('ecommerce-marketplace-automation', 'Aftercool', 'Teil unseres E-Commerce-Portfolios. Eine ausführliche Beschreibung dieser Lösung ergänzen wir in Kürze.', ['In Vorbereitung']),
     ('ai-business-solutions', 'Lisa', 'KI-Sprachassistentin für JV Möbel: nimmt Kundenanrufe rund um die Uhr an, verifiziert Anrufer, teilt den Bestellstatus aus Afterbuy mit und übermittelt Sprachnachrichten als Transkript per E-Mail – verwaltet in einer Mitarbeiterkonsole.', ['Voice AI', 'Twilio', 'Afterbuy']),
     ('workforce-hr-automation', 'Industry Human Organization', 'Organisatorische Ergänzung für Industriebetriebe im Umfeld der Hubnity Workforce Platform. Nähere Details folgen in Kürze.', ['In Vorbereitung']),
     ('ai-business-solutions', 'ProVocat', 'Bestehende KI-Lösung von Automatonsoft. Eine ausführliche Beschreibung ergänzen wir in Kürze.', ['In Vorbereitung']),
@@ -25,7 +24,6 @@ PROJECTS = (
 # so edits made in the dashboard are never overwritten.
 TRANSLATIONS_EN = {
     'E-Commerce Automation Suite': ('Automated product data management for otto.de, kaufland.de and Shopware – from one central product database.', ['Marketplace automation', 'Product data management']),
-    'Aftercool': ('Part of our e-commerce portfolio. A detailed description of this solution will follow shortly.', ['In preparation']),
     'Lisa': ('AI voice assistant for JV Möbel: answers customer calls around the clock, verifies callers, shares order status from Afterbuy and forwards voice messages as transcripts by email – managed in a staff console.', ['Voice AI', 'Twilio', 'Afterbuy']),
     'Industry Human Organization': ('Organisational extension for industrial companies around our workforce solutions. Details will follow shortly.', ['In preparation']),
     'ProVocat': ('An existing AI solution by AutomatonSoft. A detailed description will follow shortly.', ['In preparation']),
