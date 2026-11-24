@@ -58,7 +58,7 @@ export default function Dashboard() {
             <section>
               <div className="mb-4 flex items-center justify-between"><h2 className="text-xl font-bold">{t.allProjects}</h2><span className="text-sm text-slate-400">{projects.length} {t.entries}</span></div>
               <div className="grid gap-4 lg:grid-cols-2">
-                {projects.map((project) => <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={setEditing} onDelete={dashboard.deleteProject} />)}
+                {projects.map((project) => <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={async (project) => setEditing(await dashboard.refreshProject(project))} onDelete={dashboard.deleteProject} />)}
               </div>
             </section>
           </>
