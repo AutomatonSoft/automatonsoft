@@ -46,7 +46,7 @@ const de = {
       ['Weiterentwicklung', 'Nach der Roadmap des Anbieters', 'Nach Ihren Prioritäten'],
     ],
   },
-  references: { eyebrow: 'Referenzen', title: 'Bereits im Einsatz in Bestellung und Lager' },
+  references: { eyebrow: 'Referenzen', title: 'Bereits im Einsatz bei Auslieferung und Warenerfassung' },
   band: { text: 'Erzählen Sie uns, wo bei Bestellungen oder im Lager die meiste Zeit verloren geht – wir zeigen, was von selbst laufen kann.' },
   faq: {
     items: [
@@ -109,7 +109,7 @@ const en = {
       ['Further development', 'Follows the vendor’s roadmap', 'Follows your priorities'],
     ],
   },
-  references: { eyebrow: 'References', title: 'Already in use for orders and warehousing' },
+  references: { eyebrow: 'References', title: 'Already in use for deliveries and product capture' },
   band: { text: 'Tell us where orders or the warehouse cost your team the most time – we will show you what can run on its own.' },
   faq: {
     items: [
@@ -130,7 +130,7 @@ const en = {
 
 const supplyChain = {
   slug: { de: 'lager-logistik', en: 'warehouse-logistics' },
-  cases: ['lisa'],
+  cases: ['roader', 'benimDepom'],
   content: { de, en },
 };
 

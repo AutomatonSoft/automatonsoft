@@ -1,0 +1,91 @@
+{
+  "title": "Aftercool",
+  "category_guess": "ecommerce",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 8 Monate",
+  "description": {
+    "de": "Verwaltungsplattform für Produktdaten, Katalogimporte, Datenabgleich und gebündelte Bearbeitung.",
+    "en": "Management platform for product data, catalog imports, synchronization and bulk editing."
+  },
+  "challenge": {
+    "de": "Produktdaten aus verschiedenen Quellen müssen geprüft, aktualisiert und für weitere Verkaufssysteme bereitgestellt werden.",
+    "en": "Product information from multiple sources needs to be checked, updated and prepared for sales systems."
+  },
+  "features": {
+    "de": [
+      "Produkt- und Fabrikkataloge synchronisieren",
+      "CSV-Dateien importieren und bearbeiten",
+      "Produktpreise gesammelt ändern",
+      "EAN-Daten bearbeiten",
+      "Produktdaten suchen und vergleichen",
+      "Datenimporte und Aufgaben überwachen",
+      "HTML-Produktbeschreibungen bearbeiten",
+      "Automatische Verarbeitung und Statusberichte"
+    ],
+    "en": [
+      "Synchronize product and factory catalogs",
+      "Import and edit CSV files",
+      "Update product prices in bulk",
+      "Edit EAN information",
+      "Search and compare product data",
+      "Monitor imports and processing jobs",
+      "Edit HTML product descriptions",
+      "Automated processing and status reports"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Python",
+    "FastAPI",
+    "Next.js",
+    "React",
+    "MongoDB",
+    "Redis",
+    "Celery"
+  ],
+  "integrations": [
+    "Afterbuy"
+  ],
+  "website": null,
+  "screenshots": [
+    {
+      "file": "aftercool/aftercool-ean.webp",
+      "alt": {
+        "de": "Web-App: EAN Lister mit Fabrikauswahl, Suche und Kopierfunktionen",
+        "en": "Web app: EAN Lister with factory selection, search and copy functions"
+      }
+    },
+    {
+      "file": "aftercool/aftercool-price.webp",
+      "alt": {
+        "de": "Web-App: Preise gesammelt ändern mit Zeilen aus Preis und I_stammartikel",
+        "en": "Web app: bulk price changes with rows of price and I_stammartikel"
+      }
+    },
+    {
+      "file": "aftercool/aftercool-csv.webp",
+      "alt": {
+        "de": "Web-App: CSV-Export je Fabrik und CSV-Import mit Prüfung und Versand an Afterbuy",
+        "en": "Web app: CSV export per factory and CSV import with a check and sending to Afterbuy"
+      }
+    },
+    {
+      "file": "aftercool/aftercool-product.webp",
+      "alt": {
+        "de": "Web-App: Lister- und Produktdaten einer Fabrik mit Preisen, Beschreibungen und Massenaktionen",
+        "en": "Web app: lister and product data of a factory with prices, descriptions and bulk actions"
+      }
+    },
+    {
+      "file": "aftercool/aftercool-dashboard.webp",
+      "alt": {
+        "de": "Web-App: Dashboard mit Spalten für Lister und Produkte, Status je Fabrik und Start der Synchronisation",
+        "en": "Web app: dashboard with lister and product columns, status per factory and a sync start"
+      }
+    }
+  ]
+}

@@ -5,6 +5,34 @@ export const images = {
 };
 
 const cases = {
+  roader: {
+    de: {
+      meta: 'Auslieferung · Fahrer-App', title: 'Roader',
+      text: 'Roader organisiert Auslieferungen für Fahrer: Routen und Stopps auf dem Smartphone, digitale Empfangsbestätigung mit Unterschrift und Benachrichtigungen an Kunden.',
+      listLabel: 'Was wir umgesetzt haben',
+      list: ['Routen mit Stopps als Liste und Karte in der Fahrer-App', 'Digitale Unterschrift des Empfängers', 'Signierter Lieferschein als PDF', 'Arbeiten ohne Internet, Daten werden später übertragen'],
+    },
+    en: {
+      meta: 'Deliveries · Driver app', title: 'Roader',
+      text: 'Roader organizes deliveries for drivers: routes and stops on the phone, digital proof of receipt with a signature, and notifications to customers.',
+      listLabel: 'What we delivered',
+      list: ['Routes with stops as a list and map in the driver app', 'Digital recipient signature', 'Signed delivery note as a PDF', 'Works without internet, data syncs later'],
+    },
+  },
+  benimDepom: {
+    de: {
+      meta: 'Warenerfassung · Marktplätze', title: 'Benim Depom',
+      text: 'Plattform für Möbelhersteller: Produkte werden per Smartphone-App im Lager erfasst, KI erstellt Bilder und Texte, Manager prüfen die Angebote und veröffentlichen sie auf Online-Marktplätzen.',
+      listLabel: 'Was wir umgesetzt haben',
+      list: ['Produkte mit dem Smartphone erfassen, bis zu 20 Fotos', 'Bilder und Texte per KI', 'Prüfung durch Manager mit Entscheidungsverlauf', 'Veröffentlichen auf OTTO, Kaufland und Hood.de'],
+    },
+    en: {
+      meta: 'Product capture · Marketplaces', title: 'Benim Depom',
+      text: 'Platform for furniture manufacturers: products are captured with a smartphone app in the warehouse, AI creates images and texts, and managers review the listings and publish them to online marketplaces.',
+      listLabel: 'What we delivered',
+      list: ['Capture products with a smartphone, up to 20 photos', 'Images and texts created with AI', 'Manager review with a history of decisions', 'Publishing to OTTO, Kaufland and Hood.de'],
+    },
+  },
   lisa: {
     de: {
       meta: 'Voice AI · JV Möbel · Afterbuy', title: 'Lisa beantwortet „Wo ist meine Bestellung?“',
