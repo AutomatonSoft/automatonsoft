@@ -273,6 +273,16 @@ class ImportProjectTests(TestCase):
         project = Project.objects.get(title='Demo')
         self.assertEqual((project.platforms, project.in_development), (['desktop'], False))
 
+    def test_empty_screenshot_list_removes_the_old_pictures_on_update(self):
+        from .portfolio_import import import_project
+        import_project(self.card)
+        project = Project.objects.get(title='Demo')
+        ProjectScreenshot.objects.create(project=project, image='projects/old.webp')
+        import_project(self.card, update=True)
+        self.assertEqual(project.screenshots.count(), 1)  # no key: pictures stay
+        import_project({**self.card, 'screenshots': []}, update=True)
+        self.assertEqual(project.screenshots.count(), 0)
+
     def test_unknown_category_is_rejected(self):
         from .portfolio_import import import_project
         with self.assertRaises(ValueError):

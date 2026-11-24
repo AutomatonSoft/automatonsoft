@@ -49,8 +49,8 @@ def import_project(data, update=False, base_dir=None):
     project.translations = {'en': {key: value for key, value in english.items() if value}}
     created = project.pk is None
     project.save()
-    if update and data.get('screenshots'):
-        project.screenshots.all().delete()  # --update replaces the screenshots with the ones in the file
+    if update and 'screenshots' in data:
+        project.screenshots.all().delete()  # --update replaces the screenshots with the ones in the file ([] removes them all)
     attach_screenshots(project, data, base_dir)
     return 'created' if created else 'updated'
 
