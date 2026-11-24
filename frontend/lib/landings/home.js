@@ -19,10 +19,10 @@ const labels = {
   de: {
     moreProjects: 'Weitere Projekte', panel: 'Im Einsatz', before: 'Vorher', after: 'Nachher', more: 'Mehr erfahren', viewProject: 'Projekt ansehen', viewSolution: 'Lösung ansehen',
     tags: ['KI im Live-Betrieb', 'Entwickelt in Deutschland', 'DSGVO by Design'],
-    stageLabel: 'Lisa · KI-Sprachassistentin', stageBadge: '24/7 live',
+    stageLabel: 'Lisa · KI-Sprachassistentin', stageBadge: 'Live',
     stats: [
       { value: '6', label: 'Produkte im täglichen Einsatz' },
-      { value: '24/7', label: 'Lisa beantwortet Kundenanrufe' },
+      { value: 'Live', label: 'Lisa nimmt Kundenanrufe an' },
       { value: '7', label: 'Branchen, die wir betreuen' },
       { value: 'DE/EN', label: 'Projekte auf Deutsch und Englisch' },
     ],
@@ -31,10 +31,10 @@ const labels = {
   en: {
     moreProjects: 'More projects', panel: 'In daily use', before: 'Before', after: 'After', more: 'Learn more', viewProject: 'View project', viewSolution: 'See the solution',
     tags: ['AI in live operation', 'Engineered in Germany', 'GDPR by design'],
-    stageLabel: 'Lisa · AI voice assistant', stageBadge: '24/7 live',
+    stageLabel: 'Lisa · AI voice assistant', stageBadge: 'Live',
     stats: [
       { value: '6', label: 'Products in daily use' },
-      { value: '24/7', label: 'Lisa answers customer calls' },
+      { value: 'Live', label: 'Lisa answers customer calls' },
       { value: '7', label: 'Industries we serve' },
       { value: 'DE/EN', label: 'Projects in German and English' },
     ],
