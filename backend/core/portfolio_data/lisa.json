@@ -1,0 +1,92 @@
+{
+  "title": "Lisa",
+  "category": "ai-business-solutions",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 7 Tage",
+  "description": {
+    "de": "Lisa ist eine telefonische Assistentin für Bestellanfragen. Eine Webkonsole zeigt Anrufe, Bestellungen und Sprachnachrichten.",
+    "en": "Lisa is a telephone assistant for order enquiries. A web console shows calls, orders and voice messages."
+  },
+  "challenge": {
+    "de": "Anrufende benötigen Auskunft zu Bestellungen und Lieferungen oder möchten eine Nachricht für das Team hinterlassen.",
+    "en": "Callers need information about orders and deliveries or want to leave a message for the team."
+  },
+  "features": {
+    "de": [
+      "Telefonmenü auf Deutsch und Englisch",
+      "Bestellungen anhand der eingegebenen Nummer in Afterbuy suchen",
+      "Anrufende über Telefonnummer oder Postleitzahl prüfen",
+      "Bestätigten Anrufenden Lieferstatus und offene Beträge mitteilen",
+      "Bei überfälliger Lieferung eine Verbindung zum Team anbieten",
+      "Sprachnachrichten aufnehmen und per E-Mail an das Büro senden",
+      "Anrufe, Bestellungen und Nachrichten in der Webkonsole anzeigen",
+      "Benutzerkonten und Zugriffsrollen verwalten"
+    ],
+    "en": [
+      "Telephone menu in German and English",
+      "Find orders in Afterbuy using the number entered by the caller",
+      "Verify callers using their phone number or postcode",
+      "Share delivery status and outstanding amounts with verified callers",
+      "Offer a connection to the team when a delivery is overdue",
+      "Record voice messages and email them to the office",
+      "View calls, orders and messages in the web console",
+      "Manage user accounts and access roles"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Python",
+    "Flask",
+    "PostgreSQL",
+    "Redis"
+  ],
+  "integrations": [
+    "Twilio",
+    "Afterbuy"
+  ],
+  "website": null,
+  "platforms": [
+    "web"
+  ],
+  "screenshots": [
+    {
+      "file": "lisa/lisa-calls.webp",
+      "alt": {
+        "de": "Webkonsole: Anrufliste mit Rufnummer, Ergebnis, Status und Filtern",
+        "en": "Web console: call list with caller, outcome, status and filters"
+      }
+    },
+    {
+      "file": "lisa/lisa-orders.webp",
+      "alt": {
+        "de": "Webkonsole: Bestellabfragen mit Ergebnis aus Afterbuy, Prüfung des Anrufers und Lieferdatum",
+        "en": "Web console: order lookups with the Afterbuy result, caller verification and delivery date"
+      }
+    },
+    {
+      "file": "lisa/lisa-users.webp",
+      "alt": {
+        "de": "Webkonsole: Benutzerverwaltung mit Rollen und Verlauf der Anmeldungen",
+        "en": "Web console: user management with roles and the sign-in history"
+      }
+    },
+    {
+      "file": "lisa/lisa-messages.webp",
+      "alt": {
+        "de": "Webkonsole: letzte Anrufe, Sprachnachrichten mit E-Mail-Versand und Prüfung der Anrufer",
+        "en": "Web console: recent calls, voice messages with email delivery and caller verification"
+      }
+    },
+    {
+      "file": "lisa/lisa-overview.webp",
+      "alt": {
+        "de": "Webkonsole: Übersicht mit Anrufstatistik, Anrufen pro Tag und Verlauf der Anrufe",
+        "en": "Web console: overview with call statistics, calls per day and the call journey"
+      }
+    }
+  ]
+}
