@@ -59,7 +59,7 @@ const home = {
         delivered: ['AI voice assistant that answers calls automatically', 'Caller verification before any data is shared', 'Live order status from Afterbuy', 'Voice messages with transcripts by email', 'Staff console for calls, orders and messages', 'User accounts and access roles'],
         facts: [{ label: 'Product', value: 'AI voice assistant and staff console' }, { label: 'Channels', value: 'Phone calls · Voice messages' }, { label: 'Industry', value: 'Furniture e-commerce' }],
         stackLabel: 'Integrations', stack: ['Twilio', 'Afterbuy'],
-        image: { src: '/assets/img/cases/lisa-console.webp', width: 2000, height: 1135, alt: 'Lisa Console sign-in screen: “Every call answered, even at night.” with an incoming call verified and resolved without an agent' } },
+        image: { src: '/assets/img/cases/lisa-console.webp', width: 2000, height: 1135, alt: 'Lisa Console overview with call statistics, calls per day and the call journey' } },
       { id: 'jv-mobel-online-shop', brand: 'JV Möbel Online-Shop', tag: 'In-house project · E-commerce', title: 'JV Möbel Online-Shop: our own furniture online shop on Shopware',
         text: 'Our own furniture online shop on Shopware, currently in development: editors maintain catalog, prices, promotions and content without developers, built for up to 30 markets. A mobile app for Google Play and the App Store is in development.',
         image: { src: '/assets/img/cases/jv-shop.webp', width: 1600, height: 900, alt: 'The JV Möbel online shop on desktop and on a smartphone' } },

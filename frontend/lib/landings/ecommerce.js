@@ -13,7 +13,7 @@ const de = {
     titleStart: 'Ein Produkt.', titleHighlight: 'Jeder Marktplatz.', titleEnd: 'Ohne doppelte Pflege.',
     lead: 'Produktdaten, Preise und Bestellungen werden über Shops und Marktplätze hinweg von Hand gepflegt – langsam und fehleranfällig. Wir verbinden alles mit einer zentralen Quelle.',
     primary: 'Kostenlosen Prozess-Check anfragen', secondary: 'Referenzen',
-    imageAlt: 'Lisa Console: „Every call answered, even at night.“', imageCaption: 'Lisa · JV Möbel · Afterbuy',
+    imageAlt: 'Lisa Console: Übersicht mit Anrufstatistik und Verlauf der Anrufe', imageCaption: 'Lisa · JV Möbel · Afterbuy',
   },
   problem: {
     eyebrow: 'Das Problem', title: 'Jeder neue Kanal bedeutet mehr Handarbeit',
@@ -73,7 +73,7 @@ const en = {
     titleStart: 'One product.', titleHighlight: 'Every marketplace.', titleEnd: 'No double data entry.',
     lead: 'Product data, prices and orders are maintained by hand across shops and marketplaces – slow and error-prone. We connect everything to one central source.',
     primary: 'Request a free process check', secondary: 'References',
-    imageAlt: 'Lisa Console: “Every call answered, even at night.”', imageCaption: 'Lisa · JV Möbel · Afterbuy',
+    imageAlt: 'Lisa Console: overview with call statistics and the call journey', imageCaption: 'Lisa · JV Möbel · Afterbuy',
   },
   problem: {
     eyebrow: 'The problem', title: 'Every new channel means more manual work',

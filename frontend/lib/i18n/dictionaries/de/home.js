@@ -59,7 +59,7 @@ const home = {
         delivered: ['KI-Sprachassistentin, die Anrufe automatisch annimmt', 'Anruferverifizierung, bevor Daten geteilt werden', 'Live-Bestellstatus aus Afterbuy', 'Sprachnachrichten mit Transkript per E-Mail', 'Mitarbeiterkonsole für Anrufe, Bestellungen und Nachrichten', 'Benutzerkonten und Zugriffsrollen'],
         facts: [{ label: 'Produkt', value: 'KI-Sprachassistentin und Mitarbeiterkonsole' }, { label: 'Kanäle', value: 'Telefonanrufe · Sprachnachrichten' }, { label: 'Branche', value: 'Möbel-E-Commerce' }],
         stackLabel: 'Integrationen', stack: ['Twilio', 'Afterbuy'],
-        image: { src: '/assets/img/cases/lisa-console.webp', width: 2000, height: 1135, alt: 'Anmeldeseite der Lisa Console: „Every call answered, even at night.“ mit einem verifizierten, ohne Mitarbeiter gelösten Anruf' } },
+        image: { src: '/assets/img/cases/lisa-console.webp', width: 2000, height: 1135, alt: 'Übersicht der Lisa Console mit Anrufstatistik, Anrufen pro Tag und Verlauf der Anrufe' } },
       { id: 'jv-mobel-online-shop', brand: 'JV Möbel Online-Shop', tag: 'Eigenes Projekt · E-Commerce', title: 'JV Möbel Online-Shop: eigener Möbel-Onlineshop auf Shopware',
         text: 'Unser eigener Möbel-Onlineshop auf Shopware, aktuell in Entwicklung: Redakteure pflegen Katalog, Preise, Aktionen und Inhalte ohne Programmierer, ausgelegt für bis zu 30 Märkte. Eine mobile App für Google Play und den App Store ist in Entwicklung.',
         image: { src: '/assets/img/cases/jv-shop.webp', width: 1600, height: 900, alt: 'Der JV-Möbel-Onlineshop am Computer und auf dem Smartphone' } },
