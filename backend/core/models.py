@@ -33,13 +33,15 @@ class Project(models.Model):
     # Our own product or in-house project, not client work; shown as a label on the card and the project page.
     own = models.BooleanField(default=False)
     published = models.BooleanField(default=True)
+    # Order in the portfolio lists: smaller comes first, equal values keep the newest first.
+    position = models.PositiveSmallIntegerField(default=100)
     # Per-locale overrides of the German base content, e.g. {'en': {'description': ..., 'stack': [...]}}
     translations = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('position', '-created_at')
 
     def __str__(self):
         return self.title

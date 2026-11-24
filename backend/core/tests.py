@@ -155,6 +155,19 @@ class ProjectApiTests(TestCase):
         self.assertEqual(Project.objects.get(pk=self.project.id).slug, 'existing-project')
         self.assertEqual(self.client.post(url, self.project_data(website='javascript:alert(1)')).status_code, 400)
 
+    def test_order_number_is_saved_validated_and_sorts_the_list(self):
+        self.client.force_login(self.staff)
+        url = f'/api/projects/{self.project.id}/update/'
+        self.assertEqual(Project.objects.get(pk=self.project.id).position, 100)
+
+        self.client.post('/api/projects/create/', self.project_data(title='Second'))
+        self.assertEqual(self.client.post(url, self.project_data(title='Existing project', slug='existing-project', position='1')).status_code, 200)
+        titles = [item['title'] for item in self.client.get('/api/projects/').json()['projects']]
+        self.assertEqual(titles, ['Existing project', 'Second'])
+        self.assertEqual(self.client.get('/api/projects/').json()['projects'][0]['position'], 1)
+        self.assertEqual(self.client.post(url, self.project_data(position='abc')).status_code, 400)
+        self.assertEqual(self.client.post(url, self.project_data(position='70000')).status_code, 400)
+
     def test_staff_can_delete_project(self):
         self.client.force_login(self.staff)
 
@@ -225,6 +238,17 @@ class ImportProjectTests(TestCase):
         project = Project.objects.get(title='Demo')
         self.assertTrue(project.own)
         self.assertTrue(self.client.get('/api/projects/').json()['projects'][0]['own'])
+
+    def test_order_number_is_imported_only_when_the_card_has_one(self):
+        from .portfolio_import import import_project
+        import_project(self.card)
+        project = Project.objects.get(title='Demo')
+        project.position = 7
+        project.save()
+        import_project(self.card, update=True)
+        self.assertEqual(Project.objects.get(title='Demo').position, 7)
+        import_project({**self.card, 'position': 3}, update=True)
+        self.assertEqual(Project.objects.get(title='Demo').position, 3)
 
     def test_unknown_category_is_rejected(self):
         from .portfolio_import import import_project
