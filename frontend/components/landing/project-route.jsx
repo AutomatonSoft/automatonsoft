@@ -33,7 +33,7 @@ export function createProjectRoute(locale) {
       const project = await loadProject(slug);
       const t = getDictionary(locale);
       const links = { home: href(locale, 'home'), portfolio: href(locale, 'portfolio'), contact: href(locale, 'contact') };
-      const labels = { ...t.portfolio.project, portfolio: t.nav.portfolio, categories: t.portfolio.categories, own: t.portfolio.own, concept: t.portfolio.concept };
+      const labels = { ...t.portfolio.project, portfolio: t.nav.portfolio, categories: t.portfolio.categories, own: t.portfolio.own, concept: t.portfolio.concept, available: t.portfolio.available, platforms: t.portfolio.platforms, inDevelopment: t.portfolio.inDevelopment };
       return (
         <SitePage locale={locale} languageHref={project ? projectHref(other, slug) : href(other, 'portfolio')}>
           {project && <JsonLd data={breadcrumbJsonLd(locale, 'portfolio', { name: project.title, path: projectHref(locale, slug) })} />}

@@ -15,6 +15,9 @@ PORTFOLIO_CATEGORIES = (
 )
 
 
+PLATFORMS = ('web', 'desktop', 'mobile')
+
+
 class Project(models.Model):
     title = models.CharField(max_length=160)
     # Public landing page at /portfolio/<slug>; derived from the title when left empty.
@@ -32,6 +35,10 @@ class Project(models.Model):
     development_time = models.CharField(max_length=120)
     # Our own product or in-house project, not client work; shown as a label on the card and the project page.
     own = models.BooleanField(default=False)
+    # Where the product runs: any of PLATFORMS; shown as icons on the card and the project page.
+    platforms = models.JSONField(default=list, blank=True)
+    # The project is still being built; shown as a badge on the card and the project page.
+    in_development = models.BooleanField(default=False)
     published = models.BooleanField(default=True)
     # Order in the portfolio lists: smaller comes first. With equal values the site puts finished projects before concepts,
     # concepts before placeholders, then the newest first.

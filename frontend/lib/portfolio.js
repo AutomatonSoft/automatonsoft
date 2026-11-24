@@ -24,6 +24,9 @@ export const projectRank = (project) => (isPreparing(project) ? 2 : isConcept(pr
 // concepts before placeholders "in preparation"; after that the API order stays, newest first.
 export const compareProjects = (a, b) => (a.position ?? 100) - (b.position ?? 100) || projectRank(a) - projectRank(b);
 
+// Where a product runs: order and icon of the platform marks on the card and the project page.
+export const platformIcons = { web: 'Globe', desktop: 'Monitor', mobile: 'Smartphone' };
+
 export const categoryIcons = {
   'ecommerce-marketplace-automation': 'ShoppingCart', 'workforce-hr-automation': 'Users', 'ai-business-solutions': 'Sparkles',
   'supply-chain-warehouse': 'Package', 'industrial-ai-manufacturing': 'Factory', 'hospitality-hotel-software': 'Hotel',

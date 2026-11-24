@@ -4,7 +4,7 @@ from pathlib import Path
 from django.core.files import File
 
 from .images import optimize_image
-from .models import PORTFOLIO_CATEGORIES, Project, ProjectScreenshot
+from .models import PLATFORMS, PORTFOLIO_CATEGORIES, Project, ProjectScreenshot
 
 CATEGORY_GUESS = {
     'ecommerce': 'ecommerce-marketplace-automation', 'workforce': 'workforce-hr-automation', 'ai': 'ai-business-solutions',
@@ -42,6 +42,10 @@ def import_project(data, update=False, base_dir=None):
     project.published = bool(data.get('published', False))
     if 'position' in data:  # absent = keep what was set in the dashboard
         project.position = int(data['position'])
+    if 'platforms' in data:
+        project.platforms = [item for item in PLATFORMS if item in data['platforms']]
+    if 'in_development' in data:
+        project.in_development = bool(data['in_development'])
     project.translations = {'en': {key: value for key, value in english.items() if value}}
     created = project.pk is None
     project.save()

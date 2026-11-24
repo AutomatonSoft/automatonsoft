@@ -168,6 +168,17 @@ class ProjectApiTests(TestCase):
         self.assertEqual(self.client.post(url, self.project_data(position='abc')).status_code, 400)
         self.assertEqual(self.client.post(url, self.project_data(position='70000')).status_code, 400)
 
+    def test_platforms_and_development_flag_are_saved_filtered_and_served(self):
+        self.client.force_login(self.staff)
+        url = f'/api/projects/{self.project.id}/update/'
+
+        self.assertEqual(self.client.post(url, self.project_data(platforms=['mobile', 'web', 'tv'], in_development='true')).status_code, 200)
+        item = self.client.get('/api/projects/').json()['projects'][0]
+        self.assertEqual((item['platforms'], item['in_development']), (['web', 'mobile'], True))
+        self.client.post(url, self.project_data())
+        item = self.client.get('/api/projects/').json()['projects'][0]
+        self.assertEqual((item['platforms'], item['in_development']), ([], False))
+
     def test_staff_can_delete_project(self):
         self.client.force_login(self.staff)
 
@@ -249,6 +260,18 @@ class ImportProjectTests(TestCase):
         self.assertEqual(Project.objects.get(title='Demo').position, 7)
         import_project({**self.card, 'position': 3}, update=True)
         self.assertEqual(Project.objects.get(title='Demo').position, 3)
+
+    def test_platforms_and_development_flag_are_imported_only_when_present(self):
+        from .portfolio_import import import_project
+        import_project({**self.card, 'platforms': ['mobile', 'web', 'tv'], 'in_development': True})
+        project = Project.objects.get(title='Demo')
+        self.assertEqual((project.platforms, project.in_development), (['web', 'mobile'], True))
+        project.platforms = ['desktop']
+        project.in_development = False
+        project.save()
+        import_project(self.card, update=True)
+        project = Project.objects.get(title='Demo')
+        self.assertEqual((project.platforms, project.in_development), (['desktop'], False))
 
     def test_unknown_category_is_rejected(self):
         from .portfolio_import import import_project

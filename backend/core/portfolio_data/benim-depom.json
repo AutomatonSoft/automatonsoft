@@ -95,5 +95,9 @@
         "en": "Benim Depom web portal with the product list and two mobile screens: inbox with a price offer and price negotiations"
       }
     }
+  ],
+  "platforms": [
+    "web",
+    "mobile"
   ]
 }
