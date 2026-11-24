@@ -33,7 +33,8 @@ class Project(models.Model):
     # Our own product or in-house project, not client work; shown as a label on the card and the project page.
     own = models.BooleanField(default=False)
     published = models.BooleanField(default=True)
-    # Order in the portfolio lists: smaller comes first, equal values keep the newest first.
+    # Order in the portfolio lists: smaller comes first. With equal values the site puts finished projects before concepts,
+    # concepts before placeholders, then the newest first.
     position = models.PositiveSmallIntegerField(default=100)
     # Per-locale overrides of the German base content, e.g. {'en': {'description': ..., 'stack': [...]}}
     translations = models.JSONField(default=dict, blank=True)
