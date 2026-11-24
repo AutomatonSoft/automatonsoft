@@ -1,0 +1,92 @@
+{
+  "title": "Lunanitiz Hotel Software",
+  "category_guess": "hospitality",
+  "published": true,
+  "own": true,
+  "development_time": "Prototyp (09/2026)",
+  "description": {
+    "de": "Mobile App für Hotels und Ferienunterkünfte: Buchungskalender, Preise, Zimmerreinigung und Berichte an einem Ort. Ein Prototyp mit Beispieldaten.",
+    "en": "Mobile app for hotels and holiday rentals: booking calendar, prices, housekeeping and reports in one place. A prototype running on sample data."
+  },
+  "challenge": {
+    "de": "Buchungen, Preise und Zimmerreinigung liegen bei Unterkünften oft in getrennten Tools. Lunanitiz bündelt das in einer App und schlägt Preise nach Saison, Feiertagen und Wochentag vor.",
+    "en": "Bookings, prices and room cleaning often live in separate tools at properties. Lunanitiz brings this into one app and suggests prices based on season, holidays and weekday."
+  },
+  "features": {
+    "de": [
+      "Tagesübersicht: Umsatz, Kanalanteile, heutige An- und Abreisen",
+      "Belegungskalender über 21 Tage mit Buchungen und Sperrzeiten",
+      "Neue Buchung anlegen; Check-in, Check-out und Stornierung",
+      "Preise, Verfügbarkeit und Mindestaufenthalt pro Tag, auch gesammelt",
+      "Smart Pricing: Preisvorschläge nach Saison, Feiertagen und Wochentag",
+      "Preisgrenzen (Mindest-/Höchstpreis) und Vorschau über 12 Monate",
+      "Zimmerreinigung: Status, Zuweisung an Personal, Kommentare",
+      "Berichte (Auslastung, Frühstück, Zahlungen) mit freiem Zeitraum",
+      "Mehrere Unterkünfte, Hilfecenter und Support-Chat"
+    ],
+    "en": [
+      "Daily overview: revenue, channel shares, today's arrivals and departures",
+      "21-day occupancy calendar with bookings and blocked dates",
+      "Create bookings; check-in, check-out and cancellation",
+      "Prices, availability and minimum stay per day, also in bulk",
+      "Smart pricing: price suggestions by season, holidays and weekday",
+      "Price limits (floor/ceiling) and a 12-month preview",
+      "Housekeeping: room status, staff assignment, comments",
+      "Reports (occupancy, breakfast, payments) for any date range",
+      "Multiple properties, help center and support chat"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Konzept",
+    "Flutter",
+    "Dart"
+  ],
+  "stack_en": [
+    "Concept",
+    "Flutter",
+    "Dart"
+  ],
+  "integrations": [],
+  "website": null,
+  "screenshots": [
+    {
+      "file": "lunanitiz/lunanitiz-pricing.webp",
+      "alt": {
+        "de": "Mobile App: Smart Pricing mit Zielregion, Strategie und Preisempfehlung für die nächsten 12 Monate",
+        "en": "Mobile app: smart pricing with destination, strategy and recommended prices for the next 12 months"
+      }
+    },
+    {
+      "file": "lunanitiz/lunanitiz-reports.webp",
+      "alt": {
+        "de": "Mobile App: Berichte mit Zeitraum und Housekeeping-Liste mit Zimmerstatus",
+        "en": "Mobile app: reports with a date range and the housekeeping list with room status"
+      }
+    },
+    {
+      "file": "lunanitiz/lunanitiz-today.webp",
+      "alt": {
+        "de": "Mobile App: Tagesübersicht mit Buchungskanälen sowie An-, Abreisen und Aufenthalten",
+        "en": "Mobile app: daily overview with booking channels, arrivals, departures and stays"
+      }
+    },
+    {
+      "file": "lunanitiz/lunanitiz-inventory.webp",
+      "alt": {
+        "de": "Mobile App: Verfügbarkeit und Preise pro Tag im Monatsraster und Kontomenü",
+        "en": "Mobile app: availability and prices per day in a month grid and the account menu"
+      }
+    },
+    {
+      "file": "lunanitiz/lunanitiz-cover.webp",
+      "alt": {
+        "de": "Lunanitiz: Tagesübersicht, Belegungskalender und Smart Pricing auf dem Smartphone",
+        "en": "Lunanitiz: daily overview, occupancy calendar and smart pricing on a smartphone"
+      }
+    }
+  ]
+}
