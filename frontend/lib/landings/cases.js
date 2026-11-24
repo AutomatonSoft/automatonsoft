@@ -36,15 +36,15 @@ const cases = {
   lisa: {
     de: {
       meta: 'Voice AI · JV Möbel · Afterbuy', title: 'Lisa beantwortet „Wo ist meine Bestellung?“',
-      text: 'Für den Möbelhändler JV Möbel nimmt Lisa Anrufe rund um die Uhr an, verifiziert Anrufer und nennt den Live-Bestellstatus aus Afterbuy.',
+      text: 'Für den Möbelhändler JV Möbel nimmt Lisa Anrufe automatisch an, verifiziert Anrufer und nennt den Live-Bestellstatus aus Afterbuy.',
       listLabel: 'Was wir umgesetzt haben',
-      list: ['KI-Sprachassistentin, die Anrufe rund um die Uhr annimmt', 'Anruferverifizierung, bevor Daten geteilt werden', 'Live-Bestellstatus aus Afterbuy', 'Sprachnachrichten mit Transkript per E-Mail'],
+      list: ['KI-Sprachassistentin, die Anrufe automatisch annimmt', 'Anruferverifizierung, bevor Daten geteilt werden', 'Live-Bestellstatus aus Afterbuy', 'Sprachnachrichten mit Transkript per E-Mail'],
     },
     en: {
       meta: 'Voice AI · JV Möbel · Afterbuy', title: 'Lisa answers “Where is my order?”',
-      text: 'For the furniture retailer JV Möbel, Lisa answers calls around the clock, verifies callers and gives the live order status from Afterbuy.',
+      text: 'For the furniture retailer JV Möbel, Lisa answers calls automatically, verifies callers and gives the live order status from Afterbuy.',
       listLabel: 'What we delivered',
-      list: ['AI voice assistant answering calls 24/7', 'Caller verification before any data is shared', 'Live order status from Afterbuy', 'Voice messages with transcripts by email'],
+      list: ['AI voice assistant that answers calls automatically', 'Caller verification before any data is shared', 'Live order status from Afterbuy', 'Voice messages with transcripts by email'],
     },
   },
   ecommerceSuite: {

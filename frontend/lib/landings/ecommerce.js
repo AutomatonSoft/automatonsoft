@@ -31,7 +31,7 @@ const de = {
       { title: 'Zentrale Produktdatenbank', text: 'Alle Produktdaten an einem Ort – die Grundlage für jeden Kanal.' },
       { title: 'Marktplatz- und Shop-Anbindungen', text: 'Produkte und Preise gehen automatisch an otto.de, Kaufland, Google und Ihren Shop.' },
       { title: 'Auftrags- und Bestandsabgleich', text: 'Bestellungen laufen zusammen, Bestände bleiben über alle Kanäle synchron.' },
-      { title: 'KI für Kundenanfragen', text: 'Eine KI-Assistentin beantwortet Statusfragen am Telefon – rund um die Uhr.' },
+      { title: 'KI für Kundenanfragen', text: 'Eine KI-Assistentin beantwortet Statusfragen am Telefon – automatisch.' },
     ],
   },
   compare: {
@@ -91,7 +91,7 @@ const en = {
       { title: 'Central product database', text: 'All product data in one place – the foundation for every channel.' },
       { title: 'Marketplace and shop connections', text: 'Products and prices flow automatically to otto.de, Kaufland, Google and your shop.' },
       { title: 'Order and stock sync', text: 'Orders come together in one place, stock stays in sync across all channels.' },
-      { title: 'AI for customer enquiries', text: 'An AI assistant answers order status questions on the phone – around the clock.' },
+      { title: 'AI for customer enquiries', text: 'An AI assistant answers order status questions on the phone – automatically.' },
     ],
   },
   compare: {
