@@ -27,6 +27,16 @@ export function useDashboard() {
     apiFetch('/session/').then(({ data }) => { if (data?.authenticated) { setUser(data.username); load(); } });
   }, [load]);
 
+  // Opening a project reloads the list first: a dashboard tab left open for a while (or an import run in between)
+  // would otherwise show an old copy, and saving the form would write that old copy over the newer data.
+  const refreshProject = async (project) => {
+    const result = await fetchProjects();
+    if (!result.ok) return project;
+    setProjects(result.data.projects);
+    setCategories(result.data.categories);
+    return result.data.projects.find((item) => item.id === project.id) || project;
+  };
+
   const setLang = (value) => { localStorage.setItem(LANGUAGE_KEY, value); setLangState(value); };
 
   const login = async (form) => {
@@ -53,5 +63,5 @@ export function useDashboard() {
     if (ok) load();
   };
 
-  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject };
+  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, refreshProject };
 }
