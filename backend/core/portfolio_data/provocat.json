@@ -1,0 +1,62 @@
+{
+  "title": "ProVocat",
+  "category": "ai-business-solutions",
+  "published": true,
+  "own": true,
+  "description": {
+    "de": "Backend-Grundlage für ein geplantes KI-gestütztes Legal-Operations-System: sichere Identitätsverwaltung, PostgreSQL-Datenbank und klare Sicherheitsregeln. Aktuell ein Konzept.",
+    "en": "Backend foundation for a planned AI-assisted legal operations system: secure identity management, a PostgreSQL database and explicit security rules. Currently a concept."
+  },
+  "challenge": {
+    "de": "Kanzleien benötigen eine sichere technische Basis für digitale Identitäten und spätere automatisierte Rechts-Workflows, ohne sensible Zugangsdaten unsicher zu verarbeiten.",
+    "en": "Law firms need a secure technical foundation for digital identities and future automated legal workflows without handling sensitive credentials unsafely."
+  },
+  "features": {
+    "de": [
+      "Benutzer- und Identitätsverwaltung mit persistenten Modellen",
+      "Sichere Anmeldung mit E-Mail-Identitäten und Argon2id-Passwortprüfung",
+      "Strenge Validierung von E-Mail-Adressen und Eingaben",
+      "PostgreSQL-Datenbank",
+      "API auf Basis von NestJS",
+      "Sicherheitsregeln und Architekturentscheidungen sind dokumentiert"
+    ],
+    "en": [
+      "User and identity management with persistent models",
+      "Secure sign-in with email identities and Argon2id password verification",
+      "Strict validation of email addresses and input",
+      "PostgreSQL database",
+      "API built on NestJS",
+      "Security rules and architecture decisions are documented"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Konzept",
+    "TypeScript",
+    "NestJS",
+    "PostgreSQL",
+    "Prisma"
+  ],
+  "stack_en": [
+    "Concept",
+    "TypeScript",
+    "NestJS",
+    "PostgreSQL",
+    "Prisma"
+  ],
+  "integrations": [],
+  "website": null,
+  "platforms": [],
+  "screenshots": [
+    {
+      "file": "provocat/provocat-cover.webp",
+      "alt": {
+        "de": "Illustration: Schild mit Schloss, Waage der Justiz, Ausweiskarte und Datenbank als Sinnbild für sichere Identitäten in einer Kanzlei-Plattform",
+        "en": "Illustration: a shield with a lock, scales of justice, an ID card and a database as a symbol of secure identities in a law firm platform"
+      }
+    }
+  ]
+}
