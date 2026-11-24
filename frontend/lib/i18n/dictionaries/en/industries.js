@@ -16,7 +16,7 @@ const industries = {
     { id: 'hospitality', summary: 'Bookings and availability across every channel.', services: ['web-mobile', 'process-automation'], category: 'hospitality-hotel-software', icon: 'Hotel', title: 'Hospitality',
       challenge: 'Bookings and availability are spread across platforms, which leads to double bookings and manual reconciliation.',
       solutions: ['Booking and availability management', 'Channel and platform integration', 'Guest and property administration'],
-      reference: { name: 'Lunanitiz Hotel Software', text: 'Central management of bookings and availability for hotels and short-term rentals, connected to Airbnb.' } },
+      reference: { name: 'Lunanitiz Hotel Software', text: 'Mobile app for hotels and holiday rentals: booking calendar, prices, housekeeping and reports in one place. A prototype running on sample data.' } },
     { id: 'automotive', summary: 'Vehicle, customer and job data for dealers and workshops.', services: ['custom-software', 'web-mobile'], category: 'automotive-software', icon: 'Car', title: 'Automotive',
       challenge: 'Vehicle, customer and job data are scattered between the back office and the workshop floor.',
       solutions: ['Dealer and workshop management', 'Vehicle and customer records', 'Mobile apps for the workshop'],
