@@ -16,7 +16,7 @@ const industries = {
     { id: 'hospitality', summary: 'Buchungen und Verfügbarkeiten über alle Kanäle.', services: ['web-mobile', 'process-automation'], category: 'hospitality-hotel-software', icon: 'Hotel', title: 'Hospitality',
       challenge: 'Buchungen und Verfügbarkeiten verteilen sich auf mehrere Plattformen – mit Doppelbuchungen und manuellem Abgleich als Folge.',
       solutions: ['Buchungs- und Verfügbarkeitsmanagement', 'Kanal- und Plattformanbindung', 'Gäste- und Objektverwaltung'],
-      reference: { name: 'Lunanitiz Hotel Software', text: 'Zentrale Verwaltung von Buchungen und Verfügbarkeiten für Hotellerie und Kurzzeitvermietung, mit Anbindung an Airbnb.' } },
+      reference: { name: 'Lunanitiz Hotel Software', text: 'Mobile App für Hotels und Ferienunterkünfte: Buchungskalender, Preise, Zimmerreinigung und Berichte an einem Ort. Ein Prototyp mit Beispieldaten.' } },
     { id: 'automotive', summary: 'Fahrzeug-, Kunden- und Auftragsdaten für Autohäuser und Werkstätten.', services: ['custom-software', 'web-mobile'], category: 'automotive-software', icon: 'Car', title: 'Automotive',
       challenge: 'Fahrzeug-, Kunden- und Auftragsdaten sind zwischen Büro und Werkstatt verstreut.',
       solutions: ['Autohaus- und Werkstattverwaltung', 'Fahrzeug- und Kundendaten', 'Mobile Apps für die Werkstatt'],

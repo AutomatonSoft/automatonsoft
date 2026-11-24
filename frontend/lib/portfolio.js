@@ -16,7 +16,9 @@ export const FALLBACK_SLUG = '_';
 const PREPARING_TAG = 'In Vorbereitung';
 const CONCEPT_TAG = 'Konzept';
 export const isPreparing = (project) => project.stack.includes(PREPARING_TAG);
-export const projectRank = (project) => (isPreparing(project) ? 2 : project.stack.includes(CONCEPT_TAG) ? 1 : 0);
+// The tag is German in the base content and English in the translation, so both are accepted.
+export const isConcept = (project) => project.stack.includes(CONCEPT_TAG) || project.stack.includes('Concept');
+export const projectRank = (project) => (isPreparing(project) ? 2 : isConcept(project) ? 1 : 0);
 
 // Within a rank the order number from the dashboard decides (smaller first); equal numbers keep the API order, newest first.
 export const compareProjects = (a, b) => projectRank(a) - projectRank(b) || (a.position ?? 100) - (b.position ?? 100);

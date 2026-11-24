@@ -75,16 +75,16 @@ const cases = {
   },
   lunanitiz: {
     de: {
-      meta: 'Hotel Software · Airbnb', title: 'Lunanitiz Hotel Software',
-      text: 'Zentrale Verwaltung von Buchungen und Verfügbarkeiten für Hotellerie und Kurzzeitvermietung, mit Anbindung an Airbnb.',
-      listLabel: 'Was wir umgesetzt haben',
-      list: ['Zentrale Verwaltung von Buchungen', 'Verfügbarkeiten für Hotellerie und Kurzzeitvermietung', 'Anbindung an Airbnb'],
+      meta: 'Prototyp · Hotelsoftware', title: 'Lunanitiz Hotel Software',
+      text: 'Mobile App für Hotels und Ferienunterkünfte: Buchungskalender, Preise, Zimmerreinigung und Berichte an einem Ort. Ein Prototyp mit Beispieldaten.',
+      listLabel: 'Was der Prototyp zeigt',
+      list: ['Buchungskalender mit Belegung über 21 Tage', 'Smart Pricing: Preisvorschläge nach Saison, Feiertagen und Wochentag', 'Zimmerreinigung und Berichte'],
     },
     en: {
-      meta: 'Hotel software · Airbnb', title: 'Lunanitiz Hotel Software',
-      text: 'Central management of bookings and availability for hotels and short-term rentals, connected to Airbnb.',
-      listLabel: 'What we delivered',
-      list: ['Central management of bookings', 'Availability for hotels and short-term rentals', 'Connection to Airbnb'],
+      meta: 'Prototype · Hotel software', title: 'Lunanitiz Hotel Software',
+      text: 'Mobile app for hotels and holiday rentals: booking calendar, prices, housekeeping and reports in one place. A prototype running on sample data.',
+      listLabel: 'What the prototype shows',
+      list: ['Booking calendar with a 21-day occupancy view', 'Smart pricing: price suggestions by season, holidays and weekday', 'Housekeeping and reports'],
     },
   },
 };

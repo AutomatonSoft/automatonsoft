@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { fetchProjects } from '@/lib/api';
-import { localizeProject } from '@/lib/portfolio';
+import { isConcept, localizeProject } from '@/lib/portfolio';
 import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
 import CtaBand from '@/components/landing/cta-band';
@@ -45,7 +45,7 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
 
   return (
     <>
-      <PageHead tags={[{ label: `← ${labels.portfolio}`, href: links.portfolio }, { label: category }, ...(p.own ? [{ label: labels.own }] : [])]} title={p.title} lead={p.description}
+      <PageHead tags={[{ label: `← ${labels.portfolio}`, href: links.portfolio }, { label: category }, ...(isConcept(p) ? [{ label: labels.concept }] : []), ...(p.own ? [{ label: labels.own }] : [])]} title={p.title} lead={p.description}
         actions={(
           <>
             {p.website && <a href={p.website} target="_blank" rel="noopener" className={cn(button, 'gap-2 bg-primary text-primary-foreground')}>{labels.visit}<ArrowUpRight aria-hidden="true" className="size-5" /></a>}
