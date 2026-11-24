@@ -12,7 +12,7 @@ const splitStack = (value) => value.split(',').map((item) => item.trim()).filter
 export default function ProjectForm({ project, categories, t, lang, onSave, onCancel }) {
   const [values, setValues] = useState({
     title: project.title, description: project.description, category: project.category || categories[0]?.value || '',
-    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, position: project.position ?? 100,
+    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, position: project.position ?? 100, in_development: Boolean(project.in_development),
     description_en: project.translations?.en?.description || '', stack_en: project.translations?.en?.stack?.join(', ') || '',
     slug: project.slug || '', website: project.website || '', challenge: project.challenge || '',
     features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
@@ -53,6 +53,13 @@ export default function ProjectForm({ project, categories, t, lang, onSave, onCa
           <div className="md:col-span-2"><Label>{t.challengeEn}</Label><Textarea {...bind('challenge_en')} /></div>
           <div><Label>{t.featuresEn}</Label><Textarea {...bind('features_en')} rows={5} /></div>
           <div><Label>{t.resultsEn}</Label><Textarea {...bind('results_en')} rows={5} /></div>
+          <div className="md:col-span-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-300">
+            <span className="text-xs font-medium">{t.platforms}</span>
+            {[['web', 'Web'], ['desktop', 'Desktop'], ['mobile', 'Mobile']].map(([value, name]) => (
+              <label key={value} className="flex cursor-pointer items-center gap-2"><input type="checkbox" name="platforms" value={value} defaultChecked={project.platforms?.includes(value)} className="size-4 accent-cyan-400" />{name}</label>
+            ))}
+            <label className="flex cursor-pointer items-center gap-2"><input type="checkbox" name="in_development" value="true" checked={values.in_development} onChange={(event) => setValues({ ...values, in_development: event.target.checked })} className="size-4 accent-cyan-400" />{t.inDevelopment}</label>
+          </div>
           <div className="md:col-span-2">
             <Label>{t.screenshot} {project.id ? t.addImages : ''}</Label>
             <Input name="screenshots" type="file" accept="image/*" multiple onChange={(event) => { const file = event.target.files?.[0]; if (file) setPreview(URL.createObjectURL(file)); }} />

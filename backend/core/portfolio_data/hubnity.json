@@ -37,8 +37,12 @@
     ]
   },
   "results": {
-    "de": ["Mehr als 150 Nutzer (Stand 11/2026)"],
-    "en": ["More than 150 users (as of 11/2026)"]
+    "de": [
+      "Mehr als 150 Nutzer (Stand 11/2026)"
+    ],
+    "en": [
+      "More than 150 users (as of 11/2026)"
+    ]
   },
   "stack": [
     "TypeScript",
@@ -113,5 +117,10 @@
         "en": "Hubnity dashboard in the browser and two mobile apps with a running timer"
       }
     }
+  ],
+  "platforms": [
+    "web",
+    "desktop",
+    "mobile"
   ]
 }

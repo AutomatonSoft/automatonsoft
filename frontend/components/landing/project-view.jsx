@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { fetchProjects } from '@/lib/api';
-import { isConcept, localizeProject } from '@/lib/portfolio';
+import { Icon } from '@/components/sections/icons';
+import { isConcept, localizeProject, platformIcons } from '@/lib/portfolio';
 import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
 import CtaBand from '@/components/landing/cta-band';
@@ -45,7 +46,7 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
 
   return (
     <>
-      <PageHead tags={[{ label: `← ${labels.portfolio}`, href: links.portfolio }, { label: category }, ...(isConcept(p) ? [{ label: labels.concept }] : []), ...(p.own ? [{ label: labels.own }] : [])]} title={p.title} lead={p.description}
+      <PageHead tags={[{ label: `← ${labels.portfolio}`, href: links.portfolio }, { label: category }, ...(isConcept(p) ? [{ label: labels.concept }] : []), ...(p.in_development ? [{ label: labels.inDevelopment }] : []), ...(p.own ? [{ label: labels.own }] : [])]} title={p.title} lead={p.description}
         actions={(
           <>
             {p.website && <a href={p.website} target="_blank" rel="noopener" className={cn(button, 'gap-2 bg-primary text-primary-foreground')}>{labels.visit}<ArrowUpRight aria-hidden="true" className="size-5" /></a>}
@@ -71,6 +72,12 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
               {facts.map(([label, value]) => (
                 <div key={label}><dt className="text-xs font-bold tracking-[0.14em] text-muted-foreground uppercase">{label}</dt><dd className="mt-1 font-extrabold">{value}</dd></div>
               ))}
+              {p.platforms?.length > 0 && (
+                <div><dt className="text-xs font-bold tracking-[0.14em] text-muted-foreground uppercase">{labels.available}</dt>
+                  <dd className="mt-2 flex flex-wrap gap-2">{p.platforms.map((item) => (
+                    <span key={item} className={cn(pill, 'inline-flex items-center gap-1.5 bg-secondary')}><Icon name={platformIcons[item]} className="size-4" />{labels.platforms[item]}</span>
+                  ))}</dd></div>
+              )}
               {p.stack.length > 0 && (
                 <div><dt className="text-xs font-bold tracking-[0.14em] text-muted-foreground uppercase">{labels.stack}</dt>
                   <dd className="mt-2 flex flex-wrap gap-1.5">{p.stack.map((item) => <span key={item} className={cn(pill, 'bg-secondary')}>{item}</span>)}</dd></div>

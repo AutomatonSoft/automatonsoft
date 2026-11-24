@@ -87,5 +87,8 @@
         "en": "Web app: dashboard with lister and product columns, status per factory and a sync start"
       }
     }
+  ],
+  "platforms": [
+    "web"
   ]
 }

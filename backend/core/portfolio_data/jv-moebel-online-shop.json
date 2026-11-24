@@ -5,8 +5,8 @@
   "own": true,
   "development_time": "seit 07/2026",
   "description": {
-    "de": "Eigenes Projekt der AEA GmbH & Co. KG: ein Möbel-Onlineshop in Entwicklung, in dem Redakteure Katalog, Preise, Aktionen und Inhalte ohne Programmierer pflegen. Ausgelegt für bis zu 30 Märkte.",
-    "en": "An in-house project of AEA GmbH & Co. KG: a furniture online shop in development where editors maintain catalog, prices, promotions and content without developers. Built for up to 30 markets."
+    "de": "Eigenes Projekt der AEA GmbH & Co. KG: ein Möbel-Onlineshop, in dem Redakteure Katalog, Preise, Aktionen und Inhalte ohne Programmierer pflegen. Ausgelegt für bis zu 30 Märkte.",
+    "en": "An in-house project of AEA GmbH & Co. KG: a furniture online shop where editors maintain catalog, prices, promotions and content without developers. Built for up to 30 markets."
   },
   "challenge": {
     "de": "Ein Möbelhändler muss Katalog, Preise, Aktionen und Inhalte für viele Länder aus einem System pflegen und die Daten aus dem alten Shopsystem übernehmen.",
@@ -89,5 +89,10 @@
     "Klarna",
     "Google Login",
     "CosmoShop (Import)"
-  ]
+  ],
+  "platforms": [
+    "web",
+    "mobile"
+  ],
+  "in_development": true
 }

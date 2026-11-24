@@ -3,21 +3,29 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useProjects } from '@/components/portfolio/use-projects';
 import { projectHref } from '@/lib/i18n';
-import { categoryIcons, compareProjects, isConcept, isPreparing, localizeProject } from '@/lib/portfolio';
+import { categoryIcons, compareProjects, isConcept, isPreparing, localizeProject, platformIcons } from '@/lib/portfolio';
 import { Icon } from '@/components/sections/icons';
 import { cn } from '@/lib/utils';
 import { block, chipRow, hover, pill } from '@/components/landing/blocks';
 
 const ALL = 'alle';
 
-function ProjectCard({ project, preparing, concept, href, category, preparingLabel, conceptLabel, ownLabel }) {
+function ProjectCard({ project, preparing, concept, href, category, preparingLabel, conceptLabel, ownLabel, labels }) {
   const body = (
     <>
       <span className="relative block aspect-[16/10] overflow-hidden bg-secondary">
         {project.screenshots[0]
           ? <img src={project.screenshots[0]} alt={project.title} loading="lazy" decoding="async" className="size-full object-cover object-top" />
           : <Icon name={categoryIcons[project.category]} className="absolute inset-0 m-auto size-16 text-lilac/40" />}
-        {(preparing || concept) && <span className={cn(pill, 'absolute top-4 left-4 bg-ink text-white')}>{preparing ? preparingLabel : conceptLabel}</span>}
+        {!preparing && project.platforms?.length > 0 && (
+          <span className="absolute top-4 right-4 flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-foreground">
+            <span className="sr-only">{labels.available}</span>
+            {project.platforms.map((item) => (
+              <span key={item} title={labels.platforms[item]}><Icon name={platformIcons[item]} className="size-4" /><span className="sr-only">{labels.platforms[item]}</span></span>
+            ))}
+          </span>
+        )}
+        {(preparing || concept || project.in_development) && <span className={cn(pill, 'absolute top-4 left-4 bg-ink text-white')}>{preparing ? preparingLabel : concept ? conceptLabel : labels.inDevelopment}</span>}
       </span>
       <span className="flex flex-1 flex-col gap-3 p-7">
         <span className="flex flex-wrap gap-1.5 self-start">
@@ -82,7 +90,7 @@ export default function PortfolioList({ locale, labels, snapshot }) {
       {visible.length === 0 ? <p className="mt-8 text-muted-foreground">{labels.empty}</p> : (
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {visible.map(({ project, preparing, concept }) => (
-            <ProjectCard key={project.id} project={project} preparing={preparing} concept={concept} category={labels.categories[project.category]} preparingLabel={labels.preparing} conceptLabel={labels.concept} ownLabel={labels.own}
+            <ProjectCard key={project.id} project={project} preparing={preparing} concept={concept} category={labels.categories[project.category]} preparingLabel={labels.preparing} conceptLabel={labels.concept} ownLabel={labels.own} labels={labels}
               href={!preparing && project.slug ? projectHref(locale, project.slug) : null} />
           ))}
         </div>

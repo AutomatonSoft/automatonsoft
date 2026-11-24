@@ -88,5 +88,8 @@
         "en": "Lunanitiz: daily overview, occupancy calendar and smart pricing on a smartphone"
       }
     }
+  ],
+  "platforms": [
+    "mobile"
   ]
 }

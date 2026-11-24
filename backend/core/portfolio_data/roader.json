@@ -78,5 +78,9 @@
         "en": "Web portal: creating a new route and the route list with status, departure time, vehicle and distance"
       }
     }
+  ],
+  "platforms": [
+    "web",
+    "mobile"
   ]
 }

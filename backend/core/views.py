@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
 from .images import InvalidImage, optimize_image
-from .models import PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot, unique_slug
+from .models import PLATFORMS, PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot, unique_slug
 
 
 def serialize(project, request):
@@ -17,7 +17,7 @@ def serialize(project, request):
         'id': project.id, 'slug': project.slug, 'title': project.title, 'description': project.description,
         'challenge': project.challenge, 'features': project.features, 'results': project.results, 'website': project.website,
         'stack': project.stack, 'integrations': project.integrations, 'category': project.category, 'category_label': project.get_category_display(),
-        'development_time': project.development_time, 'own': project.own, 'position': project.position,
+        'development_time': project.development_time, 'own': project.own, 'position': project.position, 'platforms': project.platforms, 'in_development': project.in_development,
         'published': project.published, 'translations': project.translations,
         'screenshots': [item.image.url for item in project.screenshots.order_by('-id')],
         'screenshot_alts': [item.alt for item in project.screenshots.order_by('-id')],
@@ -92,6 +92,8 @@ def apply_project_form(project, request):
     project.stack = parse_tags(request.POST.get('stack', ''))
     project.development_time = request.POST['development_time']
     project.published = request.POST.get('published') == 'true'
+    project.in_development = request.POST.get('in_development') == 'true'
+    project.platforms = [item for item in PLATFORMS if item in request.POST.getlist('platforms')]
     try:
         project.position = int(request.POST.get('position') or 100)
         if not 0 <= project.position <= 32767:
