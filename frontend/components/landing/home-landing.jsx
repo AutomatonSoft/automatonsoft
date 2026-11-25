@@ -6,6 +6,7 @@ import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
 import { block, button, chipRow, ContactSection, FaqSection, hover, num, pill, Section, StepCards, Title, tone, wrap } from '@/components/landing/blocks';
 import CtaBand from '@/components/landing/cta-band';
+import ProductMosaic from '@/components/landing/product-mosaic';
 import { FloatingCta, MobileContactBar, SiteFooter, SiteHeader } from '@/components/landing/chrome';
 
 // Home page in design E (docs/TZ.md §6). Shared blocks: blocks.jsx. Copy: dictionaries/*/home.js + lib/landings/home.js.
@@ -49,26 +50,16 @@ export default function HomeLanding({ locale }) {
           <h1 className="mt-7 text-[clamp(2.5rem,min(6vw,11vh),5rem)] leading-[0.92] font-black tracking-[-0.04em] text-balance">
             {t.titleStart} <span className="block text-lilac">{t.titleHighlight}</span>
           </h1>
-        </section>
-
-        <section className={`${wrap} mt-12 flex flex-wrap gap-4`}>
-          <div className={`${block} @container order-2 flex flex-[1_1_360px] flex-col justify-between min-[960px]:order-1 gap-8 bg-card p-8 sm:p-10`}>
-            <p className="text-[clamp(1.0625rem,6cqw,1.875rem)] leading-snug font-semibold tracking-[-0.02em]">{t.lead}</p>
-            <div className="grid gap-2.5">
+          <div className="mt-8 flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
+            <p className="max-w-[620px] flex-[1_1_360px] text-lg leading-snug font-semibold tracking-[-0.02em] sm:text-xl">{t.lead}</p>
+            <div className="grid gap-2.5 max-sm:w-full sm:grid-flow-col">
               <a href="#kontakt" className={`${button} bg-primary text-primary-foreground`}>{t.primaryCta}</a>
               <a href="#projekte" className={`${button} bg-foam text-ink`}>{t.secondaryCta}</a>
             </div>
           </div>
-          <figure className={`${block} order-1 relative flex flex-[1.6_1_520px] min-[960px]:order-2 flex-col overflow-hidden bg-primary px-5 pt-6 text-primary-foreground sm:px-9 sm:pt-9`}>
-            <div aria-hidden="true" className="absolute -top-24 -right-24 size-75 rounded-full border-[50px] border-white/22" />
-            <figcaption className="relative flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pb-6 text-lg font-extrabold">
-              {x.stageLabel}<span className="flex items-center gap-2 rounded-full bg-ink px-3.5 py-1.5 text-sm whitespace-nowrap text-white"><span aria-hidden="true" className="size-2 animate-pulse rounded-full bg-hot motion-reduce:animate-none" />{x.stageBadge}</span>
-            </figcaption>
-            <img src={caseImages.lisa.src} width={caseImages.lisa.width} height={caseImages.lisa.height} alt={cases.lisa?.image?.alt || x.stageLabel}
-              srcSet={`${caseImages.lisa.small} 960w, ${caseImages.lisa.src} 2000w`} sizes="(min-width: 1024px) 800px, 100vw"
-              className="relative mt-auto aspect-[2/1] w-full rounded-t-[22px] object-cover object-top-right" />
-          </figure>
         </section>
+
+        <ProductMosaic locale={locale} />
 
         <section aria-label={t.trust.label} className="mt-18 overflow-hidden border-y border-secondary py-5">
           <div className="marquee text-[clamp(1.75rem,3vw,2.75rem)] font-black tracking-[-0.03em] whitespace-nowrap">
@@ -81,11 +72,11 @@ export default function HomeLanding({ locale }) {
         </section>
 
         <section className={`${wrap} mt-18`}>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {x.stats.map((stat, index) => (
-              <li key={stat.label} className={cn(block, '@container flex min-h-52 flex-col justify-between p-8', tone[['wave', 'foam', 'deep', 'deep'][index]].card)}>
-                <span className="text-[clamp(2.5rem,28cqw,6rem)] leading-[0.9] font-black tracking-[-0.06em] whitespace-nowrap">{stat.value}</span>
-                <span className="mt-4 text-lg font-bold">{stat.label}</span>
+              <li key={stat.label} className={cn(block, '@container flex min-h-36 flex-col justify-between p-4 sm:min-h-52 sm:p-8', tone[['wave', 'foam', 'deep', 'deep'][index]].card)}>
+                <span className="text-[clamp(1.75rem,28cqw,6rem)] leading-[0.9] font-black tracking-[-0.06em] whitespace-nowrap">{stat.value}</span>
+                <span className="mt-4 text-sm font-bold break-words hyphens-auto sm:text-lg">{stat.label}</span>
               </li>
             ))}
           </ul>

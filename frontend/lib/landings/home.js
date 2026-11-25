@@ -3,7 +3,6 @@
 export const caseImages = {
   hubnity: { src: '/assets/img/cases/hubnity-site.webp', small: '/assets/img/cases/hubnity-site-960.webp', width: 1600, height: 900 },
   'jv-mobel-online-shop': { src: '/assets/img/cases/jv-shop.webp', small: '/assets/img/cases/jv-shop-960.webp', width: 1600, height: 900 },
-  lisa: { src: '/assets/img/cases/lisa-console.webp', small: '/assets/img/cases/lisa-console-960.webp', width: 2000, height: 1135 },
 };
 
 const products = [
@@ -19,7 +18,6 @@ const labels = {
   de: {
     moreProjects: 'Weitere Projekte', panel: 'Im Einsatz', before: 'Vorher', after: 'Nachher', more: 'Mehr erfahren', viewProject: 'Projekt ansehen', viewSolution: 'Lösung ansehen',
     tags: ['KI im Live-Betrieb', 'Entwickelt in Deutschland', 'DSGVO by Design'],
-    stageLabel: 'Lisa · KI-Sprachassistentin', stageBadge: 'Live',
     stats: [
       { value: '6', label: 'Produkte im täglichen Einsatz' },
       { value: 'Live', label: 'Lisa nimmt Kundenanrufe an' },
@@ -31,7 +29,6 @@ const labels = {
   en: {
     moreProjects: 'More projects', panel: 'In daily use', before: 'Before', after: 'After', more: 'Learn more', viewProject: 'View project', viewSolution: 'See the solution',
     tags: ['AI in live operation', 'Engineered in Germany', 'GDPR by design'],
-    stageLabel: 'Lisa · AI voice assistant', stageBadge: 'Live',
     stats: [
       { value: '6', label: 'Products in daily use' },
       { value: 'Live', label: 'Lisa answers customer calls' },
