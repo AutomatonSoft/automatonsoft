@@ -124,7 +124,7 @@ class ProjectApiTests(TestCase):
         self.project.refresh_from_db()
         self.assertEqual(self.project.translations, {})
 
-    def test_seed_backfills_missing_translations_only(self):
+    def test_seed_adds_missing_cards_and_keeps_existing_ones(self):
         from django.core.management import call_command
         Project.objects.create(title='Cashbook', description='Edited', category='finance-accounting-automation', stack=[], development_time='—', translations={'en': {'description': 'Kept'}})
 
