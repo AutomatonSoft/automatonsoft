@@ -125,7 +125,7 @@ const en = {
 const ecommerce = {
   slug: { de: 'e-commerce', en: 'e-commerce' },
   heroImage: images.lisa,
-  cases: ['lisa', 'ecommerceSuite'],
+  cases: ['lisa', 'benimDepom'],
   integrations: ['otto.de', 'kaufland.de', 'Shopware', 'Afterbuy', 'Twilio', 'Stripe'],
   content: { de, en },
 };

@@ -145,13 +145,7 @@ export default function LandingPage({ locale, id }) {
                   <div>
                     {item.listLabel && <p className={cn('mb-4 text-xs font-bold tracking-[0.14em] uppercase', scheme.muted)}>{item.listLabel}</p>}
                     <ul className="grid grid-cols-1 content-start gap-3">
-                      {item.list.map((entry) => item.status ? (
-                        <li key={entry} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-lg font-extrabold">
-                          <span className="min-w-0 break-words">{entry}</span><span className={cn('flex shrink-0 items-center gap-2 text-sm font-medium whitespace-nowrap', scheme.muted)}><span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-hot" />{item.status}</span>
-                        </li>
-                      ) : (
-                        <li key={entry} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{entry}</span></li>
-                      ))}
+                      {item.list.map((entry) => <li key={entry} className="flex gap-3"><Check aria-hidden="true" className="mt-1 size-4 shrink-0" strokeWidth={2.6} /><span className="min-w-0 break-words">{entry}</span></li>)}
                     </ul>
                   </div>
                 </article>
