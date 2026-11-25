@@ -1,0 +1,93 @@
+{
+  "title": "Woodguard",
+  "category_guess": "supply-chain",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 2 Monate",
+  "description": {
+    "de": "Woodguard ist ein Arbeitsbereich für die EUDR-Sorgfaltspflicht in Holzlieferketten. Er bündelt Lieferungsakten, Herkunftsdaten, Nachweise und Risikoprüfungen.",
+    "en": "Woodguard is a workspace for EUDR due diligence in timber supply chains. It brings shipment dossiers, origin data, evidence and risk reviews together."
+  },
+  "challenge": {
+    "de": "Holzimporteure müssen Herkunft, Lieferkette und Nachweise je Lieferung prüfen und dokumentieren. Woodguard bündelt diese Angaben für eine nachvollziehbare EUDR-Prüfung.",
+    "en": "Timber importers need to review and document origin, supply chains and evidence for each shipment. Woodguard brings this information together for traceable EUDR reviews."
+  },
+  "features": {
+    "de": [
+      "Lieferungsakten mit Lieferant, Holzart, HS-Code und Ernteherkunft führen",
+      "Erntegebiete mit Koordinaten und Polygonen dokumentieren",
+      "Nachweise ablegen: Zertifikate, Legalitäts-, DDS- und Transportdokumente",
+      "Länderrisiken anhand hinterlegter Profile bewerten",
+      "Prüfpunkte und offene Anforderungen festhalten",
+      "Risikomaßnahmen und Aufbewahrungsfristen pflegen",
+      "Änderungen in einem Audit-Verlauf nachvollziehen"
+    ],
+    "en": [
+      "Keep shipment dossiers with supplier, wood species, HS code and harvest origin",
+      "Record harvest areas with coordinates and polygons",
+      "Store evidence: certificates, legality, DDS and transport documents",
+      "Assess country risk using configured profiles",
+      "Record review points and open requirements",
+      "Track mitigation actions and document retention dates",
+      "Review changes in an audit trail"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "FastAPI",
+    "Next.js",
+    "Flutter",
+    "PostgreSQL",
+    "S3",
+    "Leaflet"
+  ],
+  "integrations": [
+    "Google Sign-In",
+    "OpenStreetMap"
+  ],
+  "website": "https://woodguardcare.com",
+  "screenshots": [
+    {
+      "file": "woodguard/woodguard-geodata.webp",
+      "alt": {
+        "de": "Herkunft und Geodaten: Karte der Einschlagsgebiete mit Koordinaten und Status (Beispieldaten)",
+        "en": "Origin and geodata: map of harvest areas with coordinates and status (sample data)"
+      }
+    },
+    {
+      "file": "woodguard/woodguard-risk.webp",
+      "alt": {
+        "de": "Risikobewertung: Gesamtrisiko, Verlauf und Risikofaktoren (Beispieldaten)",
+        "en": "Risk assessment: overall risk, trend and risk factors (sample data)"
+      }
+    },
+    {
+      "file": "woodguard/woodguard-supply-chain.webp",
+      "alt": {
+        "de": "Lieferkette: Stufen vom Forst bis zum Inverkehrbringen mit Kernnachweisen (Beispieldaten)",
+        "en": "Supply chain: tiers from the forest to market placement with key evidence (sample data)"
+      }
+    },
+    {
+      "file": "woodguard/woodguard-certificates.webp",
+      "alt": {
+        "de": "Zertifikate und Dokumente aus den Lieferungsakten mit Download und Ersetzen (Beispieldaten)",
+        "en": "Certificates and documents from the shipment dossiers with download and replace (sample data)"
+      }
+    },
+    {
+      "file": "woodguard/woodguard-overview.webp",
+      "alt": {
+        "de": "Übersicht: Kennzahlen und Liste der Lieferungsakten mit Nachweisabdeckung (Beispieldaten)",
+        "en": "Overview: key figures and the list of shipment dossiers with evidence coverage (sample data)"
+      }
+    }
+  ],
+  "platforms": [
+    "web",
+    "mobile"
+  ]
+}
