@@ -25,8 +25,8 @@ export function SitePage({ locale, languageHref, children }) {
   );
 }
 
-// Top of an inner page: crumb pills, big heading, lead, optional actions.
-export function PageHead({ tags = [], title, lead, actions }) {
+// Top of an inner page: crumb pills, big heading, lead, optional extra content and actions.
+export function PageHead({ tags = [], title, lead, actions, children }) {
   return (
     <section className={`${wrap} pt-10`}>
       <ul className="flex flex-wrap gap-2">
@@ -41,6 +41,7 @@ export function PageHead({ tags = [], title, lead, actions }) {
       </ul>
       <Title as="h1" parts={title} className="mt-7 text-[clamp(2.5rem,min(6vw,11vh),5rem)] tracking-[-0.04em] leading-[0.92]" />
       {lead && <p className="mt-6 max-w-[640px] text-lg text-muted-foreground">{lead}</p>}
+      {children}
       {actions && <div className="mt-8 flex flex-wrap gap-3">{actions}</div>}
     </section>
   );
