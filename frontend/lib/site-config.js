@@ -4,7 +4,6 @@ export const siteConfig = {
   shortName: 'AutomatonSoft', // brand: page titles, social previews, search results
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://automatonsoft.com',
   logo: '/assets/img/logo.webp',
-  icon: '/assets/img/logo-icon.webp',
   favicon: '/assets/img/favicon-48.png',
   appleIcon: '/assets/img/apple-touch-icon.png',
   ogImage: (locale) => `/assets/img/og/og-${locale}.jpg`,

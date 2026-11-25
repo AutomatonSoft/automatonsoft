@@ -6,7 +6,7 @@ import { wrap as shell } from '@/components/landing/blocks';
 
 const hairline = 'border-border';
 
-const logo = '/assets/img/logo-icon-96.webp';
+const logo = '/assets/img/logo-mark.svg';
 
 // links: [{ href, label }]; language: { href, label, locale } of the same page in the other language.
 export function SiteHeader({ locale, links, language, cta, label }) {
@@ -14,8 +14,8 @@ export function SiteHeader({ locale, links, language, cta, label }) {
     <header className="sticky top-0 z-30 transform-gpu bg-background/95">
       <div className={`${shell} flex h-18 items-center justify-between gap-6`}>
         <a href={href(locale, 'home')} className="flex shrink-0 items-center gap-2.5 text-lg font-extrabold tracking-[-0.02em] whitespace-nowrap">
-          <img src={logo} alt="" width="34" height="34" className="size-8.5 rounded-[10px]" />
-          {siteConfig.shortName}
+          <img src={logo} alt="" width="36" height="36" className="size-9" />
+          <span>{siteConfig.shortName.slice(0, -4)}<span className="text-lilac">{siteConfig.shortName.slice(-4)}</span></span>
         </a>
         <nav aria-label={label} className="hidden items-center gap-1 rounded-full bg-card p-1.5 text-[15px] font-semibold lg:flex">
           {links.map((link) => <a key={link.href} href={link.href} className="rounded-full px-4 py-2 hover:bg-secondary hover:text-lilac">{link.label}</a>)}
