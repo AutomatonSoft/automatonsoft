@@ -1,5 +1,5 @@
 // Shipped projects a landing can cite as references. Facts only – taken from the portfolio and the case studies.
-// list: what was delivered (or connected); status: optional label shown next to every list item.
+// list: what was delivered.
 export const images = {
   lisa: { src: '/assets/img/cases/lisa-console.webp', small: '/assets/img/cases/lisa-console-960.webp', width: 2000, height: 1135 },
 };
@@ -45,18 +45,6 @@ const cases = {
       text: 'For the furniture retailer JV Möbel, Lisa answers calls automatically, verifies callers and gives the live order status from Afterbuy.',
       listLabel: 'What we delivered',
       list: ['AI voice assistant that answers calls automatically', 'Caller verification before any data is shared', 'Live order status from Afterbuy', 'Voice messages with transcripts by email'],
-    },
-  },
-  ecommerceSuite: {
-    de: {
-      meta: 'Produktdaten · Marktplätze', title: 'E-Commerce Automation Suite',
-      text: 'Automatisiertes Produktdatenmanagement für otto.de, kaufland.de und Shopware – aus einer zentralen Produktdatenbank heraus.',
-      list: ['otto.de', 'kaufland.de', 'Shopware'], status: 'synchron',
-    },
-    en: {
-      meta: 'Product data · Marketplaces', title: 'E-Commerce Automation Suite',
-      text: 'Automated product data management for otto.de, kaufland.de and Shopware – from one central product database.',
-      list: ['otto.de', 'kaufland.de', 'Shopware'], status: 'in sync',
     },
   },
   cashbook: {

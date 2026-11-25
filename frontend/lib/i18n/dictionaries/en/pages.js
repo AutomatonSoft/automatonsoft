@@ -43,10 +43,8 @@ const pages = {
         { name: 'Cashbook', category: 'finance-accounting-automation', tag: 'Finance' },
         { name: 'Roader', category: 'supply-chain-warehouse', tag: 'Deliveries' },
         { name: 'Lisa', category: 'ai-business-solutions', tag: 'AI voice assistant' },
-        { name: 'E-Commerce Automation Suite', category: 'ecommerce-marketplace-automation', tag: 'Marketplace automation' },
+        { name: 'Aftercool', category: 'ecommerce-marketplace-automation', tag: 'Product data platform' },
         { name: 'Lunanitiz Hotel Software', category: 'hospitality-hotel-software', tag: 'Hospitality prototype' },
-        { name: 'AutoCar Software Suite', category: 'automotive-software', tag: 'Automotive' },
-        { name: 'KIDOC_Office', category: 'ai-business-solutions', tag: 'AI document processing' },
       ],
     },
     location: {

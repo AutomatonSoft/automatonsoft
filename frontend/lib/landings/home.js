@@ -12,7 +12,7 @@ const products = [
   { slug: 'cashbook', name: 'Cashbook', de: 'Digitale Kassenbücher', en: 'Digital cash books' },
   { slug: 'roader', name: 'Roader', de: 'Auslieferungen für Fahrer', en: 'Deliveries for drivers' },
   { slug: 'lisa', name: 'Lisa', de: 'KI-Sprachassistentin im Kundenservice', en: 'AI voice assistant for customer calls' },
-  { slug: 'e-commerce-automation-suite', name: 'E-Commerce Automation Suite', short: 'E-Commerce Suite', de: 'Produktdaten für Marktplätze', en: 'Product data for marketplaces' },
+  { slug: 'aftercool', name: 'Aftercool', de: 'Produktdaten verwalten und abgleichen', en: 'Manage and sync product data' },
 ];
 
 const labels = {
@@ -42,4 +42,4 @@ const labels = {
   },
 };
 
-export const homeExtras = (locale) => ({ ...labels[locale], products: products.map(({ slug, name, short, ...text }) => ({ slug, name: short || name, text: text[locale] })) });
+export const homeExtras = (locale) => ({ ...labels[locale], products: products.map(({ slug, name, ...text }) => ({ slug, name, text: text[locale] })) });

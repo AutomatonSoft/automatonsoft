@@ -29,7 +29,7 @@ const en = {
   industries,
   portfolio: {
     title: 'Software. Automation. Artificial Intelligence.',
-    intro: 'Platforms, automation and AI solutions across nine categories – from e-commerce and workforce management to industrial AI.',
+    intro: 'Platforms, automation and AI solutions – from e-commerce and workforce management to industrial AI.',
     all: 'All', loading: 'Loading projects …', empty: 'No projects have been published in this category yet.', preparing: 'In preparation', concept: 'Concept', available: 'Available on', platforms: { web: 'Web', desktop: 'Desktop', mobile: 'Mobile' }, inDevelopment: 'In development', own: 'In-house project',
     categories: {
       'ecommerce-marketplace-automation': 'E-commerce & marketplaces', 'workforce-hr-automation': 'Workforce & HR', 'ai-business-solutions': 'AI business solutions',
