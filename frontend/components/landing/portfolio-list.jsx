@@ -46,9 +46,22 @@ function ProjectCard({ project, preparing, concept, href, category, preparingLab
   return href ? <a href={href} className={cn(className, hover)}>{body}</a> : <div className={className}>{body}</div>;
 }
 
+function Chip({ active, count, onClick, children }) {
+  return (
+    <button type="button" aria-pressed={active} onClick={onClick}
+      className={cn('flex items-center gap-1.5 rounded-full px-4 py-2 text-[15px] font-bold transition', active ? 'bg-primary text-primary-foreground' : 'bg-card hover:bg-secondary')}>
+      {children} <span className={active ? 'text-primary-foreground/80' : 'text-muted-foreground'}>{count}</span>
+    </button>
+  );
+}
+
+const inCategory = (items, category) => (category === ALL ? items : items.filter(({ project }) => project.category === category));
+const onPlatform = (items, platform) => (platform === ALL ? items : items.filter(({ project, preparing }) => !preparing && project.platforms?.includes(platform)));
+
 export default function PortfolioList({ locale, labels, snapshot }) {
   const { projects, categories, loading } = useProjects(snapshot);
   const [active, setActive] = useState(ALL);
+  const [platform, setPlatform] = useState(ALL);
 
   // Finished work first, then concepts; placeholders "in preparation" stay but move to the end.
   const items = useMemo(() => [...projects]
@@ -65,9 +78,13 @@ export default function PortfolioList({ locale, labels, snapshot }) {
 
   const choose = (value) => {
     setActive(value);
+    // A device filter that matches nothing in the new category would leave the page empty.
+    if (!onPlatform(inCategory(items, value), platform).length) setPlatform(ALL);
     window.history.replaceState(null, '', value === ALL ? window.location.pathname : `#${value}`);
   };
-  const visible = active === ALL ? items : items.filter(({ project }) => project.category === active);
+  const selected = inCategory(items, active);
+  const devices = [ALL, ...Object.keys(platformIcons)].map((value) => ({ value, count: onPlatform(selected, value).length })).filter(({ count }) => count);
+  const visible = onPlatform(selected, platform);
 
   if (loading) {
     return (
@@ -81,10 +98,14 @@ export default function PortfolioList({ locale, labels, snapshot }) {
     <>
       <div className={chipRow} role="toolbar">
         {filters.map(({ value, count }) => (
-          <button type="button" key={value} aria-pressed={active === value} onClick={() => choose(value)}
-            className={cn('rounded-full px-4 py-2 text-[15px] font-bold transition', active === value ? 'bg-primary text-primary-foreground' : 'bg-card hover:bg-secondary')}>
-            {value === ALL ? labels.all : labels.categories[value]} <span className={active === value ? 'text-primary-foreground/80' : 'text-muted-foreground'}>{count}</span>
-          </button>
+          <Chip key={value} active={active === value} count={count} onClick={() => choose(value)}>{value === ALL ? labels.all : labels.categories[value]}</Chip>
+        ))}
+      </div>
+      <div className={cn(chipRow, 'mt-3 sm:mt-4')} role="toolbar" aria-label={labels.available}>
+        {devices.map(({ value, count }) => (
+          <Chip key={value} active={platform === value} count={count} onClick={() => setPlatform(value)}>
+            {value === ALL ? labels.allDevices : <><Icon name={platformIcons[value]} className="size-4.5" />{labels.platforms[value]}</>}
+          </Chip>
         ))}
       </div>
       {visible.length === 0 ? <p className="mt-8 text-muted-foreground">{labels.empty}</p> : (

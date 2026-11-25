@@ -14,7 +14,7 @@ export default async function PortfolioView({ locale }) {
     <SitePage locale={locale} languageHref={href(other, 'portfolio')}>
       <PageHead tags={[{ label: nav.portfolio }]} title={t.title} lead={t.intro} />
       <Section id="solutions">
-        <PortfolioList locale={locale} snapshot={snapshot} labels={{ all: t.all, loading: t.loading, empty: t.empty, preparing: t.preparing, concept: t.concept, own: t.own, available: t.available, platforms: t.platforms, inDevelopment: t.inDevelopment, categories: t.categories }} />
+        <PortfolioList locale={locale} snapshot={snapshot} labels={{ all: t.all, allDevices: t.allDevices, loading: t.loading, empty: t.empty, preparing: t.preparing, concept: t.concept, own: t.own, available: t.available, platforms: t.platforms, inDevelopment: t.inDevelopment, categories: t.categories }} />
       </Section>
       <CtaBand title={t.ctaTitle} text={t.ctaText} cta={t.ctaButton} href={href(locale, 'contact')} />
     </SitePage>

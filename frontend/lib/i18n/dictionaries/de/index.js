@@ -30,7 +30,7 @@ const de = {
   portfolio: {
     title: 'Software. Automation. Artificial Intelligence.',
     intro: 'Plattformen, Automatisierung und KI-Lösungen – von E-Commerce und Workforce-Management bis zur Lieferkette.',
-    all: 'Alle', loading: 'Projekte werden geladen …', empty: 'In dieser Kategorie sind noch keine Projekte veröffentlicht.', preparing: 'In Vorbereitung', concept: 'Konzept', available: 'Verfügbar auf', platforms: { web: 'Web', desktop: 'Desktop', mobile: 'Mobil' }, inDevelopment: 'In Entwicklung', own: 'Eigenes Projekt',
+    all: 'Alle', allDevices: 'Alle Geräte', loading: 'Projekte werden geladen …', empty: 'In dieser Kategorie sind noch keine Projekte veröffentlicht.', preparing: 'In Vorbereitung', concept: 'Konzept', available: 'Verfügbar auf', platforms: { web: 'Web', desktop: 'Desktop', mobile: 'Mobil' }, inDevelopment: 'In Entwicklung', own: 'Eigenes Projekt',
     categories: {
       'ecommerce-marketplace-automation': 'E-Commerce & Marktplätze', 'workforce-hr-automation': 'Workforce & HR', 'ai-business-solutions': 'KI-Lösungen für Unternehmen',
       'supply-chain-warehouse': 'Supply Chain & Lager', 'industrial-ai-manufacturing': 'Industrial AI & Fertigung', 'hospitality-hotel-software': 'Hospitality',

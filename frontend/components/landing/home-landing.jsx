@@ -65,7 +65,7 @@ export default function HomeLanding({ locale }) {
           <div className="marquee text-[clamp(1.75rem,3vw,2.75rem)] font-black tracking-[-0.03em] whitespace-nowrap">
             {[0, 1].map((copy) => (
               <ul key={copy} aria-hidden={copy === 1 || undefined} className="flex">
-                {t.ticker.map((item, index) => <li key={item} className={cn('px-7', index % 2 && 'text-lilac')}>{item} <span aria-hidden="true" className="text-hot">✦</span></li>)}
+                {t.ticker.map((item, index) => <li key={item} className={cn('flex items-center gap-9 pr-9', index % 2 && 'text-lilac')}>{item}<span aria-hidden="true" className="text-hot">✦</span></li>)}
               </ul>
             ))}
           </div>
