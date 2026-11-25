@@ -52,7 +52,13 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
             {p.website && <a href={p.website} target="_blank" rel="noopener" className={cn(button, 'gap-2 bg-primary text-primary-foreground')}>{labels.visit}<ArrowUpRight aria-hidden="true" className="size-5" /></a>}
             <a href={links.contact} className={cn(button, p.website ? 'bg-foam text-ink' : 'bg-primary text-primary-foreground')}>{labels.similar}</a>
           </>
-        )} />
+        )}>
+        {p.results.length > 0 && (
+          <ul aria-label={labels.results} className="mt-6 flex flex-wrap gap-2">
+            {p.results.map((item) => <li key={item} className="flex items-start gap-2 rounded-[1.25rem] bg-foam px-4 py-2.5 text-[15px] leading-snug font-extrabold text-ink"><Check aria-hidden="true" className="mt-0.5 size-4 shrink-0" strokeWidth={2.6} />{item}</li>)}
+          </ul>
+        )}
+      </PageHead>
 
       {cover && (
         <section className="mx-auto mt-12 w-full max-w-[1200px] px-4 sm:px-6">
@@ -98,18 +104,6 @@ export default function ProjectView({ locale, slug, initial, links, labels }) {
           )}
         </div>
       </Section>
-
-      {p.results.length > 0 && (
-        <Section>
-          <Title parts={labels.results} />
-          <ul className={cn('mt-12 grid grid-cols-1 gap-4', p.results.length > 2 ? 'md:grid-cols-3' : p.results.length === 2 && 'md:grid-cols-2')}>
-            {p.results.map((item, index) => {
-              const scheme = tone[['wave', 'deep', 'deep'][index % 3]];
-              return <li key={item} className={cn(block, 'p-6 text-lg font-extrabold sm:p-8', p.results.length === 1 && 'sm:p-10 sm:text-3xl sm:leading-tight', scheme.card)}>{item}</li>;
-            })}
-          </ul>
-        </Section>
-      )}
 
       {gallery.length > 0 && (
         <Section>

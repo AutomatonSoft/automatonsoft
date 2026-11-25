@@ -12,13 +12,12 @@ export function createLandingOgImage(locale) {
     generateStaticParams: () => landingParams(locale),
     Image: async function LandingOgImage({ params }) {
       const t = landings[landingFromSlug(locale, (await params).industry)].content[locale];
-      const logo = await readFile(join(process.cwd(), 'public/assets/img/logo-icon.png'));
+      const logo = await readFile(join(process.cwd(), 'public/assets/img/logo-lockup-on-dark.png'));
       return new ImageResponse(
         (
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 72, color: '#ffffff', backgroundColor: '#062587', backgroundImage: 'radial-gradient(60% 70% at 50% 0%, rgba(0,160,236,0.45) 0%, rgba(6,37,135,0) 70%)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 18, fontSize: 30, fontWeight: 600 }}>
-              <img src={`data:image/png;base64,${logo.toString('base64')}`} width={56} height={56} style={{ borderRadius: 14 }} alt="" />
-              {siteConfig.shortName}
+            <div style={{ display: 'flex' }}>
+              <img src={`data:image/png;base64,${logo.toString('base64')}`} width={293} height={64} alt={siteConfig.shortName} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', fontSize: 26, color: '#c7dbff' }}>{t.hero.eyebrow}</div>
