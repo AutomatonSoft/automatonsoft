@@ -13,9 +13,8 @@ const tiles = [
   { slug: 'jv-mobel-online-shop', name: 'JV Möbel', size: [1252, 551], tile: 'order-3 col-span-2 h-48 bg-[#b23a2b] sm:col-span-1 sm:h-64 md:col-span-7', art: cn(card, 'top-14 left-1/2 w-[88%] max-w-[300px] -translate-x-1/2 sm:top-20 sm:max-w-[560px]'), inDevelopment: true },
   { slug: 'aftercool', name: 'Aftercool', file: 'aftercool-cards', size: [800, 646], tile: 'order-4 col-span-2 h-64 bg-[#0fa89a] [container-type:size] sm:col-span-1 md:col-span-7', art: cn(card, 'top-14 left-1/2 w-[min(84cqw,calc((100cqh-5rem)*1.238))] -translate-x-1/2 md:top-16') },
   { slug: 'benim-depom', name: 'Benim Depom', file: 'benim-depom-phone', size: [640, 1344], tile: 'order-2 h-72 bg-[#f28a24] md:col-span-5 md:row-span-2', art: phone },
-  { slug: 'cashbook', name: 'Cashbook', size: [800, 728], tile: 'order-5 col-span-2 h-64 bg-[#f6c453] sm:col-span-1 sm:h-56 md:col-span-4', art: cn(card, 'top-3 left-1/2 w-[74%] max-w-[220px] -translate-x-1/2 sm:max-w-[180px] md:top-[12%] md:w-[84%] md:max-w-[300px]'), bottom: true },
-  { slug: 'lisa', name: 'Lisa', size: [624, 408], tile: 'order-7 col-span-2 h-64 bg-[#6d4aff] md:col-span-6', art: cn(card, 'bottom-14 left-1/2 w-[84%] max-w-[300px] -translate-x-1/2 sm:max-w-[290px] md:w-[80%] md:max-w-[420px]'), bottom: true },
-  { slug: 'roader', name: 'Roader', size: [1004, 340], tile: 'order-6 col-span-2 h-48 bg-[#0b120d] sm:col-span-1 sm:h-56 md:col-span-4', art: cn(card, 'top-[12%] left-[6%] w-[135%] max-w-[520px] -rotate-6 border border-white/15 sm:top-[18%] sm:left-[8%] sm:w-[190%] sm:max-w-none md:top-[26%] md:w-[210%]'), bottom: true },
+  { slug: 'cashbook', name: 'Cashbook', file: 'cashbook-reports', size: [1030, 494], tile: 'order-5 col-span-2 h-52 bg-[#f6c453] [container-type:size] sm:h-72 md:col-span-10', art: cn(card, 'top-4 left-1/2 w-[min(92cqw,calc((100cqh-4.5rem)*2.085))] -translate-x-1/2 md:top-6'), bottom: true },
+  { slug: 'roader', name: 'Roader', size: [1004, 340], tile: 'order-6 col-span-2 h-48 bg-[#0b120d] md:col-span-4', art: cn(card, 'top-[12%] left-[6%] w-[135%] max-w-[520px] -rotate-6 border border-white/15 sm:top-[18%] sm:w-[85%] sm:max-w-none md:top-[26%] md:left-[8%] md:w-[210%]'), bottom: true },
 ];
 
 export default function ProductMosaic({ locale }) {
