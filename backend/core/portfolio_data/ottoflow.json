@@ -1,0 +1,97 @@
+{
+  "title": "OttoFlow",
+  "category_guess": "ecommerce",
+  "published": true,
+  "own": true,
+  "development_time": "ca. 3 Monate",
+  "description": {
+    "de": "OttoFlow ist eine Produktdaten-Plattform für den Marktplatz OTTO: Sie ordnet Lieferantenartikel automatisch Kategorien zu, füllt Pflichtattribute mit KI und steuert die schrittweise Veröffentlichung.",
+    "en": "OttoFlow is a product data platform for the OTTO marketplace: it maps supplier items to categories automatically, fills required attributes with AI and schedules gradual publishing."
+  },
+  "challenge": {
+    "de": "Wer tausende Lieferantenartikel auf OTTO anbietet, muss Kategorien, Attribute, Preise, Bilder und Markenvorgaben für mehrere Konten aufbereiten. Manuelles Mapping und unkoordinierte Massen-Uploads führen zu Ablehnungen und hohem Pflegeaufwand.",
+    "en": "Selling thousands of supplier items on OTTO means preparing categories, attributes, prices, images and brand rules for several accounts. Manual mapping and uncoordinated bulk uploads lead to rejections and a lot of maintenance work."
+  },
+  "features": {
+    "de": [
+      "Kategorien automatisch zuordnen und Attribute per KI vorschlagen",
+      "Produkttitel mit KI auf höchstens 70 Zeichen optimieren",
+      "Mehrere Produkte in der Massenbearbeitung gemeinsam ändern",
+      "OTTO-Pflichtfelder, Markenregeln und Preise prüfen",
+      "Veröffentlichung zeitgesteuert über bis zu 30 Tage verteilen (Drip Feed)",
+      "Bestände und Lieferprofile synchronisieren",
+      "Produkte samt Bildern zwischen Konten übertragen",
+      "Daten über CSV, Excel, SQLite und eine externe API importieren und exportieren"
+    ],
+    "en": [
+      "Map categories automatically and get attribute suggestions from AI",
+      "Optimise product titles with AI to at most 70 characters",
+      "Change several products at once in bulk editing",
+      "Check OTTO mandatory fields, brand rules and prices",
+      "Spread publishing over up to 30 days on a schedule (Drip Feed)",
+      "Synchronise stock and delivery profiles",
+      "Transfer products and their images between accounts",
+      "Import and export data via CSV, Excel, SQLite and an external API"
+    ]
+  },
+  "results": {
+    "de": [],
+    "en": []
+  },
+  "stack": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "Celery"
+  ],
+  "integrations": [
+    "OTTO Market API",
+    "Afterbuy",
+    "Aftercool",
+    "OpenAI API"
+  ],
+  "screenshots": [
+    {
+      "file": "ottoflow/ottoflow-factories.webp",
+      "alt": {
+        "de": "Fabriken: Lieferantenkataloge mit Nummer und Anzahl der Produkte (Beispieldaten)",
+        "en": "Factories: supplier catalogs with their number and product count (sample data)"
+      }
+    },
+    {
+      "file": "ottoflow/ottoflow-products.webp",
+      "alt": {
+        "de": "Produkttabelle einer Fabrik mit Status, Titellänge, EAN, Preis und Kategorie (Beispieldaten)",
+        "en": "Product table of a factory with status, title length, EAN, price and category (sample data)"
+      }
+    },
+    {
+      "file": "ottoflow/ottoflow-bulk-actions.webp",
+      "alt": {
+        "de": "Aktionen für ausgewählte Produkte: Massenbearbeitung, KI-Titel, KI-Kategorien und KI-Attribute (Beispieldaten)",
+        "en": "Actions for selected products: bulk editing, AI titles, AI categories and AI attributes (sample data)"
+      }
+    },
+    {
+      "file": "ottoflow/ottoflow-drip-feed.webp",
+      "alt": {
+        "de": "Drip-Feed-Warteschlange: Produkte mit Veröffentlichungstag und Status (Beispieldaten)",
+        "en": "Drip Feed queue: products with their publishing day and status (sample data)"
+      }
+    },
+    {
+      "file": "ottoflow/ottoflow-overview.webp",
+      "alt": {
+        "de": "Übersicht: Kennzahlen zum Katalog, Fortschritt und offene Probleme (Beispieldaten)",
+        "en": "Overview: catalog figures, progress and open issues (sample data)"
+      }
+    }
+  ],
+  "platforms": [
+    "web"
+  ]
+}
