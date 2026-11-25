@@ -18,14 +18,14 @@ function ProjectCard({ project, preparing, concept, href, category, preparingLab
           ? <img src={project.screenshots[0]} alt={project.title} loading="lazy" decoding="async" className="size-full object-cover object-top" />
           : <Icon name={categoryIcons[project.category]} className="absolute inset-0 m-auto size-16 text-lilac/40" />}
         {!preparing && project.platforms?.length > 0 && (
-          <span className="absolute top-4 right-4 flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-foreground">
+          <span className="absolute top-4 right-4 flex h-8 items-center gap-2 rounded-full bg-ink px-3 text-white">
             <span className="sr-only">{labels.available}</span>
             {project.platforms.map((item) => (
-              <span key={item} title={labels.platforms[item]}><Icon name={platformIcons[item]} className="size-4" /><span className="sr-only">{labels.platforms[item]}</span></span>
+              <span key={item} title={labels.platforms[item]}><Icon name={platformIcons[item]} className="size-5" /><span className="sr-only">{labels.platforms[item]}</span></span>
             ))}
           </span>
         )}
-        {(preparing || concept || project.in_development) && <span className={cn(pill, 'absolute top-4 left-4 bg-ink text-white')}>{preparing ? preparingLabel : concept ? conceptLabel : labels.inDevelopment}</span>}
+        {(preparing || concept || project.in_development) && <span className={cn(pill, 'absolute top-4 left-4 flex h-8 items-center bg-ink text-white')}>{preparing ? preparingLabel : concept ? conceptLabel : labels.inDevelopment}</span>}
       </span>
       <span className="flex flex-1 flex-col gap-3 p-7">
         <span className="flex flex-wrap gap-1.5 self-start">
