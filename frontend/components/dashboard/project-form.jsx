@@ -11,43 +11,38 @@ import LanguageSwitch from '@/components/dashboard/language-switch';
 import ProjectImages from '@/components/dashboard/project-images';
 import ProjectPreview from '@/components/dashboard/project-preview';
 import { container, control } from '@/components/dashboard/styles';
+import { useProjectDraft } from '@/components/dashboard/use-project-draft';
 
 const splitStack = (value) => value.split(',').map((item) => item.trim()).filter(Boolean);
 const platforms = [['web', 'Web'], ['desktop', 'Desktop'], ['mobile', 'Mobile']];
 // The preview is a section of its own only on narrow screens; from xl it always stands next to the form.
 const sections = [['main', 'sectionMain'], ['page', 'sectionPage'], ['images', 'sectionImages'], ['preview', 'sectionPreview']];
 
+const formValues = (project, categories) => ({
+  title: project.title, description: project.description, category: project.category || categories[0]?.value || '',
+  development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, in_development: Boolean(project.in_development),
+  platforms: platforms.map(([value]) => value).filter((value) => project.platforms?.includes(value)),
+  description_en: project.translations?.en?.description || '', stack_en: project.translations?.en?.stack?.join(', ') || '',
+  slug: project.slug || '', website: project.website || '', challenge: project.challenge || '',
+  features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
+  challenge_en: project.translations?.en?.challenge || '',
+  features_en: project.translations?.en?.features?.join('\n') || '', results_en: project.translations?.en?.results?.join('\n') || '',
+});
+
 export default function ProjectForm({ project, categories, t, lang, setLang, onSave, onClose }) {
-  const [values, setValues] = useState({
-    title: project.title, description: project.description, category: project.category || categories[0]?.value || '',
-    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, in_development: Boolean(project.in_development),
-    description_en: project.translations?.en?.description || '', stack_en: project.translations?.en?.stack?.join(', ') || '',
-    slug: project.slug || '', website: project.website || '', challenge: project.challenge || '',
-    features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
-    challenge_en: project.translations?.en?.challenge || '',
-    features_en: project.translations?.en?.features?.join('\n') || '', results_en: project.translations?.en?.results?.join('\n') || '',
-  });
+  const { values, setValues, files, setFiles, copiedAt, dirty, found, restore, discard } = useProjectDraft(project.id || 'new', () => formValues(project, categories));
   const [section, setSection] = useState('main');
-  const [files, setFiles] = useState([]);
-  const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const added = useMemo(() => files.map((file) => URL.createObjectURL(file)), [files]);
   useEffect(() => () => added.forEach((url) => URL.revokeObjectURL(url)), [added]);
 
-  // Reload, closing the tab and leaving the site ask first while there are unsaved changes.
-  useEffect(() => {
-    if (!dirty) return undefined;
-    const warn = (event) => { event.preventDefault(); event.returnValue = ''; };
-    window.addEventListener('beforeunload', warn);
-    return () => window.removeEventListener('beforeunload', warn);
-  }, [dirty]);
-
   const bind = (name) => ({ id: name, name, value: values[name], onChange: (event) => setValues({ ...values, [name]: event.target.value }) });
   const toggle = (name) => ({ name, checked: values[name], onChange: (event) => setValues({ ...values, [name]: event.target.checked }) });
+  const togglePlatform = (platform, checked) => setValues({ ...values, platforms: platforms.map(([value]) => value).filter((value) => (value === platform ? checked : values.platforms.includes(value))) });
   const selected = categories.find((item) => item.value === values.category);
   const showSection = (id) => { setSection(id); window.scrollTo(0, 0); };
-  const leave = () => { if (!dirty || window.confirm(t.discard)) onClose(); };
+  const time = (stamp, options) => new Date(stamp).toLocaleString(lang, options);
 
   // The browser cannot point at a field in a hidden section, so open that section first (the form is noValidate).
   const submit = async (event) => {
@@ -62,7 +57,7 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
       return;
     }
     setSaving(true);
-    if (!(await onSave(form))) setSaving(false);
+    if (!(await onSave(form, files))) setSaving(false);
   };
 
   // German and English side by side; on a phone English follows right below German.
@@ -77,16 +72,19 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
   };
 
   return (
-    <form noValidate onSubmit={submit} onChange={() => setDirty(true)}>
+    <form noValidate onSubmit={submit}>
       <header className="sticky top-0 z-20 border-b border-border bg-card">
         <div className={cn(container, 'flex items-center gap-2 py-3 sm:gap-3')}>
-          <button type="button" onClick={leave} disabled={saving} aria-label={t.back} title={t.back} className={cn(buttonVariants({ variant: 'outline' }), 'size-10 bg-card')}><ArrowLeft /></button>
+          <button type="button" onClick={onClose} disabled={saving} aria-label={t.back} title={t.back} className={cn(buttonVariants({ variant: 'outline' }), 'size-10 bg-card')}><ArrowLeft /></button>
           <div className="min-w-0 flex-1">
-            <p className={cn('truncate text-xs', dirty ? 'font-bold text-amber-700' : 'text-muted-foreground')} aria-live="polite">{dirty ? t.unsaved : project.id ? t.edit : t.new}</p>
+            <p className={cn('truncate text-xs', dirty ? 'font-bold text-amber-700' : 'text-muted-foreground')} aria-live="polite">
+              {dirty ? t.unsaved : project.id ? t.edit : t.new}
+              {dirty && copiedAt && <span className="font-normal max-sm:hidden"> · {t.copyKept}, {time(copiedAt, { timeStyle: 'short' })}</span>}
+            </p>
             <h1 className="truncate text-base font-black text-ink sm:text-xl">{values.title || t.projectName}</h1>
           </div>
           <div className="max-sm:hidden"><LanguageSwitch lang={lang} setLang={setLang} /></div>
-          <button type="submit" disabled={saving} className={cn(buttonVariants({ size: 'xl' }), 'h-10 px-4 text-sm sm:px-6')}>{saving ? t.saving : t.save}</button>
+          <button type="submit" disabled={saving || Boolean(found)} className={cn(buttonVariants({ size: 'xl' }), 'h-10 px-4 text-sm sm:px-6')}>{saving ? t.saving : t.save}</button>
         </div>
         <div className={cn(container, 'flex overflow-x-auto max-sm:px-1')} role="tablist" aria-label={t.sections}>
           {sections.map(([id, label]) => (
@@ -100,8 +98,22 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
         </div>
       </header>
 
+      {found && (
+        <div className={cn(container, 'pt-6')}>
+          <div role="alert" className="flex flex-wrap items-center gap-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
+            <div className="min-w-0 flex-1 basis-64">
+              <p className="font-bold">{t.draftFound} {time(found.savedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>
+              {found.outdated && <p className="mt-1 text-sm">{t.draftOutdated}</p>}
+            </div>
+            <button type="button" onClick={restore} className={cn(buttonVariants(), 'h-10 px-4')}>{t.restore}</button>
+            <button type="button" onClick={discard} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 bg-card px-4')}>{t.discardCopy}</button>
+          </div>
+        </div>
+      )}
+
       <div className={cn(container, 'grid items-start gap-6 py-6 xl:grid-cols-[minmax(0,1fr)_340px]')}>
-        <div className="min-w-0">
+        {/* Typing waits for the decision above: it would replace the copy that was found. */}
+        <div className={cn('min-w-0', found && 'opacity-50')} inert={Boolean(found)}>
           {/* All sections stay in the form and are only hidden, so saving always sends every field. */}
           <div data-section="main" hidden={!['main', 'preview'].includes(section)} className={cn('space-y-4', section === 'preview' && 'max-xl:hidden')}>
             <Card>
@@ -123,7 +135,7 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
               </div>
               <fieldset className="flex flex-wrap items-center gap-x-6">
                 <legend className="mb-1 text-sm font-semibold">{t.platforms}</legend>
-                {platforms.map(([value, name]) => <Check key={value} name="platforms" value={value} defaultChecked={project.platforms?.includes(value)}>{name}</Check>)}
+                {platforms.map(([value, name]) => <Check key={value} name="platforms" value={value} checked={values.platforms.includes(value)} onChange={(event) => togglePlatform(value, event.target.checked)}>{name}</Check>)}
               </fieldset>
             </Card>
             <Card>

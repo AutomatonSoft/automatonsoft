@@ -4,6 +4,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { categoryName } from '@/components/dashboard/copy';
+import { hasDraft } from '@/components/dashboard/drafts';
 import ProjectListItem from '@/components/dashboard/project-list-item';
 import { control, panel } from '@/components/dashboard/styles';
 import { useDragOrder } from '@/components/dashboard/use-drag-order';
@@ -28,7 +29,10 @@ export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete
     <section className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-black text-ink sm:text-3xl">{t.projects}</h1>
-        <button type="button" onClick={onNew} className={cn(buttonVariants({ size: 'xl' }), 'h-11 text-sm max-sm:w-full')}><Plus /> {t.newProject}</button>
+        <div className="flex flex-wrap items-center gap-3 max-sm:w-full">
+          {hasDraft('new') && <button type="button" onClick={onNew} className="rounded-full bg-amber-100 px-3 py-1.5 text-xs font-bold text-amber-900 hover:bg-amber-200">{t.newUnsaved}</button>}
+          <button type="button" onClick={onNew} className={cn(buttonVariants({ size: 'xl' }), 'h-11 text-sm max-sm:w-full')}><Plus /> {t.newProject}</button>
+        </div>
       </div>
       <div className="flex flex-col gap-3 md:flex-row md:items-center">
         <div className="relative flex-1">
@@ -49,7 +53,7 @@ export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete
         ? (
           <ul className={cn(panel, 'divide-y divide-border *:first:rounded-t-2xl *:last:rounded-b-2xl', drag.dragged !== undefined && 'select-none')}>
             {visible.map((project, index) => (
-              <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={onEdit} onDelete={onDelete}
+              <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={onEdit} onDelete={onDelete} unsaved={hasDraft(project.id)}
                 order={sortable ? { count: projects.length, onMove: (place) => onMove(project, place), onDragStart: (event) => drag.start(event, index) } : null}
                 style={drag.rowStyle(index)} dragged={drag.dragged === index} />
             ))}
