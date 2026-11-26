@@ -1,29 +1,53 @@
-import { ExternalLink, ImagePlus, Pencil, Trash2 } from 'lucide-react';
+import { ArrowDown, ArrowUp, ExternalLink, GripVertical, ImagePlus, Pencil, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { categoryName } from '@/components/dashboard/copy';
+import PlaceNumber from '@/components/dashboard/place-number';
 
-export default function ProjectListItem({ project, t, lang, onEdit, onDelete }) {
+const iconButton = cn(buttonVariants({ variant: 'outline' }), 'size-10 bg-card');
+
+// `order` is set while the list can be sorted: { count, onMove(place), onDragStart(event) }.
+export default function ProjectListItem({ project, t, lang, order, style, dragged, onEdit, onDelete }) {
+  const place = project.position;
+  const arrow = (step, label, Icon) => (
+    <button type="button" onClick={() => order.onMove(place + step)} disabled={place + step < 1 || place + step > order.count}
+      aria-label={`${label}: ${project.title}`} title={label} className={iconButton}><Icon /></button>
+  );
+
   return (
-    <article className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition hover:border-cyan-400/40">
-      <div className="grid sm:grid-cols-[180px_1fr]">
-        <div className="aspect-[16/10] bg-slate-800">
-          {project.screenshots[0] ? <img className="size-full object-cover" src={project.screenshots[0]} alt={project.title} /> : <div className="flex size-full items-center justify-center text-slate-500"><ImagePlus className="size-6" /></div>}
+    <li style={style} className={cn('relative flex flex-col gap-3 bg-card p-3 lg:flex-row lg:items-center lg:gap-4',dragged ? 'z-10 rounded-xl shadow-xl ring-2 ring-primary' : 'hover:bg-background')}>
+      <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 flex-col items-center gap-1 sm:flex-row">
+          {order && (
+            // Only the handle blocks touch scrolling; arrows and the number do the same job from the keyboard.
+            <button type="button" tabIndex={-1} onPointerDown={order.onDragStart} aria-label={`${t.drag}: ${project.title}`} title={t.drag}
+              className="grid size-10 cursor-grab touch-none place-items-center rounded-lg text-muted-foreground hover:bg-secondary hover:text-primary active:cursor-grabbing">
+              <GripVertical className="size-5" />
+            </button>
+          )}
+          <PlaceNumber place={place} count={order?.count} label={t.changePlace} onMove={order?.onMove} />
         </div>
-        <div className="p-4">
-          <div className="flex items-start justify-between gap-3">
-            <div><p className="text-xs font-semibold tracking-widest text-cyan-300">{categoryName(project, lang)}</p><h3 className="mt-1 text-xl font-bold">{project.title}</h3></div>
-            <Badge className={project.published ? 'bg-cyan-400/15 text-cyan-200' : 'bg-slate-700 text-slate-300'}>{project.published ? t.publishedStatus : t.draftStatus}</Badge>
-          </div>
-          <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-400">{project.description}</p>
-          <div className="mt-3 flex flex-wrap gap-1.5"><Badge>{project.development_time}</Badge>{project.stack.map((item) => <Badge key={item}>{item}</Badge>)}</div>
-          <div className="mt-4 flex gap-2">
-            <button type="button" onClick={() => onEdit(project)} className={`${buttonVariants({ variant: 'outline' })} !border-slate-600 !bg-slate-700 !text-white hover:!bg-slate-600`}><Pencil className="size-3.5" /> {t.editButton}</button>
-            {project.slug && <a href={`/portfolio/${project.slug}`} target="_blank" rel="noopener" className={buttonVariants({ variant: 'outline' })}><ExternalLink className="size-3.5" /> {t.viewPage}</a>}
-            <button type="button" onClick={() => onDelete(project)} className={`${buttonVariants({ variant: 'destructive' })} !bg-red-500 !text-white hover:!bg-red-400`}><Trash2 className="size-3.5" /> {t.deleteButton}</button>
-          </div>
-        </div>
+        <button type="button" onClick={() => onEdit(project)} className="flex min-w-0 flex-1 items-center gap-3 rounded-lg text-left sm:gap-4">
+          <span className="grid aspect-[16/10] w-20 shrink-0 place-items-center overflow-hidden rounded-lg border border-border bg-secondary sm:w-28">
+            {project.screenshots[0] ? <img className="size-full object-cover" src={project.screenshots[0]} alt="" loading="lazy" draggable="false" /> : <ImagePlus className="size-5 text-muted-foreground" />}
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block truncate font-bold">{project.title}</span>
+            <span className="block truncate text-xs text-muted-foreground">{categoryName(project, lang)}</span>
+            <span className="mt-1.5 flex flex-wrap items-center gap-1.5">
+              <Badge className={project.published ? 'bg-foam text-ink' : 'bg-amber-100 text-amber-900'}>{project.published ? t.publishedStatus : t.draftStatus}</Badge>
+              {project.in_development && <Badge variant="outline">{t.developmentStatus}</Badge>}
+            </span>
+          </span>
+        </button>
       </div>
-    </article>
+      <div className="flex shrink-0 gap-2">
+        {order && <>{arrow(-1, t.moveUp, ArrowUp)}{arrow(1, t.moveDown, ArrowDown)}</>}
+        <button type="button" onClick={() => onEdit(project)} aria-label={`${t.editButton}: ${project.title}`} title={t.editButton} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 flex-1 bg-card px-3 text-primary lg:flex-none')}><Pencil /> <span className="max-sm:hidden">{t.editButton}</span></button>
+        {project.slug && <a href={`/portfolio/${project.slug}`} target="_blank" rel="noopener" aria-label={`${t.viewPage}: ${project.title}`} title={t.viewPage} className={iconButton}><ExternalLink /></a>}
+        <button type="button" onClick={() => onDelete(project)} aria-label={`${t.deleteButton}: ${project.title}`} title={t.deleteButton} className={cn(iconButton, 'text-destructive hover:bg-destructive/10 hover:text-destructive')}><Trash2 /></button>
+      </div>
+    </li>
   );
 }

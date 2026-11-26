@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { apiFetch, fetchProjects } from '@/lib/api';
 import { copy } from '@/components/dashboard/copy';
 
@@ -12,9 +12,12 @@ export function useDashboard() {
   const [projects, setProjects] = useState([]);
   const [categories, setCategories] = useState([]);
   const [leads, setLeads] = useState([]);
-  const [notice, setNotice] = useState('');
+  const [notice, setNotice] = useState(null);
   const [lang, setLangState] = useState('de');
   const t = copy[lang];
+
+  const say = (text, error = false) => setNotice({ text, error });
+  const dismissNotice = useCallback(() => setNotice(null), []);
 
   const load = useCallback(async () => {
     const [projectResult, leadResult] = await Promise.all([fetchProjects(), apiFetch('/contact-requests/')]);
@@ -41,27 +44,54 @@ export function useDashboard() {
 
   const login = async (form) => {
     const { ok, data } = await apiFetch('/session/login/', { method: 'POST', json: { username: form.username.value, password: form.password.value } });
-    if (!ok) return setNotice(t.loginError);
-    setUser(data.username); setNotice(t.welcome); load();
+    if (!ok) return say(t.loginError, true);
+    setUser(data.username); say(t.welcome); load();
   };
 
-  const logout = async () => { await apiFetch('/session/logout/', { method: 'POST' }); setUser(null); setNotice(''); };
+  const logout = async () => { await apiFetch('/session/logout/', { method: 'POST' }); setUser(null); setNotice(null); };
 
   const saveProject = async (form, project) => {
     const body = new FormData(form);
     body.set('published', form.published.checked ? 'true' : 'false');
-    const { ok } = await apiFetch(`/projects/${project.id ? `${project.id}/update` : 'create'}/`, { method: 'POST', body });
-    setNotice(ok ? (project.id ? t.updated : t.created) : t.saveError);
-    if (ok) load();
-    return ok;
+    try {
+      const { ok, status, data } = await apiFetch(`/projects/${project.id ? `${project.id}/update` : 'create'}/`, { method: 'POST', body });
+      if (!ok) { say(`${t.saveError} (${data?.detail || `HTTP ${status}`})`, true); return false; }
+    } catch {
+      say(t.saveError, true);
+      return false;
+    }
+    say(project.id ? t.updated : t.created);
+    load();
+    return true;
   };
 
   const deleteProject = async (project) => {
     if (!window.confirm(`„${project.title}“ ${t.confirmDelete}`)) return;
     const { ok } = await apiFetch(`/projects/${project.id}/delete/`, { method: 'DELETE' });
-    setNotice(ok ? t.deleted : t.deleteError);
+    say(ok ? t.deleted : t.deleteError, !ok);
     if (ok) load();
   };
 
-  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, refreshProject };
+  // The list shows the new order at once. The requests go out one after another, because each move builds on the last,
+  // and the list is reloaded when the last one is done.
+  const moves = useRef(Promise.resolve());
+  const moveProject = (project, place) => {
+    setProjects((current) => {
+      const next = current.filter((item) => item.id !== project.id);
+      next.splice(place - 1, 0, project);
+      return next.map((item, index) => ({ ...item, position: index + 1 }));
+    });
+    const request = moves.current.then(async () => {
+      try {
+        const { ok } = await apiFetch(`/projects/${project.id}/move/`, { method: 'POST', json: { place } });
+        say(ok ? t.orderSaved : t.moveError, !ok);
+      } catch {
+        say(t.moveError, true);
+      }
+    });
+    moves.current = request;
+    request.then(() => { if (moves.current === request) load(); });
+  };
+
+  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, moveProject, refreshProject, dismissNotice };
 }

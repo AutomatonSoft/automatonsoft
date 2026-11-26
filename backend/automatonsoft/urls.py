@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/projects/', views.projects), path('api/projects/create/', views.create_project),
     path('api/projects/<int:project_id>/update/', views.update_project),
     path('api/projects/<int:project_id>/delete/', views.delete_project),
+    path('api/projects/<int:project_id>/move/', views.move_project),
     path('api/contact/', views.contact), path('api/contact-requests/', views.contact_requests),
 ]
 

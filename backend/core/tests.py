@@ -155,18 +155,58 @@ class ProjectApiTests(TestCase):
         self.assertEqual(Project.objects.get(pk=self.project.id).slug, 'existing-project')
         self.assertEqual(self.client.post(url, self.project_data(website='javascript:alert(1)')).status_code, 400)
 
-    def test_order_number_is_saved_validated_and_sorts_the_list(self):
-        self.client.force_login(self.staff)
-        url = f'/api/projects/{self.project.id}/update/'
-        self.assertEqual(Project.objects.get(pk=self.project.id).position, 100)
+    def places(self):
+        return [(item['title'], item['position']) for item in self.client.get('/api/projects/').json()['projects']]
 
-        self.client.post('/api/projects/create/', self.project_data(title='Second'))
-        self.assertEqual(self.client.post(url, self.project_data(title='Existing project', slug='existing-project', position='1')).status_code, 200)
-        titles = [item['title'] for item in self.client.get('/api/projects/').json()['projects']]
-        self.assertEqual(titles, ['Existing project', 'Second'])
-        self.assertEqual(self.client.get('/api/projects/').json()['projects'][0]['position'], 1)
-        self.assertEqual(self.client.post(url, self.project_data(position='abc')).status_code, 400)
-        self.assertEqual(self.client.post(url, self.project_data(position='70000')).status_code, 400)
+    def create(self, title):
+        return self.client.post('/api/projects/create/', self.project_data(title=title)).json()['project']
+
+    def move(self, project_id, body):
+        return self.client.post(f'/api/projects/{project_id}/move/', body, content_type='application/json')
+
+    def test_new_projects_go_last_and_deleting_closes_the_gap(self):
+        self.client.force_login(self.staff)
+
+        self.assertEqual(self.create('Second')['position'], 2)
+        self.create('Third')
+        self.client.delete(f'/api/projects/{self.project.id}/delete/')
+
+        self.assertEqual(self.places(), [('Second', 1), ('Third', 2)])
+
+    def test_moving_a_project_shifts_the_others(self):
+        self.client.force_login(self.staff)
+        self.create('Second')
+        third = self.create('Third')['id']
+
+        self.assertEqual(self.move(third, {'place': 1}).status_code, 204)
+        self.assertEqual(self.places(), [('Third', 1), ('Existing project', 2), ('Second', 3)])
+        self.move(third, {'place': 50})
+        self.assertEqual(self.places(), [('Existing project', 1), ('Second', 2), ('Third', 3)])
+
+    def test_move_needs_a_valid_place_and_a_staff_user(self):
+        self.assertEqual(self.move(self.project.id, {'place': 1}).status_code, 401)
+        self.client.force_login(self.staff)
+        for body in ({}, {'place': 0}, {'place': 'abc'}, {'place': None}, [1]):
+            self.assertEqual(self.move(self.project.id, body).status_code, 400, body)
+
+    def test_saving_a_project_keeps_its_place(self):
+        self.client.force_login(self.staff)
+        second = self.create('Second')['id']
+
+        self.client.post(f'/api/projects/{second}/update/', self.project_data(title='Second', position='1'))
+
+        self.assertEqual(self.places(), [('Existing project', 1), ('Second', 2)])
+
+    def test_migration_numbers_projects_in_the_order_the_site_showed(self):
+        Project.objects.all().delete()
+        for title, position, stack in (('first', 1, []), ('older', 100, []), ('concept', 100, ['Konzept']), ('newer', 100, [])):
+            Project.objects.create(title=title, description='x', stack=stack, development_time='—', position=position)
+        migration = importlib.import_module('core.migrations.0014_number_projects')
+
+        from django.apps import apps
+        migration.number_in_site_order(apps, None)
+
+        self.assertEqual(list(Project.objects.values_list('title', 'position')), [('first', 1), ('newer', 2), ('older', 3), ('concept', 4)])
 
     def test_platforms_and_development_flag_are_saved_filtered_and_served(self):
         self.client.force_login(self.staff)
@@ -250,16 +290,16 @@ class ImportProjectTests(TestCase):
         self.assertTrue(project.own)
         self.assertTrue(self.client.get('/api/projects/').json()['projects'][0]['own'])
 
-    def test_order_number_is_imported_only_when_the_card_has_one(self):
+    def test_imported_projects_go_last_unless_the_card_names_a_place(self):
         from .portfolio_import import import_project
+        order = lambda: list(Project.objects.values_list('title', 'position'))
         import_project(self.card)
-        project = Project.objects.get(title='Demo')
-        project.position = 7
-        project.save()
-        import_project(self.card, update=True)
-        self.assertEqual(Project.objects.get(title='Demo').position, 7)
-        import_project({**self.card, 'position': 3}, update=True)
-        self.assertEqual(Project.objects.get(title='Demo').position, 3)
+        import_project({**self.card, 'title': 'Next'})
+        self.assertEqual(order(), [('Demo', 1), ('Next', 2)])
+        import_project({**self.card, 'title': 'Next', 'position': 1}, update=True)
+        self.assertEqual(order(), [('Next', 1), ('Demo', 2)])
+        import_project(self.card, update=True)  # no place in the card: it stays
+        self.assertEqual(order(), [('Next', 1), ('Demo', 2)])
 
     def test_platforms_and_development_flag_are_imported_only_when_present(self):
         from .portfolio_import import import_project

@@ -4,7 +4,7 @@ from pathlib import Path
 from django.core.files import File
 
 from .images import optimize_image
-from .models import PLATFORMS, PORTFOLIO_CATEGORIES, Project, ProjectScreenshot
+from .models import LAST_POSITION, PLATFORMS, PORTFOLIO_CATEGORIES, Project, ProjectScreenshot, number_projects
 
 CATEGORY_GUESS = {
     'ecommerce': 'ecommerce-marketplace-automation', 'workforce': 'workforce-hr-automation', 'ai': 'ai-business-solutions',
@@ -28,7 +28,7 @@ def import_project(data, update=False, base_dir=None):
     german = lambda key, empty='': (data.get(key) or {}).get('de') or empty
     english = {key: (data.get(key) or {}).get('en') for key in ('description', 'challenge', 'features', 'results')}
     english['stack'] = data.get('stack_en') or data.get('stack') or []
-    project = project or Project(title=title)
+    project = project or Project(title=title, position=LAST_POSITION)
     project.category = category
     project.description = german('description')
     project.challenge = german('challenge')
@@ -40,8 +40,6 @@ def import_project(data, update=False, base_dir=None):
     project.development_time = data.get('development_time') or '—'
     project.own = bool(data.get('own', False))
     project.published = bool(data.get('published', False))
-    if 'position' in data:  # absent = keep what was set in the dashboard
-        project.position = int(data['position'])
     if 'platforms' in data:
         project.platforms = [item for item in PLATFORMS if item in data['platforms']]
     if 'in_development' in data:
@@ -49,6 +47,8 @@ def import_project(data, update=False, base_dir=None):
     project.translations = {'en': {key: value for key, value in english.items() if value}}
     created = project.pk is None
     project.save()
+    # `position` in a card is the place to put the project at; absent = keep what was set in the dashboard.
+    number_projects(project, int(data['position']) if 'position' in data else None)
     if update and 'screenshots' in data:
         project.screenshots.all().delete()  # --update replaces the screenshots with the ones in the file ([] removes them all)
     attach_screenshots(project, data, base_dir)
