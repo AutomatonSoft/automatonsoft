@@ -1,21 +1,23 @@
+import { buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import LanguageSwitch from '@/components/dashboard/language-switch';
-import { eyebrow, primaryButton } from '@/components/dashboard/styles';
+import { control, eyebrow, panel } from '@/components/dashboard/styles';
 
-export default function LoginForm({ t, lang, setLang, notice, onLogin }) {
+export default function LoginForm({ t, lang, setLang, error, onLogin }) {
   return (
-    <main className="dark min-h-screen bg-slate-950 p-6 text-slate-100">
-      <section className="mx-auto mt-20 max-w-md rounded-3xl border border-white/10 bg-slate-900 p-7 shadow-2xl">
-        <div className="flex items-start justify-between">
-          <div><p className={eyebrow}>AUTOMATONSOFT</p><h1 className="mt-2 text-3xl font-bold">{t.loginTitle}</h1></div>
+    <main lang={lang} className="grid min-h-screen place-items-center bg-background px-4 py-10">
+      <section className={cn(panel, 'w-full max-w-md p-6 shadow-xl shadow-ink/5 sm:p-8')}>
+        <div className="flex items-start justify-between gap-4">
+          <div><p className={eyebrow}>AutomatonSoft</p><h1 className="mt-2 text-3xl font-black text-ink">{t.loginTitle}</h1></div>
           <LanguageSwitch lang={lang} setLang={setLang} />
         </div>
-        <p className="mt-2 text-sm text-slate-400">{t.loginHint}</p>
-        <form className="mt-6 grid gap-4" onSubmit={(event) => { event.preventDefault(); onLogin(event.currentTarget); }}>
-          <Input name="username" placeholder={t.username} autoComplete="username" required />
-          <Input name="password" type="password" placeholder={t.password} autoComplete="current-password" required />
-          <button type="submit" className={primaryButton()}>{t.login}</button>
-          <p className="text-sm text-red-400" role="alert">{notice}</p>
+        <p className="mt-2 text-sm text-muted-foreground">{t.loginHint}</p>
+        <form className="mt-6 grid gap-3" onSubmit={(event) => { event.preventDefault(); onLogin(event.currentTarget); }}>
+          <Input name="username" aria-label={t.username} placeholder={t.username} autoComplete="username" className={control} required />
+          <Input name="password" type="password" aria-label={t.password} placeholder={t.password} autoComplete="current-password" className={control} required />
+          <button type="submit" className={buttonVariants({ size: 'xl' })}>{t.login}</button>
+          <p className="min-h-5 text-sm text-destructive" role="alert">{error}</p>
         </form>
       </section>
     </main>
