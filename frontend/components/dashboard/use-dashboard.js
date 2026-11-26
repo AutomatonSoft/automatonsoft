@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { apiFetch, fetchProjects } from '@/lib/api';
 import { copy } from '@/components/dashboard/copy';
 
@@ -72,5 +72,26 @@ export function useDashboard() {
     if (ok) load();
   };
 
-  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, refreshProject, dismissNotice };
+  // The list shows the new order at once. The requests go out one after another, because each move builds on the last,
+  // and the list is reloaded when the last one is done.
+  const moves = useRef(Promise.resolve());
+  const moveProject = (project, place) => {
+    setProjects((current) => {
+      const next = current.filter((item) => item.id !== project.id);
+      next.splice(place - 1, 0, project);
+      return next.map((item, index) => ({ ...item, position: index + 1 }));
+    });
+    const request = moves.current.then(async () => {
+      try {
+        const { ok } = await apiFetch(`/projects/${project.id}/move/`, { method: 'POST', json: { place } });
+        say(ok ? t.orderSaved : t.moveError, !ok);
+      } catch {
+        say(t.moveError, true);
+      }
+    });
+    moves.current = request;
+    request.then(() => { if (moves.current === request) load(); });
+  };
+
+  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, moveProject, refreshProject, dismissNotice };
 }

@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { categoryName } from '@/components/dashboard/copy';
 import ProjectListItem from '@/components/dashboard/project-list-item';
 import { control, panel } from '@/components/dashboard/styles';
+import { useDragOrder } from '@/components/dashboard/use-drag-order';
 
 const filterTests = {
   all: () => true,
@@ -13,12 +14,15 @@ const filterTests = {
   drafts: (project) => !project.published,
 };
 
-export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete }) {
+export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete, onMove }) {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('all');
   const needle = query.trim().toLowerCase();
   const visible = projects.filter((project) => filterTests[filter](project)
     && [project.title, categoryName(project, lang), ...project.stack].join(' ').toLowerCase().includes(needle));
+  // Sorting needs the whole list: in a filtered one "third place" would be ambiguous.
+  const sortable = filter === 'all' && !needle && projects.length > 1;
+  const drag = useDragOrder((from, to) => onMove(visible[from], to + 1));
 
   return (
     <section className="space-y-4">
@@ -40,8 +44,17 @@ export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete
           ))}
         </div>
       </div>
+      {!sortable && projects.length > 1 && visible.length > 0 && <p className="text-sm text-muted-foreground">{t.sortOff}</p>}
       {visible.length
-        ? <ul className={cn(panel, 'divide-y divide-border overflow-hidden')}>{visible.map((project) => <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={onEdit} onDelete={onDelete} />)}</ul>
+        ? (
+          <ul className={cn(panel, 'divide-y divide-border *:first:rounded-t-2xl *:last:rounded-b-2xl', drag.dragged !== undefined && 'select-none')}>
+            {visible.map((project, index) => (
+              <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={onEdit} onDelete={onDelete}
+                order={sortable ? { count: projects.length, onMove: (place) => onMove(project, place), onDragStart: (event) => drag.start(event, index) } : null}
+                style={drag.rowStyle(index)} dragged={drag.dragged === index} />
+            ))}
+          </ul>
+        )
         : <p className={cn(panel, 'p-8 text-center text-muted-foreground')}>{t.nothingFound}</p>}
     </section>
   );

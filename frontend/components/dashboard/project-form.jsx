@@ -20,7 +20,7 @@ const sections = [['main', 'sectionMain'], ['page', 'sectionPage'], ['images', '
 export default function ProjectForm({ project, categories, t, lang, setLang, onSave, onClose }) {
   const [values, setValues] = useState({
     title: project.title, description: project.description, category: project.category || categories[0]?.value || '',
-    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, position: project.position ?? 100, in_development: Boolean(project.in_development),
+    development_time: project.development_time, stack: project.stack?.join(', ') || '', published: project.published, in_development: Boolean(project.in_development),
     description_en: project.translations?.en?.description || '', stack_en: project.translations?.en?.stack?.join(', ') || '',
     slug: project.slug || '', website: project.website || '', challenge: project.challenge || '',
     features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
@@ -120,7 +120,6 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
                   </select>
                 </Field>
                 <Field name="development_time" label={t.time}><Input {...bind('development_time')} className={control} placeholder={t.timeExample} required /></Field>
-                <Field name="position" label={t.position} hint={t.positionHint}><Input {...bind('position')} className={control} type="number" min="0" max="32767" step="1" /></Field>
               </div>
               <fieldset className="flex flex-wrap items-center gap-x-6">
                 <legend className="mb-1 text-sm font-semibold">{t.platforms}</legend>

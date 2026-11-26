@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.utils.text import slugify
 
 
@@ -40,8 +40,7 @@ class Project(models.Model):
     # The project is still being built; shown as a badge on the card and the project page.
     in_development = models.BooleanField(default=False)
     published = models.BooleanField(default=True)
-    # Order in the portfolio lists: smaller comes first. With equal values the site puts finished projects before concepts,
-    # concepts before placeholders, then the newest first.
+    # Place in the portfolio lists (1 comes first). Set by number_projects(), never typed in directly.
     position = models.PositiveSmallIntegerField(default=100)
     # Per-locale overrides of the German base content, e.g. {'en': {'description': ..., 'stack': [...]}}
     translations = models.JSONField(default=dict, blank=True)
@@ -58,6 +57,22 @@ class Project(models.Model):
         if not self.slug:
             self.slug = unique_slug(self.title, exclude=self.pk)
         super().save(*args, **kwargs)
+
+
+# A new project starts behind all others until it gets its number.
+LAST_POSITION = 32767
+
+
+def number_projects(project=None, place=None):
+    """Keep the places at 1..N without gaps or duplicates, in the current order. With `project` and `place`, that project
+    moves there and the others shift; a place beyond the end means last."""
+    with transaction.atomic():
+        ids = list(Project.objects.values_list('pk', flat=True))
+        if place is not None:
+            ids.remove(project.pk)
+            ids.insert(max(place, 1) - 1, project.pk)
+        for position, pk in enumerate(ids, 1):
+            Project.objects.filter(pk=pk).exclude(position=position).update(position=position)
 
 
 def unique_slug(text, exclude=None):

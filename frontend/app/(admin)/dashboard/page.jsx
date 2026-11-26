@@ -69,7 +69,7 @@ export default function Dashboard() {
         </header>
         <main className={cn(container, 'py-6')}>
           <div hidden={tab !== 'projects'}>
-            <ProjectList projects={projects} t={t} lang={lang} onDelete={dashboard.deleteProject}
+            <ProjectList projects={projects} t={t} lang={lang} onDelete={dashboard.deleteProject} onMove={dashboard.moveProject}
               onNew={() => open({ ...emptyProject, category: categories[0]?.value || '' })}
               onEdit={async (project) => open(await dashboard.refreshProject(project))} />
           </div>

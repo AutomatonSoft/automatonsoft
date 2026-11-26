@@ -9,7 +9,9 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
 from .images import InvalidImage, optimize_image
-from .models import PLATFORMS, PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot, unique_slug
+from .models import (
+    LAST_POSITION, PLATFORMS, PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot, number_projects, unique_slug,
+)
 
 
 def serialize(project, request):
@@ -94,12 +96,6 @@ def apply_project_form(project, request):
     project.published = request.POST.get('published') == 'true'
     project.in_development = request.POST.get('in_development') == 'true'
     project.platforms = [item for item in PLATFORMS if item in request.POST.getlist('platforms')]
-    try:
-        project.position = int(request.POST.get('position') or 100)
-        if not 0 <= project.position <= 32767:
-            raise ValueError
-    except ValueError:
-        return JsonResponse({'detail': 'Invalid order number.'}, status=400)
     english = {
         'description': request.POST.get('description_en', '').strip(), 'stack': parse_tags(request.POST.get('stack_en', '')),
         'challenge': request.POST.get('challenge_en', '').strip(),
@@ -118,9 +114,13 @@ def apply_project_form(project, request):
 @staff_required
 @require_http_methods(['POST'])
 def create_project(request):
-    project = Project()
+    project = Project(position=LAST_POSITION)
     error = apply_project_form(project, request)
-    return error or JsonResponse({'project': serialize(project, request)}, status=201)
+    if error:
+        return error
+    number_projects()
+    project.refresh_from_db(fields=['position'])
+    return JsonResponse({'project': serialize(project, request)}, status=201)
 
 
 @staff_required
@@ -132,9 +132,24 @@ def update_project(request, project_id):
 
 
 @staff_required
+@require_http_methods(['POST'])
+def move_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    try:
+        place = int(json.loads(request.body)['place'])
+        if place < 1:
+            raise ValueError
+    except (KeyError, TypeError, ValueError):
+        return JsonResponse({'detail': 'Invalid place number.'}, status=400)
+    number_projects(project, place)
+    return HttpResponse(status=204)
+
+
+@staff_required
 @require_http_methods(['DELETE'])
 def delete_project(request, project_id):
     get_object_or_404(Project, pk=project_id).delete()
+    number_projects()
     return HttpResponse(status=204)
 
 
