@@ -8,7 +8,7 @@ import PlaceNumber from '@/components/dashboard/place-number';
 const iconButton = cn(buttonVariants({ variant: 'outline' }), 'size-10 bg-card');
 
 // `order` is set while the list can be sorted: { count, onMove(place), onDragStart(event) }.
-export default function ProjectListItem({ project, t, lang, order, style, dragged, onEdit, onDelete }) {
+export default function ProjectListItem({ project, t, lang, order, style, dragged, unsaved, onEdit, onDelete }) {
   const place = project.position;
   const arrow = (step, label, Icon) => (
     <button type="button" onClick={() => order.onMove(place + step)} disabled={place + step < 1 || place + step > order.count}
@@ -38,6 +38,7 @@ export default function ProjectListItem({ project, t, lang, order, style, dragge
             <span className="mt-1.5 flex flex-wrap items-center gap-1.5">
               <Badge className={project.published ? 'bg-foam text-ink' : 'bg-amber-100 text-amber-900'}>{project.published ? t.publishedStatus : t.draftStatus}</Badge>
               {project.in_development && <Badge variant="outline">{t.developmentStatus}</Badge>}
+              {unsaved && <Badge className="bg-amber-500 text-amber-950">{t.unsavedEdits}</Badge>}
             </span>
           </span>
         </button>

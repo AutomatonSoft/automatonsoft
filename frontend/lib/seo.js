@@ -1,6 +1,6 @@
 import { defaultLocale, getDictionary, href, locales, projectHref } from '@/lib/i18n';
 import { isPreparing, localizeProject } from '@/lib/portfolio';
-import { siteConfig } from '@/lib/site-config';
+import { siteConfig, siteIcons } from '@/lib/site-config';
 
 // Pages without real content yet: reachable, but kept out of search results and the sitemap.
 export const draftPages = ['blog'];
@@ -35,7 +35,7 @@ export function buildMetadata(locale, page, overrides = {}) {
       images: [image],
     },
     twitter: { card: 'summary_large_image', title: fullTitle, description, images: [image] },
-    icons: { icon: [{ url: siteConfig.favicon, sizes: '48x48', type: 'image/png' }], apple: siteConfig.appleIcon },
+    icons: siteIcons,
     ...((draftPages.includes(page) || overrides.noindex) && { robots: { index: false, follow: true } }),
   };
 }

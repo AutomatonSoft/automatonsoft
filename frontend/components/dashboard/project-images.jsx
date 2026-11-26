@@ -29,8 +29,9 @@ export default function ProjectImages({ saved, added, onSelect, t }) {
         <label className="relative flex flex-col items-center gap-2 rounded-xl border-2 border-dashed border-input bg-background p-8 text-center font-bold text-primary focus-within:ring-3 focus-within:ring-ring/50 hover:border-primary">
           <ImagePlus className="size-7" />
           {t.chooseFiles}
-          {/* Invisible but on top of the whole box, so clicking and dropping files both work. */}
-          <input name="screenshots" type="file" accept="image/*" multiple aria-label={t.chooseFiles} className="absolute inset-0 cursor-pointer opacity-0" onChange={(event) => onSelect([...event.target.files])} />
+          {/* Invisible but on top of the whole box, so clicking and dropping files both work. The selection lives in the
+              form state (it outlasts the input), so the input is emptied and the same files can be picked again. */}
+          <input type="file" accept="image/*" multiple aria-label={t.chooseFiles} className="absolute inset-0 cursor-pointer opacity-0" onChange={(event) => { onSelect([...event.target.files]); event.target.value = ''; }} />
         </label>
         {added.length > 0 && (
           <>

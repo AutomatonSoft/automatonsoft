@@ -27,22 +27,25 @@ function ProjectCard({ project, preparing, concept, href, category, preparingLab
         )}
         {(preparing || concept || project.in_development) && <span className={cn(pill, 'absolute top-4 left-4 flex h-8 items-center bg-ink text-white')}>{preparing ? preparingLabel : concept ? conceptLabel : labels.inDevelopment}</span>}
       </span>
-      <span className="flex flex-1 flex-col gap-3 p-7">
-        <span className="flex flex-wrap gap-1.5 self-start">
+      <span className="row-span-4 grid grid-rows-subgrid gap-y-3 p-7">
+        {/* Labels sit at the bottom of their row, so a card with one line of them keeps them next to its title. */}
+        <span className="flex flex-wrap gap-1.5 self-end">
           <span className={cn(pill, 'bg-secondary')}>{category}</span>
           {project.own && <span className={cn(pill, 'bg-foam text-ink')}>{ownLabel}</span>}
         </span>
         <span className="text-[1.625rem] leading-tight font-black tracking-[-0.03em]">{project.title}</span>
-        <span className="line-clamp-3 text-muted-foreground">{project.description}</span>
+        <span className="line-clamp-3 self-start text-muted-foreground">{project.description}</span>
         {!preparing && project.stack.length > 0 && (
-          <span className="mt-auto flex flex-wrap gap-1.5 pt-2">
+          <span className="flex flex-wrap gap-1.5 self-end pt-2">
             {project.stack.slice(0, 4).map((item) => <span key={item} className={cn(pill, 'bg-background text-muted-foreground')}>{item}</span>)}
           </span>
         )}
       </span>
     </>
   );
-  const className = cn(block, 'flex h-full flex-col overflow-hidden bg-card');
+  // Picture, labels, title, text and stack share their rows with the other cards of the same grid row (subgrid),
+  // so titles line up even when one card needs two lines of labels.
+  const className = cn(block, 'row-span-5 mb-4 grid grid-rows-subgrid overflow-hidden bg-card');
   return href ? <a href={href} className={cn(className, hover)}>{body}</a> : <div className={className}>{body}</div>;
 }
 
@@ -109,7 +112,8 @@ export default function PortfolioList({ locale, labels, snapshot }) {
         ))}
       </div>
       {visible.length === 0 ? <p className="mt-8 text-muted-foreground">{labels.empty}</p> : (
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        // No row gap here: it would also open between the rows inside a card. The cards carry the spacing (mb-4).
+        <div className="mt-8 -mb-4 grid grid-cols-1 gap-x-4 md:grid-cols-2 lg:grid-cols-3">
           {visible.map(({ project, preparing, concept }) => (
             <ProjectCard key={project.id} project={project} preparing={preparing} concept={concept} category={labels.categories[project.category]} preparingLabel={labels.preparing} conceptLabel={labels.concept} ownLabel={labels.own} labels={labels}
               href={!preparing && project.slug ? projectHref(locale, project.slug) : null} />

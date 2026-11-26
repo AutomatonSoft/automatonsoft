@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { apiFetch, fetchProjects } from '@/lib/api';
 import { copy } from '@/components/dashboard/copy';
+import { removeDraft } from '@/components/dashboard/drafts';
 
 const LANGUAGE_KEY = 'admin-language';
 
@@ -32,13 +33,16 @@ export function useDashboard() {
 
   // Opening a project reloads the list first: a dashboard tab left open for a while (or an import run in between)
   // would otherwise show an old copy, and saving the form would write that old copy over the newer data.
-  const refreshProject = async (project) => {
-    const result = await fetchProjects();
-    if (!result.ok) return project;
+  // If the request fails, the list already on screen is returned.
+  const refresh = async () => {
+    const result = await fetchProjects().catch(() => null);
+    if (!result?.ok) return { projects, categories };
     setProjects(result.data.projects);
     setCategories(result.data.categories);
-    return result.data.projects.find((item) => item.id === project.id) || project;
+    return result.data;
   };
+
+  const projectMissing = () => say(t.notFound, true);
 
   const setLang = (value) => { localStorage.setItem(LANGUAGE_KEY, value); setLangState(value); };
 
@@ -50,9 +54,10 @@ export function useDashboard() {
 
   const logout = async () => { await apiFetch('/session/logout/', { method: 'POST' }); setUser(null); setNotice(null); };
 
-  const saveProject = async (form, project) => {
+  const saveProject = async (form, project, files) => {
     const body = new FormData(form);
     body.set('published', form.published.checked ? 'true' : 'false');
+    files.forEach((file) => body.append('screenshots', file));
     try {
       const { ok, status, data } = await apiFetch(`/projects/${project.id ? `${project.id}/update` : 'create'}/`, { method: 'POST', body });
       if (!ok) { say(`${t.saveError} (${data?.detail || `HTTP ${status}`})`, true); return false; }
@@ -69,7 +74,7 @@ export function useDashboard() {
     if (!window.confirm(`„${project.title}“ ${t.confirmDelete}`)) return;
     const { ok } = await apiFetch(`/projects/${project.id}/delete/`, { method: 'DELETE' });
     say(ok ? t.deleted : t.deleteError, !ok);
-    if (ok) load();
+    if (ok) { removeDraft(project.id); load(); }
   };
 
   // The list shows the new order at once. The requests go out one after another, because each move builds on the last,
@@ -93,5 +98,5 @@ export function useDashboard() {
     request.then(() => { if (moves.current === request) load(); });
   };
 
-  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, moveProject, refreshProject, dismissNotice };
+  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, moveProject, refresh, projectMissing, dismissNotice };
 }
