@@ -22,6 +22,10 @@ services:
       SQLITE_PATH: /data/db.sqlite3
       DJANGO_ALLOWED_HOSTS: automatonsoft.com,localhost,127.0.0.1
       DJANGO_CSRF_TRUSTED_ORIGINS: https://automatonsoft.com
+    # Mail settings including the password exist only on the server, in mail.env beside this file (see README).
+    env_file:
+      - path: ./mail.env
+        required: false
     volumes:
       - automatonsoft_data:/data
       - automatonsoft_media:/app/media
