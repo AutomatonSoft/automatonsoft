@@ -18,7 +18,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(ContactRequest)
 class ContactRequestAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'company', 'locale', 'created_at')
-    list_filter = ('locale',)
+    list_display = ('name', 'email', 'company', 'status', 'locale', 'created_at')
+    list_filter = ('status', 'locale')
     search_fields = ('name', 'email', 'company', 'message')
     readonly_fields = ('created_at',)

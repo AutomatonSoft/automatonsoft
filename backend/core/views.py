@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator, validate_email
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
@@ -180,11 +181,47 @@ def contact(request):
     return JsonResponse({}, status=201)
 
 
+def serialize_contact(item):
+    return {'id': item.id, 'name': item.name, 'email': item.email, 'company': item.company, 'phone': item.phone,
+            'message': item.message, 'locale': item.locale, 'attribution': item.attribution, 'status': item.status,
+            'note': item.note, 'created_at': item.created_at.isoformat()}
+
+
 @staff_required
 @require_GET
 def contact_requests(request):
-    return JsonResponse({'requests': [
-        {'id': item.id, 'name': item.name, 'email': item.email, 'company': item.company, 'phone': item.phone,
-         'message': item.message, 'locale': item.locale, 'attribution': item.attribution, 'created_at': item.created_at.isoformat()}
-        for item in ContactRequest.objects.all()[:500]
-    ]})
+    return JsonResponse({'requests': [serialize_contact(item) for item in ContactRequest.objects.all()[:500]]})
+
+
+@staff_required
+@require_http_methods(['POST'])
+def update_contact_request(request, request_id):
+    """Change the status, the note or both. Only what is sent is written, so two quick changes do not undo each other."""
+    item = get_object_or_404(ContactRequest, pk=request_id)
+    try:
+        payload = json.loads(request.body)
+        changes = {field: payload[field] for field in ('status', 'note') if field in payload}
+        if not changes or not all(isinstance(value, str) for value in changes.values()):
+            raise ValueError
+    except (TypeError, ValueError):
+        return JsonResponse({'detail': 'Nothing valid to change.'}, status=400)
+    if changes.get('status', item.status) not in dict(ContactRequest.STATUSES):
+        return JsonResponse({'detail': 'Invalid status.'}, status=400)
+    if 'note' in changes:
+        changes['note'] = changes['note'].strip()
+        if len(changes['note']) > ContactRequest._meta.get_field('note').max_length:
+            return JsonResponse({'detail': 'The note is too long.'}, status=400)
+    changed = [field for field, value in changes.items() if getattr(item, field) != value]
+    if changed:
+        for field in changed:
+            setattr(item, field, changes[field])
+        item.marked_at = timezone.now()
+        item.save(update_fields=[*changed, 'marked_at'])
+    return JsonResponse({'request': serialize_contact(item)})
+
+
+@staff_required
+@require_http_methods(['DELETE'])
+def delete_contact_request(request, request_id):
+    get_object_or_404(ContactRequest, pk=request_id).delete()
+    return HttpResponse(status=204)

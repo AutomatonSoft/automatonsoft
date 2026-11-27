@@ -1,33 +1,51 @@
-import { Badge } from '@/components/ui/badge';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import FilterTabs from '@/components/dashboard/filter-tabs';
+import LeadCard, { leadStatuses } from '@/components/dashboard/lead-card';
+import SearchField from '@/components/dashboard/search-field';
 import { panel } from '@/components/dashboard/styles';
 
-const sourceLabel = ({ utm_source, utm_campaign, gclid, referrer }) =>
-  [utm_source, utm_campaign, gclid && 'Google Ads', !utm_source && referrer && new URL(referrer).hostname].filter(Boolean).join(' · ');
+export default function LeadsList({ leads, t, lang, onChange, onDelete }) {
+  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState('all');
+  // Typed notes are held here, not in the cards: a filter can take a card away before its note is saved.
+  const [typed, setTyped] = useState({});
+  const unsaved = leads.some((lead) => lead.id in typed && typed[lead.id].trim() !== lead.note);
 
-export default function LeadsList({ leads, t, lang }) {
+  // Once the server has a note, the typed copy is dropped, so a later change from elsewhere shows.
+  useEffect(() => {
+    setTyped((current) => Object.fromEntries(Object.entries(current).filter(([id, text]) => leads.find((lead) => String(lead.id) === id)?.note !== text.trim())));
+  }, [leads]);
+
+  useEffect(() => {
+    if (!unsaved) return undefined;
+    const warn = (event) => { event.preventDefault(); event.returnValue = ''; };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [unsaved]);
+
+  const needle = query.trim().toLowerCase();
+  const visible = leads.filter((lead) => (filter === 'all' || lead.status === filter)
+    && [lead.name, lead.email, lead.company, lead.phone, lead.message, lead.note].join(' ').toLowerCase().includes(needle));
+  const count = (status) => leads.filter((lead) => lead.status === status).length;
+
   if (!leads.length) return <p className={cn(panel, 'p-8 text-center text-muted-foreground')}>{t.noLeads}</p>;
   return (
-    <div className="grid gap-3">
-      {leads.map((lead) => (
-        <article key={lead.id} className={cn(panel, 'p-4 sm:p-5')}>
-          <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold">{lead.name}{lead.company && <span className="font-normal text-muted-foreground"> · {lead.company}</span>}</h2>
-              <p className="flex flex-wrap gap-x-4 text-sm font-medium text-primary">
-                <a href={`mailto:${lead.email}`} className="py-1 break-all hover:underline">{lead.email}</a>
-                {lead.phone && <a href={`tel:${lead.phone}`} className="py-1 hover:underline">{lead.phone}</a>}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              {lead.locale && <Badge variant="accent">{lead.locale.toUpperCase()}</Badge>}
-              <time dateTime={lead.created_at}>{new Date(lead.created_at).toLocaleString(lang, { dateStyle: 'medium', timeStyle: 'short' })}</time>
-            </div>
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+        <SearchField value={query} onChange={setQuery} label={t.searchLeads} />
+        <FilterTabs active={filter} onChange={setFilter} options={[['all', t.all, leads.length], ...leadStatuses.map((status) => [status, t.leadFilter[status], count(status)])]} />
+      </div>
+      {visible.length
+        ? (
+          <div className="grid gap-3">
+            {visible.map((lead) => (
+              <LeadCard key={lead.id} lead={lead} note={typed[lead.id] ?? lead.note} t={t} lang={lang} onChange={onChange} onDelete={onDelete}
+                onType={(text) => setTyped((current) => ({ ...current, [lead.id]: text }))} />
+            ))}
           </div>
-          <p className="mt-3 text-sm leading-6 break-words whitespace-pre-line">{lead.message}</p>
-          {sourceLabel(lead.attribution) && <p className="mt-3 border-t border-border pt-3 text-xs break-words text-muted-foreground">{t.source}: {sourceLabel(lead.attribution)}</p>}
-        </article>
-      ))}
+        )
+        : <p className={cn(panel, 'p-8 text-center text-muted-foreground')}>{t.noLeadsFound}</p>}
     </div>
   );
 }

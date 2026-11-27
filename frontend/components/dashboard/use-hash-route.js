@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 const read = () => window.location.hash.slice(1);
 
-// The screen is part of the address (#new, #edit/12), so the browser's Back and Forward move between the list and the
-// editor and a reload stays where it was. A hash needs no server route, which suits the static export.
+// The screen is part of the address (#new, #edit/12, #leads), so the browser's Back and Forward move between the
+// portfolio and the other screens, and a reload stays where it was. A hash needs no server route, which suits the
+// static export.
 export function useHashRoute() {
   const [route, setRoute] = useState('');
   const goingBack = useRef(false);
