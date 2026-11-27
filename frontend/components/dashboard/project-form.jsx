@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -27,15 +27,29 @@ const formValues = (project, categories) => ({
   features: project.features?.join('\n') || '', results: project.results?.join('\n') || '',
   challenge_en: project.translations?.en?.challenge || '',
   features_en: project.translations?.en?.features?.join('\n') || '', results_en: project.translations?.en?.results?.join('\n') || '',
+  own: Boolean(project.own), integrations: project.integrations?.join(', ') || '',
+  pictures: (project.screenshot_ids || []).map((id, index) => ({ id, remove: false, de: project.screenshot_alts[index]?.de || '', en: project.screenshot_alts[index]?.en || '' })),
 });
 
+// A stored copy may list pictures that are gone by now, or miss ones added since: those stay as the server has them.
+const mergeDraft = (base, stored) => {
+  const saved = new Set(base.pictures.map((picture) => picture.id));
+  const kept = (stored.pictures || []).filter((picture) => saved.has(picture.id));
+  const known = new Set(kept.map((picture) => picture.id));
+  return { ...base, ...stored, pictures: [...kept, ...base.pictures.filter((picture) => !known.has(picture.id))] };
+};
+
 export default function ProjectForm({ project, categories, t, lang, setLang, onSave, onClose }) {
-  const { values, setValues, files, setFiles, copiedAt, dirty, found, restore, discard } = useProjectDraft(project.id || 'new', () => formValues(project, categories));
+  const { values, setValues, files, setFiles, copiedAt, dirty, found, restore, discard } = useProjectDraft(project, (source) => formValues(source, categories), mergeDraft);
   const [section, setSection] = useState('main');
   const [saving, setSaving] = useState(false);
 
   const added = useMemo(() => files.map((file) => URL.createObjectURL(file)), [files]);
   useEffect(() => () => added.forEach((url) => URL.revokeObjectURL(url)), [added]);
+
+  const urls = Object.fromEntries((project.screenshot_ids || []).map((id, index) => [id, project.screenshots[index]]));
+  // The same order as the server will keep: the first saved picture that stays, else the first new one.
+  const cover = urls[values.pictures.find((picture) => !picture.remove)?.id] || added[0];
 
   const bind = (name) => ({ id: name, name, value: values[name], onChange: (event) => setValues({ ...values, [name]: event.target.value }) });
   const toggle = (name) => ({ name, checked: values[name], onChange: (event) => setValues({ ...values, [name]: event.target.checked }) });
@@ -57,7 +71,8 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
       return;
     }
     setSaving(true);
-    if (!(await onSave(form, files))) setSaving(false);
+    await onSave(form, files);
+    setSaving(false);
   };
 
   // German and English side by side; on a phone English follows right below German.
@@ -84,6 +99,12 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
             <h1 className="truncate text-base font-black text-ink sm:text-xl">{values.title || t.projectName}</h1>
           </div>
           <div className="max-sm:hidden"><LanguageSwitch lang={lang} setLang={setLang} /></div>
+          {/* The saved project's page, in a new tab so the editor stays. */}
+          {project.slug && (
+            <a href={`/portfolio/${project.slug}`} target="_blank" rel="noopener" aria-label={t.viewOnSite} title={t.viewOnSite} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 min-w-10 bg-card text-primary')}>
+              <ExternalLink /> <span className="max-md:hidden">{t.viewOnSite}</span>
+            </a>
+          )}
           <button type="submit" disabled={saving || Boolean(found)} className={cn(buttonVariants({ size: 'xl' }), 'h-10 px-4 text-sm sm:px-6')}>{saving ? t.saving : t.save}</button>
         </div>
         <div className={cn(container, 'flex overflow-x-auto max-sm:px-1')} role="tablist" aria-label={t.sections}>
@@ -122,6 +143,9 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
                 <p className="pl-7.5 text-xs text-muted-foreground">{values.published ? t.published : t.draft}</p>
               </div>
               <Check {...toggle('in_development')} value="true">{t.inDevelopment}</Check>
+              {/* An unchecked box sends nothing, and nothing means "leave as it is": the hidden field says "false". */}
+              <Check checked={values.own} onChange={(event) => setValues({ ...values, own: event.target.checked })}>{t.own}</Check>
+              <input type="hidden" name="own" value={String(values.own)} />
             </Card>
             <Card>
               <div className="grid gap-4 md:grid-cols-2">
@@ -149,8 +173,9 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
             <Card hint={t.landingHint}>
               <div className="grid gap-4 md:grid-cols-2">
                 <Field name="slug" label={t.slug}><Input {...bind('slug')} className={control} placeholder={t.slugHint} pattern="[a-z0-9\-]*" title={t.slugRule} autoCapitalize="none" /></Field>
-                <Field name="website" label={t.website}><Input {...bind('website')} className={control} type="url" placeholder="https://" /></Field>
+                <Field name="website" label={t.website} hint={/^https?:\/\/\S+$/.test(values.website) && <a href={values.website} target="_blank" rel="noopener" className="inline-flex items-center gap-1 py-1 text-sm font-semibold text-primary hover:underline">{t.openWebsite} <ExternalLink className="size-3.5" /></a>}><Input {...bind('website')} className={control} type="url" placeholder="https://" /></Field>
               </div>
+              <Field name="integrations" label={t.integrations} hint={t.integrationsHint}><Input {...bind('integrations')} className={control} placeholder="Afterbuy, Klarna" /></Field>
               {pair('challenge', t.challenge, text('min-h-24'))}
               {pair('features', t.features, text('min-h-40'))}
               {pair('results', t.results, text('min-h-24'))}
@@ -158,12 +183,14 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
           </div>
 
           <div data-section="images" hidden={section !== 'images'} className="space-y-4">
-            <ProjectImages saved={project.screenshots || []} added={added} onSelect={setFiles} t={t} />
+            <ProjectImages pictures={values.pictures} urls={urls} onChange={(pictures) => setValues({ ...values, pictures })}
+              added={added} onAdd={(picked) => setFiles([...files, ...picked])} onDrop={(index) => setFiles(files.filter((_, other) => other !== index))} t={t} />
+            <input type="hidden" name="pictures" value={JSON.stringify(values.pictures.map(({ id, remove, de, en }) => ({ id, remove, alt: { de, en } })))} />
           </div>
         </div>
 
         <aside className={cn('xl:sticky xl:top-36 xl:block', section !== 'preview' && 'hidden')}>
-          <ProjectPreview t={t} lang={lang} image={added.at(-1) || project.screenshots?.[0]} category={{ category: values.category, category_label: selected?.label || '' }}
+          <ProjectPreview t={t} lang={lang} image={cover} category={{ category: values.category, category_label: selected?.label || '' }}
             title={values.title} description={values.description} developmentTime={values.development_time} stack={splitStack(values.stack)} />
         </aside>
       </div>

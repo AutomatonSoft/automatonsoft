@@ -35,16 +35,18 @@ function Tabs({ tabs, active, onChange }) {
 export default function Dashboard() {
   const dashboard = useDashboard();
   const { user, projects, categories, leads, notice, lang, t, setLang } = dashboard;
-  const { route, open, close } = useHashRoute();
+  const { route, open, replace, close } = useHashRoute();
+  // The open editor: its project, and a key that stays while the editor does (also when a new project gets its id).
   const [editing, setEditing] = useState(null);
   const listScroll = useRef(0);
   const arrived = useRef(false);
-  const editorOpen = Boolean(editing) && routeOf(editing) === route;
+  const editorOpen = Boolean(editing) && routeOf(editing.project) === route;
   // The requests tab is part of the address like the editor, so a reload stays on it and Back returns to the portfolio.
   const tab = route === 'leads' ? 'leads' : 'projects';
 
   // The address says which editor to show. Its project is fetched first, so the form starts from current data.
   useEffect(() => {
+    if (editorOpen) return undefined; // a new project was just saved and its editor is here already
     setEditing(null);
     const id = route.match(/^edit\/(\d+)$/)?.[1];
     if (!user || (route !== 'new' && !id)) return undefined;
@@ -54,7 +56,7 @@ export default function Dashboard() {
       const project = id
         ? data.projects.find((item) => String(item.id) === id)
         : { ...emptyProject, category: data.categories[0]?.value || '' };
-      if (project) setEditing(project);
+      if (project) setEditing({ project, key: route });
       else { dashboard.projectMissing(); close(); }
     });
     return () => { outdated = true; };
@@ -87,22 +89,23 @@ export default function Dashboard() {
   if (!user || waitingForEditor) return <LoadingScreen label={t.loading} />;
   arrived.current = true;
 
+  // Saving stays in the editor, which then shows the project as the server has it.
   const save = async (form, files) => {
-    const project = editing;
+    const { project, key } = editing;
     const saved = await dashboard.saveProject(form, project, files);
-    if (saved) {
-      removeDraft(project.id || 'new');
-      // Only if the user has not gone elsewhere while the request was running.
-      if (window.location.hash === `#${routeOf(project)}`) close();
-    }
-    return saved;
+    if (!saved) return;
+    removeDraft(project.id || 'new');
+    // Only if the user has not gone elsewhere while the request was running.
+    if (window.location.hash !== `#${routeOf(project)}`) return;
+    setEditing({ project: saved, key });
+    if (!project.id) replace(routeOf(saved)); // a new project has an address of its own from now on
   };
 
   const newLeads = leads.filter((lead) => lead.status === 'new').length;
 
   return (
     <div lang={lang} className="min-h-screen bg-background pb-24">
-      {editorOpen && <ProjectForm key={route} project={editing} categories={categories} t={t} lang={lang} setLang={setLang} onSave={save} onClose={close} />}
+      {editorOpen && <ProjectForm key={editing.key} project={editing.project} categories={categories} t={t} lang={lang} setLang={setLang} onSave={save} onClose={close} />}
       {/* Kept mounted while editing, so search, filter and tab are still there afterwards. */}
       <div hidden={editorOpen}>
         <header className="border-b border-border bg-card">

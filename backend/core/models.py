@@ -88,7 +88,13 @@ class ProjectScreenshot(models.Model):
     image = models.FileField(upload_to='projects/%Y/%m/')
     # Description per language, e.g. {'de': '…', 'en': '…'}; the page falls back to the project title.
     alt = models.JSONField(default=dict, blank=True)
+    # Order on the site, set in the dashboard; the first picture is the cover. Pictures without a number (0) come first,
+    # the newest before the older ones, so an imported card keeps its last picture as the cover.
+    position = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('position', '-id')
 
 
 class ContactRequest(models.Model):

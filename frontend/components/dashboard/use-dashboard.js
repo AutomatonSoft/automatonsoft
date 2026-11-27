@@ -73,16 +73,18 @@ export function useDashboard() {
     const body = new FormData(form);
     body.set('published', form.published.checked ? 'true' : 'false');
     files.forEach((file) => body.append('screenshots', file));
+    let saved;
     try {
       const { ok, status, data } = await apiFetch(`/projects/${project.id ? `${project.id}/update` : 'create'}/`, { method: 'POST', body });
-      if (!ok) { say(`${t.saveError} (${data?.detail || `HTTP ${status}`})`, true); return false; }
+      if (!ok) { say(`${t.saveError} (${data?.detail || `HTTP ${status}`})`, true); return null; }
+      saved = data.project;
     } catch {
       say(t.saveError, true);
-      return false;
+      return null;
     }
     say(project.id ? t.updated : t.created);
     load();
-    return true;
+    return saved; // the project as the server has it now
   };
 
   const deleteProject = async (project) => {
