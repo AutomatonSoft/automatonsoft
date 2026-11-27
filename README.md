@@ -72,6 +72,19 @@ Push в `main` после зелёного CI: GitHub Actions на self-hosted �
 
 Если меняется `deploy/server/deploy-automatonsoft`, его нужно вручную установить на сервер: в `/usr/local/sbin/` он лежит под root.
 
+**Письма о новых заявках.** Настройки лежат только на сервере, в `/home/Automatonsoft/mail.env` (права `600`, в git не попадают; нужен Docker Compose 2.24 или новее). Без этого файла письма не отправляются. Значения с паролем берите в одинарные кавычки:
+
+```
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=логин ящика
+SMTP_PASSWORD='пароль ящика'
+MAIL_FROM=website@automatonsoft.de
+LEADS_NOTIFY_TO=info@automatonsoft.de
+```
+
+После изменения файла пересоздайте контейнер: `sudo docker compose -f /home/Automatonsoft/docker-compose.yml up -d --force-recreate backend`. Проверка без заявки: `sudo docker exec automatonsoft-backend python manage.py sendtestemail адрес@example.com`. Не доставленные письма видны в `docker logs automatonsoft-backend`; сама заявка сохраняется в любом случае. Больше 20 заявок за час считаются потоком спама: письма о лишних не отправляются.
+
 ## Контент
 
 - **Главная** (`/`, `/en`) уже в новом дизайне: `components/landing/home-landing.jsx`, тексты из `dictionaries/*/home.js`, продукты в первом экране — `lib/landings/home.js`. Главная и лендинги собраны из общих блоков `components/landing/blocks.jsx` (заголовок, карточки трёх тонов, FAQ, контакты) и `cta-band.jsx`; шапка, подвал (со ссылками на все лендинги), плавающая кнопка и мобильная панель — в `chrome.jsx`. Новый блок или правку стиля делайте в `blocks.jsx`, тогда они применятся везде.

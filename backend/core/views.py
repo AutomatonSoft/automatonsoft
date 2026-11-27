@@ -13,6 +13,7 @@ from .images import InvalidImage, optimize_image
 from .models import (
     LAST_POSITION, PLATFORMS, PORTFOLIO_CATEGORIES, ContactRequest, Project, ProjectScreenshot, number_projects, unique_slug,
 )
+from .notifications import notify_new_request
 
 
 def serialize(project, request):
@@ -177,7 +178,8 @@ def contact(request):
     if errors or payload.get('consent') is not True:
         return JsonResponse({'detail': 'Invalid contact request.', 'fields': sorted(set(errors))}, status=400)
     source = payload.get('attribution') if isinstance(payload.get('attribution'), dict) else {}
-    ContactRequest.objects.create(**data, attribution={key: str(source[key])[:500] for key in ATTRIBUTION_KEYS if source.get(key)})
+    item = ContactRequest.objects.create(**data, attribution={key: str(source[key])[:500] for key in ATTRIBUTION_KEYS if source.get(key)})
+    notify_new_request(item)
     return JsonResponse({}, status=201)
 
 

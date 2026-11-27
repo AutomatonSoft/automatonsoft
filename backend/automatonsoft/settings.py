@@ -107,7 +107,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {'console': {'class': 'logging.StreamHandler'}},
-    'loggers': {'django': {'handlers': ['console'], 'level': 'INFO' if DEBUG else 'ERROR'}},
+    'loggers': {
+        'django': {'handlers': ['console'], 'level': 'INFO' if DEBUG else 'ERROR'},
+        'core': {'handlers': ['console'], 'level': 'INFO'},
+    },
 }
 
 
@@ -152,9 +155,22 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
+# On the server these values come from mail.env (see README). Without SMTP_HOST a mail is only printed to the log.
+
+SMTP_HOST = os.getenv('SMTP_HOST', '')
+SMTP_PORT = int(os.getenv('SMTP_PORT') or 587)
 
 MAILERS = {
     'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        'OPTIONS': {
+            'host': SMTP_HOST, 'port': SMTP_PORT, 'username': os.getenv('SMTP_USER', ''), 'password': os.getenv('SMTP_PASSWORD', ''),
+            'use_ssl': SMTP_PORT == 465, 'use_tls': SMTP_PORT != 465, 'timeout': 20,
+        },
+    } if SMTP_HOST else {'BACKEND': 'django.core.mail.backends.console.EmailBackend'},
 }
+DEFAULT_FROM_EMAIL = os.getenv('MAIL_FROM') or 'website@automatonsoft.de'
+# Who is told about a new contact request: addresses separated by commas. Empty: nobody.
+LEADS_NOTIFY_TO = [address.strip() for address in os.getenv('LEADS_NOTIFY_TO', '').split(',') if address.strip()]
+# For links in mails.
+SITE_URL = os.getenv('SITE_URL') or 'https://automatonsoft.com'
