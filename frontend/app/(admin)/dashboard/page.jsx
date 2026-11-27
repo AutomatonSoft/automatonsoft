@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { removeDraft, wouldLoseWork } from '@/components/dashboard/drafts';
 import LanguageSwitch from '@/components/dashboard/language-switch';
 import LeadsList from '@/components/dashboard/leads-list';
+import LoadingScreen from '@/components/dashboard/loading-screen';
 import LoginForm from '@/components/dashboard/login-form';
 import ProjectForm from '@/components/dashboard/project-form';
 import ProjectList from '@/components/dashboard/project-list';
@@ -21,10 +22,10 @@ const routeOf = (project) => (project.id ? `edit/${project.id}` : 'new');
 function Tabs({ tabs, active, onChange }) {
   return (
     <div className="flex gap-1" role="tablist">
-      {tabs.map(({ id, label, count }) => (
+      {tabs.map(({ id, label, count, alert, hint }) => (
         <button key={id} type="button" role="tab" aria-selected={active === id} onClick={() => onChange(id)}
           className={cn('-mb-px border-b-2 px-4 py-3 text-sm font-bold', active === id ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground')}>
-          {label} <span className="ml-1 rounded-full bg-secondary px-2 py-0.5 text-xs tabular-nums">{count}</span>
+          {label} {count > 0 && <span title={hint && `${hint}: ${count}`} className={cn('ml-1 rounded-full px-2 py-0.5 text-xs tabular-nums', alert ? 'bg-primary text-primary-foreground' : 'bg-secondary')}>{count}{hint && <span className="sr-only"> ({hint})</span>}</span>}
         </button>
       ))}
     </div>
@@ -36,9 +37,11 @@ export default function Dashboard() {
   const { user, projects, categories, leads, notice, lang, t, setLang } = dashboard;
   const { route, open, close } = useHashRoute();
   const [editing, setEditing] = useState(null);
-  const [tab, setTab] = useState('projects');
   const listScroll = useRef(0);
+  const arrived = useRef(false);
   const editorOpen = Boolean(editing) && routeOf(editing) === route;
+  // The requests tab is part of the address like the editor, so a reload stays on it and Back returns to the portfolio.
+  const tab = route === 'leads' ? 'leads' : 'projects';
 
   // The address says which editor to show. Its project is fetched first, so the form starts from current data.
   useEffect(() => {
@@ -57,6 +60,9 @@ export default function Dashboard() {
     return () => { outdated = true; };
   }, [user, route]);
 
+  // Requests arrive while the dashboard is open, so opening their tab fetches them again.
+  useEffect(() => { if (user && route === 'leads') dashboard.loadLeads(); }, [route]);
+
   // The editor starts at the top; closing it returns to the same place in the list.
   useEffect(() => { window.scrollTo(0, editorOpen ? 0 : listScroll.current); }, [editorOpen]);
 
@@ -74,7 +80,12 @@ export default function Dashboard() {
   const show = (next) => { listScroll.current = window.scrollY; open(next); };
   const toast = <Toast notice={notice} closeLabel={t.closeNotice} onClose={dashboard.dismissNotice} />;
 
-  if (!user) return <LoginForm t={t} lang={lang} setLang={setLang} error={notice?.error ? notice.text : ''} onLogin={dashboard.login} />;
+  // Arriving straight on an editor (reload, link), wait for it instead of showing the list for a moment.
+  const waitingForEditor = !arrived.current && /^(new|edit\/\d+)$/.test(route) && !editorOpen;
+
+  if (user === null) return <LoginForm t={t} lang={lang} setLang={setLang} error={notice?.error ? notice.text : ''} onLogin={dashboard.login} />;
+  if (!user || waitingForEditor) return <LoadingScreen label={t.loading} />;
+  arrived.current = true;
 
   const save = async (form, files) => {
     const project = editing;
@@ -86,6 +97,8 @@ export default function Dashboard() {
     }
     return saved;
   };
+
+  const newLeads = leads.filter((lead) => lead.status === 'new').length;
 
   return (
     <div lang={lang} className="min-h-screen bg-background pb-24">
@@ -101,7 +114,8 @@ export default function Dashboard() {
             </div>
           </div>
           <div className={container}>
-            <Tabs active={tab} onChange={setTab} tabs={[{ id: 'projects', label: t.tabProjects, count: projects.length }, { id: 'leads', label: t.tabLeads, count: leads.length }]} />
+            <Tabs active={tab} onChange={(next) => (next === 'leads' ? open('leads') : close())}
+              tabs={[{ id: 'projects', label: t.tabProjects, count: projects.length }, { id: 'leads', label: t.tabLeads, count: newLeads, alert: true, hint: t.newLeads }]} />
           </div>
         </header>
         <main className={cn(container, 'py-6')}>
@@ -109,12 +123,11 @@ export default function Dashboard() {
             <ProjectList projects={projects} t={t} lang={lang} onDelete={dashboard.deleteProject} onMove={dashboard.moveProject}
               onNew={() => show('new')} onEdit={(project) => show(routeOf(project))} />
           </div>
-          {tab === 'leads' && (
-            <section className="space-y-4">
-              <h1 className="text-2xl font-black text-ink sm:text-3xl">{t.leadsTitle}</h1>
-              <LeadsList leads={leads} t={t} lang={lang} />
-            </section>
-          )}
+          {/* Hidden rather than removed, so search, filter and a note being typed survive a look at the portfolio. */}
+          <section hidden={tab !== 'leads'} className="space-y-4">
+            <h1 className="text-2xl font-black text-ink sm:text-3xl">{t.leadsTitle}</h1>
+            <LeadsList leads={leads} t={t} lang={lang} onChange={dashboard.updateLead} onDelete={dashboard.deleteLead} />
+          </section>
         </main>
       </div>
       {toast}

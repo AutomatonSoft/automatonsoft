@@ -258,6 +258,44 @@ class ContactApiTests(TestCase):
         self.assertEqual(self.client.get('/api/contact-requests/').json()['requests'][0]['name'], 'Ada')
 
 
+class ContactManagementTests(TestCase):
+    def setUp(self):
+        self.staff = get_user_model().objects.create_user('staff', password='pw', is_staff=True)
+        self.lead = ContactRequest.objects.create(name='Ada', email='ada@example.com', message='x')
+
+    def update(self, body):
+        return self.client.post(f'/api/contact-requests/{self.lead.id}/update/', body, content_type='application/json')
+
+    def test_changes_need_a_staff_user(self):
+        self.assertEqual(self.update({'status': 'client'}).status_code, 401)
+        self.assertEqual(self.client.delete(f'/api/contact-requests/{self.lead.id}/delete/').status_code, 401)
+        self.assertEqual(ContactRequest.objects.get().status, 'new')
+
+    def test_status_and_note_are_saved_separately_and_dated(self):
+        self.client.force_login(self.staff)
+        self.assertEqual(self.update({'status': 'new'}).status_code, 200)
+        self.assertIsNone(ContactRequest.objects.get().marked_at)  # nothing changed: no new date
+
+        self.assertEqual(self.update({'status': 'active'}).status_code, 200)
+        response = self.update({'note': '  Called, wants an offer.  '})
+
+        self.assertEqual((response.json()['request']['status'], response.json()['request']['note']), ('active', 'Called, wants an offer.'))
+        self.assertIsNotNone(ContactRequest.objects.get().marked_at)
+        listed = self.client.get('/api/contact-requests/').json()['requests'][0]
+        self.assertEqual((listed['status'], listed['note']), ('active', 'Called, wants an offer.'))
+
+    def test_invalid_changes_are_rejected(self):
+        self.client.force_login(self.staff)
+        for body in ({}, {'status': 'done'}, {'status': 1}, {'note': None}, {'note': 'x' * 2001}, {'name': 'Eve'}, [1]):
+            self.assertEqual(self.update(body).status_code, 400, body)
+        self.assertEqual(list(ContactRequest.objects.values_list('name', 'status', 'note')), [('Ada', 'new', '')])
+
+    def test_staff_can_delete_a_request(self):
+        self.client.force_login(self.staff)
+        self.assertEqual(self.client.delete(f'/api/contact-requests/{self.lead.id}/delete/').status_code, 204)
+        self.assertFalse(ContactRequest.objects.exists())
+
+
 class PurgeRequestsTests(TestCase):
     def test_only_requests_older_than_the_retention_period_are_deleted(self):
         for name, days in (('old', 400), ('recent', 30)):
@@ -265,6 +303,14 @@ class PurgeRequestsTests(TestCase):
             ContactRequest.objects.filter(pk=lead.pk).update(created_at=timezone.now() - timedelta(days=days))
         call_command('purge_requests', stdout=StringIO())
         self.assertEqual(list(ContactRequest.objects.values_list('name', flat=True)), ['recent'])
+
+    def test_clients_are_kept_and_the_period_starts_at_the_last_mark(self):
+        ago = lambda days: timezone.now() - timedelta(days=days)
+        for name, status, marked in (('client', 'client', 400), ('talked recently', 'declined', 30), ('talked long ago', 'active', 400)):
+            lead = ContactRequest.objects.create(name=name, email='a@example.com', message='x', status=status)
+            ContactRequest.objects.filter(pk=lead.pk).update(created_at=ago(800), marked_at=ago(marked))
+        call_command('purge_requests', stdout=StringIO())
+        self.assertEqual(sorted(ContactRequest.objects.values_list('name', flat=True)), ['client', 'talked recently'])
 
 
 class ImportProjectTests(TestCase):

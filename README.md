@@ -68,7 +68,7 @@ CI (`.github/workflows/website.yml`) запускает обе проверки 
 
 Push в `main` после зелёного CI: GitHub Actions на self-hosted раннере собирает архив из `frontend/`, `backend/` и `deploy/docker-compose.yml` и запускает `/usr/local/sbin/deploy-automatonsoft` (копия в `deploy/server/`). Скрипт распаковывает релиз, пересобирает контейнеры и откатывается, если сайт не ответил.
 
-**Сроки хранения данных** (текст в Datenschutz): логи контейнеров ограничены в `deploy/docker-compose.yml`; на сервере один раз нужно поставить `deploy/server/automatonsoft-purge.cron` (в `/etc/cron.d/`, удаляет заявки старше 12 месяцев командой `purge_requests`). Логи nginx на сервере общие для всех проектов: ротация в `/etc/logrotate.d/nginx` (`daily`, `rotate 10`) уже укладывается в 14 дней, её не менять; журнал запросов в контейнере выключен (`access_log off`).
+**Сроки хранения данных** (текст в Datenschutz): логи контейнеров ограничены в `deploy/docker-compose.yml`; на сервере один раз нужно поставить `deploy/server/automatonsoft-purge.cron` (в `/etc/cron.d/`, командой `purge_requests` удаляет заявки, по которым 12 месяцев не меняли статус или заметку; заявки со статусом «Клиент» остаются и удаляются вручную в админке). Логи nginx на сервере общие для всех проектов: ротация в `/etc/logrotate.d/nginx` (`daily`, `rotate 10`) уже укладывается в 14 дней, её не менять; журнал запросов в контейнере выключен (`access_log off`).
 
 Если меняется `deploy/server/deploy-automatonsoft`, его нужно вручную установить на сервер: в `/usr/local/sbin/` он лежит под root.
 

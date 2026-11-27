@@ -6,10 +6,13 @@ import { copy } from '@/components/dashboard/copy';
 import { removeDraft } from '@/components/dashboard/drafts';
 
 const LANGUAGE_KEY = 'admin-language';
+// How long the start may wait for the server before it shows what it has.
+const PATIENCE = 10000;
 
 // Owns dashboard state and every API side effect; components stay presentational.
 export function useDashboard() {
-  const [user, setUser] = useState(null);
+  // undefined while the session is being checked, null when signed out.
+  const [user, setUser] = useState(undefined);
   const [projects, setProjects] = useState([]);
   const [categories, setCategories] = useState([]);
   const [leads, setLeads] = useState([]);
@@ -26,10 +29,21 @@ export function useDashboard() {
     if (leadResult.ok) setLeads(leadResult.data.requests);
   }, []);
 
-  useEffect(() => {
-    setLangState(localStorage.getItem(LANGUAGE_KEY) || 'de');
-    apiFetch('/session/').then(({ data }) => { if (data?.authenticated) { setUser(data.username); load(); } });
+  // The data is fetched before the dashboard appears, so it does not open as an empty list.
+  const enter = useCallback(async (username) => {
+    await Promise.race([load().catch(() => {}), new Promise((resolve) => setTimeout(resolve, PATIENCE))]);
+    setUser(username);
   }, [load]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(LANGUAGE_KEY) || 'de';
+    setLangState(saved);
+    apiFetch('/session/', { signal: AbortSignal.timeout(PATIENCE) }).catch(() => null).then((session) => {
+      if (session?.data?.authenticated) return enter(session.data.username);
+      if (!session?.ok) setNotice({ text: copy[saved].serverError, error: true });
+      setUser(null);
+    });
+  }, [enter]);
 
   // Opening a project reloads the list first: a dashboard tab left open for a while (or an import run in between)
   // would otherwise show an old copy, and saving the form would write that old copy over the newer data.
@@ -49,7 +63,8 @@ export function useDashboard() {
   const login = async (form) => {
     const { ok, data } = await apiFetch('/session/login/', { method: 'POST', json: { username: form.username.value, password: form.password.value } });
     if (!ok) return say(t.loginError, true);
-    setUser(data.username); say(t.welcome); load();
+    await enter(data.username);
+    say(t.welcome);
   };
 
   const logout = async () => { await apiFetch('/session/logout/', { method: 'POST' }); setUser(null); setNotice(null); };
@@ -98,5 +113,31 @@ export function useDashboard() {
     request.then(() => { if (moves.current === request) load(); });
   };
 
-  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, moveProject, refresh, projectMissing, dismissNotice };
+  const loadLeads = async () => {
+    const result = await apiFetch('/contact-requests/').catch(() => null);
+    if (result?.ok) setLeads(result.data.requests);
+  };
+
+  // A status shows at once. A note counts as saved only when the server says so: until then the card keeps the typed
+  // text and tries again the next time the field is left. Changes go out one after another, in the order made.
+  const leadWrites = useRef(Promise.resolve());
+  const apply = (id, changes) => setLeads((current) => current.map((item) => (item.id === id ? { ...item, ...changes } : item)));
+  const updateLead = (lead, changes) => {
+    if (changes.status) apply(lead.id, changes);
+    leadWrites.current = leadWrites.current.then(async () => {
+      const result = await apiFetch(`/contact-requests/${lead.id}/update/`, { method: 'POST', json: changes }).catch(() => null);
+      if (!result?.ok) { say(t.leadError, true); if (changes.status) await loadLeads(); return; }
+      if ('note' in changes) apply(lead.id, { note: result.data.request.note });
+      say(changes.status ? t.statusSaved : t.noteSaved);
+    });
+  };
+
+  const deleteLead = async (lead) => {
+    if (!window.confirm(`„${lead.name}“: ${t.confirmDeleteLead}`)) return;
+    const result = await apiFetch(`/contact-requests/${lead.id}/delete/`, { method: 'DELETE' }).catch(() => null);
+    say(result?.ok ? t.leadDeleted : t.leadDeleteError, !result?.ok);
+    if (result?.ok) setLeads((current) => current.filter((item) => item.id !== lead.id));
+  };
+
+  return { user, projects, categories, leads, notice, lang, t, setLang, login, logout, saveProject, deleteProject, moveProject, refresh, projectMissing, loadLeads, updateLead, deleteLead, dismissNotice };
 }

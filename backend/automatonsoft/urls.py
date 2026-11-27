@@ -28,6 +28,8 @@ urlpatterns = [
     path('api/projects/<int:project_id>/delete/', views.delete_project),
     path('api/projects/<int:project_id>/move/', views.move_project),
     path('api/contact/', views.contact), path('api/contact-requests/', views.contact_requests),
+    path('api/contact-requests/<int:request_id>/update/', views.update_contact_request),
+    path('api/contact-requests/<int:request_id>/delete/', views.delete_contact_request),
 ]
 
 # Uploaded media is served by Nginx in production; the dev server needs this to show dashboard uploads locally.

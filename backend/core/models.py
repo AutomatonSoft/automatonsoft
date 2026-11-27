@@ -92,6 +92,10 @@ class ProjectScreenshot(models.Model):
 
 
 class ContactRequest(models.Model):
+    # How far the request has got. Clients are exempt from the automatic deletion (purge_requests).
+    CLIENT = 'client'
+    STATUSES = (('new', 'New'), ('active', 'In progress'), (CLIENT, 'Client'), ('declined', 'Declined'))
+
     name = models.CharField(max_length=160)
     email = models.EmailField()
     company = models.CharField(max_length=160, blank=True)
@@ -99,6 +103,10 @@ class ContactRequest(models.Model):
     message = models.TextField(max_length=5000)
     locale = models.CharField(max_length=8, blank=True)
     attribution = models.JSONField(default=dict, blank=True)
+    status = models.CharField(max_length=16, choices=STATUSES, default='new')
+    note = models.TextField(max_length=2000, blank=True)
+    # When the team last changed the status or the note; the retention period starts again from here.
+    marked_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

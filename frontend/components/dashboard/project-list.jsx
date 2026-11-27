@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Plus, Search } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { categoryName } from '@/components/dashboard/copy';
 import { hasDraft } from '@/components/dashboard/drafts';
+import FilterTabs from '@/components/dashboard/filter-tabs';
 import ProjectListItem from '@/components/dashboard/project-list-item';
-import { control, panel } from '@/components/dashboard/styles';
+import SearchField from '@/components/dashboard/search-field';
+import { panel } from '@/components/dashboard/styles';
 import { useDragOrder } from '@/components/dashboard/use-drag-order';
 
 const filterTests = {
@@ -35,18 +36,8 @@ export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete
         </div>
       </div>
       <div className="flex flex-col gap-3 md:flex-row md:items-center">
-        <div className="relative flex-1">
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input type="search" value={query} onChange={(event) => setQuery(event.target.value)} aria-label={t.search} placeholder={t.search} className={cn(control, 'pl-9')} />
-        </div>
-        <div className="flex gap-1 overflow-x-auto rounded-xl border border-border bg-card p-1">
-          {Object.entries(filterTests).map(([id, test]) => (
-            <button key={id} type="button" aria-pressed={filter === id} onClick={() => setFilter(id)}
-              className={cn('h-9 flex-auto rounded-lg px-2 text-[13px] font-semibold whitespace-nowrap sm:px-3 sm:text-sm',filter === id ? 'bg-secondary text-primary' : 'text-muted-foreground hover:text-foreground')}>
-              {t[id]} <span className="ml-0.5 tabular-nums opacity-70">{projects.filter(test).length}</span>
-            </button>
-          ))}
-        </div>
+        <SearchField value={query} onChange={setQuery} label={t.search} />
+        <FilterTabs active={filter} onChange={setFilter} options={Object.entries(filterTests).map(([id, test]) => [id, t[id], projects.filter(test).length])} />
       </div>
       {!sortable && projects.length > 1 && visible.length > 0 && <p className="text-sm text-muted-foreground">{t.sortOff}</p>}
       {visible.length

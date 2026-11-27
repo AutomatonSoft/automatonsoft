@@ -9,7 +9,7 @@ export const ruCategories = {
 export const copy = {
   de: {
     // Sign in and header
-    loginTitle: 'Admin', loginHint: 'Mit einem Django-Administrator anmelden.', username: 'Benutzername', password: 'Passwort', login: 'Anmelden', loginError: 'Anmeldedaten ungültig.', welcome: 'Willkommen zurück.', logout: 'Abmelden', closeNotice: 'Meldung schließen',
+    loginTitle: 'Admin', loginHint: 'Mit einem Django-Administrator anmelden.', username: 'Benutzername', password: 'Passwort', login: 'Anmelden', loginError: 'Anmeldedaten ungültig.', welcome: 'Willkommen zurück.', loading: 'Wird geladen …', serverError: 'Der Server antwortet nicht. Bitte Seite neu laden.', logout: 'Abmelden', closeNotice: 'Meldung schließen',
     tabProjects: 'Portfolio', tabLeads: 'Anfragen',
     // Project list
     projects: 'Portfolio verwalten', newProject: 'Neues Projekt', search: 'Name, Kategorie oder Stack suchen', all: 'Alle', live: 'Veröffentlicht', drafts: 'Entwürfe', nothingFound: 'Keine Projekte gefunden.', publishedStatus: 'Veröffentlicht', draftStatus: 'Entwurf', developmentStatus: 'In Entwicklung', editButton: 'Bearbeiten', deleteButton: 'Löschen', viewPage: 'Seite öffnen', confirmDelete: 'endgültig löschen?', deleted: 'Projekt gelöscht.', deleteError: 'Projekt konnte nicht gelöscht werden.',
@@ -22,10 +22,12 @@ export const copy = {
     currentImages: 'Aktuelle Bilder', noImages: 'Noch keine Bilder.', cover: 'Titelbild', addImages: 'Bilder hinzufügen', chooseFiles: 'Dateien auswählen', newImages: 'Werden beim Speichern hinzugefügt', imagesHint: 'Neue Bilder ergänzen die vorhandenen. Das zuletzt ausgewählte wird das Titelbild.',
     preview: 'Live-Vorschau', noScreenshot: 'Screenshot', projectName: 'Projektname', previewDescription: 'Die Beschreibung des Projekts erscheint hier.',
     // Leads
-    leadsTitle: 'Kontaktanfragen', noLeads: 'Noch keine Anfragen.', source: 'Quelle',
+    leadsTitle: 'Kontaktanfragen', noLeads: 'Noch keine Anfragen.', source: 'Quelle', firstPage: 'Erste Seite', searchLeads: 'Name, E-Mail, Firma oder Text suchen', noLeadsFound: 'Keine Anfragen gefunden.', newLeads: 'Neue Anfragen',
+    statusLabel: 'Status', leadStatus: { new: 'Neu', active: 'In Arbeit', client: 'Kunde', declined: 'Absage' }, leadFilter: { new: 'Neu', active: 'In Arbeit', client: 'Kunden', declined: 'Absagen' },
+    note: 'Notiz', notePlaceholder: 'Notiz (wird automatisch gespeichert)', statusSaved: 'Status gespeichert.', noteSaved: 'Notiz gespeichert.', leadError: 'Änderung konnte nicht gespeichert werden.', confirmDeleteLead: 'Anfrage endgültig löschen?', leadDeleted: 'Anfrage gelöscht.', leadDeleteError: 'Anfrage konnte nicht gelöscht werden.',
   },
   ru: {
-    loginTitle: 'Админка', loginHint: 'Войдите с учётной записью администратора Django.', username: 'Имя пользователя', password: 'Пароль', login: 'Войти', loginError: 'Неверные данные для входа.', welcome: 'Добро пожаловать.', logout: 'Выйти', closeNotice: 'Закрыть сообщение',
+    loginTitle: 'Админка', loginHint: 'Войдите с учётной записью администратора Django.', username: 'Имя пользователя', password: 'Пароль', login: 'Войти', loginError: 'Неверные данные для входа.', welcome: 'Добро пожаловать.', loading: 'Загрузка…', serverError: 'Сервер не отвечает. Обновите страницу.', logout: 'Выйти', closeNotice: 'Закрыть сообщение',
     tabProjects: 'Портфолио', tabLeads: 'Заявки',
     projects: 'Управление портфолио', newProject: 'Новый проект', search: 'Название, категория или стек', all: 'Все', live: 'Опубликованные', drafts: 'Черновики', nothingFound: 'Проекты не найдены.', publishedStatus: 'Опубликован', draftStatus: 'Черновик', developmentStatus: 'В разработке', editButton: 'Редактировать', deleteButton: 'Удалить', viewPage: 'Открыть страницу', confirmDelete: 'удалить безвозвратно?', deleted: 'Проект удалён.', deleteError: 'Не удалось удалить проект.',
     sortOff: 'Чтобы менять порядок, выберите «Все» и очистите поиск.', drag: 'Перетащить', moveUp: 'Выше', moveDown: 'Ниже', changePlace: 'Изменить место', orderSaved: 'Порядок сохранён.', moveError: 'Не удалось сохранить порядок.',
@@ -35,7 +37,9 @@ export const copy = {
     landingHint: 'Содержимое страницы проекта /portfolio/<slug>. Списки: один пункт на строку.', slug: 'URL (slug)', slugHint: 'пусто = из названия', slugRule: 'Только строчные латинские буквы, цифры и дефис', website: 'Сайт (необязательно)', challenge: 'Исходная задача', features: 'Функции', results: 'Результаты',
     currentImages: 'Текущие картинки', noImages: 'Картинок пока нет.', cover: 'Обложка', addImages: 'Добавить картинки', chooseFiles: 'Выбрать файлы', newImages: 'Будут добавлены при сохранении', imagesHint: 'Новые картинки добавляются к уже загруженным. Последняя выбранная станет обложкой.',
     preview: 'Предпросмотр', noScreenshot: 'Скриншот', projectName: 'Название проекта', previewDescription: 'Здесь появится описание проекта.',
-    leadsTitle: 'Заявки с сайта', noLeads: 'Заявок пока нет.', source: 'Источник',
+    leadsTitle: 'Заявки с сайта', noLeads: 'Заявок пока нет.', source: 'Источник', firstPage: 'Первая страница', searchLeads: 'Имя, почта, компания или текст', noLeadsFound: 'Заявки не найдены.', newLeads: 'Новые заявки',
+    statusLabel: 'Статус', leadStatus: { new: 'Новая', active: 'В работе', client: 'Клиент', declined: 'Отказ' }, leadFilter: { new: 'Новые', active: 'В работе', client: 'Клиенты', declined: 'Отказы' },
+    note: 'Заметка', notePlaceholder: 'Заметка (сохраняется сама)', statusSaved: 'Статус сохранён.', noteSaved: 'Заметка сохранена.', leadError: 'Не удалось сохранить изменение.', confirmDeleteLead: 'удалить заявку безвозвратно?', leadDeleted: 'Заявка удалена.', leadDeleteError: 'Не удалось удалить заявку.',
   },
 };
 
