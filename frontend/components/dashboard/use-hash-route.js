@@ -26,6 +26,12 @@ export function useHashRoute() {
     setRoute(next);
   };
 
+  // Change the address of the screen that is open, without a new history entry.
+  const replace = (next) => {
+    window.history.replaceState({ fromList: window.history.state?.fromList }, '', `#${next}`);
+    setRoute(next);
+  };
+
   // Back to the list. An entry this page added is taken back, so Back from the list does not reopen the editor;
   // after arriving by a link there is no list entry behind it, and the address is only cleaned up.
   const close = () => {
@@ -39,5 +45,5 @@ export function useHashRoute() {
     }
   };
 
-  return { route, open, close };
+  return { route, open, replace, close };
 }

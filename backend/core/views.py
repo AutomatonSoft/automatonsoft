@@ -17,14 +17,16 @@ from .notifications import notify_new_request
 
 
 def serialize(project, request):
+    pictures = list(project.screenshots.all())  # in the order of the model: the cover first
     return {
         'id': project.id, 'slug': project.slug, 'title': project.title, 'description': project.description,
         'challenge': project.challenge, 'features': project.features, 'results': project.results, 'website': project.website,
         'stack': project.stack, 'integrations': project.integrations, 'category': project.category, 'category_label': project.get_category_display(),
         'development_time': project.development_time, 'own': project.own, 'position': project.position, 'platforms': project.platforms, 'in_development': project.in_development,
         'published': project.published, 'translations': project.translations,
-        'screenshots': [item.image.url for item in project.screenshots.order_by('-id')],
-        'screenshot_alts': [item.alt for item in project.screenshots.order_by('-id')],
+        'screenshots': [item.image.url for item in pictures],
+        'screenshot_alts': [item.alt for item in pictures],
+        'screenshot_ids': [item.id for item in pictures],
     }
 
 
@@ -74,6 +76,48 @@ def parse_lines(value):
     return [item.strip() for item in value.splitlines() if item.strip()]
 
 
+ALT_LANGUAGES = ('de', 'en')
+ALT_LENGTH = 300
+
+
+def parse_pictures(value):
+    """The dashboard's list of the saved pictures, cover first: [{"id": 1, "remove": false, "alt": {"de": "…", "en": "…"}}].
+    Raises ValueError for anything else."""
+    pictures = json.loads(value)
+    if not isinstance(pictures, list):
+        raise ValueError
+    for item in pictures:
+        if not isinstance(item, dict) or type(item.get('id')) is not int or not isinstance(item.get('alt', {}), dict):
+            raise ValueError
+        if any(not isinstance(text, str) or len(text) > ALT_LENGTH for text in item.get('alt', {}).values()):
+            raise ValueError
+    return pictures
+
+
+def edit_pictures(project, pictures):
+    """Apply order, captions and removals; returns the number the next new picture gets. A picture the list does not
+    name (uploaded elsewhere meanwhile) stays as it is."""
+    saved = {item.id: item for item in project.screenshots.all()}
+    place = 0
+    for entry in pictures:
+        item = saved.get(entry['id'])
+        if item is None:
+            continue
+        if entry.get('remove'):
+            file = item.image
+            item.delete()
+            if not ProjectScreenshot.objects.filter(image=file.name).exists():
+                file.delete(save=False)
+            continue
+        place += 1
+        item.position = place
+        if 'alt' in entry:
+            texts = {**item.alt, **{language: entry['alt'].get(language, '').strip() for language in ALT_LANGUAGES}}
+            item.alt = {language: text for language, text in texts.items() if text}
+        item.save(update_fields=['position', 'alt'])
+    return place + 1
+
+
 def apply_project_form(project, request):
     """Copy the dashboard form onto `project`; returns an error response or None."""
     category = request.POST.get('category', '')
@@ -98,6 +142,15 @@ def apply_project_form(project, request):
     project.published = request.POST.get('published') == 'true'
     project.in_development = request.POST.get('in_development') == 'true'
     project.platforms = [item for item in PLATFORMS if item in request.POST.getlist('platforms')]
+    # Fields a dashboard page loaded before they existed does not send: absent means "leave as it is".
+    if 'own' in request.POST:
+        project.own = request.POST['own'] == 'true'
+    if 'integrations' in request.POST:
+        project.integrations = parse_tags(request.POST['integrations'])
+    try:
+        pictures = parse_pictures(request.POST['pictures']) if 'pictures' in request.POST else None
+    except ValueError:
+        return JsonResponse({'detail': 'Invalid picture list.'}, status=400)
     english = {
         'description': request.POST.get('description_en', '').strip(), 'stack': parse_tags(request.POST.get('stack_en', '')),
         'challenge': request.POST.get('challenge_en', '').strip(),
@@ -109,7 +162,12 @@ def apply_project_form(project, request):
     except InvalidImage:
         return JsonResponse({'detail': 'Screenshots must be valid image files.'}, status=400)
     project.save()
-    ProjectScreenshot.objects.bulk_create([ProjectScreenshot(project=project, image=image) for image in images])
+    # With a picture list, new uploads follow the saved ones in the order picked; without one they lead, newest first.
+    first = edit_pictures(project, pictures) if pictures is not None else None
+    ProjectScreenshot.objects.bulk_create([
+        ProjectScreenshot(project=project, image=image, position=0 if first is None else first + index)
+        for index, image in enumerate(images)
+    ])
     return None
 
 

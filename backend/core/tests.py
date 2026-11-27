@@ -1,4 +1,5 @@
 import importlib
+import json
 from datetime import timedelta
 from io import StringIO
 import shutil
@@ -112,6 +113,75 @@ class ProjectApiTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.project.screenshots.count(), 2)
         self.assertTrue(response.json()['project']['screenshots'][0].endswith('new.webp'))
+
+    def picture(self, name, **fields):
+        return ProjectScreenshot.objects.create(project=self.project, image=self.image(name, (10, 10)), **fields)
+
+    def save_project(self, project_id=None, **data):
+        url = f'/api/projects/{project_id or self.project.id}/update/'
+        return self.client.post(url, self.project_data(title=self.project.title, **data))
+
+    def names(self, response):
+        # Without the extension (uploads become WebP) and the suffix storage adds when a file name is taken.
+        return [url.rsplit('/', 1)[1].split('.')[0].split('_')[0] for url in response.json()['project']['screenshots']]
+
+    def test_own_label_and_integrations_are_saved_and_kept_when_not_sent(self):
+        self.client.force_login(self.staff)
+
+        response = self.save_project(own='true', integrations=' Afterbuy, Klarna ,')
+        self.assertEqual((response.json()['project']['own'], response.json()['project']['integrations']), (True, ['Afterbuy', 'Klarna']))
+
+        kept = self.save_project().json()['project']  # a form without these fields
+        self.assertEqual((kept['own'], kept['integrations']), (True, ['Afterbuy', 'Klarna']))
+        cleared = self.save_project(own='false', integrations='').json()['project']
+        self.assertEqual((cleared['own'], cleared['integrations']), (False, []))
+
+    def test_pictures_can_be_reordered_captioned_and_removed(self):
+        self.client.force_login(self.staff)
+        first, second, third = (self.picture(f'{name}.png') for name in ('first', 'second', 'third'))
+        third.alt = {'de': 'Alt', 'fr': 'Reste'}
+        third.save()
+
+        response = self.save_project(pictures=json.dumps([
+            {'id': second.id, 'alt': {'de': ' Übersicht ', 'en': 'Overview'}},
+            {'id': third.id, 'alt': {'de': '', 'en': 'List'}},
+            {'id': first.id, 'remove': True},
+        ]))
+
+        self.assertEqual(self.names(response), ['second', 'third'])
+        self.assertEqual(response.json()['project']['screenshot_alts'], [{'de': 'Übersicht', 'en': 'Overview'}, {'en': 'List', 'fr': 'Reste'}])
+        self.assertEqual(response.json()['project']['screenshot_ids'], [second.id, third.id])
+        self.assertFalse(first.image.storage.exists(first.image.name))
+        self.assertTrue(second.image.storage.exists(second.image.name))
+
+    def test_new_pictures_follow_the_listed_ones_in_the_order_picked(self):
+        self.client.force_login(self.staff)
+        old = self.picture('old.png')
+
+        response = self.save_project(pictures=json.dumps([{'id': old.id}]), screenshots=[self.image('a.png'), self.image('b.png')])
+
+        self.assertEqual(self.names(response), ['old', 'a', 'b'])
+
+    def test_a_picture_the_list_does_not_name_is_left_alone_and_foreign_ids_are_ignored(self):
+        self.client.force_login(self.staff)
+        mine, unnamed = self.picture('mine.png'), self.picture('unnamed.png')
+        other = Project.objects.create(title='Other', description='x', stack=[], development_time='—')
+        foreign = ProjectScreenshot.objects.create(project=other, image=self.image('foreign.png', (10, 10)))
+
+        self.save_project(pictures=json.dumps([{'id': mine.id}, {'id': foreign.id, 'remove': True}, {'id': 999999}]))
+
+        self.assertTrue(ProjectScreenshot.objects.filter(pk__in=[unnamed.pk, foreign.pk]).count() == 2)
+
+    def test_an_invalid_picture_list_changes_nothing(self):
+        self.client.force_login(self.staff)
+        picture = self.picture('keep.png')
+        bad = ('x', '{}', '[1]', '[{"id": "1"}]', '[{"id": true}]', json.dumps([{'id': picture.id, 'alt': {'de': 'x' * 301}}]),
+               json.dumps([{'id': picture.id, 'alt': {'de': 5}}]))
+
+        for value in bad:
+            response = self.client.post(f'/api/projects/{self.project.id}/update/', self.project_data(title='Changed', pictures=value))
+            self.assertEqual(response.status_code, 400, value)
+        self.assertEqual((Project.objects.get(pk=self.project.id).title, self.project.screenshots.count()), ('Existing project', 1))
 
     def test_english_translation_is_saved_and_cleared(self):
         self.client.force_login(self.staff)
