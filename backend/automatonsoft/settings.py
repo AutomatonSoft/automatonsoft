@@ -13,18 +13,37 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 import os
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+SQLITE_PATH = Path(os.getenv('SQLITE_PATH', BASE_DIR / 'db.sqlite3'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-kc=p0+=967m=t0gj7a^z-(q_xdd+*er-8rvb8%f375(3=moql4')
-
 # SECURITY WARNING: don't run with debug turned on in production!
+# On for work on a developer's machine; deploy/docker-compose.yml switches it off.
 DEBUG = os.getenv('DJANGO_DEBUG', 'true').lower() == 'true'
+
+
+def installation_key(path):
+    """This installation's own secret key: made on first use and kept beside the database, never in the repository."""
+    try:
+        with open(path, 'x') as file:  # 'x': only if there is none yet
+            path.chmod(0o600)
+            file.write(get_random_secret_key())
+    except FileExistsError:
+        pass
+    return path.read_text().strip()
+
+
+# SECURITY WARNING: keep the secret key used in production secret!
+# The key written here is public with the repository, so only debug mode may fall back to it.
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY') or (
+    'django-insecure-kc=p0+=967m=t0gj7a^z-(q_xdd+*er-8rvb8%f375(3=moql4' if DEBUG
+    else installation_key(SQLITE_PATH.parent / 'secret_key'))
 
 ALLOWED_HOSTS = [host for host in os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',') if host]
 CSRF_TRUSTED_ORIGINS = [origin for origin in os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',') if origin]
@@ -78,8 +97,17 @@ WSGI_APPLICATION = 'automatonsoft.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.getenv('SQLITE_PATH', BASE_DIR / 'db.sqlite3'),
+        'NAME': SQLITE_PATH,
     }
+}
+
+
+# With debug off Django would print nothing about a failed request; keep its traceback in the container log.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {'console': {'class': 'logging.StreamHandler'}},
+    'loggers': {'django': {'handlers': ['console'], 'level': 'INFO' if DEBUG else 'ERROR'}},
 }
 
 

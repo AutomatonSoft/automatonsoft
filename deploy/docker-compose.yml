@@ -16,6 +16,9 @@ services:
     build: ./current/backend
     container_name: automatonsoft-backend
     environment:
+      # No debug pages in production. The secret key is then made on the first start and kept in /data/secret_key;
+      # setting DJANGO_SECRET_KEY would take its place.
+      DJANGO_DEBUG: 'false'
       SQLITE_PATH: /data/db.sqlite3
       DJANGO_ALLOWED_HOSTS: automatonsoft.com,localhost,127.0.0.1
       DJANGO_CSRF_TRUSTED_ORIGINS: https://automatonsoft.com
