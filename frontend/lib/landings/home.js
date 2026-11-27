@@ -12,6 +12,8 @@ const products = [
   { slug: 'roader', name: 'Roader', de: 'Auslieferungen für Fahrer', en: 'Deliveries for drivers' },
   { slug: 'lisa', name: 'Lisa', de: 'KI-Sprachassistentin im Kundenservice', en: 'AI voice assistant for customer calls' },
   { slug: 'aftercool', name: 'Aftercool', de: 'Produktdaten verwalten und abgleichen', en: 'Manage and sync product data' },
+  { slug: 'woodguard', name: 'Woodguard', de: 'EUDR-Sorgfaltspflicht in Holzlieferketten', en: 'EUDR due diligence for timber supply chains' },
+  { slug: 'ottoflow', name: 'OttoFlow', de: 'Produktdaten für den Marktplatz OTTO', en: 'Product data for the OTTO marketplace' },
 ];
 
 const labels = {
@@ -19,7 +21,7 @@ const labels = {
     moreProjects: 'Weitere Projekte', panel: 'Im Einsatz', before: 'Vorher', after: 'Nachher', more: 'Mehr erfahren', viewProject: 'Projekt ansehen', viewSolution: 'Lösung ansehen',
     tags: ['KI im Live-Betrieb', 'Entwickelt in Deutschland', 'DSGVO by Design'],
     stats: [
-      { value: '6', label: 'Produkte im täglichen Einsatz' },
+      { value: '8', label: 'Produkte im täglichen Einsatz' },
       { value: 'Live', label: 'Lisa nimmt Kundenanrufe an' },
       { value: '7', label: 'Branchen, die wir betreuen' },
       { value: 'DE/EN', label: 'Projekte auf Deutsch und Englisch' },
@@ -30,7 +32,7 @@ const labels = {
     moreProjects: 'More projects', panel: 'In daily use', before: 'Before', after: 'After', more: 'Learn more', viewProject: 'View project', viewSolution: 'See the solution',
     tags: ['AI in live operation', 'Engineered in Germany', 'GDPR by design'],
     stats: [
-      { value: '6', label: 'Products in daily use' },
+      { value: '8', label: 'Products in daily use' },
       { value: 'Live', label: 'Lisa answers customer calls' },
       { value: '7', label: 'Industries we serve' },
       { value: 'DE/EN', label: 'Projects in German and English' },

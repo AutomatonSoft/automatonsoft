@@ -2,11 +2,21 @@ import { defaultLocale } from '@/lib/i18n';
 
 const TRANSLATED = ['description', 'stack', 'challenge', 'features', 'results'];
 
+// The development time is typed only once, in German ("ca. 3,5 Monate", "seit 07/2026"); these are the words it is written with.
+const ENGLISH_TIME = { 'ca.': 'approx.', seit: 'since', Prototyp: 'Prototype', Tag: 'day', Tage: 'days', Woche: 'week', Wochen: 'weeks', Monat: 'month', Monate: 'months', Jahr: 'year', Jahre: 'years' };
+const englishTime = (value) => value
+  .replace(/\bca\.|\p{L}+/gu, (word) => ENGLISH_TIME[word] || word)
+  .replace(/(\d),(\d)/g, '$1.$2');
+
 // Project content in the database is German; other locales read optional overrides from `translations`.
 export function localizeProject(project, locale) {
   if (locale === defaultLocale) return project;
   const translation = project.translations?.[locale] || {};
-  return { ...project, ...Object.fromEntries(TRANSLATED.filter((key) => translation[key]?.length).map((key) => [key, translation[key]])) };
+  return {
+    ...project,
+    ...(project.development_time && { development_time: englishTime(project.development_time) }),
+    ...Object.fromEntries(TRANSLATED.filter((key) => translation[key]?.length).map((key) => [key, translation[key]])),
+  };
 }
 
 // Slug of the client-rendered page Nginx serves for projects added after the last build.
