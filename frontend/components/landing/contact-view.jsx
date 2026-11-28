@@ -32,10 +32,8 @@ export default function ContactView({ locale }) {
               </ol>
               <p className="mt-6 text-sm text-muted-foreground">{shared.points.join(' · ')}</p>
             </div>
-          <div className={cn(block, 'order-2 bg-secondary p-6 sm:p-10 lg:sticky lg:top-24 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1')}>
-            <h2 className="mb-6 text-[clamp(1.75rem,3vw,2.5rem)] leading-none font-black tracking-[-0.04em]">{t.formTitle}</h2>
-            <LandingContactForm locale={locale} t={t} messageLabel={t.message} privacyHref={href(locale, 'privacy')} />
-          </div>
+          <LandingContactForm locale={locale} t={t} title={t.formTitle} messageLabel={t.message} privacyHref={href(locale, 'privacy')}
+            className="order-2 lg:sticky lg:top-24 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1" />
         </div>
       </Section>
     </SitePage>

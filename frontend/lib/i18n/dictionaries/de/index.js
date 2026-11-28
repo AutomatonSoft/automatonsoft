@@ -50,7 +50,7 @@ const de = {
     formTitle: 'Projekt anfragen', name: 'Name', emailField: 'E-Mail', company: 'Unternehmen (optional)', phoneField: 'Telefon (optional)',
     message: 'Ihre Nachricht', consent: 'Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden. Details in der',
     privacyLink: 'Datenschutzerklärung', submit: 'Anfrage senden', sending: 'Wird gesendet …',
-    success: 'Vielen Dank! Wir haben Ihre Anfrage erhalten und melden uns zeitnah bei Ihnen.', error: 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie uns direkt per E-Mail.',
+    successTitle: 'Anfrage erhalten', success: 'Vielen Dank! Wir haben Ihre Anfrage erhalten und melden uns zeitnah bei Ihnen.', sendAnother: 'Weitere Anfrage senden', error: 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie uns direkt per E-Mail.',
   },
   pages,
 };

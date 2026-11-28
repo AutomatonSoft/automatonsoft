@@ -50,7 +50,7 @@ const en = {
     formTitle: 'Request a project', name: 'Name', emailField: 'Email', company: 'Company (optional)', phoneField: 'Phone (optional)',
     message: 'Your message', consent: 'I agree that my details will be stored to process my request. See our',
     privacyLink: 'privacy policy', submit: 'Send request', sending: 'Sending …',
-    success: 'Thank you! We have received your request and will get back to you shortly.', error: 'Your request could not be sent. Please email us directly.',
+    successTitle: 'Request received', success: 'Thank you! We have received your request and will get back to you shortly.', sendAnother: 'Send another request', error: 'Your request could not be sent. Please email us directly.',
   },
   pages,
 };
