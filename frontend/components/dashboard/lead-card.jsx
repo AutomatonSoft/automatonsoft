@@ -42,10 +42,10 @@ export default function LeadCard({ lead, note, t, lang, onType, onChange, onDele
         </p>
       )}
       <div className="mt-4 space-y-3 border-t border-border pt-4">
-        <div role="group" aria-label={t.statusLabel} className="grid grid-cols-4 gap-1 rounded-xl border border-border bg-background p-1 sm:flex sm:w-fit">
+        <div role="group" aria-label={t.statusLabel} className="grid grid-cols-2 gap-1 rounded-xl border border-border bg-background p-1 sm:flex sm:w-fit">
           {leadStatuses.map((status) => (
             <button key={status} type="button" aria-pressed={lead.status === status} onClick={() => lead.status !== status && onChange(lead, { status })}
-              className={cn('h-9 rounded-lg px-1 text-[13px] font-semibold whitespace-nowrap sm:px-3', lead.status === status ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-card hover:text-foreground')}>
+              className={cn('h-9 rounded-lg px-2.5 text-[13px] font-semibold whitespace-nowrap sm:px-3', lead.status === status ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-card hover:text-foreground')}>
               {t.leadStatus[status]}
             </button>
           ))}

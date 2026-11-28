@@ -26,7 +26,7 @@ export const copy = {
     // Leads
     leadsTitle: 'Kontaktanfragen', noLeads: 'Noch keine Anfragen.', source: 'Quelle', firstPage: 'Erste Seite', searchLeads: 'Anfragen suchen', noLeadsFound: 'Keine Anfragen gefunden.', newLeads: 'Neue Anfragen',
     statusLabel: 'Status', leadStatus: { new: 'Neu', active: 'In Arbeit', client: 'Kunde', declined: 'Absage' }, leadFilter: { new: 'Neu', active: 'In Arbeit', client: 'Kunden', declined: 'Absagen' },
-    note: 'Notiz', notePlaceholder: 'Notiz (wird automatisch gespeichert)', statusSaved: 'Status gespeichert.', noteSaved: 'Notiz gespeichert.', leadError: 'Änderung konnte nicht gespeichert werden.', confirmDeleteLead: 'Anfrage endgültig löschen?', leadDeleted: 'Anfrage gelöscht.', leadDeleteError: 'Anfrage konnte nicht gelöscht werden.',
+    note: 'Notiz', notePlaceholder: 'Notiz', statusSaved: 'Status gespeichert.', noteSaved: 'Notiz gespeichert.', leadError: 'Änderung konnte nicht gespeichert werden.', confirmDeleteLead: 'Anfrage endgültig löschen?', leadDeleted: 'Anfrage gelöscht.', leadDeleteError: 'Anfrage konnte nicht gelöscht werden.',
   },
   ru: {
     loginTitle: 'Админка', loginHint: 'Войдите с учётной записью администратора Django.', username: 'Имя пользователя', password: 'Пароль', login: 'Войти', loginError: 'Неверные данные для входа.', welcome: 'Добро пожаловать.', loading: 'Загрузка…', serverError: 'Сервер не отвечает. Обновите страницу.', logout: 'Выйти', toSite: 'На сайт', backToSite: 'На сайт', menu: 'Меню', language: 'Язык', closeNotice: 'Закрыть сообщение',
@@ -43,7 +43,7 @@ export const copy = {
     preview: 'Предпросмотр', noScreenshot: 'Скриншот', projectName: 'Название проекта', previewDescription: 'Здесь появится описание проекта.',
     leadsTitle: 'Заявки с сайта', noLeads: 'Заявок пока нет.', source: 'Источник', firstPage: 'Первая страница', searchLeads: 'Поиск заявок', noLeadsFound: 'Заявки не найдены.', newLeads: 'Новые заявки',
     statusLabel: 'Статус', leadStatus: { new: 'Новая', active: 'В работе', client: 'Клиент', declined: 'Отказ' }, leadFilter: { new: 'Новые', active: 'В работе', client: 'Клиенты', declined: 'Отказы' },
-    note: 'Заметка', notePlaceholder: 'Заметка (сохраняется сама)', statusSaved: 'Статус сохранён.', noteSaved: 'Заметка сохранена.', leadError: 'Не удалось сохранить изменение.', confirmDeleteLead: 'удалить заявку безвозвратно?', leadDeleted: 'Заявка удалена.', leadDeleteError: 'Не удалось удалить заявку.',
+    note: 'Заметка', notePlaceholder: 'Заметка', statusSaved: 'Статус сохранён.', noteSaved: 'Заметка сохранена.', leadError: 'Не удалось сохранить изменение.', confirmDeleteLead: 'удалить заявку безвозвратно?', leadDeleted: 'Заявка удалена.', leadDeleteError: 'Не удалось удалить заявку.',
   },
 };
 
