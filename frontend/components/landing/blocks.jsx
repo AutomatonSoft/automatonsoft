@@ -120,9 +120,8 @@ export function ContactSection({ id, locale, contact, formT, privacyHref }) {
             <p className="mt-6 text-sm text-muted-foreground">{contact.points.join(' · ')}</p>
           </div>
         </div>
-        <div className={cn(block, 'order-2 bg-secondary p-6 sm:p-10 lg:sticky lg:top-24 lg:order-none lg:col-start-2 lg:row-start-1')}>
-          <LandingContactForm locale={locale} t={formT} messageLabel={contact.message} privacyHref={privacyHref} />
-        </div>
+        <LandingContactForm locale={locale} t={formT} messageLabel={contact.message} privacyHref={privacyHref}
+          className="order-2 lg:sticky lg:top-24 lg:order-none lg:col-start-2 lg:row-start-1" />
       </div>
     </Section>
   );

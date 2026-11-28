@@ -18,16 +18,28 @@ export function useDashboard() {
   const [leads, setLeads] = useState([]);
   const [notice, setNotice] = useState(null);
   const [lang, setLangState] = useState('de');
+  const langRef = useRef(lang);
+  langRef.current = lang;
   const t = copy[lang];
 
   const say = (text, error = false) => setNotice({ text, error });
   const dismissNotice = useCallback(() => setNotice(null), []);
 
+  // Any 401 from a staff endpoint means the Django session ended: return to LoginForm without losing drafts or hash.
+  const authedFetch = useCallback(async (path, options) => {
+    const result = await apiFetch(path, options);
+    if (result.status === 401) {
+      setUser(null);
+      setNotice({ text: copy[langRef.current].sessionExpired, error: true });
+    }
+    return result;
+  }, []);
+
   const load = useCallback(async () => {
-    const [projectResult, leadResult] = await Promise.all([fetchProjects(), apiFetch('/contact-requests/')]);
+    const [projectResult, leadResult] = await Promise.all([fetchProjects(), authedFetch('/contact-requests/')]);
     if (projectResult.ok) { setProjects(projectResult.data.projects); setCategories(projectResult.data.categories); }
     if (leadResult.ok) setLeads(leadResult.data.requests);
-  }, []);
+  }, [authedFetch]);
 
   // The data is fetched before the dashboard appears, so it does not open as an empty list.
   const enter = useCallback(async (username) => {
@@ -75,7 +87,8 @@ export function useDashboard() {
     files.forEach((file) => body.append('screenshots', file));
     let saved;
     try {
-      const { ok, status, data } = await apiFetch(`/projects/${project.id ? `${project.id}/update` : 'create'}/`, { method: 'POST', body });
+      const { ok, status, data } = await authedFetch(`/projects/${project.id ? `${project.id}/update` : 'create'}/`, { method: 'POST', body });
+      if (status === 401) return null;
       if (!ok) { say(`${t.saveError} (${data?.detail || `HTTP ${status}`})`, true); return null; }
       saved = data.project;
     } catch {
@@ -89,7 +102,8 @@ export function useDashboard() {
 
   const deleteProject = async (project) => {
     if (!window.confirm(`„${project.title}“ ${t.confirmDelete}`)) return;
-    const { ok } = await apiFetch(`/projects/${project.id}/delete/`, { method: 'DELETE' });
+    const { ok, status } = await authedFetch(`/projects/${project.id}/delete/`, { method: 'DELETE' });
+    if (status === 401) return;
     say(ok ? t.deleted : t.deleteError, !ok);
     if (ok) { removeDraft(project.id); load(); }
   };
@@ -105,18 +119,21 @@ export function useDashboard() {
     });
     const request = moves.current.then(async () => {
       try {
-        const { ok } = await apiFetch(`/projects/${project.id}/move/`, { method: 'POST', json: { place } });
+        const { ok, status } = await authedFetch(`/projects/${project.id}/move/`, { method: 'POST', json: { place } });
+        if (status === 401) return false;
         say(ok ? t.orderSaved : t.moveError, !ok);
+        return true;
       } catch {
         say(t.moveError, true);
+        return true;
       }
     });
     moves.current = request;
-    request.then(() => { if (moves.current === request) load(); });
+    request.then((keepGoing) => { if (keepGoing && moves.current === request) load(); });
   };
 
   const loadLeads = async () => {
-    const result = await apiFetch('/contact-requests/').catch(() => null);
+    const result = await authedFetch('/contact-requests/').catch(() => null);
     if (result?.ok) setLeads(result.data.requests);
   };
 
@@ -127,7 +144,8 @@ export function useDashboard() {
   const updateLead = (lead, changes) => {
     if (changes.status) apply(lead.id, changes);
     leadWrites.current = leadWrites.current.then(async () => {
-      const result = await apiFetch(`/contact-requests/${lead.id}/update/`, { method: 'POST', json: changes }).catch(() => null);
+      const result = await authedFetch(`/contact-requests/${lead.id}/update/`, { method: 'POST', json: changes }).catch(() => null);
+      if (result?.status === 401) return;
       if (!result?.ok) { say(t.leadError, true); if (changes.status) await loadLeads(); return; }
       if ('note' in changes) apply(lead.id, { note: result.data.request.note });
       say(changes.status ? t.statusSaved : t.noteSaved);
@@ -136,7 +154,8 @@ export function useDashboard() {
 
   const deleteLead = async (lead) => {
     if (!window.confirm(`„${lead.name}“: ${t.confirmDeleteLead}`)) return;
-    const result = await apiFetch(`/contact-requests/${lead.id}/delete/`, { method: 'DELETE' }).catch(() => null);
+    const result = await authedFetch(`/contact-requests/${lead.id}/delete/`, { method: 'DELETE' }).catch(() => null);
+    if (result?.status === 401) return;
     say(result?.ok ? t.leadDeleted : t.leadDeleteError, !result?.ok);
     if (result?.ok) setLeads((current) => current.filter((item) => item.id !== lead.id));
   };

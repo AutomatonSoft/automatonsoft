@@ -17,7 +17,7 @@ compose.yaml  локальный запуск всего стека в Docker
 Внутри `frontend/`:
 
 ```
-app/              маршруты: (landing-de) и (landing-en) — сайт, (admin)/dashboard — админка; globals.css — Tailwind и палитра
+app/              маршруты: (landing-de) и (landing-en) — сайт, (admin)/admin — админка; globals.css — Tailwind и палитра
 components/       landing/ — блоки и страницы сайта, portfolio/ — данные портфолио, ui/ — shadcn, dashboard/ — админка
 lib/i18n/         тексты на двух языках и таблица URL (routes)
 lib/site-config.js  телефон, e-mail, адрес, домен
@@ -36,7 +36,7 @@ nginx.conf        Nginx внутри контейнера: статика, /api/
 docker compose up -d --build
 ```
 
-Сайт: http://127.0.0.1:18080/, админка: http://127.0.0.1:18080/dashboard. Остановить: `docker compose down` (данные остаются в volume).
+Сайт: http://127.0.0.1:18080/, админка: http://127.0.0.1:18080/admin. Остановить: `docker compose down` (данные остаются в volume).
 
 Для разработки фронта с горячей перезагрузкой: Django на `:8000`, затем
 
@@ -92,5 +92,5 @@ LEADS_NOTIFY_TO=info@automatonsoft.de
 - **Отраслевой лендинг** (`/branchen/<slug>`, `/en/industries/<slug>`): файл данных в `lib/landings/` по образцу `supply-chain.js` и строка в `sources` (`lib/landings/index.js`, ключ = id отрасли из `dictionaries/industries.js`). Общие тексты лежат в `common.js` (файл лендинга может переопределить любое поле), кейсы и картинки — в `cases.js`. Без `heroImage` в первом экране показывается список модулей, без `integrations` нет строки интеграций. Шаблон (`components/landing/landing-page.jsx`), маршруты, hreflang, FAQPage, картинка для соцсетей, sitemap и ссылки с «Branchen» и главной подхватятся сами.
 - **Новая страница:** id и slug в `routes` (`lib/i18n/index.js`) и `pages.<id>` в обоих словарях. `ContentPage` отрисует её сама.
 - **Страница без готового контента:** добавить в `draftPages` (`lib/seo.js`). Она доступна, но `noindex`, без меню и sitemap.
-- **Портфолио:** хранится в Django и редактируется в `/dashboard`. Для статических страниц проектов данные берутся с API во время сборки. `seed_portfolio` при каждом старте backend создаёт недостающие проекты по заголовку. Если меняется заголовок seed-проекта, нужна ещё и data-миграция (пример: `core/migrations/0004_update_hubnity_and_lisa.py`), иначе seed создаст старый проект заново.
+- **Портфолио:** хранится в Django и редактируется в `/admin`. Для статических страниц проектов данные берутся с API во время сборки. `seed_portfolio` при каждом старте backend создаёт недостающие проекты по заголовку. Если меняется заголовок seed-проекта, нужна ещё и data-миграция (пример: `core/migrations/0004_update_hubnity_and_lisa.py`), иначе seed создаст старый проект заново.
 - **Старые URL** (`/kontakt.html`, `/kontakt/`) редиректятся 301 на чистые в `frontend/nginx.conf`.

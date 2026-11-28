@@ -10,7 +10,7 @@ import { Card, Check, Field } from '@/components/dashboard/field';
 import LanguageSwitch from '@/components/dashboard/language-switch';
 import ProjectImages from '@/components/dashboard/project-images';
 import ProjectPreview from '@/components/dashboard/project-preview';
-import { container, control } from '@/components/dashboard/styles';
+import { container, control, gutter } from '@/components/dashboard/styles';
 import { useProjectDraft } from '@/components/dashboard/use-project-draft';
 
 const splitStack = (value) => value.split(',').map((item) => item.trim()).filter(Boolean);
@@ -88,7 +88,7 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
 
   return (
     <form noValidate onSubmit={submit}>
-      <header className="sticky top-0 z-20 border-b border-border bg-card">
+      <header className={cn('sticky top-0 z-20 border-b border-border bg-card', gutter)}>
         <div className={cn(container, 'flex items-center gap-2 py-3 sm:gap-3')}>
           <button type="button" onClick={onClose} disabled={saving} aria-label={t.back} title={t.back} className={cn(buttonVariants({ variant: 'outline' }), 'size-10 bg-card')}><ArrowLeft /></button>
           <div className="min-w-0 flex-1">
@@ -119,20 +119,21 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
         </div>
       </header>
 
-      {found && (
-        <div className={cn(container, 'pt-6')}>
-          <div role="alert" className="flex flex-wrap items-center gap-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
-            <div className="min-w-0 flex-1 basis-64">
-              <p className="font-bold">{t.draftFound} {time(found.savedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>
-              {found.outdated && <p className="mt-1 text-sm">{t.draftOutdated}</p>}
+      <div className={gutter}>
+        {found && (
+          <div className={cn(container, 'pt-6')}>
+            <div role="alert" className="flex flex-wrap items-center gap-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
+              <div className="min-w-0 flex-1 basis-64">
+                <p className="font-bold">{t.draftFound} {time(found.savedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>
+                {found.outdated && <p className="mt-1 text-sm">{t.draftOutdated}</p>}
+              </div>
+              <button type="button" onClick={restore} className={cn(buttonVariants(), 'h-10 px-4')}>{t.restore}</button>
+              <button type="button" onClick={discard} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 bg-card px-4')}>{t.discardCopy}</button>
             </div>
-            <button type="button" onClick={restore} className={cn(buttonVariants(), 'h-10 px-4')}>{t.restore}</button>
-            <button type="button" onClick={discard} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 bg-card px-4')}>{t.discardCopy}</button>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className={cn(container, 'grid items-start gap-6 py-6 xl:grid-cols-[minmax(0,1fr)_340px]')}>
+        <div className={cn(container, 'grid items-start gap-6 py-6 xl:grid-cols-[minmax(0,1fr)_340px]')}>
         {/* Typing waits for the decision above: it would replace the copy that was found. */}
         <div className={cn('min-w-0', found && 'opacity-50')} inert={Boolean(found)}>
           {/* All sections stay in the form and are only hidden, so saving always sends every field. */}
@@ -193,6 +194,7 @@ export default function ProjectForm({ project, categories, t, lang, setLang, onS
           <ProjectPreview t={t} lang={lang} image={cover} category={{ category: values.category, category_label: selected?.label || '' }}
             title={values.title} description={values.description} developmentTime={values.development_time} stack={splitStack(values.stack)} />
         </aside>
+        </div>
       </div>
     </form>
   );
