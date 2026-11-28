@@ -11,7 +11,7 @@ import LoadingScreen from '@/components/dashboard/loading-screen';
 import LoginForm from '@/components/dashboard/login-form';
 import ProjectForm from '@/components/dashboard/project-form';
 import ProjectList from '@/components/dashboard/project-list';
-import { container, eyebrow } from '@/components/dashboard/styles';
+import { container, eyebrow, gutter } from '@/components/dashboard/styles';
 import Toast from '@/components/dashboard/toast';
 import { useDashboard } from '@/components/dashboard/use-dashboard';
 import { useHashRoute } from '@/components/dashboard/use-hash-route';
@@ -108,7 +108,7 @@ export default function Dashboard() {
       {editorOpen && <ProjectForm key={editing.key} project={editing.project} categories={categories} t={t} lang={lang} setLang={setLang} onSave={save} onClose={close} />}
       {/* Kept mounted while editing, so search, filter and tab are still there afterwards. */}
       <div hidden={editorOpen}>
-        <header className="border-b border-border bg-card">
+        <header className={cn('border-b border-border bg-card', gutter)}>
           <div className={cn(container, 'flex items-center justify-between gap-3 py-3')}>
             <div className="min-w-0"><p className={eyebrow}>AutomatonSoft</p><p className="truncate text-sm text-muted-foreground">Admin · {user}</p></div>
             <div className="flex items-center gap-2">
@@ -121,17 +121,19 @@ export default function Dashboard() {
               tabs={[{ id: 'projects', label: t.tabProjects, count: projects.length }, { id: 'leads', label: t.tabLeads, count: newLeads, alert: true, hint: t.newLeads }]} />
           </div>
         </header>
-        <main className={cn(container, 'py-6')}>
-          <div hidden={tab !== 'projects'}>
-            <ProjectList projects={projects} t={t} lang={lang} onDelete={dashboard.deleteProject} onMove={dashboard.moveProject}
-              onNew={() => show('new')} onEdit={(project) => show(routeOf(project))} />
-          </div>
-          {/* Hidden rather than removed, so search, filter and a note being typed survive a look at the portfolio. */}
-          <section hidden={tab !== 'leads'} className="space-y-4">
-            <h1 className="text-2xl font-black text-ink sm:text-3xl">{t.leadsTitle}</h1>
-            <LeadsList leads={leads} t={t} lang={lang} onChange={dashboard.updateLead} onDelete={dashboard.deleteLead} />
-          </section>
-        </main>
+        <div className={gutter}>
+          <main className={cn(container, 'py-6')}>
+            <div hidden={tab !== 'projects'}>
+              <ProjectList projects={projects} t={t} lang={lang} onDelete={dashboard.deleteProject} onMove={dashboard.moveProject}
+                onNew={() => show('new')} onEdit={(project) => show(routeOf(project))} />
+            </div>
+            {/* Hidden rather than removed, so search, filter and a note being typed survive a look at the portfolio. */}
+            <section hidden={tab !== 'leads'} className="space-y-4">
+              <h1 className="text-2xl font-black text-ink sm:flex sm:min-h-11 sm:items-center sm:text-3xl">{t.leadsTitle}</h1>
+              <LeadsList leads={leads} t={t} lang={lang} onChange={dashboard.updateLead} onDelete={dashboard.deleteLead} />
+            </section>
+          </main>
+        </div>
       </div>
       {toast}
     </div>
