@@ -45,6 +45,7 @@ export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete
           <ul className={cn(panel, 'divide-y divide-border *:first:rounded-t-2xl *:last:rounded-b-2xl', drag.dragged !== undefined && 'select-none')}>
             {visible.map((project, index) => (
               <ProjectListItem key={project.id} project={project} t={t} lang={lang} onEdit={onEdit} onDelete={onDelete} unsaved={hasDraft(project.id)}
+                menuUp={index >= 2 && index >= visible.length - 2}
                 order={sortable ? { count: projects.length, onMove: (place) => onMove(project, place), onDragStart: (event) => drag.start(event, index) } : null}
                 style={drag.rowStyle(index)} dragged={drag.dragged === index} />
             ))}
