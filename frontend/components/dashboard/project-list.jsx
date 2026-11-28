@@ -29,7 +29,7 @@ export default function ProjectList({ projects, t, lang, onNew, onEdit, onDelete
   return (
     <section className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-black text-ink sm:text-3xl">{t.projects}</h1>
+        <h1 className="text-2xl font-black text-ink hyphens-none sm:text-3xl">{t.projects}</h1>
         <div className="flex flex-wrap items-center gap-3 max-sm:w-full">
           {hasDraft('new') && <button type="button" onClick={onNew} className="rounded-full bg-amber-100 px-3 py-1.5 text-xs font-bold text-amber-900 hover:bg-amber-200">{t.newUnsaved}</button>}
           <button type="button" onClick={onNew} className={cn(buttonVariants({ size: 'xl' }), 'h-11 text-sm max-sm:w-full')}><Plus /> {t.newProject}</button>

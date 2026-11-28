@@ -171,7 +171,7 @@ export default function Dashboard() {
             </div>
             {/* Hidden rather than removed, so search, filter and a note being typed survive a look at the portfolio. */}
             <section hidden={tab !== 'leads'} className="space-y-4">
-              <h1 className="text-2xl font-black text-ink sm:flex sm:min-h-11 sm:items-center sm:text-3xl">{t.leadsTitle}</h1>
+              <h1 className="text-2xl font-black text-ink hyphens-none sm:flex sm:min-h-11 sm:items-center sm:text-3xl">{t.leadsTitle}</h1>
               <LeadsList leads={leads} t={t} lang={lang} onChange={dashboard.updateLead} onDelete={dashboard.deleteLead} />
             </section>
           </main>
