@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { LogOut } from 'lucide-react';
+import { ExternalLink, LogOut, Menu, X } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { removeDraft, wouldLoseWork } from '@/components/dashboard/drafts';
@@ -11,13 +11,53 @@ import LoadingScreen from '@/components/dashboard/loading-screen';
 import LoginForm from '@/components/dashboard/login-form';
 import ProjectForm from '@/components/dashboard/project-form';
 import ProjectList from '@/components/dashboard/project-list';
-import { container, eyebrow, gutter } from '@/components/dashboard/styles';
+import { container, eyebrow, gutter, panel } from '@/components/dashboard/styles';
 import Toast from '@/components/dashboard/toast';
 import { useDashboard } from '@/components/dashboard/use-dashboard';
 import { useHashRoute } from '@/components/dashboard/use-hash-route';
 
 const emptyProject = { title: '', description: '', category: '', development_time: '', stack: [], published: true, screenshots: [], features: [], results: [] };
 const routeOf = (project) => (project.id ? `edit/${project.id}` : 'new');
+
+function HeaderMenu({ lang, setLang, t, onLogout }) {
+  const [open, setOpen] = useState(false);
+  const box = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onPointer = (event) => { if (!box.current?.contains(event.target)) setOpen(false); };
+    const onKey = (event) => { if (event.key === 'Escape') setOpen(false); };
+    document.addEventListener('pointerdown', onPointer);
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('pointerdown', onPointer); document.removeEventListener('keydown', onKey); };
+  }, [open]);
+
+  return (
+    <div ref={box} className="relative sm:hidden">
+      <button type="button" aria-label={t.menu} aria-expanded={open} onClick={() => setOpen((value) => !value)}
+        className={cn(buttonVariants({ variant: 'outline' }), 'size-10 bg-card')}>
+        {open ? <X /> : <Menu />}
+      </button>
+      {open && (
+        <div className={cn(panel, 'absolute top-12 right-0 z-30 w-56 p-2 shadow-xl shadow-ink/10')}>
+          <div className="flex items-center justify-between gap-2 px-2.5 py-2">
+            <span className="text-sm font-medium text-muted-foreground">{t.language}</span>
+            <LanguageSwitch lang={lang} setLang={setLang} />
+          </div>
+          <div className="my-1 border-t border-border" />
+          <a href="/" target="_blank" rel="noopener" onClick={() => setOpen(false)}
+            className="flex h-10 w-full items-center gap-2.5 rounded-lg px-2.5 text-sm font-semibold text-foreground hover:bg-secondary">
+            <ExternalLink className="size-4 text-muted-foreground" /> {t.toSite}
+          </a>
+          <button type="button" onClick={() => { setOpen(false); onLogout(); }}
+            className="flex h-10 w-full items-center gap-2.5 rounded-lg px-2.5 text-sm font-semibold text-foreground hover:bg-secondary">
+            <LogOut className="size-4 text-muted-foreground" /> {t.logout}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Tabs({ tabs, active, onChange }) {
   return (
@@ -110,11 +150,13 @@ export default function Dashboard() {
       <div hidden={editorOpen}>
         <header className={cn('border-b border-border bg-card', gutter)}>
           <div className={cn(container, 'flex items-center justify-between gap-3 py-3')}>
-            <div className="min-w-0"><p className={eyebrow}>AutomatonSoft</p><p className="truncate text-sm text-muted-foreground">Admin · {user}</p></div>
-            <div className="flex items-center gap-2">
+            <div className="min-w-0"><p className={cn(eyebrow, 'truncate')}>AutomatonSoft</p><p className="truncate text-sm text-muted-foreground">Admin · {user}</p></div>
+            <div className="hidden items-center gap-2 sm:flex">
               <LanguageSwitch lang={lang} setLang={setLang} />
-              <button type="button" onClick={dashboard.logout} aria-label={t.logout} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 min-w-10 bg-card')}><LogOut /> <span className="max-sm:hidden">{t.logout}</span></button>
+              <a href="/" target="_blank" rel="noopener" className={cn(buttonVariants({ variant: 'outline' }), 'h-10 bg-card')}><ExternalLink /> {t.toSite}</a>
+              <button type="button" onClick={dashboard.logout} className={cn(buttonVariants({ variant: 'outline' }), 'h-10 bg-card')}><LogOut /> {t.logout}</button>
             </div>
+            <HeaderMenu lang={lang} setLang={setLang} t={t} onLogout={dashboard.logout} />
           </div>
           <div className={container}>
             <Tabs active={tab} onChange={(next) => (next === 'leads' ? open('leads') : close())}

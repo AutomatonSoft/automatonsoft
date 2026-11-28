@@ -9,7 +9,7 @@ export const ruCategories = {
 export const copy = {
   de: {
     // Sign in and header
-    loginTitle: 'Admin', loginHint: 'Mit einem Django-Administrator anmelden.', username: 'Benutzername', password: 'Passwort', login: 'Anmelden', loginError: 'Anmeldedaten ungültig.', welcome: 'Willkommen zurück.', loading: 'Wird geladen …', serverError: 'Der Server antwortet nicht. Bitte Seite neu laden.', logout: 'Abmelden', closeNotice: 'Meldung schließen',
+    loginTitle: 'Admin', loginHint: 'Mit einem Django-Administrator anmelden.', username: 'Benutzername', password: 'Passwort', login: 'Anmelden', loginError: 'Anmeldedaten ungültig.', welcome: 'Willkommen zurück.', loading: 'Wird geladen …', serverError: 'Der Server antwortet nicht. Bitte Seite neu laden.', logout: 'Abmelden', toSite: 'Website', backToSite: 'Zur Website', menu: 'Menü', language: 'Sprache', closeNotice: 'Meldung schließen',
     tabProjects: 'Portfolio', tabLeads: 'Anfragen',
     // Project list
     projects: 'Portfolio verwalten', newProject: 'Neues Projekt', search: 'Name, Kategorie oder Stack suchen', all: 'Alle', live: 'Veröffentlicht', drafts: 'Entwürfe', nothingFound: 'Keine Projekte gefunden.', publishedStatus: 'Veröffentlicht', draftStatus: 'Entwurf', developmentStatus: 'In Entwicklung', editButton: 'Bearbeiten', deleteButton: 'Löschen', viewPage: 'Seite öffnen', confirmDelete: 'endgültig löschen?', deleted: 'Projekt gelöscht.', deleteError: 'Projekt konnte nicht gelöscht werden.',
@@ -29,7 +29,7 @@ export const copy = {
     note: 'Notiz', notePlaceholder: 'Notiz (wird automatisch gespeichert)', statusSaved: 'Status gespeichert.', noteSaved: 'Notiz gespeichert.', leadError: 'Änderung konnte nicht gespeichert werden.', confirmDeleteLead: 'Anfrage endgültig löschen?', leadDeleted: 'Anfrage gelöscht.', leadDeleteError: 'Anfrage konnte nicht gelöscht werden.',
   },
   ru: {
-    loginTitle: 'Админка', loginHint: 'Войдите с учётной записью администратора Django.', username: 'Имя пользователя', password: 'Пароль', login: 'Войти', loginError: 'Неверные данные для входа.', welcome: 'Добро пожаловать.', loading: 'Загрузка…', serverError: 'Сервер не отвечает. Обновите страницу.', logout: 'Выйти', closeNotice: 'Закрыть сообщение',
+    loginTitle: 'Админка', loginHint: 'Войдите с учётной записью администратора Django.', username: 'Имя пользователя', password: 'Пароль', login: 'Войти', loginError: 'Неверные данные для входа.', welcome: 'Добро пожаловать.', loading: 'Загрузка…', serverError: 'Сервер не отвечает. Обновите страницу.', logout: 'Выйти', toSite: 'На сайт', backToSite: 'На сайт', menu: 'Меню', language: 'Язык', closeNotice: 'Закрыть сообщение',
     tabProjects: 'Портфолио', tabLeads: 'Заявки',
     projects: 'Управление портфолио', newProject: 'Новый проект', search: 'Название, категория или стек', all: 'Все', live: 'Опубликованные', drafts: 'Черновики', nothingFound: 'Проекты не найдены.', publishedStatus: 'Опубликован', draftStatus: 'Черновик', developmentStatus: 'В разработке', editButton: 'Редактировать', deleteButton: 'Удалить', viewPage: 'Открыть страницу', confirmDelete: 'удалить безвозвратно?', deleted: 'Проект удалён.', deleteError: 'Не удалось удалить проект.',
     sortOff: 'Чтобы менять порядок, выберите «Все» и очистите поиск.', drag: 'Перетащить', moveUp: 'Выше', moveDown: 'Ниже', changePlace: 'Изменить место', orderSaved: 'Порядок сохранён.', moveError: 'Не удалось сохранить порядок.',

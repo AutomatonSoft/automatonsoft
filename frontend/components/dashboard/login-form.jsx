@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -19,6 +20,9 @@ export default function LoginForm({ t, lang, setLang, error, onLogin }) {
           <button type="submit" className={buttonVariants({ size: 'xl' })}>{t.login}</button>
           <p className="min-h-5 text-sm text-destructive" role="alert">{error}</p>
         </form>
+        <p className="mt-2">
+          <a href="/" className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary"><ArrowLeft className="size-4" /> {t.backToSite}</a>
+        </p>
       </section>
     </main>
   );
