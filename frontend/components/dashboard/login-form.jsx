@@ -17,10 +17,10 @@ export default function LoginForm({ t, lang, setLang, error, onLogin }) {
         <form className="mt-6 grid gap-3" onSubmit={(event) => { event.preventDefault(); onLogin(event.currentTarget); }}>
           <Input name="username" aria-label={t.username} placeholder={t.username} autoComplete="username" className={control} required />
           <Input name="password" type="password" aria-label={t.password} placeholder={t.password} autoComplete="current-password" className={control} required />
+          {error && <p className="rounded-xl border border-destructive/20 bg-destructive/5 px-3.5 py-2.5 text-sm font-medium text-destructive" role="alert">{error}</p>}
           <button type="submit" className={buttonVariants({ size: 'xl' })}>{t.login}</button>
-          <p className="min-h-5 text-sm text-destructive" role="alert">{error}</p>
         </form>
-        <p className="mt-2">
+        <p className="mt-5">
           <a href="/" className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary"><ArrowLeft className="size-4" /> {t.backToSite}</a>
         </p>
       </section>
